@@ -2,6 +2,9 @@ package be.kuleuven.gent.project.ejb;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.*;
+
+import be.kuleuven.gent.project.data.Rit;
 
 /**
  * Session Bean implementation class RitManagementEJB
@@ -10,6 +13,9 @@ import javax.ejb.Stateless;
 @LocalBean
 public class RitManagementEJB implements RitManagementEJBLocal {
 
+	@PersistenceContext(unitName="db")
+	private EntityManager em;
+	
     /**
      * Default constructor. 
      */
