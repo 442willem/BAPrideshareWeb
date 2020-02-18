@@ -7,21 +7,32 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import be.kuleuven.gent.project.data.Rit;
-import be.kuleuven.gent.project.ejb.TaskManagementEJBLocal;
-import be.kuleuven.gent.project.ejb.UserManagementEJBLocal;
+import be.kuleuven.gent.project.*;
+import be.kuleuven.gent.project.ejb.RitManagementEJBLocal;
+
 
 @Named
 @ViewScoped
 public class RitController {
 	private static final long serialVersionUID = -3737221385235612830L;
 	@EJB
-	private RitManagementEJBLocal taskEJB;
+	private RitManagementEJBLocal ritEJB;
 	
 	@EJB
 	private UserManagementEJBLocal userEJB;
 	
 	private Rit rit = new Rit();
+	
+	
+	
+	
+	public Rit getRit() {
+		return rit;
+	}
+	public void setRit(Rit rit) {
+		this.rit = rit;
+	}
+	
 	
 	
 }
