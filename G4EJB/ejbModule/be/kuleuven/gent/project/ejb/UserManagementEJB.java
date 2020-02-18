@@ -15,7 +15,7 @@ import be.kuleuven.gent.project.data.*;
 @Stateless
 public class UserManagementEJB implements UserManagementEJBLocal {
 	
-	@PersistenceContext(unitName="demodb")
+	@PersistenceContext(unitName="db")
 	private EntityManager em;
 	
     /**

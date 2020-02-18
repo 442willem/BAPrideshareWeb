@@ -25,11 +25,10 @@ public class RitManagementEJB implements RitManagementEJBLocal {
 
 	@Override
 	public boolean createRit() {
-		Rit r=new Rit();
-		
+		Rit r=new Rit();		
 		em.persist(r);
 		
-		if()return false;
+//		if()return false;
 		
 		return true;
 	}
@@ -38,7 +37,7 @@ public class RitManagementEJB implements RitManagementEJBLocal {
 	public boolean wijzigRit() {
 		Rit r=new Rit();
 		
-		if()return false;
+//		if()return false;
 		
 		return true;
 	}
