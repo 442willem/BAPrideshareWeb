@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
@@ -38,11 +39,12 @@ public class Route {
 	@Column(name="vertrektijd", nullable=false)
 	private Timestamp vertrektijd;
 	
-	@Column(name="bestuurder", nullable=false)
+	@JoinColumn(name="bestuurder", nullable=false)
 	private Profiel bestuurder;
 
+	public Route() {
+		
+	}
 	
-	@Column(name="route", nullable=false)
-	private Route route;
 
 }
