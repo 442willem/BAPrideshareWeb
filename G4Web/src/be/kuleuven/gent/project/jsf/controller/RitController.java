@@ -8,7 +8,9 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import be.kuleuven.gent.project.*;
+import be.kuleuven.gent.project.data.Rit;
 import be.kuleuven.gent.project.ejb.RitManagementEJBLocal;
+import be.kuleuven.gent.project.ejb.UserManagementEJBLocal;
 
 
 @Named
