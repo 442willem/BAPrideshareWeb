@@ -15,7 +15,7 @@ import be.kuleuven.gent.project.ejb.UserManagementEJBLocal;
 
 @Named
 @ViewScoped
-public class RitController {
+public class RitController implements Serializable {
 	private static final long serialVersionUID = -3737221385235612830L;
 	@EJB
 	private RitManagementEJBLocal ritEJB;
