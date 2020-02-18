@@ -3,8 +3,8 @@
 	<persistence-unit name="db" transaction-type="JTA">
 	
 	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<jta-data-source>jdbc/rideshare</jta-data-source>
-		
+		<jta-data-source>jdbc/rideshare</jta-data-source>	
+			
 		<properties>
 			<!--  tables will be created only if they do not exist. Use for production 
 			<property name="eclipselink.ddl-generation" value="create-tables"/>
@@ -15,6 +15,5 @@
 			-->
 			<property name="eclipselink.logging.level" value="INFO"/>
 		</properties>
-		
 	</persistence-unit>
 </persistence>
