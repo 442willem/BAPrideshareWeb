@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import com.sun.jmx.snmp.Timestamp;
@@ -34,10 +35,10 @@ public class Rit implements Serializable {
 	@Column(name="eindtijd", nullable=false)
 	private Timestamp eindtijd;
 	
-	@Column(name="passagier", nullable=false)
+	@JoinColumn(name="passagier", nullable=false)
 	private Profiel passagier;
 	
-	@Column(name="route", nullable=false)
+	@JoinColumn(name="route", nullable=false)
 	private Route route;
 	
 	public Rit() {
