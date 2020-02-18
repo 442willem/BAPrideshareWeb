@@ -1,6 +1,8 @@
 package be.kuleuven.gent.project.ejb;
 
+import be.kuleuven.gent.project.*;
 import javax.persistence.*;
+
 
 public class RitManagementEJB implements RitManagementEJBLocal {
 	
@@ -13,17 +15,19 @@ public class RitManagementEJB implements RitManagementEJBLocal {
 	
     @Override
 	public boolean createRit() {		
-//		Rit r=new Rit();
-//		
-//		if()return false;
+		Rit r=new Rit();
+		
+		em.persist(r);
+		
+		if()return false;
 		
 		return true;
 	}
     @Override
 	public boolean wijzigRit() {		
-//		Rit r=new Rit();
-//		
-//		if()return false;
+		Rit r=new Rit();
+		
+		if()return false;
 		
 		return true;
 	}
