@@ -22,27 +22,31 @@ public class Profiel implements Serializable {
 	@Column(name="idProfiel", nullable=false,length=16)
 	private int id;
 	
-	@Column(name="name", nullable=false)
-	private String name;
+	@Column(name="driverscore", nullable=false)
+	private int driverscore;
 
-	@Column(name="prijs", nullable=false)
-	private int prijs;
+	@Column(name="passagierscore", nullable=false)
+	private int passagierscore;
 	
-	@Column(name="betaald", nullable=false)
-	private boolean betaald;
+	@Column(name="voornaam", nullable=false)
+	private String voornaam;
 	
-	@Column(name="aantal_personen", nullable=false)
-	private int aantalPersonen;
+	@Column(name="achternaam", nullable=false)
+	private String achternaam;
 	
-	@Column(name="vertrektijd", nullable=false)
-	private Timestamp vertrektijd;
+	@Column(name="stad", nullable=false)
+	private String stad;
 	
-	@Column(name="eindtijd", nullable=false)
-	private Timestamp eindtijd;
+	@Column(name="straat", nullable=false)
+	private String straat;
 	
-	@Column(name="passagier", nullable=false)
-	private Profiel passagier;
+	@Column(name="huisnummer", nullable=false)
+	private int huisnummer;
 	
-	@Column(name="route", nullable=false)
-	private Route route;
+	@Column(name="login", nullable=false)
+	private String login;
+	
+	@Column(name="password", nullable=false)
+	private String password;
+	
 }
