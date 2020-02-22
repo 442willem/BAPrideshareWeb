@@ -6,5 +6,16 @@
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>
+  
+ <login-config>
+    <auth-method>FORM</auth-method>
+    <realm-name>rideshare-realm</realm-name>
+    <form-login-config>
+      <form-login-page>/login.xhtml</form-login-page>
+      <form-error-page>/loginError.xhtml</form-error-page>
+    </form-login-config>
+  </login-config>
+  
 </web-app>
+  
   
