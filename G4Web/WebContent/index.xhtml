@@ -13,6 +13,11 @@
 </h:head> 
 
 <h:body> 
+<h:form method="post" id="loginForm">
+<h:commandButton style="text-decoration:none; padding:5px; width:100px; float:right;" value ="Login" action="#{userController.goToLogin()}" class="btn btn-primary pull-right" id="Login"/>
+</h:form>
+
+
 
 <div class="jumbotron jumbotron-sm">
     <div class="container">
@@ -28,6 +33,7 @@
 
             
 <h:form id="taskForm" method="post" action="j_security_check">
+	
                 
 	<h:commandButton style="margin-left:350px;float:left;hight:100px;width:200px" value="I am a Driver" action="#{userController.activateDriver()}" class="btn btn-primary pull-left" id="Driver"/>
 	<h:commandButton style="margin-right:350px;float:right;hight:100px;width:200px" value="I am a Passenger" action="#{userController.activatePassenger()}" class="btn btn-primary pull-right" id="Passenger"/>

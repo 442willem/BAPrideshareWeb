@@ -16,14 +16,23 @@ import be.kuleuven.gent.project.ejb.UserManagementEJBLocal;
 public class UserController implements Serializable{
 	private static final long serialVersionUID = 6737147724536164355L;
 	
+	@EJB
+	private UserManagementEJBLocal userEJB;
 	
 	
 	public String activateDriver(){
 		return "driver/ritten.faces?faces-redirect=true";
 	}
 	
-	public String activateCaregiver(){
-		return "caregiver/ritten.faces?faces-redirect=true";
+	public String activatePassenger(){
+		return "passenger/ritten.faces?faces-redirect=true";
+	}
+	
+	public String goToLogin() {
+		return "login.faces?faces-redirect=true";
+	}
+	public String goToCreateAccount() {
+		return "createAccount.faces?faces-redirect=true";
 	}
 	
 	public void logout() {
