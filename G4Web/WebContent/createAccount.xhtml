@@ -37,7 +37,7 @@
 	              			<div class="form-group">
 		    					<h:outputLabel value="Family name: "/>
 		  						<h:inputText class="form-control" id="achternaam" value="#{ProfielController.profiel.achternaam}" required="true">
-		  							<f:validateRegex pattern="[a-zA-Z]+" validatorMessage="Alpha numaric characters are not allowed in Last Name."/>
+		  							<f:validateRegex pattern="[a-zA-Z]+" validatorMessage="Alpha numaric characters are not allowed in Family Name."/>
 		  						</h:inputText>
 	  						</div>
 	  						<div class="form-group">
@@ -57,7 +57,23 @@
 		  							<f:validateLength minimum = "6" validatorMessage="Password is not long enough"/>
 		  						</h:inputText>
 	  						</div>
-	  						
+	  						<div class="form-group">
+		    					<h:outputLabel value="City: "/>
+		  						<h:inputText class="form-control" id="adrescity" value="#{ProfielController.profiel.stad}" required="true">
+		  						</h:inputText>
+	  						</div>
+	  						<div class="form-group">
+		    					<h:outputLabel value="Street: "/>
+		  						<h:inputText class="form-control" id="adresstreet" value="#{ProfielController.profiel.straat}" required="true">
+		  							<f:validateRegex pattern="[a-zA-Z]+" validatorMessage="Alpha numaric characters are not allowed in Streetname."/>
+		  						</h:inputText>
+	  						</div>
+	  						<div class="form-group">
+		    					<h:outputLabel value="House number: "/>
+		  						<h:inputText class="form-control" id="adresnumber" value="#{ProfielController.profiel.huisnummer}" required="true">
+		  							<f:validateRegex pattern="[^A-Za-z0-9]+" validatorMessage="No special characters in House number"/>
+		  						</h:inputText>
+	  						</div>
 	  						<h:commandButton style="text-decoration:none; padding:5px; width:115px;" value = "submit"  action = "index" id = "MakeAccount"/>
 	  					</div>
 					</div>
