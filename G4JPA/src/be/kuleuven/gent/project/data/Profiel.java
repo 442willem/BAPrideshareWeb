@@ -47,7 +47,7 @@ public class Profiel implements Serializable {
 	@Column(name="password", nullable=false)
 	private String password;
 	
-	@Column(table="profiel_Group", name="idGroup")
+	@Column(table="profiel_Group", name="idGroup", nullable =false)
 	private String group;
 	
 	public int getId() {
