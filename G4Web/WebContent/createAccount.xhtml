@@ -48,7 +48,7 @@
 	  						</div>
 		    					<h:outputLabel value="Family name: "/>
 		  						<h:inputText class="form-control" id="achternaam" value="#{profielController.profiel.achternaam}" required="true">
-		  							<f:validateRegex pattern="[a-zA-Z]+$" validatorMessage="Alpha numaric characters are not allowed in Family Name."/>
+		  							<f:validateRegex pattern="[a-zA-Z ]+$" validatorMessage="Alpha numaric characters are not allowed in Family Name."/>
 		  						</h:inputText>
 	  						</div>
 	  						<div class="form-group">
