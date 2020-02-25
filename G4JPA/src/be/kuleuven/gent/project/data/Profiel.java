@@ -41,7 +41,7 @@ public class Profiel implements Serializable {
 	private String straat;
 	
 	@Column(name="huisnummer", nullable=false)
-	private int huisnummer;
+	private String huisnummer;
 	
 	@Column(name="login", nullable=false)
 	private String login;
@@ -105,11 +105,11 @@ public class Profiel implements Serializable {
 		this.straat = straat;
 	}
 
-	public int getHuisnummer() {
+	public String getHuisnummer() {
 		return huisnummer;
 	}
 
-	public void setHuisnummer(int huisnummer) {
+	public void setHuisnummer(String huisnummer) {
 		this.huisnummer = huisnummer;
 	}
 
@@ -131,7 +131,7 @@ public class Profiel implements Serializable {
 
 	public Profiel() {}
 	
-	public Profiel(String stad,String straat,int huisnummer,String login, String password,String achternaam, String voornaam) {
+	public Profiel(String stad,String straat,String huisnummer,String login, String password,String achternaam, String voornaam) {
 		this.achternaam=achternaam;
 		this.stad=stad;
 		this.straat=straat;
