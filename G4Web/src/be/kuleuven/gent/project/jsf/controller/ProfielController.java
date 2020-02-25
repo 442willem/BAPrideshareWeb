@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.bean.*;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -15,7 +16,7 @@ import be.kuleuven.gent.project.ejb.*;
 import be.kuleuven.gent.project.ejb.ProfielManagementEJBLocal;
 
 @Named
-@Stateless
+@SessionScoped
 public class ProfielController implements Serializable {
 	private static final long serialVersionUID = 6731234724536164355L;
 	

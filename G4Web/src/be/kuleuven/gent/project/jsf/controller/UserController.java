@@ -21,7 +21,7 @@ public class UserController implements Serializable{
 	
 	
 	public String activateDriver(){
-		return "driver/test.faces?faces-redirect=true";
+		return "driver/indexD.faces?faces-redirect=true&login=1";
 	}
 	
 	public String activatePassenger(){

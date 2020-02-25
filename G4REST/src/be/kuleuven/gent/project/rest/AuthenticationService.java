@@ -69,7 +69,7 @@ public class AuthenticationService {
         
         Key key = ApplicationConfig.JWT_KEY;
         String jwtToken = Jwts.builder()
-                .setId(person.getLogin())										//needed getLogin en getGroup --> niet zeker omdat je ze alle 2 kan zijn
+                .setId(person.getLogin())										
                 .setSubject(person.getGroup())
                 .setIssuer("http://localhost:8080/RESTDemo/rest_example/")
                 .setIssuedAt(curDate)
