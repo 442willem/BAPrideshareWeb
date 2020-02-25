@@ -16,5 +16,8 @@ public class BerichtManagementEJB implements BerichtManagementEJBLocal {
     public BerichtManagementEJB() {
         // TODO Auto-generated constructor stub
     }
+    public void createBericht() {
+    	
+    }
 
 }
