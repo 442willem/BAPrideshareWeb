@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -25,10 +26,10 @@ public class Review {
 	@Column(name="v", nullable=false)
 	private int modus;
 	
-	@Column(name="ontvangerId", nullable=false)
+	@JoinColumn(name="ontvangerId", nullable=false)
 	private Profiel ontvanger;
 	
-	@Column(name="afzenderId", nullable=false)
+	@JoinColumn(name="afzenderId", nullable=false)
 	private Profiel afzender;
 	
 	public int getId() {

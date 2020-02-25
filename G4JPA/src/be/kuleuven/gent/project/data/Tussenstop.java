@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -24,10 +25,10 @@ public class Tussenstop {
 	@Column(name="plaats_long", nullable=false)
 	private DecimalFormat plaats_longtitude;
 	
-	@Column(name="passagierId", nullable=false)
+	@JoinColumn(name="passagierId", nullable=false)
 	private Profiel passagier;
 	
-	@Column(name="routeId", nullable=false)
+	@JoinColumn(name="routeId", nullable=false)
 	private Route route;
 
 	public int getId() {

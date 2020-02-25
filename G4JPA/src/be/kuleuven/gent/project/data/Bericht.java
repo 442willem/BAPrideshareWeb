@@ -15,4 +15,7 @@ public class Bericht {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idBericht", nullable=false,length=16)
 	private int id;
+	
+	private String content;
+	
 }
