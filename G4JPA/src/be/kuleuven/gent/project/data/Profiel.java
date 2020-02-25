@@ -49,4 +49,15 @@ public class Profiel implements Serializable {
 	@Column(name="password", nullable=false)
 	private String password;
 	
+	public Profiel() {}
+	
+	public Profiel(String stad,String straat,int huisnummer,String login, String password,String achternaam, String voornaam) {
+		this.achternaam=achternaam;
+		this.stad=stad;
+		this.straat=straat;
+		this.huisnummer=huisnummer;
+		this.login=login;
+		this.password=password;
+		this.voornaam=voornaam;
+	}
 }
