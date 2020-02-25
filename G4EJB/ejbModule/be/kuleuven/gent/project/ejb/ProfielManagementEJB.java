@@ -21,7 +21,7 @@ public class ProfielManagementEJB implements ProfielManagementEJBLocal {
     public ProfielManagementEJB() {
         // TODO Auto-generated constructor stub
     }
-    
+    @Override
      public void createProfiel(Profiel p) {
 		em.persist(p);
     }
