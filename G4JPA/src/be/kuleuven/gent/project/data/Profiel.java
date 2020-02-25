@@ -1,5 +1,6 @@
 package be.kuleuven.gent.project.data;
 
+
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,14 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
-
-import com.sun.jmx.snmp.Timestamp;
-
 import javax.persistence.PrimaryKeyJoinColumn;
-
 
 @Entity
 @Table(name="profiel")
+@SecondaryTable(name = "profiel_Group", pkJoinColumns=@PrimaryKeyJoinColumn(name="login", referencedColumnName="login"))
 public class Profiel implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,8 +47,19 @@ public class Profiel implements Serializable {
 	@Column(name="password", nullable=false)
 	private String password;
 	
+	@Column(table="profiel_Group", name="idGroup")
+	private String group;
+	
 	public int getId() {
 		return id;
+	}
+
+	public String getGroup() {
+		return group;
+	}
+
+	public void setGroup(String group) {
+		this.group = group;
 	}
 
 	public void setId(int id) {
