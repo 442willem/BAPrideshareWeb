@@ -41,12 +41,16 @@ public class Rit implements Serializable {
 	@JoinColumn(name="route", nullable=false)
 	private Route route;
 	
-	public Rit() {
-		
-	}
+	public Rit() {}
 	
-	public Rit(int aantalpers, Timestamp vertrektijd, Timestamp eindtijd) {
-		
+	public Rit(int aantalPersonen,int prijs, Timestamp vertrektijd, Timestamp eindtijd, Profiel passagier,Route route) {
+		this.aantalPersonen=aantalPersonen;
+		this.vertrektijd=vertrektijd;
+		this.eindtijd=eindtijd;
+		this.passagier=passagier;
+		this.route=route;
+		betaald=false;
+		this.prijs=prijs;
 	}
 	
 }
