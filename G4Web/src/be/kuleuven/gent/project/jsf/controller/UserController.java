@@ -34,6 +34,10 @@ public class UserController implements Serializable{
 	public String goToCreateAccount() {
 		return "createAccount.faces?faces-redirect=true";
 	}
+	public String goToTest() {
+		return "test.faces?faces-redirect=true";
+	}
+	
 	
 	public void logout() {
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();

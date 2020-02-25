@@ -35,6 +35,17 @@
 					<div class="row">
 						<div class="col-md-6">
 	              			<div class="form-group">
+	              				<div class="form-group">
+		    					<h:outputLabel value="Login: "/>
+		  						<h:inputText class="form-control" id="login" value="#{ProfielController.profiel.login}" required="true">
+		  						</h:inputText>
+	  						</div>
+	  						<div class="form-group">
+		    					<h:outputLabel value="Password: "/>
+		  						<h:inputText class="form-control" id="password" value="#{ProfielController.profiel.hPassword}" required="true">
+		  							<f:validateLength minimum = "6" validatorMessage="Password is not long enough"/>
+		  						</h:inputText>
+	  						</div>
 		    					<h:outputLabel value="Family name: "/>
 		  						<h:inputText class="form-control" id="achternaam" value="#{ProfielController.profiel.achternaam}" required="true">
 		  							<f:validateRegex pattern="[a-zA-Z]+" validatorMessage="Alpha numaric characters are not allowed in Family Name."/>
@@ -44,17 +55,6 @@
 		    					<h:outputLabel value="First name: "/>
 		  						<h:inputText class="form-control" id="voornaam" value="#{ProfielController.profiel.voornaam}" required="true">
 		  							<f:validateRegex pattern="[a-zA-Z]+" validatorMessage="Alpha numaric characters are not allowed in First Name."/>
-		  						</h:inputText>
-	  						</div>
-	  						<div class="form-group">
-		    					<h:outputLabel value="Login: "/>
-		  						<h:inputText class="form-control" id="login" value="#{ProfielController.profiel.login}" required="true">
-		  						</h:inputText>
-	  						</div>
-	  						<div class="form-group">
-		    					<h:outputLabel value="Password: "/>
-		  						<h:inputText class="form-control" id="password" value="#{ProfielController.profiel.hPassword}" required="true">
-		  							<f:validateLength minimum = "6" validatorMessage="Password is not long enough"/>
 		  						</h:inputText>
 	  						</div>
 	  						<div class="form-group">
@@ -74,7 +74,7 @@
 		  							<f:validateRegex pattern="[^A-Za-z0-9]+" validatorMessage="No special characters in House number"/>
 		  						</h:inputText>
 	  						</div>
-	  						<h:commandButton style="text-decoration:none; padding:5px; width:115px;" value = "submit"  action = "index" id = "MakeAccount"/>
+	  						<h:commandButton style="text-decoration:none; padding:5px; width:115px;" value = "submit"  action = "#{userController.goToTest()}" id = "MakeAccount"/>
 	  					</div>
 					</div>
 				</h:form>

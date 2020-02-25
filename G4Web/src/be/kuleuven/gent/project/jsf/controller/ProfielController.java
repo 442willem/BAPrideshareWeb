@@ -25,7 +25,7 @@ public class ProfielController implements Serializable {
 	private Profiel profiel = new Profiel();
 	
 	public String createProfiel() {
-		profielEJB.createProfiel();
+		profielEJB.createProfiel(profiel);
 		return "index.faces.faces-redirect=true";
 	}
 	
