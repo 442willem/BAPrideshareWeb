@@ -42,13 +42,13 @@
 	  						</div>
 	  						<div class="form-group">
 		    					<h:outputLabel value="Password: "/>
-		  						<h:inputText class="form-control" id="password" value="#{profielController.profiel.password}" required="true">
+		  						<h:inputSecret class="form-control" id="password" value="#{profielController.profiel.password}" required="true">
 		  							<f:validateLength minimum = "6" validatorMessage="Password is not long enough"/>
-		  						</h:inputText>
+		  						</h:inputSecret>
 	  						</div>
 		    					<h:outputLabel value="Family name: "/>
 		  						<h:inputText class="form-control" id="achternaam" value="#{profielController.profiel.achternaam}" required="true">
-		  							<f:validateRegex pattern="[a-zA-Z]+" validatorMessage="Alpha numaric characters are not allowed in Family Name."/>
+		  							<f:validateRegex pattern="[a-zA-Z]+$" validatorMessage="Alpha numaric characters are not allowed in Family Name."/>
 		  						</h:inputText>
 	  						</div>
 	  						<div class="form-group">
@@ -71,10 +71,10 @@
 	  						<div class="form-group">
 		    					<h:outputLabel value="House number: "/>
 		  						<h:inputText class="form-control" id="adresnumber" value="#{profielController.profiel.huisnummer}" required="true">
-		  							<f:validateRegex pattern="[^A-Za-z0-9]+" validatorMessage="No special characters in House number"/>
+		  							
 		  						</h:inputText>
 	  						</div>
-	  						<h:commandButton style="text-decoration:none; padding:5px; width:115px;" value = "submit"  action = "#{profielController.createAccount}" id = "MakeAccount"/>
+	  						<h:commandButton style="text-decoration:none; padding:5px; width:115px;" value = "submit"  action = "#{profielController.createProfiel()}" id = "MakeProfiel" class="btn btn-primary pull-right"/>
 	  					</div>
 					</div>
 				</h:form>

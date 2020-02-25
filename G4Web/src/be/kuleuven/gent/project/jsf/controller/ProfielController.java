@@ -13,7 +13,7 @@ import be.kuleuven.gent.project.ejb.*;
 import be.kuleuven.gent.project.ejb.ProfielManagementEJBLocal;
 
 @Named
-@ViewScoped
+@Stateless
 public class ProfielController implements Serializable {
 	private static final long serialVersionUID = 6731234724536164355L;
 	
@@ -27,7 +27,7 @@ public class ProfielController implements Serializable {
 	
 	public String createProfiel() {
 		profielEJB.createProfiel(profiel);
-		return "test.faces.faces-redirect=true";
+		return "test.faces?faces-redirect=true";
 	}
 
 	public Profiel getProfiel() {
