@@ -7,6 +7,10 @@
 		<class>be.kuleuven.gent.project.data.Profiel</class>
 		<class>be.kuleuven.gent.project.data.Rit</class>
 		<class>be.kuleuven.gent.project.data.Route</class>
+		<class>be.kuleuven.gent.project.data.Review</class>
+		<class>be.kuleuven.gent.project.data.Bericht</class>
+		<class>be.kuleuven.gent.project.data.Chat</class>
+		<class>be.kuleuven.gent.project.data.Tussenstop</class>
 		<properties>
 			<!--  tables will be created only if they do not exist. Use for production 
 			<property name="eclipselink.ddl-generation" value="create-tables"/>
