@@ -4,12 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import be.kuleuven.gent.project.data.*;
 import be.kuleuven.gent.project.ejb.*;
-//import be.kuleuven.gent.project.ejb.ProfielManagementEJBLocal;
+import be.kuleuven.gent.project.ejb.ProfielManagementEJBLocal;
 
 @Named
 @ViewScoped
@@ -28,5 +29,14 @@ public class ProfielController implements Serializable {
 		profielEJB.createProfiel(profiel);
 		return "test.faces.faces-redirect=true";
 	}
+
+	public Profiel getProfiel() {
+		return profiel;
+	}
+
+	public void setProfiel(Profiel profiel) {
+		this.profiel = profiel;
+	}
+	
 	
 }
