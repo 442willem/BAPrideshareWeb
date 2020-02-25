@@ -15,7 +15,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @Table(name="profiel")
 @SecondaryTable(name = "profiel_Group", pkJoinColumns=@PrimaryKeyJoinColumn(name="login", referencedColumnName="login"))
 public class Profiel implements Serializable {
-	//alle parameters die in de DB staan , nog iets
+	//alle parameters die in de DB staan , nog iets ...
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idProfiel", nullable=false,length=16)
