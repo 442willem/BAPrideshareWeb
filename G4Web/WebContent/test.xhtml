@@ -10,12 +10,29 @@
 
   <title>
     <ui:insert name="title">Rideshare account make succes</ui:insert>
-  </title>
+  </title>  
+  
+      
+<meta name="viewport" content="initial-scale=1.0" />
+<meta charset="utf-8" />
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  
 </h:head> 
 
 
 <h:body>
-	  <body>
     <div id="map"></div>
     <script>
       var map;
@@ -26,8 +43,7 @@
         });
       }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&callback=initMap" async defer></script>
-  </body>
+    <script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;callback=initMap"></script>
 
 </h:body>
 </html>
