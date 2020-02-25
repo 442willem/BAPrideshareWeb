@@ -22,9 +22,7 @@ public class ProfielManagementEJB implements ProfielManagementEJBLocal {
         // TODO Auto-generated constructor stub
     }
     
-     public boolean createProfiel() {
-    	Profiel p =new Profiel();
+     public void createProfiel(Profiel p) {
 		em.persist(p);
-    	return true;
     }
 }
