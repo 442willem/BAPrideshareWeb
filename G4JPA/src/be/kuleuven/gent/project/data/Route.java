@@ -42,9 +42,11 @@ public class Route {
 	@JoinColumn(name="bestuurder", nullable=false)
 	private Profiel bestuurder;
 
-	public Route() {
-		
-	}
+	public Route() {}
 	
-
+	public Route(Timestamp eindtijd, Timestamp vertrektijd, Profiel bestuurder) {
+		this.eindtijd=eindtijd;
+		this.vertrektijd=vertrektijd;
+		this.bestuurder=bestuurder;
+	}
 }
