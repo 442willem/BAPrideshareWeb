@@ -33,6 +33,70 @@ public class Route {
 	@Column(name="eindpunt_long", nullable=false)
 	private DecimalFormat eindpuntLong;
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public DecimalFormat getBeginpuntLat() {
+		return beginpuntLat;
+	}
+
+	public void setBeginpuntLat(DecimalFormat beginpuntLat) {
+		this.beginpuntLat = beginpuntLat;
+	}
+
+	public DecimalFormat getBeginpuntLong() {
+		return beginpuntLong;
+	}
+
+	public void setBeginpuntLong(DecimalFormat beginpuntLong) {
+		this.beginpuntLong = beginpuntLong;
+	}
+
+	public DecimalFormat getEindpuntLat() {
+		return eindpuntLat;
+	}
+
+	public void setEindpuntLat(DecimalFormat eindpuntLat) {
+		this.eindpuntLat = eindpuntLat;
+	}
+
+	public DecimalFormat getEindpuntLong() {
+		return eindpuntLong;
+	}
+
+	public void setEindpuntLong(DecimalFormat eindpuntLong) {
+		this.eindpuntLong = eindpuntLong;
+	}
+
+	public Timestamp getEindtijd() {
+		return eindtijd;
+	}
+
+	public void setEindtijd(Timestamp eindtijd) {
+		this.eindtijd = eindtijd;
+	}
+
+	public Timestamp getVertrektijd() {
+		return vertrektijd;
+	}
+
+	public void setVertrektijd(Timestamp vertrektijd) {
+		this.vertrektijd = vertrektijd;
+	}
+
+	public Profiel getBestuurder() {
+		return bestuurder;
+	}
+
+	public void setBestuurder(Profiel bestuurder) {
+		this.bestuurder = bestuurder;
+	}
+
 	@Column(name="eindtijd", nullable=false)
 	private Timestamp eindtijd;
 	
