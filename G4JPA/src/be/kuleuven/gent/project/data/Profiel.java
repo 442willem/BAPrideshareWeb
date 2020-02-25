@@ -141,8 +141,9 @@ public class Profiel implements Serializable {
 
 	public Profiel() {}
 	
-	public Profiel(String stad,String straat,String huisnummer,String login, String password,String achternaam, String voornaam) {
+	public Profiel(String stad,String group,String straat,String huisnummer,String login, String password,String achternaam, String voornaam) {
 		this.achternaam=achternaam;
+		this.group=group;
 		this.stad=stad;
 		this.straat=straat;
 		this.huisnummer=huisnummer;
