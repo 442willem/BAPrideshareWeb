@@ -15,7 +15,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 
 
 @Entity
-@Table(name="Profiel")
+@Table(name="profiel")
 public class Profiel implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

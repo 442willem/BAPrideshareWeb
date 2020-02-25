@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import com.sun.jmx.snmp.Timestamp;
 
 @Entity
-@Table(name="Route")
+@Table(name="route")
 public class Route {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
