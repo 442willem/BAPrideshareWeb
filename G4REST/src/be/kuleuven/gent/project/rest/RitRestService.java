@@ -21,7 +21,7 @@ import be.kuleuven.gent.project.data.Profiel;
 import be.kuleuven.gent.project.data.Rit;
 import be.kuleuven.gent.project.data.Route;
 import be.kuleuven.gent.project.ejb.RitManagementEJBLocal;
-//mss route EJB nodig
+//mss route EJB & Rit EJB nodig
 import be.kuleuven.gent.project.ejb.UserManagementEJBLocal;
 
 @javax.enterprise.context.RequestScoped
@@ -44,7 +44,7 @@ public class RitRestService {
 
 //	@POST
 //	@JWTTokenNeeded
-//	public Response createTask(Rit task) {
+//	public Response createRit(Rit task) {
 //		if (task == null)
 //			throw new BadRequestException();
 //		
@@ -55,7 +55,7 @@ public class RitRestService {
 
 //	@GET
 //	@JWTTokenNeeded
-//	public Response getTasks() {
+//	public Response getRitten() {
 //		
 //		Principal p = ctx.getUserPrincipal();
 //		Profiel person = userRepo.findProfiel(p.getName());
