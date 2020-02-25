@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.faces.bean.*;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -25,9 +27,13 @@ public class ProfielController implements Serializable {
 	
 	private Profiel profiel = new Profiel();
 	
+	
+	
 	public String createProfiel() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.renderResponse();
 		profielEJB.createProfiel(profiel);
-		return "test.faces?faces-redirect=true";
+		return "index.faces?faces-redirect=true&login=1";
 	}
 
 	public Profiel getProfiel() {

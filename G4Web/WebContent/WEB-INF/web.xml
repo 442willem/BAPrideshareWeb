@@ -16,6 +16,15 @@
     </form-login-config>
   </login-config>
   
+    <!-- Security roles used by this web application -->
+   <security-role>
+    <role-name>Driver</role-name>
+ </security-role>
+ <security-role>
+    <role-name>Passenger</role-name>
+ </security-role>
+  
+  
 </web-app>
   
   
