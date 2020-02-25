@@ -21,11 +21,11 @@ public class UserController implements Serializable{
 	
 	
 	public String activateDriver(){
-		return "driver/ritten.faces?faces-redirect=true";
+		return "driver/test.faces?faces-redirect=true";
 	}
 	
 	public String activatePassenger(){
-		return "passenger/ritten.faces?faces-redirect=true";
+		return "passenger/test.faces?faces-redirect=true";
 	}
 	
 	public String goToLogin() {

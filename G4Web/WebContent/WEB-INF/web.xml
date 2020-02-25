@@ -23,6 +23,28 @@
  <security-role>
     <role-name>Passenger</role-name>
  </security-role>
+ 
+  <security-constraint>
+    <web-resource-collection>
+        <web-resource-name>Secure Driver Pages</web-resource-name>
+        <description/>
+        <url-pattern>/driver/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+        <role-name>Driver</role-name>
+    </auth-constraint>
+</security-constraint>
+
+ <security-constraint>
+    <web-resource-collection>
+        <web-resource-name>Secure Passenger Pages</web-resource-name>
+        <description/>
+        <url-pattern>/passenger/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+        <role-name>Passenger</role-name>
+    </auth-constraint>
+</security-constraint>
   
   
 </web-app>

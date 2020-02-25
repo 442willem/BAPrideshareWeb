@@ -53,7 +53,7 @@ public class AuthenticationService {
 		byte[] passwordDigest = md.digest();
 		String pHash = DatatypeConverter.printBase64Binary(passwordDigest);
 		
-		if(person.getPassword().equals(pHash)){										//needed gethPassword uit DB
+		if(person.getPassword().equals(pHash)){										
 			return person;
 		}else{
 			throw new SecurityException("Invalid user/password");

@@ -16,26 +16,20 @@
 <h:body> 
 
 
+
 <h:form method="post" id="loginForm">
-<h:commandButton style="text-decoration:none; padding:5px; width:100px; float:right;" value ="Login" action="#{userController.goToLogin()}" class="btn btn-primary pull-right" id="Login"/>
+<h:commandButton style="text-decoration:none; padding:5px; width:100px; float:right;" value ="Login" action="#{userController.goToLogin()}" class="btn btn-primary pull-right" id="Login" rendered="#{param.login!=1}"/>
 </h:form>
+<script type="text/javascript">
+	jQuery(function() {topBar.show()});</script>          
+<p:notificationBar id="notbar" position="top" widgetVar="topBar" styleClass="top" rendered="#{param.login == 1}">
+    <h:outputText value="Welcome, you are now logged in! #{profielController.getProfiel().login}" rendered="#{param.login == 1}" style="color:#FFCC00;font-size:15px;" />
+</p:notificationBar>
 
 
 
 <div class="jumbotron jumbotron-sm">
     <div class="container">
-    	<ui:define name="mainForm">      
-       				 <script type="text/javascript">
-        				  jQuery(function() {
-        					  topBar.show()
-         				  });
-        			 </script>          
-       			 <p:notificationBar id="notbar" position="top" widgetVar="topBar" styleClass="top" rendered="#{param.login == 1}">
-          		  <h:outputText value="Welcome, you are now logged in!"
-             	   style="color:#FFCC00;font-size:36px;" />
-       			 </p:notificationBar>
-
-    	</ui:define>
         <div class="row">
             <div class="col-sm-12 col-lg-12">
             	
@@ -46,6 +40,7 @@
         </div>
     </div>
 </div>
+      
 
 
             
