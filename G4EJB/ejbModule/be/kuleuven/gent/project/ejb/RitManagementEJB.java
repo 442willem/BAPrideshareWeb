@@ -1,9 +1,10 @@
 package be.kuleuven.gent.project.ejb;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import javax.annotation.Resource;
+import javax.ejb.*;
 import javax.persistence.*;
 
+import be.kuleuven.gent.project.data.Profiel;
 import be.kuleuven.gent.project.data.Rit;
 
 /**
@@ -16,6 +17,10 @@ public class RitManagementEJB implements RitManagementEJBLocal {
 	@PersistenceContext(unitName="db")
 	private EntityManager em;
 	
+	@EJB
+	private UserManagementEJBLocal userEJB;
+	@Resource
+	private SessionContext ctx;	
     /**
      * Default constructor. 
      */
@@ -24,7 +29,11 @@ public class RitManagementEJB implements RitManagementEJBLocal {
     }
 
 	@Override
-	public void createRit(Rit r) {		
+	public void createRit(Rit r) {	
+    	String login = ctx.getCallerPrincipal().getName();
+		Profiel p = userEJB.findProfiel(login);
+    	
+		r.setPassagier(p);
 		em.persist(r);
 	}
 

@@ -7,4 +7,6 @@ import be.kuleuven.gent.project.data.Profiel;
 @Local
 public interface ProfielManagementEJBLocal {
 	public void createProfiel(Profiel p);
+
+	public Profiel getProfiel();
 }

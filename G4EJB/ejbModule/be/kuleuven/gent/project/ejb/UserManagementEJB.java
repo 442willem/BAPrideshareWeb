@@ -26,9 +26,8 @@ public class UserManagementEJB implements UserManagementEJBLocal {
     }
 	
 	@Override
-	public Profiel findProfiel(String login) {
-		
-		Query q = em.createQuery("SELECT p FROM Person p WHERE p.login = :login");
+	public Profiel findProfiel(String login) {		
+		Query q = em.createQuery("SELECT p FROM Profiel p WHERE p.login = :login");
 		q.setParameter("login", login);
 		List<Profiel> profielen = q.getResultList();
 		

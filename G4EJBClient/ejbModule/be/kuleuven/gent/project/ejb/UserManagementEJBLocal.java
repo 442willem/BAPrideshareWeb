@@ -6,6 +6,5 @@ import be.kuleuven.gent.project.data.*;
 
 @Local
 public interface UserManagementEJBLocal {
-
 	public Profiel findProfiel(String login);
 }

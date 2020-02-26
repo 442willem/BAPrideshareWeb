@@ -1,10 +1,11 @@
 package be.kuleuven.gent.project.ejb;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import javax.annotation.Resource;
+import javax.ejb.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import be.kuleuven.gent.project.data.Profiel;
 import be.kuleuven.gent.project.data.Route;
 
 /**
@@ -15,6 +16,12 @@ import be.kuleuven.gent.project.data.Route;
 public class RouteManagementEJB implements RouteManagementEJBLocal {
 	@PersistenceContext(unitName="db")
 	private EntityManager em;
+	
+	@EJB
+	private UserManagementEJBLocal userEJB;
+	@Resource
+	private SessionContext ctx;
+	
     /**
      * Default constructor. 
      */
@@ -23,6 +30,10 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
     }
     @Override
     public void createRoute(Route r) {
+    	String login = ctx.getCallerPrincipal().getName();
+		Profiel p = userEJB.findProfiel(login);
+    	
+		r.setBestuurder(p);
     	em.persist(r);
     }
 

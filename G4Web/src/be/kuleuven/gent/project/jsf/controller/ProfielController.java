@@ -3,7 +3,9 @@ package be.kuleuven.gent.project.jsf.controller;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.faces.bean.*;
 import javax.enterprise.context.SessionScoped;
@@ -29,7 +31,6 @@ public class ProfielController implements Serializable {
 	private Profiel profiel = new Profiel();
 	
 	
-	
 	public String createProfiel() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		facesContext.renderResponse();
@@ -38,7 +39,8 @@ public class ProfielController implements Serializable {
 	}
 
 	public Profiel getProfiel() {
-		return profiel;
+		Profiel p = profielEJB.getProfiel();
+		return p;
 	}
 
 	public void setProfiel(Profiel profiel) {

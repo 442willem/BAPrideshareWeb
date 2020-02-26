@@ -32,6 +32,15 @@ public class Route {
 	
 	@Column(name="eindpunt_long", nullable=false)
 	private DecimalFormat eindpuntLong;
+
+	@Column(name="eindtijd", nullable=false)
+	private Timestamp eindtijd;
+	
+	@Column(name="vertrektijd", nullable=false)
+	private Timestamp vertrektijd;
+	
+	@JoinColumn(name="bestuurder", nullable=false)
+	private Profiel bestuurder;
 	
 	public int getId() {
 		return id;
@@ -96,16 +105,6 @@ public class Route {
 	public void setBestuurder(Profiel bestuurder) {
 		this.bestuurder = bestuurder;
 	}
-
-	@Column(name="eindtijd", nullable=false)
-	private Timestamp eindtijd;
-	
-	@Column(name="vertrektijd", nullable=false)
-	private Timestamp vertrektijd;
-	
-	@JoinColumn(name="bestuurder", nullable=false)
-	private Profiel bestuurder;
-
 	public Route() {}
 	
 	public Route(Timestamp eindtijd, Timestamp vertrektijd, Profiel bestuurder) {
