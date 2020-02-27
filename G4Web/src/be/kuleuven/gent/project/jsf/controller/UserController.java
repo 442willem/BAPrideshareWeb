@@ -9,6 +9,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
+import be.kuleuven.gent.project.data.Profiel;
+import be.kuleuven.gent.project.ejb.ProfielManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.UserManagementEJBLocal;
 	
 @Named
@@ -19,17 +21,16 @@ public class UserController implements Serializable{
 	@EJB
 	private UserManagementEJBLocal userEJB;
 	
-	
 	public String activateDriver(){
 		return "driver/indexD.faces?faces-redirect=true&login=1";
 	}
 	
 	public String activatePassenger(){
-		return "passenger/test.faces?faces-redirect=true";
+		return "passenger/indexP.faces?faces-redirect=true&login=1";
 	}
 	
 	public String goToLogin() {
-		return "login.faces?faces-redirect=true";
+		return "role.faces?faces-redirect=true";
 	}
 	public String goToCreateAccount() {
 		return "createAccount.faces?faces-redirect=true";

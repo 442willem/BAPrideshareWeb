@@ -18,7 +18,7 @@
 
 
 <h:form method="post" id="loginForm">
-<h:commandButton style="text-decoration:none; padding:5px; width:100px; float:right;" value ="Login" action="#{userController.goToLogin()}" class="btn btn-primary pull-right" id="Login" rendered="#{param.login!=1}"/>
+<h:commandButton style="text-decoration:none; padding:5px; width:100px; float:right;" value ="Driver" action="#{userController.activateDriver()}" class="btn btn-primary pull-right" id="activateD" />
 </h:form>
 <script type="text/javascript">
 	jQuery(function() {topBar.show()});</script>          
@@ -34,12 +34,16 @@
             <div class="col-sm-12 col-lg-12">
             	
                 <h1 class="h1">
-                    Welcome to the new and improved Ridesharing platform <small></small></h1>
+                    Welcome to the new and improved Ridesharing platform, Passenger! <small></small></h1>
                     
             </div>
         </div>
     </div>
 </div>
+      
+
+
+            
 <h2 class="h2">Hier komt dus die tabel met de gegevens in de db</h2>
 <!--     
 <h:dataTable id ="rittentable" value="#{ritManagementEJB.findAllRitten()}" var =rit >
@@ -59,8 +63,7 @@
  -->  
             
 
-        
-
+   
 
 </h:body> 
 

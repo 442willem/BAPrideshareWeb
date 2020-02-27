@@ -34,7 +34,7 @@
             <div class="col-sm-12 col-lg-12">
             	
                 <h1 class="h1">
-                    Welcome to the new and improved Ridesharing platform <small></small></h1>
+                    Welcome to the new and improved Ridesharing platform, Driver! <small></small></h1>
                     
             </div>
         </div>
@@ -44,15 +44,26 @@
 
 
             
-<h:form id="taskForm" method="post" action="j_security_check">
-	
-                
-	<h:commandButton style="margin-left:350px;float:left;hight:100px;width:200px" value="I am a Driver" action="#{userController.activateDriver()}" class="btn btn-primary pull-left" id="Driver"/>
-	<h:commandButton style="margin-right:350px;float:right;hight:100px;width:200px" value="I am a Passenger" action="#{userController.activatePassenger()}" class="btn btn-primary pull-right" id="Passenger"/>
-    			
-</h:form>
-        
+<h2 class="h2">Hier komt dus die tabel met de gegevens in de db</h2>
+<!--     
+<h:dataTable id ="rittentable" value="#{ritManagementEJB.findAllRitten()}" var =rit >
+	<h:column>
+		<f:facet name="header">
+			<h:outputText value="Route"/>
+		</f:facet>
+		<h:link outcome="viewRit.xhtml?id=#{rit.id}" value="#{rit.route}"/>
+	</h:column>
+	<h:column>
+		<f:facet name="header">
+			<h:outputText value="vertrektijd"/>
+		</f:facet>
+		<h:outputText value="#{rit.vertrektijd}"/>
+	</h:column>
+</h:dataTable>
+ -->  
+            
 
+   
 
 </h:body> 
 
