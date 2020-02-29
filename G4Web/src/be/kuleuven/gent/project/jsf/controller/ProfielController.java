@@ -32,13 +32,13 @@ public class ProfielController implements Serializable {
 	private Profiel profiel = new Profiel();
 	
 	public String createProfiel() {
-		/*FacesContext facesContext = FacesContext.getCurrentInstance();
-		facesContext.renderResponse();*/
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.renderResponse();
 		profielEJB.createProfiel(profiel);
 		return "index.faces?faces-redirect=true&login=1";
 	}
 	
-	/*public String activateP() {
+	public String activateP() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		facesContext.renderResponse();
 		Profiel p = profielEJB.getProfiel();
@@ -46,14 +46,14 @@ public class ProfielController implements Serializable {
 		return "passenger/indexP.faces?faces-redirect=true&login=1";
 		
 	}
-	*/
+	
 	public Profiel getProfiel() {
 		
 		return profiel;
 	}
-	public String getHuidigProfiel() {
+	public Profiel getHuidigProfiel() {
 		Profiel p = profielEJB.getProfiel();
-		return p.getLogin();
+		return p;
 	}
 
 	public void setProfiel(Profiel profiel) {
