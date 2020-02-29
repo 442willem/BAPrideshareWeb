@@ -21,7 +21,7 @@
 <h:commandButton style="text-decoration:none; padding:5px; width:100px; float:right;" value ="Login" action="#{userController.goToLogin()}" class="btn btn-primary pull-right" id="Login" rendered="#{param.login!=1}"/>
 </h:form>
 <script type="text/javascript">
-	jQuery(function() {topBar.show()});</script>          
+	jQuery(function() {topBar.show()});</script>
 <p:notificationBar id="notbar" position="top" widgetVar="topBar" styleClass="top" rendered="#{param.login == 1}">
     <h:outputText value="Welcome, you are now logged in! #{profielController.getProfiel().login}" rendered="#{param.login == 1}" style="color:#FFCC00;font-size:15px;" />
 </p:notificationBar>
@@ -41,8 +41,8 @@
     </div>
 </div>
 <h2 class="h2">Hier komt dus die tabel met de gegevens in de db</h2>
-<!--     
-<h:dataTable id ="rittentable" value="#{ritManagementEJB.findAllRitten()}" var =rit >
+  
+<h:dataTable id ="rittentable" value="#{ritController.findAllRitten()}" var ="rit" >
 	<h:column>
 		<f:facet name="header">
 			<h:outputText value="Route"/>
@@ -56,7 +56,6 @@
 		<h:outputText value="#{rit.vertrektijd}"/>
 	</h:column>
 </h:dataTable>
- -->  
             
 
         

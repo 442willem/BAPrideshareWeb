@@ -34,6 +34,12 @@ public class RitController implements Serializable {
 	public void setRit(Rit rit) {
 		this.rit = rit;
 	}
+	public int getAantalRitten() {
+		return ritEJB.getAantalRitten();
+	}
+	public List<Rit> findAllRitten() {
+		return ritEJB.findAllRitten();
+	}
 	
 	
 	
