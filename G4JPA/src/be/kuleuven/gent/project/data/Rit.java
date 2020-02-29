@@ -17,7 +17,7 @@ public class Rit implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idRit", nullable=false,length=16)
+	@Column(name="idrit", nullable=false,length=16)
 	private int id;
 	
 	@Column(name="prijs", nullable=false)
@@ -35,10 +35,10 @@ public class Rit implements Serializable {
 	@Column(name="eindtijd", nullable=false)
 	private Timestamp eindtijd;
 	
-	@JoinColumn(name="passagier", nullable=false)
+	@JoinColumn(name="passagierId", nullable=false)
 	private Profiel passagier;
 	
-	@JoinColumn(name="route", nullable=false)
+	@JoinColumn(name="routeId", nullable=false)
 	private Route route;
 	
 	public int getId() {

@@ -39,7 +39,7 @@ public class Route {
 	@Column(name="vertrektijd", nullable=false)
 	private Timestamp vertrektijd;
 	
-	@JoinColumn(name="bestuurder", nullable=false)
+	@JoinColumn(name="bestuurderd", nullable=false)
 	private Profiel bestuurder;
 	
 	public int getId() {

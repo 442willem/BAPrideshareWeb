@@ -21,10 +21,10 @@ public class Profiel implements Serializable {
 	@Column(name="idProfiel", nullable=false,length=16)
 	private int id;
 	
-	@Column(name="driverscore", nullable=false)
+	@Column(name="driverScore", nullable=false)
 	private int driverscore;
 
-	@Column(name="passagierscore", nullable=false)
+	@Column(name="passagierScore", nullable=false)
 	private int passagierscore;
 	
 	@Column(name="voornaam", nullable=false)

@@ -14,7 +14,7 @@ public class Review {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idReview", nullable=false,length=16)
+	@Column(name="idreview", nullable=false,length=16)
 	private int id;
 	
 	@Column(name="descriptie", nullable=false)
@@ -23,7 +23,7 @@ public class Review {
 	@Column(name="score", nullable=false)
 	private int score;
 	
-	@Column(name="v", nullable=false)
+	@Column(name="modus", nullable=false)
 	private int modus;
 	
 	@JoinColumn(name="ontvangerId", nullable=false)
