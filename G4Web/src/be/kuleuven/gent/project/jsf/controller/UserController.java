@@ -26,6 +26,7 @@ public class UserController implements Serializable{
 	}
 	
 	public String activatePassenger(){
+		
 		return "passenger/indexP.faces?faces-redirect=true&login=1";
 	}
 	

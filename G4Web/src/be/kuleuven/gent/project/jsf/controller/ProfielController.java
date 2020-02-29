@@ -3,6 +3,7 @@ package be.kuleuven.gent.project.jsf.controller;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.SessionContext;
@@ -18,7 +19,7 @@ import be.kuleuven.gent.project.ejb.*;
 import be.kuleuven.gent.project.ejb.ProfielManagementEJBLocal;
 
 @Named
-@SessionScoped
+@ViewScoped
 public class ProfielController implements Serializable {
 	private static final long serialVersionUID = 6731234724536164355L;
 	
@@ -30,17 +31,29 @@ public class ProfielController implements Serializable {
 	
 	private Profiel profiel = new Profiel();
 	
-	
 	public String createProfiel() {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		facesContext.renderResponse();
+		/*FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.renderResponse();*/
 		profielEJB.createProfiel(profiel);
 		return "index.faces?faces-redirect=true&login=1";
 	}
-
-	public Profiel getProfiel() {
+	
+	/*public String activateP() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.renderResponse();
 		Profiel p = profielEJB.getProfiel();
-		return p;
+		p.setGroup("Passenger");
+		return "passenger/indexP.faces?faces-redirect=true&login=1";
+		
+	}
+	*/
+	public Profiel getProfiel() {
+		
+		return profiel;
+	}
+	public String getHuidigProfiel() {
+		Profiel p = profielEJB.getProfiel();
+		return p.getLogin();
 	}
 
 	public void setProfiel(Profiel profiel) {

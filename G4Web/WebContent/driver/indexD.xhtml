@@ -18,12 +18,12 @@
 
 
 <h:form method="post" id="loginForm">
-<h:commandButton style="text-decoration:none; padding:5px; width:100px; float:right;" value ="Passenger" action="#{userController.activatePassenger()}" class="btn btn-primary pull-right" id="activateP" />
+<h:commandButton style="text-decoration:none; padding:5px; width:100px; float:right;" value ="Passenger" action="#{profielController.activateP()}" class="btn btn-primary pull-right" id="activateP" />
 </h:form>
 <script type="text/javascript">
 	jQuery(function() {topBar.show()});</script>          
 <p:notificationBar id="notbar" position="top" widgetVar="topBar" styleClass="top" rendered="#{param.login == 1}">
-    <h:outputText value="Welcome, you are now logged in! #{profielController.getProfiel().login}" rendered="#{param.login == 1}" style="color:#FFCC00;font-size:15px;" />
+    <h:outputText value="Welcome, you are now logged in! #{profielController.getHuidigProfiel()}" rendered="#{param.login == 1}" style="color:#FFCC00;font-size:15px;" />
 </p:notificationBar>
 
 
