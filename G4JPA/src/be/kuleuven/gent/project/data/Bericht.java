@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
-import com.sun.jmx.snmp.Timestamp;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name="bericht")

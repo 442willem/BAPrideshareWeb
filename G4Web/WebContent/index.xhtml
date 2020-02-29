@@ -53,13 +53,13 @@
 		<f:facet name="header">
 			<h:outputText value="vertrektijd"/>
 		</f:facet>
-		<h:outputText value="#{rit.vertrektijd}"/>
+		<h:outputText value="#{rit.vertrektijdToString()}"/>
 	</h:column>
 	<h:column>
 		<f:facet name="header">
 			<h:outputText value="aankomsttijd"/>
 		</f:facet>
-		<h:outputText value="#{rit.eindtijd}"/>
+		<h:outputText value="#{rit.eindtijdToString()}"/>
 	</h:column>
 </h:dataTable>
 

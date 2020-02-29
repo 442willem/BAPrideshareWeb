@@ -8,8 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 @Entity
 @Table(name="Rit")
@@ -29,7 +32,7 @@ public class Rit implements Serializable {
 	@Column(name="aantal_personen", nullable=false)
 	private int aantalPersonen;
 	
-	@Column(name="vertrektijd", nullable=false)
+	@Column(name="vertrektijd", nullable=false)	
 	private Timestamp vertrektijd;
 	
 	@Column(name="eindtijd", nullable=false)
@@ -76,6 +79,9 @@ public class Rit implements Serializable {
 	public Timestamp getVertrektijd() {
 		return vertrektijd;
 	}
+	public String vertrektijdToString() {
+		return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(vertrektijd);
+	}
 
 	public void setVertrektijd(Timestamp vertrektijd) {
 		this.vertrektijd = vertrektijd;
@@ -83,6 +89,9 @@ public class Rit implements Serializable {
 
 	public Timestamp getEindtijd() {
 		return eindtijd;
+	}
+	public String eindtijdToString() {
+		return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(eindtijd);
 	}
 
 	public void setEindtijd(Timestamp eindtijd) {
