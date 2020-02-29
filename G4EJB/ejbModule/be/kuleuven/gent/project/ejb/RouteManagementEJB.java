@@ -1,9 +1,12 @@
 package be.kuleuven.gent.project.ejb;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.ejb.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import be.kuleuven.gent.project.data.Profiel;
 import be.kuleuven.gent.project.data.Route;
@@ -35,6 +38,11 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
     	
 		r.setBestuurder(p);
     	em.persist(r);
+    }
+    
+    public List<Route> findAllRoutes(){
+		Query q = em.createQuery("SELECT r FROM Route r");
+		return q.getResultList();
     }
 
 }
