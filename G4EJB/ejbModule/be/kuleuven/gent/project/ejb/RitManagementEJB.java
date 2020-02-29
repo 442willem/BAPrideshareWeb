@@ -49,8 +49,8 @@ public class RitManagementEJB implements RitManagementEJBLocal {
 	}
 	@Override
 	public int getAantalRitten() {
-		Query q = em.createQuery("SELECT r FROM Rit r");
-		return q.getResultList().size();
+		Query q = em.createQuery("SELECT COUNT(*) FROM Rit");
+		return q.getFirstResult();
 	}
 	@Override
 	public List<Rit> findAllRitten(){
