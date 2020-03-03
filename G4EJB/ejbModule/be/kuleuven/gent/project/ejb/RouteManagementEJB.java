@@ -64,22 +64,21 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 		}
 		else {
 			Timestamp t = new Timestamp(0);
-			t.setYear(-4713);
+			t.setYear(0);
 			q.setParameter(3, t);
-			t.setYear(9999);
+			t.setYear(8000);
 			q.setParameter(4, t);
 		}
 		
-		if(eindtijd!=null) {
-			
+		if(eindtijd!=null) {		
 			q.setParameter(5, eindtijd);
 			q.setParameter(6, eindtijd);
 		}
 		else {
 			Timestamp t =  new Timestamp(0);
-			t.setYear(-4713);
+			t.setYear(0);
 			q.setParameter(5,t);
-			t.setYear(9999);
+			t.setYear(8000);
 			q.setParameter(6, t);
 		}
 		
