@@ -1,5 +1,6 @@
 package be.kuleuven.gent.project.ejb;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.annotation.Resource;
