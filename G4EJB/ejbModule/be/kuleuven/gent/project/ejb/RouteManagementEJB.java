@@ -49,25 +49,18 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
     public List<Route> findRoutes(String beginpunt,String eindpunt, Timestamp begintijd, Timestamp eindtijd){
 		Query q = em.createQuery("SELECT r FROM Route r WHERE r.beginpunt=?1 AND r.eindpunt=?2 AND r.begintijd=?3 AND r.eindtijd=?4");
 		
-		if(beginpunt==null) {
-			q.setParameter(1, "*");
+		if(beginpunt!=null) {
+			q.setParameter(1, beginpunt);
 		}
-		else q.setParameter(1, beginpunt);
-		
-		if(eindpunt==null) {
-			q.setParameter(2, "*");
+		if(eindpunt!=null) {
+			q.setParameter(2, eindpunt);
 		}
-		else q.setParameter(2, eindpunt);
-		
-		if(begintijd==null) {
-			q.setParameter(3, "*");
+		if(begintijd!=null) {
+			q.setParameter(3, begintijd);
 		}
-		else q.setParameter(3, begintijd);
-		
-		if(eindtijd==null) {
-			q.setParameter(4, "*");
+		if(eindtijd!=null) {
+			q.setParameter(4, eindtijd);
 		}
-		else q.setParameter(4, eindtijd);
 		
 		return q.getResultList();
     }
