@@ -77,6 +77,18 @@
 		</f:facet>
 		<h:link outcome="viewRoute.xhtml?id=#{rit.id}" value="#{route.getId()}"/>
 	</h:column>
+		<h:column>
+		<f:facet name="header">
+			<h:outputText value="beginpunt"/>
+		</f:facet>
+		<h:outputText value="#{route.beginpunt}"/>
+	</h:column>
+		<h:column>
+		<f:facet name="header">
+			<h:outputText value="eindpunt"/>
+		</f:facet>
+		<h:outputText value="#{route.eindpunt}"/>
+	</h:column>
 	<h:column>
 		<f:facet name="header">
 			<h:outputText value="vertrektijd"/>
@@ -90,5 +102,14 @@
 		<h:outputText value="#{route.eindtijdToString()}"/>
 	</h:column>
 </h:dataTable>
+<script type="text/javascript" language="javascript">
+$(document).ready(function() { /// Wait till page is loaded
+   $('#FilterProfiel').click(function(){
+      $('#routentable').load('#routentable', function() {
+           /// can add another function here
+      });
+   });
+}); 
+</script>
 </h:body> 
 </html>

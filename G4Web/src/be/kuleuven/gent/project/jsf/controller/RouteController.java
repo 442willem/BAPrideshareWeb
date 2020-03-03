@@ -1,7 +1,7 @@
 package be.kuleuven.gent.project.jsf.controller;
 
 import java.io.Serializable;
-
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -29,6 +29,10 @@ public class RouteController implements Serializable {
 	public void init(){
 		route = new Route();
 		queryRoute = new Route();
+		queryRoute.setBeginpunt(null);
+		queryRoute.setEindpunt(null);
+		queryRoute.setVertrektijd(null);
+		queryRoute.setEindtijd(null);
 	}
 	
 	public Route getRoute() {
@@ -48,7 +52,7 @@ public class RouteController implements Serializable {
 		return routeEJB.getAantalRoutes();
 	}
 	public List<Route> getRoutes() {
-		return routeEJB.findRoutes(queryRoute);
+		return routeEJB.findRoutes(queryRoute.getBeginpunt(),queryRoute.getEindpunt(),queryRoute.getVertrektijd(),queryRoute.getEindtijd());
 	}
 	public List<Route> findAllRoutes() {
 		return routeEJB.findAllRoutes();

@@ -45,6 +45,7 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 		return q.getResultList();
     }
     public void filterRoutes() {}
+    @Override
     public List<Route> findRoutes(Route model){
 		Query q = em.createQuery("SELECT r FROM Route r");
 		return q.getResultList();
