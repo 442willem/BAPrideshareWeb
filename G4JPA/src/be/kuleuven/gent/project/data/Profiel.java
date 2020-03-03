@@ -33,15 +33,6 @@ public class Profiel implements Serializable {
 	@Column(name="achternaam", nullable=false)
 	private String achternaam;
 	
-	@Column(name="stad", nullable=false)
-	private String stad;
-	
-	@Column(name="straat", nullable=false)
-	private String straat;
-	
-	@Column(name="huisnummer", nullable=false)
-	private String huisnummer;
-	
 	@Column(name="login", nullable=false)
 	private String login;
 	
@@ -99,30 +90,6 @@ public class Profiel implements Serializable {
 		this.achternaam = achternaam;
 	}
 
-	public String getStad() {
-		return stad;
-	}
-
-	public void setStad(String stad) {
-		this.stad = stad;
-	}
-
-	public String getStraat() {
-		return straat;
-	}
-
-	public void setStraat(String straat) {
-		this.straat = straat;
-	}
-
-	public String getHuisnummer() {
-		return huisnummer;
-	}
-
-	public void setHuisnummer(String huisnummer) {
-		this.huisnummer = huisnummer;
-	}
-
 	public String getLogin() {
 		return login;
 	}
@@ -141,12 +108,10 @@ public class Profiel implements Serializable {
 
 	public Profiel() {}
 	
-	public Profiel(String stad,String group,String straat,String huisnummer,String login, String password,String achternaam, String voornaam) {
+	public Profiel(String stad,String group,String login, String password,String achternaam, String voornaam) {
 		this.achternaam=achternaam;
 		this.group=group;
-		this.stad=stad;
-		this.straat=straat;
-		this.huisnummer=huisnummer;
+		
 		this.login=login;
 		this.password=password;
 		this.voornaam=voornaam;

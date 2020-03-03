@@ -58,4 +58,6 @@ public class Tussenstop {
 		this.route = route;
 	}
 	
+	public Tussenstop() {}
+	
 }

@@ -8,9 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
@@ -26,6 +23,13 @@ public class Rit implements Serializable {
 	@Column(name="prijs", nullable=false)
 	private int prijs;
 	
+	@Column(name="eindpunt", nullable=false)
+	private String eindpunt;
+	
+	@Column(name="begintpunt", nullable=false)
+	private String begintpunt;
+	
+
 	@Column(name="betaald", nullable=false)
 	private boolean betaald;
 	
@@ -50,6 +54,22 @@ public class Rit implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getEindpunt() {
+		return eindpunt;
+	}
+
+	public void setEindpunt(String eindpunt) {
+		this.eindpunt = eindpunt;
+	}
+
+	public String getBegintpunt() {
+		return begintpunt;
+	}
+
+	public void setBegintpunt(String begintpunt) {
+		this.begintpunt = begintpunt;
 	}
 
 	public int getPrijs() {
