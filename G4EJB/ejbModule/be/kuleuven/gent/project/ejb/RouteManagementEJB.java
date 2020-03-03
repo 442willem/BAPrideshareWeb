@@ -44,10 +44,15 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 		Query q = em.createQuery("SELECT r FROM Route r");
 		return q.getResultList();
     }
+    public void filterRoutes() {}
     public List<Route> findRoutes(Route model){
-		Query q = em.createQuery("SELECT r FROM Route r "
-				+ "WHERE ******=model.*****");
+		Query q = em.createQuery("SELECT r FROM Route r");
 		return q.getResultList();
     }
+	@Override
+	public int getAantalRoutes() {
+		Query q = em.createQuery("SELECT COUNT(*) FROM Rit");
+		return q.getFirstResult();
+	}
 
 }

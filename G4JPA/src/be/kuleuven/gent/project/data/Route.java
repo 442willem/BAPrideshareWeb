@@ -1,6 +1,7 @@
 package be.kuleuven.gent.project.data;
 import java.io.Serializable;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,6 +52,9 @@ public class Route {
 	public void setEindtijd(Timestamp eindtijd) {
 		this.eindtijd = eindtijd;
 	}
+	public String eindtijdToString() {
+		return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(eindtijd);
+	}
 
 	public Timestamp getVertrektijd() {
 		return vertrektijd;
@@ -58,6 +62,9 @@ public class Route {
 
 	public void setVertrektijd(Timestamp vertrektijd) {
 		this.vertrektijd = vertrektijd;
+	}
+	public String vertrektijdToString() {
+		return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(vertrektijd);
 	}
 
 	public Profiel getBestuurder() {

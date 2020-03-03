@@ -10,4 +10,7 @@ import be.kuleuven.gent.project.data.Route;
 public interface RouteManagementEJBLocal {
 	public void createRoute(Route r);
 	public List<Route> findAllRoutes();
+	public int getAantalRoutes();
+	public List<Route> findRoutes(Route queryRoute);
+	public void filterRoutes();
 }

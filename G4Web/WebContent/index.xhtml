@@ -7,16 +7,11 @@
 
 <h:head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-
   <title>
     <ui:insert name="title">Welcome To RideSharing</ui:insert>
   </title>
 </h:head> 
-
 <h:body> 
-
-
-
 <h:form method="post" id="loginForm">
 <h:commandButton style="text-decoration:none; padding:5px; width:100px; float:right;" value ="Login" action="#{userController.goToLogin()}" class="btn btn-primary pull-right" id="Login" rendered="#{param.login!=1}"/>
 </h:form>
@@ -25,44 +20,75 @@
 <p:notificationBar id="notbar" position="top" widgetVar="topBar" styleClass="top" rendered="#{param.login == 1}">
     <h:outputText value="Welcome, you are now logged in! #{profielController.getHuidigProfiel().login}" rendered="#{param.login == 1}" style="color:#FFCC00;font-size:15px;" />
 </p:notificationBar>
-
-
-
 <div class="jumbotron jumbotron-sm">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 col-lg-12">
-            	
+            <div class="col-sm-12 col-lg-12">            	
                 <h1 class="h1">
-                    Welcome to the new and improved Ridesharing platform <small></small></h1>
-                    
+                    Welcome to the new and improved Ridesharing platform <small></small></h1>                   
             </div>
         </div>
     </div>
 </div>
 <h2 class="h2">Hier komt dus die tabel met de gegevens in de db</h2>
-  
-<h:dataTable id ="rittentable" value="#{ritController.findAllRitten()}" var ="rit" >
+<div class="filter">
+    <div class="rij">
+        <div class="col-md-8">
+            <div class="well well-sm">
+				<h:form method="post" id="createAccount">
+					<div class="row">
+						<div class="col-md-6">
+	              			 <div class="form-group">
+	              				<div class="form-group">
+		    					<h:outputLabel value="vertrekplaats"/>
+		  						<h:inputText class="form-control" id="login" value="#{routeController.queryRoute.beginpunt}">
+		  						</h:inputText>
+	  						</div></div>
+	  	           			<div class="form-group">
+	              				<div class="form-group">
+		    					<h:outputLabel value="aankomstplaats"/>
+		  						<h:inputText class="form-control" id="login" value="#{routeController.queryRoute.eindpunt}">
+		  						</h:inputText>
+	  						</div></div>
+	  						<div class="form-group">
+	              				<div class="form-group">
+		    					<h:outputLabel value="vertrektijd"/>
+		  						<h:inputText class="form-control" id="login" value="#{routeController.queryRoute.vertrektijd}">
+		  						</h:inputText>
+	  						</div></div>
+	  						<div class="form-group">
+	              				<div class="form-group">
+		    					<h:outputLabel value="aankomsttijd"/>
+		  						<h:inputText class="form-control" id="login" value="#{routeController.queryRoute.eindtijd}">
+		  						</h:inputText>
+	  						</div></div>    						
+	  						<h:commandButton style="text-decoration:none; padding:5px; width:115px;" value = "ok"  action = "#{routeController.filterRoutes()}" id = "FilterProfiel" class="btn btn-primary pull-right"/>
+	  					</div>
+					</div>
+				</h:form>
+			</div>
+		</div>
+	</div>
+</div>
+<h:dataTable id ="routentable" value="#{routeController.getRoutes()}" var ="route" >
 	<h:column>
 		<f:facet name="header">
-			<h:outputText value="Route"/>
+			<h:outputText value="Id"/>
 		</f:facet>
-		<h:link outcome="viewRit.xhtml?id=#{rit.id}" value="#{rit.route.getId()}"/>
+		<h:link outcome="viewRoute.xhtml?id=#{rit.id}" value="#{route.getId()}"/>
 	</h:column>
 	<h:column>
 		<f:facet name="header">
 			<h:outputText value="vertrektijd"/>
 		</f:facet>
-		<h:outputText value="#{rit.vertrektijdToString()}"/>
+		<h:outputText value="#{route.vertrektijdToString()}"/>
 	</h:column>
 	<h:column>
 		<f:facet name="header">
 			<h:outputText value="aankomsttijd"/>
 		</f:facet>
-		<h:outputText value="#{rit.eindtijdToString()}"/>
+		<h:outputText value="#{route.eindtijdToString()}"/>
 	</h:column>
 </h:dataTable>
-
 </h:body> 
-
 </html>
