@@ -48,20 +48,27 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
     public void filterRoutes() {}
     @Override
     public List<Route> findRoutes(String beginpunt,String eindpunt, Timestamp vertrektijd, Timestamp eindtijd){
-		Query q = em.createQuery("SELECT r FROM Route r WHERE r.beginpunt=?1 AND r.eindpunt=?2 AND r.vertrektijd=?3 AND r.eindtijd=?4");
+		Query q = em.createQuery("SELECT r FROM Route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2 AND r.vertrektijd LIKE ?3 AND r.eindtijd LIKE ?4");
 		
 		if(beginpunt!=null) {
-			q.setParameter(1, beginpunt);
+			q.setParameter(1,"'"+beginpunt+"'");
 		}
+		else q.setParameter(1, "'%'");
+		
 		if(eindpunt!=null) {
-			q.setParameter(2, eindpunt);
+			q.setParameter(2, "'"+eindpunt+"'");
 		}
+		else q.setParameter(2, "'%'");
+		
 		if(vertrektijd!=null) {
-			q.setParameter(3, vertrektijd);
+			q.setParameter(3, "'"+vertrektijd+"'");
 		}
+		else q.setParameter(3, "'%'");
+		
 		if(eindtijd!=null) {
-			q.setParameter(4, eindtijd);
+			q.setParameter(4,"'"+ eindtijd+"'");
 		}
+		else q.setParameter(4, "'%'");
 		
 		return q.getResultList();
     }
