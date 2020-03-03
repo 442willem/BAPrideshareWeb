@@ -28,6 +28,9 @@ public class Route {
 	@Column(name="eindpunt", nullable=false)
 	private String eindpunt;
 	
+	@Column(name="maximum_personen", nullable=false)
+	private int maxPersonen;
+	
 	@Column(name="eindtijd", nullable=false)
 	private Timestamp eindtijd;
 	
