@@ -2,6 +2,7 @@ package be.kuleuven.gent.project.data;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import java.sql.Timestamp;
 
@@ -30,7 +32,7 @@ public class Route {
 	
 	@Column(name="maximum_personen", nullable=false)
 	private int maxPersonen;
-	
+
 	@Column(name="eindtijd", nullable=false)
 	private Timestamp eindtijd;
 	
@@ -39,6 +41,11 @@ public class Route {
 	
 	@JoinColumn(name="bestuurderId", nullable=false)
 	private Profiel bestuurder;
+	
+	@Transient
+	private Date eindtijdDate;
+	@Transient
+	private Date vertrektijdDate;
 	
 	public int getId() {
 		return id;
@@ -55,6 +62,9 @@ public class Route {
 	public void setEindtijd(Timestamp eindtijd) {
 		this.eindtijd = eindtijd;
 	}
+	public void setEindtijd(Date eindtijd) {
+		this.eindtijd = new Timestamp(eindtijd.getTime());
+	}
 	public String eindtijdToString() {
 		return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(eindtijd);
 	}
@@ -62,11 +72,14 @@ public class Route {
 	public Timestamp getVertrektijd() {
 		return vertrektijd;
 	}
-
+	
 	public void setVertrektijd(Timestamp vertrektijd) {
 		this.vertrektijd = vertrektijd;
 	}
-	public String vertrektijdToString() {
+	public void setVertrektijd(Date vertrektijd) {
+		this.vertrektijd = new Timestamp(vertrektijd.getTime());
+	}
+	public String vertrektijdToString() {	
 		return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(vertrektijd);
 	}
 
@@ -93,12 +106,39 @@ public class Route {
 	public void setEindpunt(String eindpunt) {
 		this.eindpunt = eindpunt;
 	}
+	
+	public int getMaxPersonen() {
+		return maxPersonen;
+	}
 
-	public Route() {}
+	public void setMaxPersonen(int maxPersonen) {
+		this.maxPersonen = maxPersonen;
+	}
+
+	public Route() {
+	}
 	
 	public Route(Timestamp eindtijd, Timestamp vertrektijd, Profiel bestuurder) {
 		this.eindtijd=eindtijd;
 		this.vertrektijd=vertrektijd;
 		this.bestuurder=bestuurder;
+	}
+
+	public Date getEindtijdDate() {
+		return eindtijdDate;
+	}
+
+	public void setEindtijdDate(Date eindtijdDate) {
+		this.eindtijdDate = eindtijdDate;
+		this.eindtijd= new Timestamp(eindtijdDate.getTime());
+	}
+
+	public Date getVertrektijdDate() {
+		return vertrektijdDate;
+	}
+
+	public void setVertrektijdDate(Date vertrektijdDate) {
+		this.vertrektijdDate = vertrektijdDate;
+		this.vertrektijd= new Timestamp(vertrektijdDate.getTime());
 	}
 }

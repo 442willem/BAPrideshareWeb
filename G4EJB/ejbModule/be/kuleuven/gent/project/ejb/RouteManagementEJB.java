@@ -40,11 +40,12 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 		r.setBestuurder(p);
     	em.persist(r);
     }
-    
+    @Override
     public List<Route> findAllRoutes(){
 		Query q = em.createQuery("SELECT r FROM Route r");
 		return q.getResultList();
     }
+    @Override
     public void filterRoutes() {}
     @Override
     public List<Route> findRoutes(String beginpunt,String eindpunt, Timestamp vertrektijd, Timestamp eindtijd){

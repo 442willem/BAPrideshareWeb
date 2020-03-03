@@ -61,26 +61,26 @@
 	              			<div class="form-group">
 	              				<div class="form-group">
 		    					<h:outputLabel value="Vertrek Adres: "/>
-		  						<input class="form-control" id="vertrekAdress" value="#{routeController.route.beginpunt}" >
+		  						<input required="required" class="form-control" id="vertrekAdress" value="#{routeController.route.beginpunt}">
 		  						</input>
 	  						</div>
 	  						<div class="form-group">
 		    					<h:outputLabel value="Vroegste Vertrek Tijd: "/>
-		  						<p:datePicker id="timevertrek" value="#{routeController.route.vertrektijd}" showTime="true"/>
+		  						<p:datePicker id="timevertrek" value="#{routeController.route.vertrektijdDate}" showTime="true"/>
 	  						</div>
 		    					<h:outputLabel value="Aankomst adress: "/>
-		  						<input class="form-control" id="aankomstAdress" value="#{routeController.route.eindpunt}" >
+		  						<input required="required" class="form-control" id="aankomstAdress" value="#{routeController.route.eindpunt}">
 		  						</input>
 	  						</div>
 	  						<div>
 	  						<h:outputLabel value="Laatste Aankomst Tijd:" />
-	  						<p:datePicker id="timeaankomst" value="#{routeController.route.eindtijd}" showTime="true"/>
+	  						<p:datePicker id="timeaankomst" value="#{routeController.route.eindtijdDate}" showTime="true"/>
 	  						</div>
 	  						<div>
 	  						
 	  						<dir class = "form-group">
 	  						<h:outputLabel value="Aantal Beschikbare Zitplaatsen: "/>
-	  						<h:selectOneMenu value="#routeController.rit.maxPersonen}">
+	  						<h:selectOneMenu value="#{routeController.route.maxPersonen}">
    								 <f:selectItem itemValue="1" itemLabel="1" />
    								 <f:selectItem itemValue="2" itemLabel="2" />
    								 <f:selectItem itemValue="3" itemLabel="3" />
