@@ -23,10 +23,10 @@ public class Route {
 	private int id;
 	
 	@Column(name="beginpunt", nullable=false)
-	private DecimalFormat beginpunt;
+	private String beginpunt;
 	
 	@Column(name="eindpunt", nullable=false)
-	private DecimalFormat eindpunt;
+	private String eindpunt;
 	
 	@Column(name="eindtijd", nullable=false)
 	private Timestamp eindtijd;
@@ -75,19 +75,19 @@ public class Route {
 		this.bestuurder = bestuurder;
 	}
 	
-	public DecimalFormat getBeginpunt() {
+	public String getBeginpunt() {
 		return beginpunt;
 	}
 
-	public void setBeginpunt(DecimalFormat beginpunt) {
+	public void setBeginpunt(String beginpunt) {
 		this.beginpunt = beginpunt;
 	}
 
-	public DecimalFormat getEindpunt() {
+	public String getEindpunt() {
 		return eindpunt;
 	}
 
-	public void setEindpunt(DecimalFormat eindpunt) {
+	public void setEindpunt(String eindpunt) {
 		this.eindpunt = eindpunt;
 	}
 
