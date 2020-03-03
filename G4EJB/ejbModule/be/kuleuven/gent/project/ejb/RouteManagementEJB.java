@@ -52,11 +52,11 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 		
 		if(beginpunt!=null) {
 			q.setParameter(1,beginpunt);
-		}
+		}else q.setParameter(1, "%");
 		
 		if(eindpunt!=null) {
 			q.setParameter(2, eindpunt);
-		}
+		}else q.setParameter(2, "%");
 		
 		if(vertrektijd!=null) {
 			q.setParameter(3, vertrektijd);
