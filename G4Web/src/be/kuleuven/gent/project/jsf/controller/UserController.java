@@ -31,7 +31,7 @@ public class UserController implements Serializable{
 	}
 	
 	public String goToLogin() {
-		return "role.faces?faces-redirect=true";
+		return "driver/indexD.faces?faces-redirect=true";
 	}
 	public String goToCreateAccount() {
 		return "createAccount.faces?faces-redirect=true";

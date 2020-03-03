@@ -23,83 +23,12 @@
 #map {
   height: 100%;
 }
-/* Optional: Makes the sample page fill the window. */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-#description {
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: 300;
-}
 
-#infowindow-content .title {
-  font-weight: bold;
-}
-
-#infowindow-content {
-  display: none;
-}
-
-#map #infowindow-content {
-  display: inline;
-}
-
-.pac-card {
-  margin: 10px 10px 0 0;
-  border-radius: 2px 0 0 2px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  outline: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  background-color: #fff;
-  font-family: Roboto;
-}
 .mapinv{
   display: none;
 }
 
-#pac-container {
-  padding-bottom: 12px;
-  margin-right: 12px;
-}
 
-.pac-controls {
-  display: inline-block;
-  padding: 5px 11px;
-}
-
-.pac-controls label {
-  font-family: Roboto;
-  font-size: 13px;
-  font-weight: 300;
-}
-
-#pac-input {
-  background-color: #fff;
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: 300;
-  margin-left: 12px;
-  padding: 0 11px 0 13px;
-  text-overflow: ellipsis;
-  width: 400px;
-}
-
-#pac-input:focus {
-  border-color: #4d90fe;
-}
-
-#title {
-  color: #fff;
-  background-color: #4d90fe;
-  font-size: 25px;
-  font-weight: 500;
-  padding: 6px 12px;
-}
-      
  </style>
 <meta name="viewport" content="initial-scale=1.0" />
 <meta charset="utf-8" />
@@ -107,6 +36,7 @@ html, body {
 </h:head> 
 
 <h:body> 
+
 <div class="jumbotron jumbotron-sm">
     <div class="container">
         <div class="row">
@@ -119,6 +49,7 @@ html, body {
         </div>
     </div>
 </div>
+
 <div class="mapinv" id="map"></div>
 <div class="container">
     <div class="row">
@@ -134,19 +65,33 @@ html, body {
 		  						</input>
 	  						</div>
 	  						<div class="form-group">
-		    					<h:outputLabel value="Vertrek Tijd: "/>
-		  						<h:outputText value="Time:" />
-          						  <h:outputText value="#{calendarView.date13}">
-               							 <f:convertDateTime pattern="MM/dd/yyyy HH:mm" />
-           						 </h:outputText>
+		    					<h:outputLabel value="Vroegste Vertrek Tijd: "/>
+		  						<p:datePicker id="timevertrek" value="#{routeController.route.vertrektijd}" showTime="true"/>
 	  						</div>
 		    					<h:outputLabel value="Aankomst adress: "/>
 		  						<input class="form-control" id="aankomstAdress" value="#{routeController.route.eindpunt}" >
 		  						</input>
-		  						
 	  						</div>
-	  										
-	  						<h:commandButton style="text-decoration:none; padding:5px; width:115px;" value = "submit"  action = "#{profielController.createProfiel()}" id = "MakeProfiel" class="btn btn-primary pull-right"/>
+	  						<div>
+	  						<h:outputLabel value="Laatste Aankomst Tijd:" />
+	  						<p:datePicker id="timeaankomst" value="#{routeController.route.eindtijd}" showTime="true"/>
+	  						</div>
+	  						<div>
+	  						
+	  						<dir class = "form-group">
+	  						<h:outputLabel value="Aantal Beschikbare Zitplaatsen: "/>
+	  						<h:selectOneMenu value="#routeController.rit.maxPersonen}">
+   								 <f:selectItem itemValue="1" itemLabel="1" />
+   								 <f:selectItem itemValue="2" itemLabel="2" />
+   								 <f:selectItem itemValue="3" itemLabel="3" />
+   								 <f:selectItem itemValue="4" itemLabel="4" />
+   								 <f:selectItem itemValue="5" itemLabel="5" />
+   								 <f:selectItem itemValue="6" itemLabel="6" />
+							</h:selectOneMenu>
+	  						</dir>
+	  						<br />
+								<h:commandButton style="text-decoration:none; padding:3px; width:115px;" value = "submit"  action = "#{profielController.createProfiel()}" id = "MakeProfiel" class="btn btn-primary pull-right"/>
+	  						</div>
 	  					</div>
 					</div>
 				</h:form>
@@ -154,6 +99,7 @@ html, body {
 		</div>
 	</div>
 </div>
+
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;sensor=false&amp;libraries=places"></script>
 <script>
