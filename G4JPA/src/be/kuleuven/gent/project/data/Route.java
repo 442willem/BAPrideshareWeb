@@ -21,18 +21,12 @@ public class Route {
 	@Column(name="idRoute", nullable=false,length=16)
 	private int id;
 	
-	@Column(name="beginpunt_lat", nullable=false)
-	private DecimalFormat beginpuntLat;
+	@Column(name="beginpunt", nullable=false)
+	private DecimalFormat beginpunt;
 	
-	@Column(name="beginpunt_long", nullable=false)
-	private DecimalFormat beginpuntLong;
+	@Column(name="eindpunt", nullable=false)
+	private DecimalFormat eindpunt;
 	
-	@Column(name="eindpunt_lat", nullable=false)
-	private DecimalFormat eindpuntLat;
-	
-	@Column(name="eindpunt_long", nullable=false)
-	private DecimalFormat eindpuntLong;
-
 	@Column(name="eindtijd", nullable=false)
 	private Timestamp eindtijd;
 	
@@ -48,38 +42,6 @@ public class Route {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public DecimalFormat getBeginpuntLat() {
-		return beginpuntLat;
-	}
-
-	public void setBeginpuntLat(DecimalFormat beginpuntLat) {
-		this.beginpuntLat = beginpuntLat;
-	}
-
-	public DecimalFormat getBeginpuntLong() {
-		return beginpuntLong;
-	}
-
-	public void setBeginpuntLong(DecimalFormat beginpuntLong) {
-		this.beginpuntLong = beginpuntLong;
-	}
-
-	public DecimalFormat getEindpuntLat() {
-		return eindpuntLat;
-	}
-
-	public void setEindpuntLat(DecimalFormat eindpuntLat) {
-		this.eindpuntLat = eindpuntLat;
-	}
-
-	public DecimalFormat getEindpuntLong() {
-		return eindpuntLong;
-	}
-
-	public void setEindpuntLong(DecimalFormat eindpuntLong) {
-		this.eindpuntLong = eindpuntLong;
 	}
 
 	public Timestamp getEindtijd() {
@@ -105,6 +67,23 @@ public class Route {
 	public void setBestuurder(Profiel bestuurder) {
 		this.bestuurder = bestuurder;
 	}
+	
+	public DecimalFormat getBeginpunt() {
+		return beginpunt;
+	}
+
+	public void setBeginpunt(DecimalFormat beginpunt) {
+		this.beginpunt = beginpunt;
+	}
+
+	public DecimalFormat getEindpunt() {
+		return eindpunt;
+	}
+
+	public void setEindpunt(DecimalFormat eindpunt) {
+		this.eindpunt = eindpunt;
+	}
+
 	public Route() {}
 	
 	public Route(Timestamp eindtijd, Timestamp vertrektijd, Profiel bestuurder) {

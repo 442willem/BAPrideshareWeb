@@ -1,7 +1,5 @@
 package be.kuleuven.gent.project.data;
 
-import java.text.DecimalFormat;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,11 +17,8 @@ public class Tussenstop {
 	@Column(name="idTussenstop", nullable=false,length=16)
 	private int id;
 	
-	@Column(name="plaats_lat", nullable=false)
-	private DecimalFormat plaats_latitude;
-	
-	@Column(name="plaats_long", nullable=false)
-	private DecimalFormat plaats_longtitude;
+	@Column(name="plaats", nullable=false)
+	private String plaats;
 	
 	@JoinColumn(name="passagierId", nullable=false)
 	private Profiel passagier;
@@ -38,21 +33,13 @@ public class Tussenstop {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public DecimalFormat getPlaats_latitude() {
-		return plaats_latitude;
+	
+	public String getPlaats() {
+		return plaats;
 	}
 
-	public void setPlaats_latitude(DecimalFormat plaats_latitude) {
-		this.plaats_latitude = plaats_latitude;
-	}
-
-	public DecimalFormat getPlaats_longtitude() {
-		return plaats_longtitude;
-	}
-
-	public void setPlaats_longtitude(DecimalFormat plaats_longtitude) {
-		this.plaats_longtitude = plaats_longtitude;
+	public void setPlaats(String plaats) {
+		this.plaats = plaats;
 	}
 
 	public Profiel getPassagier() {
