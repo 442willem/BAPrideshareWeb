@@ -63,7 +63,7 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 			q.setParameter(4, vertrektijd);
 		}
 		else {
-			Timestamp t = null;
+			Timestamp t = new Timestamp(0);
 			t.setYear(-4713);
 			q.setParameter(3, t);
 			t.setYear(9999);
@@ -76,7 +76,7 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 			q.setParameter(6, eindtijd);
 		}
 		else {
-			Timestamp t = null;
+			Timestamp t =  new Timestamp(0);
 			t.setYear(-4713);
 			q.setParameter(5,t);
 			t.setYear(9999);
