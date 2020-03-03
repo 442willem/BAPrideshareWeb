@@ -130,7 +130,7 @@ html, body {
 	              			<div class="form-group">
 	              				<div class="form-group">
 		    					<h:outputLabel value="Vertrek Adres: "/>
-		  						<input class="form-control" id="vertrekAdress" value="#{routeController.route.vertrekadres}" >
+		  						<input class="form-control" id="vertrekAdress" value="#{routeController.route.beginpunt}" >
 		  						</input>
 	  						</div>
 	  						<div class="form-group">
@@ -141,42 +141,11 @@ html, body {
            						 </h:outputText>
 	  						</div>
 		    					<h:outputLabel value="Aankomst adress: "/>
-		  						<input class="form-control" id="aankomstAdress" value="#{routeController.route.aankomstadres}" >
+		  						<input class="form-control" id="aankomstAdress" value="#{routeController.route.eindpunt}" >
 		  						</input>
 		  						
 	  						</div>
-	  						<div class="form-group">
-		    					<h:outputLabel value="First name: "/>
-		  						<h:inputText class="form-control" id="voornaam" value="#{profielController.profiel.voornaam}" required="true" validatorMessage="Alpha numaric characters are not allowed in First Name.">
-		  							<f:validateRegex pattern="[a-zA-Z]+" />
-		  						</h:inputText>
-		  						<h:message for="voornaam"></h:message>
-	  						</div>
-	  						<div class="form-group">
-		    					<h:outputLabel value="City: "/>
-		  						<h:inputText class="form-control" id="adrescity" value="#{profielController.profiel.stad}" required="true">
-		  						</h:inputText>
-		  						<h:message for="adrescity"></h:message>
-	  						</div>
-	  						<div class="form-group">
-		    					<h:outputLabel value="Street: "/>
-		  						<h:inputText class="form-control" id="adresstreet" value="#{profielController.profiel.straat}" required="true" validatorMessage="Alpha numaric characters are not allowed in Streetname.">
-		  							<f:validateRegex pattern="[a-zA-Z]+" />
-		  						</h:inputText>
-		  						<h:message for="adresstreet"></h:message>
-	  						</div>
-	  						<div class="form-group">
-		    					<h:outputLabel value="House number: "/>
-		  						<h:inputText class="form-control" id="adresnumber" value="#{profielController.profiel.huisnummer}" required="true">	
-		  						</h:inputText>
-	  						</div>
-	  						<dir class = "form-group">
-	  						<h:selectOneMenu value="#{profielController.profiel.group}">
-   								 <f:selectItem itemValue="Driver" itemLabel="Driver" />
-   								 <f:selectItem itemValue="Passenger" itemLabel="Passenger" />
-							</h:selectOneMenu>
-	  						</dir>
-	  						
+	  										
 	  						<h:commandButton style="text-decoration:none; padding:5px; width:115px;" value = "submit"  action = "#{profielController.createProfiel()}" id = "MakeProfiel" class="btn btn-primary pull-right"/>
 	  					</div>
 					</div>
