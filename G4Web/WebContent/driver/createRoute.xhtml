@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+
+  <title>
+    <ui:insert name="title">Create a new Route</ui:insert>
+  </title>
+ <style>
+ .mapinv{
+ display: none;
+ }
+ #map {
+        height: 100%;
+      }
+ /* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+#map {
+  height: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#description {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+#infowindow-content .title {
+  font-weight: bold;
+}
+
+#infowindow-content {
+  display: none;
+}
+
+#map #infowindow-content {
+  display: inline;
+}
+
+.pac-card {
+  margin: 10px 10px 0 0;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  font-family: Roboto;
+}
+.mapinv{
+  display: none;
+}
+
+#pac-container {
+  padding-bottom: 12px;
+  margin-right: 12px;
+}
+
+.pac-controls {
+  display: inline-block;
+  padding: 5px 11px;
+}
+
+.pac-controls label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+#title {
+  color: #fff;
+  background-color: #4d90fe;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+      
+ </style>
+<meta name="viewport" content="initial-scale=1.0" />
+<meta charset="utf-8" />
+
+</h:head> 
+
+<h:body> 
+<div class="jumbotron jumbotron-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-12">
+            	
+                <h1 class="h1">
+                    Create a new Route! <small></small></h1>
+                    
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mapinv" id="map"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="well well-sm">
+				<h:form method="post" id="createRoute">
+					<div class="row">
+						<div class="col-md-6">
+	              			<div class="form-group">
+	              				<div class="form-group">
+		    					<h:outputLabel value="Vertrek Adres: "/>
+		  						<input class="form-control" id="vertrekAdress" value="#{routeController.route.vertrekadres}" >
+		  						</input>
+	  						</div>
+	  						<div class="form-group">
+		    					<h:outputLabel value="Vertrek Tijd: "/>
+		  						<h:outputText value="Time:" />
+          						  <h:outputText value="#{calendarView.date13}">
+               							 <f:convertDateTime pattern="MM/dd/yyyy HH:mm" />
+           						 </h:outputText>
+	  						</div>
+		    					<h:outputLabel value="Aankomst adress: "/>
+		  						<input class="form-control" id="aankomstAdress" value="#{routeController.route.aankomstadres}" >
+		  						</input>
+		  						
+	  						</div>
+	  						<div class="form-group">
+		    					<h:outputLabel value="First name: "/>
+		  						<h:inputText class="form-control" id="voornaam" value="#{profielController.profiel.voornaam}" required="true" validatorMessage="Alpha numaric characters are not allowed in First Name.">
+		  							<f:validateRegex pattern="[a-zA-Z]+" />
+		  						</h:inputText>
+		  						<h:message for="voornaam"></h:message>
+	  						</div>
+	  						<div class="form-group">
+		    					<h:outputLabel value="City: "/>
+		  						<h:inputText class="form-control" id="adrescity" value="#{profielController.profiel.stad}" required="true">
+		  						</h:inputText>
+		  						<h:message for="adrescity"></h:message>
+	  						</div>
+	  						<div class="form-group">
+		    					<h:outputLabel value="Street: "/>
+		  						<h:inputText class="form-control" id="adresstreet" value="#{profielController.profiel.straat}" required="true" validatorMessage="Alpha numaric characters are not allowed in Streetname.">
+		  							<f:validateRegex pattern="[a-zA-Z]+" />
+		  						</h:inputText>
+		  						<h:message for="adresstreet"></h:message>
+	  						</div>
+	  						<div class="form-group">
+		    					<h:outputLabel value="House number: "/>
+		  						<h:inputText class="form-control" id="adresnumber" value="#{profielController.profiel.huisnummer}" required="true">	
+		  						</h:inputText>
+	  						</div>
+	  						<dir class = "form-group">
+	  						<h:selectOneMenu value="#{profielController.profiel.group}">
+   								 <f:selectItem itemValue="Driver" itemLabel="Driver" />
+   								 <f:selectItem itemValue="Passenger" itemLabel="Passenger" />
+							</h:selectOneMenu>
+	  						</dir>
+	  						
+	  						<h:commandButton style="text-decoration:none; padding:5px; width:115px;" value = "submit"  action = "#{profielController.createProfiel()}" id = "MakeProfiel" class="btn btn-primary pull-right"/>
+	  					</div>
+					</div>
+				</h:form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;sensor=false&amp;libraries=places"></script>
+<script>
+// <![CDATA[
+	
+function initialize() {
+  var mapOptions = {
+    center: new google.maps.LatLng(-33.8688, 151.2195),
+    zoom: 13,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById('map'),
+    mapOptions);
+
+  var input = /** @type {HTMLInputElement} */(document.getElementById('vertrekAdress'));
+  var autocomplete = new google.maps.places.Autocomplete(input);
+
+  autocomplete.bindTo('bounds', map);
+
+  var infowindow = new google.maps.InfoWindow();
+  var marker = new google.maps.Marker({
+    map: map
+  });
+
+  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    infowindow.close();
+    marker.setVisible(false);
+    input.className = '';
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+      // Inform the user that the place was not found and return.
+      input.className = 'notfound';
+      return;
+    }
+
+    // If the place has a geometry, then present it on a map.
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(17);  // Why 17? Because it looks good.
+    }
+    marker.setIcon(/** @type {google.maps.Icon} */({
+      url: place.icon,
+      size: new google.maps.Size(71, 71),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(17, 34),
+      scaledSize: new google.maps.Size(35, 35)
+    }));
+    marker.setPosition(place.geometry.location);
+    marker.setVisible(true);
+
+    var address = '';
+    if (place.address_components) {
+      address = [
+        (place.address_components[0] && place.address_components[0].short_name || ''),
+        (place.address_components[1] && place.address_components[1].short_name || ''),
+        (place.address_components[2] && place.address_components[2].short_name || '')
+      ].join(' ');
+    }
+
+    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+    infowindow.open(map, marker);
+  });
+
+  // Sets a listener on a radio button to change the filter type on Places
+  // Autocomplete.
+  function setupClickListener(id, types) {
+    var radioButton = document.getElementById(id);
+    google.maps.event.addDomListener(radioButton, 'click', function() {
+      autocomplete.setTypes(types);
+    });
+  }
+
+  setupClickListener('changetype-all', []);
+  setupClickListener('changetype-establishment', ['establishment']);
+  setupClickListener('changetype-geocode', ['geocode']);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+// ]]>
+
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;sensor=false&amp;libraries=places"></script>
+<script>
+// <![CDATA[
+	
+function initialize() {
+  var mapOptions = {
+    center: new google.maps.LatLng(-33.8688, 151.2195),
+    zoom: 13,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById('map'),
+    mapOptions);
+
+  var input = /** @type {HTMLInputElement} */(document.getElementById('aankomstAdress'));
+  var autocomplete = new google.maps.places.Autocomplete(input);
+
+  autocomplete.bindTo('bounds', map);
+
+  var infowindow = new google.maps.InfoWindow();
+  var marker = new google.maps.Marker({
+    map: map
+  });
+
+  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    infowindow.close();
+    marker.setVisible(false);
+    input.className = '';
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+      // Inform the user that the place was not found and return.
+      input.className = 'notfound';
+      return;
+    }
+
+    // If the place has a geometry, then present it on a map.
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(17);  // Why 17? Because it looks good.
+    }
+    marker.setIcon(/** @type {google.maps.Icon} */({
+      url: place.icon,
+      size: new google.maps.Size(71, 71),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(17, 34),
+      scaledSize: new google.maps.Size(35, 35)
+    }));
+    marker.setPosition(place.geometry.location);
+    marker.setVisible(true);
+
+    var address = '';
+    if (place.address_components) {
+      address = [
+        (place.address_components[0] && place.address_components[0].short_name || ''),
+        (place.address_components[1] && place.address_components[1].short_name || ''),
+        (place.address_components[2] && place.address_components[2].short_name || '')
+      ].join(' ');
+    }
+
+    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+    infowindow.open(map, marker);
+  });
+
+  // Sets a listener on a radio button to change the filter type on Places
+  // Autocomplete.
+  function setupClickListener(id, types) {
+    var radioButton = document.getElementById(id);
+    google.maps.event.addDomListener(radioButton, 'click', function() {
+      autocomplete.setTypes(types);
+    });
+  }
+
+  setupClickListener('changetype-all', []);
+  setupClickListener('changetype-establishment', ['establishment']);
+  setupClickListener('changetype-geocode', ['geocode']);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+// ]]>
+
+
+</script>
+</h:body>
+
+</html>

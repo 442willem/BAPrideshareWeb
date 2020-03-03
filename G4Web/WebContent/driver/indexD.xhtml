@@ -45,24 +45,29 @@
 
             
 <h2 class="h2">Hier komt dus die tabel met de gegevens in de db</h2>
-<!--     
-<h:dataTable id ="rittentable" value="#{ritManagementEJB.findAllRitten()}" var =rit >
+  
+<h:dataTable id ="rittentable" value="#{ritController.findAllRitten()}" var ="rit" >
 	<h:column>
 		<f:facet name="header">
 			<h:outputText value="Route"/>
 		</f:facet>
-		<h:link outcome="viewRit.xhtml?id=#{rit.id}" value="#{rit.route}"/>
+		<h:link outcome="viewRit.xhtml?id=#{rit.id}" value="#{rit.route.getId()}"/>
 	</h:column>
 	<h:column>
 		<f:facet name="header">
 			<h:outputText value="vertrektijd"/>
 		</f:facet>
-		<h:outputText value="#{rit.vertrektijd}"/>
+		<h:outputText value="#{rit.vertrektijdToString()}"/>
+	</h:column>
+	<h:column>
+		<f:facet name="header">
+			<h:outputText value="aankomsttijd"/>
+		</f:facet>
+		<h:outputText value="#{rit.eindtijdToString()}"/>
 	</h:column>
 </h:dataTable>
- -->  
-            
 
+<h:commandButton style="text-decoration:none; padding:5px; width:120px; float:center;" value ="Create new route" action="#{userController.goToCreateRoute()}" class="btn btn-primary pull-right" id="RouteNav" />
    
 
 </h:body> 
