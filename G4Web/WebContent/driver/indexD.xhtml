@@ -18,7 +18,7 @@
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 <h:form method="post" id="loginForm">
-<h:commandButton style="text-decoration:none; padding:5px; width:100px; float:right;" value ="Passenger" action="#{profielController.activateP()}" class="btn btn-primary pull-right" id="activateP" />
+<h:commandButton style="text-decoration:none; padding:5px; width:100px; float:right;" value ="Logout" action="#{profielController.logout()}" class="btn btn-primary pull-right" id="activateP" />
 </h:form>
 <script type="text/javascript">
 	jQuery(function() {topBar.show()});</script>          
@@ -34,7 +34,7 @@
             <div class="col-sm-12 col-lg-12">
             	
                 <h1 class="h1">
-                    Welcome to the new and improved Ridesharing platform, User! <small></small></h1>
+                    Welcome to the new and improved Ridesharing platform, #{profielController.getHuidigProfiel().login}! <small></small></h1>
                     
             </div>
         </div>
@@ -104,8 +104,9 @@
 		<h:outputText value="#{route.eindtijdToString()}"/>
 	</h:column>
 </h:dataTable>
-<h:commandButton style="text-decoration:none; padding:5px; width:120px; float:center;" value ="Create new route" action="#{userController.goToCreateRoute()}" class="btn btn-primary pull-right" id="RouteNav" />
-   
+<h:form method="post" id="createRoute">
+	<h:commandButton style="text-decoration:none; padding:5px; width:120px; float:center;" value ="Create new route" action="#{userController.goToCreateRoute()}" class="btn btn-primary pull-right" id="RouteNav" />
+</h:form>
 
 </h:body> 
 

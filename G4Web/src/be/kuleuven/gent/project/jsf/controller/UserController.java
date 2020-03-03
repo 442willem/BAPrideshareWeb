@@ -31,7 +31,7 @@ public class UserController implements Serializable{
 	}
 	
 	public String goToLogin() {
-		return "driver/indexD.faces?faces-redirect=true";
+		return "driver/indexD.faces?faces-redirect=true&login=1";
 	}
 	public String goToCreateAccount() {
 		return "createAccount.faces?faces-redirect=true";
@@ -40,18 +40,9 @@ public class UserController implements Serializable{
 		return "test.faces?faces-redirect=true";
 	}
 	public String goToCreateRoute() {
-		return "driver/createRoute.faces?faces-redirect=true";
+		return "createRoute.faces?faces-redirect=true";
 	}
 	
 	
-	public void logout() {
-		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-	    ec.invalidateSession();
-	    try {
-			ec.redirect(ec.getRequestContextPath() + "/index.faces");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	  }
-	
+
 }

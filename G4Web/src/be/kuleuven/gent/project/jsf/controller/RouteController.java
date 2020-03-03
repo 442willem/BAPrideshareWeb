@@ -35,6 +35,11 @@ public class RouteController implements Serializable {
 		queryRoute.setEindtijd(null);
 	}
 	
+	public String createRoute() {
+		routeEJB.createRoute(route);
+		return "indexD.faces?faces-redirect=true&login=1";
+	}
+		
 	public Route getRoute() {
 		return route;
 	}

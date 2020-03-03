@@ -1,5 +1,6 @@
 package be.kuleuven.gent.project.jsf.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.faces.bean.*;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -59,6 +61,16 @@ public class ProfielController implements Serializable {
 	public void setProfiel(Profiel profiel) {
 		this.profiel = profiel;
 	}
+	public void logout() {
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+	    ec.invalidateSession();
+	    try {
+			ec.redirect(ec.getRequestContextPath() + "/index.faces");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	  }
+	
 	
 	
 }
