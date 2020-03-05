@@ -39,6 +39,9 @@ public class UserController implements Serializable{
 	public String goToTest() {
 		return "test.faces?faces-redirect=true";
 	}
+	public String goToIndex() {
+		return "index.faces?faces-redirect=true";
+	}
 	public String goToCreateRoute() {
 		return "createRoute.faces?faces-redirect=true";
 	}

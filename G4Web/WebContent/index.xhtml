@@ -44,49 +44,44 @@
 		</div>
 	</div>
 	<h2 class="h2">Hier komt dus die tabel met de gegevens in de db</h2>
-	<div class="filter">
-		<div class="rij">
+	<div class="container">
+		<div class="row">
 			<div class="col-md-8">
 				<div class="well well-sm">
-					<h:form method="post" id="createAccount">
+					<h:form method="post" id="filterRoutes">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<div class="form-group">
 										<h:outputLabel value="vertrekplaats" />
 										<h:inputText class="form-control" id="vertrekplaats"
-											value="#{routeController.queryRoute.beginpunt}">
-										</h:inputText>
+											value="#{routeController.queryVertrek}"> </h:inputText>
 									</div>
-								</div>
-								<div class="form-group">
 									<div class="form-group">
 										<h:outputLabel value="aankomstplaats" />
 										<h:inputText class="form-control" id="aankomstplaats"
-											value="#{routeController.queryRoute.eindpunt}">
+											value="#{routeController.queryEinde}">
 										</h:inputText>
 									</div>
-								</div>
-								<div class="form-group">
 									<div class="form-group">
 										<h:outputLabel value="vertrektijd" />
 										<h:inputText class="form-control" id="vertrektijd"
-											value="#{routeController.queryRoute.vertrektijd}">
+											value="#{routeController.queryVertrektijd}">
 										</h:inputText>
 									</div>
-								</div>
-								<div class="form-group">
 									<div class="form-group">
 										<h:outputLabel value="aankomsttijd" />
 										<h:inputText class="form-control" id="aankomsttijd"
-											value="#{routeController.queryRoute.eindtijd}">
+											value="#{routeController.queryEindetijd}">
 										</h:inputText>
 									</div>
+									<div class="form-group">
+										<h:commandButton
+											style="text-decoration:none; padding:5px; width:115px;"
+											value="ok" action="#{routeController.goToIndex()}"
+											id="FilterProfiel" class="btn btn-primary pull-right" />
+									</div>
 								</div>
-								<h:commandButton
-									style="text-decoration:none; padding:5px; width:115px;"
-									value="ok" action="#{routeController.filterRoutes()}"
-									id="FilterProfiel" class="btn btn-primary pull-right" />
 							</div>
 						</div>
 					</h:form>
@@ -94,46 +89,49 @@
 			</div>
 		</div>
 	</div>
-	<h:dataTable id="routentable" value="#{routeController.getRoutes()}"
-		var="route">
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Id" />
-			</f:facet>
-			<h:link outcome="viewRoute.xhtml?id=#{rit.id}"
-				value="#{route.getId()}" />
-		</h:column>
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="beginpunt" />
-			</f:facet>
-			<h:outputText value="#{route.beginpunt}" />
-		</h:column>
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="eindpunt" />
-			</f:facet>
-			<h:outputText value="#{route.eindpunt}" />
-		</h:column>
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="vertrektijd" />
-			</f:facet>
-			<h:outputText value="#{route.vertrektijdToString()}" />
-		</h:column>
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="aankomsttijd" />
-			</f:facet>
-			<h:outputText value="#{route.eindtijdToString()}" />
-		</h:column>
-	</h:dataTable>
 	<script type="text/javascript" language="javascript">
 		$(document).ready(function() { /// Wait till page is loaded
 			$("#FilterProfiel").click(function() {
-				$("#routentable").load(window.location.href, "#routentable")
+				$('#herlaad').load(/G4Web/index.xhtml +  ' #herlaad');
 			});
 		});
 	</script>
+	<div id="herlaad">
+		<h:dataTable id="routentable" value="#{routeController.getRoutes()}"
+			var="route">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Id" />
+				</f:facet>
+				<h:link outcome="viewRoute.xhtml?id=#{rit.id}"
+					value="#{route.getId()}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="beginpunt" />
+				</f:facet>
+				<h:outputText value="#{route.beginpunt}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="eindpunt" />
+				</f:facet>
+				<h:outputText value="#{route.eindpunt}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="vertrektijd" />
+				</f:facet>
+				<h:outputText value="#{route.vertrektijdToString()}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="aankomsttijd" />
+				</f:facet>
+				<h:outputText value="#{route.eindtijdToString()}" />
+			</h:column>
+		</h:dataTable>
+		<h:outputLabel id="label" value="#{routeController.queryVertrek}" />
+	</div>
 </h:body>
 </html>

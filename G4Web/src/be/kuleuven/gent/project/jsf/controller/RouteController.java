@@ -6,14 +6,17 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import be.kuleuven.gent.project.data.*;
 import be.kuleuven.gent.project.ejb.*;
 
 @Named
-@ViewScoped
+@SessionScoped
 public class RouteController implements Serializable {
 	private static final long serialVersionUID = -3737221385235612830L;
 	@EJB
@@ -23,16 +26,19 @@ public class RouteController implements Serializable {
 	private UserManagementEJBLocal userEJB;
 	
 	private Route route;
-	private Route queryRoute;
+	
+	private String queryVertrek;
+	private String queryEinde;
+	private Timestamp queryVertrektijd;
+	private Timestamp queryEindetijd;
 	
 	@PostConstruct
 	public void init(){
 		route = new Route();
-		queryRoute = new Route();
-		queryRoute.setBeginpunt(null);
-		queryRoute.setEindpunt(null);
-		queryRoute.setVertrektijd(null);
-		queryRoute.setEindtijd(null);
+		queryVertrek= null;
+		queryEinde= null;
+		queryVertrektijd= null;
+		queryEindetijd= null;
 	}
 	
 	public String createRoute() {
@@ -46,23 +52,69 @@ public class RouteController implements Serializable {
 	public void setRoute(Route route) {
 		this.route = route;
 	}
-	public Route getQueryRoute() {
-		return queryRoute;
-	}
-	public void setQueryRoute(Route queryRoute) {
-		this.queryRoute = queryRoute;
-	}	
 	
+	public RouteManagementEJBLocal getRouteEJB() {
+		return routeEJB;
+	}
+
+	public void setRouteEJB(RouteManagementEJBLocal routeEJB) {
+		this.routeEJB = routeEJB;
+	}
+
+	public UserManagementEJBLocal getUserEJB() {
+		return userEJB;
+	}
+
+	public void setUserEJB(UserManagementEJBLocal userEJB) {
+		this.userEJB = userEJB;
+	}
+
+	public String getQueryVertrek() {
+		return queryVertrek;
+	}
+
+	public void setQueryVertrek(String queryVertrek) {
+		this.queryVertrek = queryVertrek;
+	}
+
+	public String getQueryEinde() {
+		return queryEinde;
+	}
+
+	public void setQueryEinde(String queryEinde) {
+		this.queryEinde = queryEinde;
+	}
+
+	public Timestamp getQueryVertrektijd() {
+		return queryVertrektijd;
+	}
+
+	public void setQueryVertrektijd(Timestamp queryVertrektijd) {
+		this.queryVertrektijd = queryVertrektijd;
+	}
+
+	public Timestamp getQueryEindetijd() {
+		return queryEindetijd;
+	}
+
+	public void setQueryEindetijd(Timestamp queryEindetijd) {
+		this.queryEindetijd = queryEindetijd;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public int getAantalRoutes() {
 		return routeEJB.getAantalRoutes();
 	}
 	public List<Route> getRoutes() {
-		return routeEJB.findRoutes(queryRoute.getBeginpunt(),queryRoute.getEindpunt(),queryRoute.getVertrektijd(),queryRoute.getEindtijd());
+		return routeEJB.findRoutes(queryVertrek,queryEinde,queryVertrektijd,queryEindetijd);
 	}
 	public List<Route> findAllRoutes() {
 		return routeEJB.findAllRoutes();
 	}
-	public void filterRoutes() {
-		
+	public String filterRoutes() {
+		return "index.faces?faces-redirect=true";
 	}
 }
