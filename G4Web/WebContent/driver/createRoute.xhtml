@@ -61,12 +61,12 @@
 	              			
 	              			<div class="form-group">
 		    					<h:outputLabel value="Vertrek Adres: "/>
-		  						<input  id="vertrekAdress" type="text" />
+		  						<input required="required" id="vertrekAdress" type="text" />
 		  						<h:inputHidden id="pleaseGodWork" value="#{routeController.route.beginpunt}"/>
 	  						</div>
 	  						<div class="form-group">
 		    					<h:outputLabel value="Vroegste Vertrek Tijd: "/>
-		  						<p:datePicker id="timevertrek" value="#{routeController.route.vertrektijdDate}" showTime="true"/>
+		  						<p:datePicker required="true"  id="timevertrek" value="#{routeController.route.vertrektijdDate}" showTime="true"/>
 	  						</div>
 	  						<div>
 		    					<h:outputLabel value="Aankomst adress: "/>
@@ -76,7 +76,7 @@
 	  						</div>
 	  						<div>
 	  						<h:outputLabel value="Laatste Aankomst Tijd:" />
-	  						<p:datePicker id="timeaankomst" value="#{routeController.route.eindtijdDate}" showTime="true"/>
+	  						<p:datePicker required="true"  id="timeaankomst" value="#{routeController.route.eindtijdDate}" showTime="true"/>
 	  						</div>
 	  						<div>
 	  						
@@ -109,66 +109,46 @@
 	var options = {
 			  types : ['address']
 			};
+	var componentForm = {
+			  street_number: 'short_name',
+			  route: 'long_name',
+			  locality: 'long_name',
+			  administrative_area_level_1: 'short_name',
+			  country: 'long_name',
+			  postal_code: 'short_name'
+			};
     var input = document.getElementById('vertrekAdress');
     var input1 = document.getElementById('aankomstAdress');
     var autocomplete1= new google.maps.places.Autocomplete(input1, options);
     var autocomplete = new google.maps.places.Autocomplete(input, options);
     var place = autocomplete.getPlace();
     var place1 = autocomplete1.getPlace();
-    document.getElementById('pleaseGodWork').value = place;
-    document.getElementById('pleaseGodWorkTOO').value = place1;
+    autocomplete.addListener('place_changed', fillInAddress);
+    autocomplete1.addListener('place_changed', fillInAddress1);
+    document.getElementById('createRoute:pleaseGodWork').value = place.formatted_address;
+    document.getElementById('createRoute:pleaseGodWorkTOO').value = place1.formatted_address;
     
+    function fillInAddress() {
+    	  // Get the place details from the autocomplete object.
+    	  var place = autocomplete.getPlace();
+    	
+
+    	  document.getElementById('createRoute:pleaseGodWork').value = place.formatted_address;
+    	  
+    	}
+    function fillInAddress1() {
+  	  // Get the place details from the autocomplete object.
+  	  
+  	  var place1=autocomplete1.getPlace();
+
+  	 
+  	  document.getElementById('createRoute:pleaseGodWorkTOO').value = place1.formatted_address;
+  	}
     
   }
 </script>
 
-<!--
-<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;libraries=places,geometry&amp;callback=PlaceAutocompleteSearch&amp;fields=formatted_address" async="" defer=""></script>
-<script>
-  function PlaceAutocompleteSearch() {
-	var options = {
-			  types : ['geocode']
-			};
-    var input = document.getElementById('aankomstAdress');
-    var autocomplete = new google.maps.places.Autocomplete(input, options);
-    var place = autocomplete.getPlace();
-    document.getElementById('pleaseGodWorkTOO').value = place; 
-    
-  }
-</script>
 
-
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;sensor=false&amp;libraries=places"></script>
-<script>
-// <![CDATA[
-	
-function initialize() {
-
-
-  var input = /** @type {HTMLInputElement} */(document.getElementById('aankomstAdress'));
-  var autocomplete = new google.maps.places.Autocomplete(input);
-
-
-
-
-    var address = '';
-    if (place.address_components) {
-      address = [
-        (place.address_components[0] && place.address_components[0].short_name || ''),
-        (place.address_components[1] && place.address_components[1].short_name || ''),
-        (place.address_components[2] && place.address_components[2].short_name || '')
-      ].join(' ');
-    }
-    document.getElementById('pleaseGodWorkTOO').value = address; 
-   
-  }
-
-
-// ]]>
-
-</script>
--->
 
 </h:body>
 
