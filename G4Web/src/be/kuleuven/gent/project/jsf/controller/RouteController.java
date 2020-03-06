@@ -2,6 +2,7 @@ package be.kuleuven.gent.project.jsf.controller;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -16,7 +17,7 @@ import be.kuleuven.gent.project.data.*;
 import be.kuleuven.gent.project.ejb.*;
 
 @Named
-@SessionScoped
+@ViewScoped
 public class RouteController implements Serializable {
 	private static final long serialVersionUID = -3737221385235612830L;
 	@EJB
@@ -29,16 +30,16 @@ public class RouteController implements Serializable {
 	
 	private String queryVertrek;
 	private String queryEinde;
-	private Timestamp queryVertrektijd;
-	private Timestamp queryEindetijd;
+	private Date queryVertrektijd;
+	private Date queryEindetijd;
 	
 	@PostConstruct
 	public void init(){
 		route = new Route();
-		queryVertrek= null;
-		queryEinde= null;
-		queryVertrektijd= null;
-		queryEindetijd= null;
+		queryVertrek=null;
+		queryEinde=null;
+		queryVertrektijd=null;
+		queryEindetijd=null;
 	}
 	
 	public String createRoute() {
@@ -85,19 +86,19 @@ public class RouteController implements Serializable {
 		this.queryEinde = queryEinde;
 	}
 
-	public Timestamp getQueryVertrektijd() {
+	public Date getQueryVertrektijd() {
 		return queryVertrektijd;
 	}
 
-	public void setQueryVertrektijd(Timestamp queryVertrektijd) {
+	public void setQueryVertrektijd(Date queryVertrektijd) {
 		this.queryVertrektijd = queryVertrektijd;
 	}
 
-	public Timestamp getQueryEindetijd() {
+	public Date getQueryEindetijd() {
 		return queryEindetijd;
 	}
 
-	public void setQueryEindetijd(Timestamp queryEindetijd) {
+	public void setQueryEindetijd(Date queryEindetijd) {
 		this.queryEindetijd = queryEindetijd;
 	}
 
@@ -109,7 +110,12 @@ public class RouteController implements Serializable {
 		return routeEJB.getAantalRoutes();
 	}
 	public List<Route> getRoutes() {
-		return routeEJB.findRoutes(queryVertrek,queryEinde,queryVertrektijd,queryEindetijd);
+		Timestamp eindetijd, vertrektijd;
+		if(queryEindetijd!=null)eindetijd = new Timestamp(queryEindetijd.getTime());
+		else eindetijd=null;
+		if(queryVertrektijd!=null)vertrektijd = new Timestamp(queryVertrektijd.getTime());
+		else vertrektijd=null;
+		return routeEJB.findRoutes(queryVertrek,queryEinde,vertrektijd,eindetijd);
 	}
 	public List<Route> findAllRoutes() {
 		return routeEJB.findAllRoutes();
