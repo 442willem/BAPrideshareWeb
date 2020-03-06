@@ -58,19 +58,21 @@
 				<h:form method="post" id="createRoute">
 					<div class="row">
 						<div class="col-md-6">
+	              			
 	              			<div class="form-group">
-	              				<div class="form-group">
 		    					<h:outputLabel value="Vertrek Adres: "/>
-		  						<input required="required" class="form-control" id="vertrekAdress" value="#{routeController.route.beginpunt}">
-		  						</input>
+		  						<input  id="vertrekAdress" type="text" />
+		  						<h:inputHidden id="pleaseGodWork" value="#{routeController.route.beginpunt}"/>
 	  						</div>
 	  						<div class="form-group">
 		    					<h:outputLabel value="Vroegste Vertrek Tijd: "/>
 		  						<p:datePicker id="timevertrek" value="#{routeController.route.vertrektijdDate}" showTime="true"/>
 	  						</div>
+	  						<div>
 		    					<h:outputLabel value="Aankomst adress: "/>
-		  						<input required="required" class="form-control" id="aankomstAdress" value="#{routeController.route.eindpunt}">
+		  						<input required="required" id="aankomstAdress" type ="text">
 		  						</input>
+		  						<h:inputHidden id="pleaseGodWorkTOO" value="#{routeController.route.eindpunt}" />
 	  						</div>
 	  						<div>
 	  						<h:outputLabel value="Laatste Aankomst Tijd:" />
@@ -90,7 +92,7 @@
 							</h:selectOneMenu>
 	  						</dir>
 	  						<br />
-								<h:commandButton style="text-decoration:none; padding:3px; width:115px;" value = "submit"  action = "#{routeController.createRoute()}" id = "MakeRoute" class="btn btn-primary pull-right"/>
+								<h:commandButton style="text-decoration:none; padding:3px; width:115px;"  value = "submit"  action = "#{routeController.createRoute()}" id = "MakeRoute" class="btn btn-primary pull-right"/>
 	  						</div>
 	  					</div>
 					</div>
@@ -101,139 +103,54 @@
 </div>
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;sensor=false&amp;libraries=places"></script>
+<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;libraries=places,geometry&amp;callback=PlaceAutocompleteSearch&amp;fields=formatted_address" async="" defer=""></script>
 <script>
-// <![CDATA[
-	
-function initialize() {
-  var mapOptions = {
-    center: new google.maps.LatLng(-33.8688, 151.2195),
-    zoom: 13,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  var map = new google.maps.Map(document.getElementById('map'),
-    mapOptions);
-
-  var input = /** @type {HTMLInputElement} */(document.getElementById('vertrekAdress'));
-  var autocomplete = new google.maps.places.Autocomplete(input);
-
-  autocomplete.bindTo('bounds', map);
-
-  var infowindow = new google.maps.InfoWindow();
-  var marker = new google.maps.Marker({
-    map: map
-  });
-
-  google.maps.event.addListener(autocomplete, 'place_changed', function() {
-    infowindow.close();
-    marker.setVisible(false);
-    input.className = '';
+  function PlaceAutocompleteSearch() {
+	var options = {
+			  types : ['address']
+			};
+    var input = document.getElementById('vertrekAdress');
+    var input1 = document.getElementById('aankomstAdress');
+    var autocomplete1= new google.maps.places.Autocomplete(input1, options);
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
     var place = autocomplete.getPlace();
-    if (!place.geometry) {
-      // Inform the user that the place was not found and return.
-      input.className = 'notfound';
-      return;
-    }
-
-    // If the place has a geometry, then present it on a map.
-    if (place.geometry.viewport) {
-      map.fitBounds(place.geometry.viewport);
-    } else {
-      map.setCenter(place.geometry.location);
-      map.setZoom(17);  // Why 17? Because it looks good.
-    }
-    marker.setIcon(/** @type {google.maps.Icon} */({
-      url: place.icon,
-      size: new google.maps.Size(71, 71),
-      origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(17, 34),
-      scaledSize: new google.maps.Size(35, 35)
-    }));
-    marker.setPosition(place.geometry.location);
-    marker.setVisible(true);
-
-    var address = '';
-    if (place.address_components) {
-      address = [
-        (place.address_components[0] && place.address_components[0].short_name || ''),
-        (place.address_components[1] && place.address_components[1].short_name || ''),
-        (place.address_components[2] && place.address_components[2].short_name || '')
-      ].join(' ');
-    }
-
-    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-    infowindow.open(map, marker);
-  });
-
-  // Sets a listener on a radio button to change the filter type on Places
-  // Autocomplete.
-  function setupClickListener(id, types) {
-    var radioButton = document.getElementById(id);
-    google.maps.event.addDomListener(radioButton, 'click', function() {
-      autocomplete.setTypes(types);
-    });
+    var place1 = autocomplete1.getPlace();
+    document.getElementById('pleaseGodWork').value = place;
+    document.getElementById('pleaseGodWorkTOO').value = place1;
+    
+    
   }
-
-  setupClickListener('changetype-all', []);
-  setupClickListener('changetype-establishment', ['establishment']);
-  setupClickListener('changetype-geocode', ['geocode']);
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-// ]]>
-
-
 </script>
+
+<!--
+<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;libraries=places,geometry&amp;callback=PlaceAutocompleteSearch&amp;fields=formatted_address" async="" defer=""></script>
+<script>
+  function PlaceAutocompleteSearch() {
+	var options = {
+			  types : ['geocode']
+			};
+    var input = document.getElementById('aankomstAdress');
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
+    var place = autocomplete.getPlace();
+    document.getElementById('pleaseGodWorkTOO').value = place; 
+    
+  }
+</script>
+
+
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;sensor=false&amp;libraries=places"></script>
 <script>
 // <![CDATA[
 	
 function initialize() {
-  var mapOptions = {
-    center: new google.maps.LatLng(-33.8688, 151.2195),
-    zoom: 13,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  var map = new google.maps.Map(document.getElementById('map'),
-    mapOptions);
+
 
   var input = /** @type {HTMLInputElement} */(document.getElementById('aankomstAdress'));
   var autocomplete = new google.maps.places.Autocomplete(input);
 
-  autocomplete.bindTo('bounds', map);
 
-  var infowindow = new google.maps.InfoWindow();
-  var marker = new google.maps.Marker({
-    map: map
-  });
 
-  google.maps.event.addListener(autocomplete, 'place_changed', function() {
-    infowindow.close();
-    marker.setVisible(false);
-    input.className = '';
-    var place = autocomplete.getPlace();
-    if (!place.geometry) {
-      // Inform the user that the place was not found and return.
-      input.className = 'notfound';
-      return;
-    }
-
-    // If the place has a geometry, then present it on a map.
-    if (place.geometry.viewport) {
-      map.fitBounds(place.geometry.viewport);
-    } else {
-      map.setCenter(place.geometry.location);
-      map.setZoom(17);  // Why 17? Because it looks good.
-    }
-    marker.setIcon(/** @type {google.maps.Icon} */({
-      url: place.icon,
-      size: new google.maps.Size(71, 71),
-      origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(17, 34),
-      scaledSize: new google.maps.Size(35, 35)
-    }));
-    marker.setPosition(place.geometry.location);
-    marker.setVisible(true);
 
     var address = '';
     if (place.address_components) {
@@ -243,30 +160,16 @@ function initialize() {
         (place.address_components[2] && place.address_components[2].short_name || '')
       ].join(' ');
     }
-
-    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-    infowindow.open(map, marker);
-  });
-
-  // Sets a listener on a radio button to change the filter type on Places
-  // Autocomplete.
-  function setupClickListener(id, types) {
-    var radioButton = document.getElementById(id);
-    google.maps.event.addDomListener(radioButton, 'click', function() {
-      autocomplete.setTypes(types);
-    });
+    document.getElementById('pleaseGodWorkTOO').value = address; 
+   
   }
 
-  setupClickListener('changetype-all', []);
-  setupClickListener('changetype-establishment', ['establishment']);
-  setupClickListener('changetype-geocode', ['geocode']);
-}
 
-google.maps.event.addDomListener(window, 'load', initialize);
 // ]]>
 
-
 </script>
+-->
+
 </h:body>
 
 </html>
