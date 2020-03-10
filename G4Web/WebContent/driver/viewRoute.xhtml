@@ -40,7 +40,7 @@
         </div>
     </div>
 </div>
-
+<div id="map"></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8">
@@ -52,7 +52,7 @@
 							<div class="col-md-6"></div>
 								<div>
 								<h:outputText value="Test+ #{routeController.route.eindpunt}"></h:outputText>
-								<div id="map"></div>
+								
 								
 								
 								</div>
@@ -63,9 +63,40 @@
 			</div>
 		</div>
 	</div>
-
-
-<script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;callback=initMap">
+	<script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;callback=initMap">
     </script>
+<script>
+function initMap() {
+	  var directionsService = new google.maps.DirectionsService;
+	  var directionsRenderer = new google.maps.DirectionsRenderer;
+	  var map = new google.maps.Map(document.getElementById('map'), {
+	    zoom: 6,
+	    center: {lat: 41.85, lng: -87.65}
+	  });
+	  
+	}
+
+
+
+	  directionsService.route({
+	    origin: document.getElementById('start').value,
+	    destination: document.getElementById('end').value,
+	    waypoints: waypts,
+	    optimizeWaypoints: true,
+	    travelMode: 'DRIVING'
+	  }, function(response, status) {
+	    if (status === 'OK') {
+	      directionsRenderer.setDirections(response);
+	      var route = response.routes[0];
+
+	      // For each route, display summary information.
+	      
+	  });
+	}
+
+
+</script>
+
+
 </h:body>
 </html>
