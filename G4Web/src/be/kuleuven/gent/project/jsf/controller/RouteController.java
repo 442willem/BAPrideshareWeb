@@ -2,6 +2,8 @@ package be.kuleuven.gent.project.jsf.controller;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -30,8 +32,8 @@ public class RouteController implements Serializable {
 	
 	private String queryVertrek;
 	private String queryEinde;
-	private Date queryVertrektijd;
-	private Date queryEindetijd;
+	private String queryVertrektijd;
+	private String queryEindetijd;
 	
 	@PostConstruct
 	public void init(){
@@ -86,19 +88,19 @@ public class RouteController implements Serializable {
 		this.queryEinde = queryEinde;
 	}
 
-	public Date getQueryVertrektijd() {
+	public String getQueryVertrektijd() {
 		return queryVertrektijd;
 	}
 
-	public void setQueryVertrektijd(Date queryVertrektijd) {
+	public void setQueryVertrektijd(String queryVertrektijd) {
 		this.queryVertrektijd = queryVertrektijd;
 	}
 
-	public Date getQueryEindetijd() {
+	public String getQueryEindetijd() {
 		return queryEindetijd;
 	}
 
-	public void setQueryEindetijd(Date queryEindetijd) {
+	public void setQueryEindetijd(String queryEindetijd) {
 		this.queryEindetijd = queryEindetijd;
 	}
 
@@ -110,10 +112,18 @@ public class RouteController implements Serializable {
 		return routeEJB.getAantalRoutes();
 	}
 	public List<Route> getRoutes() {
-		Timestamp eindetijd, vertrektijd;
-		if(queryEindetijd!=null)eindetijd = new Timestamp(queryEindetijd.getTime());
-		else eindetijd=null;
-		if(queryVertrektijd!=null)vertrektijd = new Timestamp(queryVertrektijd.getTime());
+		Timestamp eindetijd=null, vertrektijd;
+//		if(queryEindetijd!=null)eindetijd = new Timestamp(queryEindetijd.getTime());
+//		else eindetijd=null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		Date date = null;
+		try {
+			date = sdf.parse(queryVertrektijd);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		long millis = date.getTime();	
+		if(queryVertrektijd!=null)vertrektijd=new Timestamp(millis);
 		else vertrektijd=null;
 		return routeEJB.findRoutes(queryVertrek,queryEinde,vertrektijd,eindetijd);
 	}
