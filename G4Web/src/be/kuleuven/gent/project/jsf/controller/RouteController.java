@@ -32,8 +32,8 @@ public class RouteController implements Serializable {
 	
 	private String queryVertrek;
 	private String queryEinde;
-	private String queryVertrektijd;
-	private String queryEindetijd;
+	private Date queryVertrektijd;
+	private Date queryEindetijd;
 	
 	@PostConstruct
 	public void init(){
@@ -88,19 +88,19 @@ public class RouteController implements Serializable {
 		this.queryEinde = queryEinde;
 	}
 
-	public String getQueryVertrektijd() {
+	public Date getQueryVertrektijd() {
 		return queryVertrektijd;
 	}
 
-	public void setQueryVertrektijd(String queryVertrektijd) {
+	public void setQueryVertrektijd(Date queryVertrektijd) {
 		this.queryVertrektijd = queryVertrektijd;
 	}
 
-	public String getQueryEindetijd() {
+	public Date getQueryEindetijd() {
 		return queryEindetijd;
 	}
 
-	public void setQueryEindetijd(String queryEindetijd) {
+	public void setQueryEindetijd(Date queryEindetijd) {
 		this.queryEindetijd = queryEindetijd;
 	}
 
@@ -115,15 +115,8 @@ public class RouteController implements Serializable {
 		Timestamp eindetijd=null, vertrektijd;
 //		if(queryEindetijd!=null)eindetijd = new Timestamp(queryEindetijd.getTime());
 //		else eindetijd=null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-		Date date = null;
-		try {
-			date = sdf.parse(queryVertrektijd);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		long millis = date.getTime();	
-		if(queryVertrektijd!=null)vertrektijd=new Timestamp(millis);
+		
+		if(queryVertrektijd!=null)vertrektijd=new Timestamp(queryVertrektijd.getTime());
 		else vertrektijd=null;
 		return routeEJB.findRoutes(queryVertrek,queryEinde,vertrektijd,eindetijd);
 	}
