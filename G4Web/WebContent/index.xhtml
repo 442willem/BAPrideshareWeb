@@ -10,11 +10,12 @@
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 	<title><ui:insert name="title">Welcome To RideSharing</ui:insert>
 	</title>
-	<meta name="viewport" content="initial-scale=1.0" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 	<meta charset="utf-8" />
 </h:head>
 <h:body>
-	
+	<script type="text/javascript"
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 	<h:form method="post" id="loginForm">
 		<h:commandButton
 			style="text-decoration:none; padding:5px; width:100px; float:right;"
@@ -54,29 +55,34 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<p:outputLabel value="vertrekplaats" />
-									<input required="required" id="vertrekAdress" type="text" />
-		  						<h:inputHidden id="pleaseGodWork" value="#{routeController.queryVertrek}"/>
+									<p:inputText class="form-control" id="queryvertrekplaats"
+										value="#{routeController.queryVertrek}">
+									</p:inputText>
 								</div>
 								<div class="form-group">
 									<p:outputLabel value="aankomstplaats" />
-									<input required="required" id="aankomstAdress" type ="text">
-		  						</input>
-		  						<h:inputHidden id="pleaseGodWorkTOO" value="#{routeController.queryEinde}" />
+									<p:inputText class="form-control" id="queryaankomstplaats"
+										value="#{routeController.queryEinde}">
+									</p:inputText>
 								</div>
 								<div class="form-group">
-									<p:outputLabel value="vertrektijd" />
-									<p:datePicker id="queryvertrektijd"
-										value="#{routeController.queryVertrektijd}" showTime="true" />
+									<h:outputLabel value="Vertrektijd (dd-mm-yyyy hh:mm): " />
+									<h:inputText id="vertrektijd" class="form-control"
+										value="#{routeController.queryVertrektijd}">
+										<f:convertDateTime pattern="dd-MM-yyyy HH:mm" />
+									</h:inputText>
 								</div>
 								<div class="form-group">
-									<p:outputLabel value="aankomsttijd" />
-									<p:datePicker id="queryaankomsttijd"
-										value="#{routeController.queryEindetijd}" showTime="true" />
-								</div>
+									<h:outputLabel value="Aankomsttijd (dd-mm-yyyy hh:mm): " />
+									<h:inputText id="aankomsttijd" class="form-control"
+										value="#{routeController.queryEindetijd}">
+										<f:convertDateTime pattern="dd-MM-yyyy HH:mm" />
+									</h:inputText>
+								</div> 
 								<div class="form-group">
 									<p:commandButton
 										style="text-decoration:none; padding:5px; width:115px;"
-										process="@form" value="zoeken" id="filterRoute"
+										value="zoeken" id="filterRoute" action="userController.goToIndex()"
 										class="btn btn-primary pull-right">
 									</p:commandButton>
 								</div>
@@ -87,13 +93,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- 	<script type="text/javascript" language="javascript">
-		$(document).ready(function() { /// Wait till page is loaded
-			$("#FilterProfiel").click(function() {
-				$('#herlaad').load(/G4Web/index.xhtml +  ' #herlaad');
-			});
-		});
-	</script> -->
 
 	<div id="herlaad">
 		<h:outputLabel id="vertrek"
@@ -133,50 +132,5 @@
 			</h:column>
 		</h:dataTable>
 	</div>
-	
-	<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;libraries=places,geometry&amp;callback=PlaceAutocompleteSearch&amp;fields=formatted_address" async="" defer=""></script>
-<script>
-  function PlaceAutocompleteSearch() {
-	var options = {
-			  types : ['address']
-			};
-	var componentForm = {
-			  street_number: 'short_name',
-			  route: 'long_name',
-			  locality: 'long_name',
-			  administrative_area_level_1: 'short_name',
-			  country: 'long_name',
-			  postal_code: 'short_name'
-			};
-    var input = document.getElementById('vertrekAdress');
-    var input1 = document.getElementById('aankomstAdress');
-    var autocomplete1= new google.maps.places.Autocomplete(input1, options);
-    var autocomplete = new google.maps.places.Autocomplete(input, options);
-    var place = autocomplete.getPlace();
-    var place1 = autocomplete1.getPlace();
-    autocomplete.addListener('place_changed', fillInAddress);
-    autocomplete1.addListener('place_changed', fillInAddress1);
-    document.getElementById('createRoute:pleaseGodWork').value = place.formatted_address;
-    document.getElementById('createRoute:pleaseGodWorkTOO').value = place1.formatted_address;
-    
-    function fillInAddress() {
-    	  // Get the place details from the autocomplete object.
-    	  var place = autocomplete.getPlace();
-    	
-
-    	  document.getElementById('createRoute:pleaseGodWork').value = place.formatted_address;
-    	  
-    	}
-    function fillInAddress1() {
-  	  // Get the place details from the autocomplete object.
-  	  
-  	  var place1=autocomplete1.getPlace();
-
-  	 
-  	  document.getElementById('createRoute:pleaseGodWorkTOO').value = place1.formatted_address;
-  	}
-    
-  }
-</script>
 </h:body>
 </html>
