@@ -54,7 +54,8 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
     
     @Override
     public List<Route> findBestuurderRoute(int bestuurderID){
-    	Query q=em.createQuery("SELECT * FROM Route r WHERE r.bestuurderId=bestuurderID");
+    	Query q=em.createQuery("SELECT r FROM Route r WHERE r.bestuurder.id=?1");
+    	q.setParameter(1, bestuurderID);
     	return q.getResultList();
     }
     
