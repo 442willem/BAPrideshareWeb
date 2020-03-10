@@ -37,16 +37,7 @@ public class ProfielController implements Serializable {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		facesContext.renderResponse();
 		profielEJB.createProfiel(profiel);
-		return "index.faces?faces-redirect=true";
-	}
-	
-	public String activateP() {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		facesContext.renderResponse();
-		Profiel p = profielEJB.getProfiel();
-		p.setGroup("Passenger");
-		return "passenger/indexP.faces?faces-redirect=true&login=1";
-		
+		return "driver/indexD.faces?faces-redirect=true&login=1";
 	}
 	
 	public Profiel getProfiel() {
