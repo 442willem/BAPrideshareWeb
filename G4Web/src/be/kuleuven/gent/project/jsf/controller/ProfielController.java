@@ -32,7 +32,7 @@ public class ProfielController implements Serializable {
 	private UserManagementEJBLocal userEJB;
 	
 	private Profiel profiel = new Profiel();
-	
+
 	public String createProfiel() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		facesContext.renderResponse();
