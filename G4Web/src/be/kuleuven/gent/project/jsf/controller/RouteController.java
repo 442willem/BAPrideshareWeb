@@ -28,6 +28,9 @@ public class RouteController implements Serializable {
 	@EJB
 	private UserManagementEJBLocal userEJB;
 	
+	@EJB
+	private ProfielManagementEJBLocal profielEJB;
+
 	private Route route;
 	
 	private String queryVertrek;
@@ -73,7 +76,13 @@ public class RouteController implements Serializable {
 	public void setUserEJB(UserManagementEJBLocal userEJB) {
 		this.userEJB = userEJB;
 	}
+	public ProfielManagementEJBLocal getProfielEJB() {
+		return profielEJB;
+	}
 
+	public void setProfielEJB(ProfielManagementEJBLocal profielEJB) {
+		this.profielEJB = profielEJB;
+	}
 	public String getQueryVertrek() {
 		return queryVertrek;
 	}
@@ -123,6 +132,9 @@ public class RouteController implements Serializable {
 	}
 	public List<Route> findAllRoutes() {
 		return routeEJB.findAllRoutes();
+	}
+	public List<Route> findByBestuurder(){		
+		return routeEJB.findBestuurderRoute(profielEJB.getProfiel().getId());
 	}
 	public String filterRoutes() {
 		return "index.faces?faces-redirect=true";
