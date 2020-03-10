@@ -20,6 +20,9 @@
 <h:form method="post" id="loginForm">
 <h:commandButton style="text-decoration:none; padding:5px; width:100px; float:right;" value ="Logout" action="#{profielController.logout()}" class="btn btn-primary pull-right" id="activateP" />
 </h:form>
+<h:form method="post" id="myRoutes">
+	<h:commandButton style="text-decoration:none; padding:5px; width:120px; float:center;" value ="My Routes" action="#{userController.goToMyRoutes()}" class="btn btn-primary pull-right" id="Routenav2" />
+</h:form>
 <script type="text/javascript">
 	jQuery(function() {topBar.show()});</script>          
 <p:notificationBar id="notbar" position="top" widgetVar="topBar" styleClass="top" rendered="#{param.login == 1}">
@@ -87,12 +90,6 @@
 <h:dataTable id ="routentable" value="#{routeController.getRoutes()}" var ="route" >
 	<h:column>
 		<f:facet name="header">
-			<h:outputText value="Id"/>
-		</f:facet>
-		<h:link outcome="viewRoute.xhtml?id=#{route.id}" value="#{route.getId()}"/>
-	</h:column>
-	<h:column>
-		<f:facet name="header">
 			<h:outputText value="vertrektijd"/>
 		</f:facet>
 		<h:outputText value="#{route.vertrektijdToString()}"/>
@@ -103,12 +100,15 @@
 		</f:facet>
 		<h:outputText value="#{route.eindtijdToString()}"/>
 	</h:column>
+	<h:column>
+				<f:facet name="header">
+					<h:outputText class="text-center" value="Route bekijken" />
+				</f:facet>
+				<a class='btn btn-info btn-xs' href="viewRoute.faces?route=#{route.id}"><span class="glyphicon glyphicon-edit"></span> Meer info</a>
+			</h:column>
 </h:dataTable>
 <h:form method="post" id="createRoute">
 	<h:commandButton style="text-decoration:none; padding:5px; width:120px; float:center;" value ="Create new route" action="#{userController.goToCreateRoute()}" class="btn btn-primary pull-right" id="RouteNav" />
-</h:form>
-<h:form method="post" id="myRoutes">
-	<h:commandButton style="text-decoration:none; padding:5px; width:120px; float:center;" value ="My Routes" action="#{userController.goToMyRoutes()}" class="btn btn-primary pull-right" id="Routenav2" />
 </h:form>
 
 </h:body> 

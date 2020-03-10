@@ -7,26 +7,38 @@
 
 <h:head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-	   <style>
-      #map {
-        height: 100%;
-        float: left;
-        width: 70%;
+
+  <title>
+    <ui:insert name="title">Create a new Route</ui:insert>
+  </title>
+ <style>
+ .mapinv{
+ display: none;
+ }
+ #map {
         height: 100%;
       }
-     
-    </style>
-	<title>
-		<ui:insert name="title">View Route</ui:insert>
-	</title>
-  
-	<f:metadata>
+ /* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+#map {
+  height: 100%;
+}
+
+.mapinv{
+  display: none;
+}
+
+
+ </style>
+<meta name="viewport" content="initial-scale=1.0" />
+<meta charset="utf-8" />
+<f:metadata>
 		<f:viewParam name="route" value="#{routeController.route.id}" />
 		<f:viewAction action="#{routeController.findRoute}" />
-	</f:metadata>
-	
+</f:metadata>
 </h:head> 
-<h:body>
+
+<h:body> 
 
 <div class="jumbotron jumbotron-sm">
     <div class="container">
@@ -35,68 +47,11 @@
             	
                 <h1 class="h1">
                     Route to: #{routeController.route.eindpunt} <small></small></h1>
-                    <h:outputText id="test" value="#{routeController.route.eindpunt}" />
+                    
             </div>
         </div>
     </div>
 </div>
-<div id="map"></div>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-8">
-				<div class="well well-sm">
-
-					<h:form id="PassengerinBoeken">
-						<div class="row">
-
-							<div class="col-md-6"></div>
-								<div>
-								<h:outputText value="Test+ #{routeController.route.eindpunt}"></h:outputText>
-								
-								
-								
-								</div>
-							
-						</div>
-					</h:form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;callback=initMap">
-    </script>
-<script>
-function initMap() {
-	  var directionsService = new google.maps.DirectionsService;
-	  var directionsRenderer = new google.maps.DirectionsRenderer;
-	  var map = new google.maps.Map(document.getElementById('map'), {
-	    zoom: 6,
-	    center: {lat: 41.85, lng: -87.65}
-	  });
-	  
-	}
-
-
-
-	  directionsService.route({
-	    origin: document.getElementById('start').value,
-	    destination: document.getElementById('end').value,
-	    waypoints: waypts,
-	    optimizeWaypoints: true,
-	    travelMode: 'DRIVING'
-	  }, function(response, status) {
-	    if (status === 'OK') {
-	      directionsRenderer.setDirections(response);
-	      var route = response.routes[0];
-
-	      // For each route, display summary information.
-	      
-	  });
-	}
-
-
-</script>
-
-
+<h:outputText value="#{routeController.route.eindpunt}"></h:outputText>
 </h:body>
 </html>
