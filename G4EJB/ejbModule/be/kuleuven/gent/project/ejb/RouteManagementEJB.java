@@ -41,6 +41,11 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 		r.setBestuurder(p);
     	em.persist(r);
     }
+	@Override
+	public Route findRoute(int id) {
+		return em.find(Route.class, id);
+	}
+	
     @Override
     public List<Route> findAllRoutes(){
 		Query q = em.createQuery("SELECT r FROM Route r");
