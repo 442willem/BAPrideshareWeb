@@ -57,11 +57,11 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
     public List<Route> findRoutes(String beginpunt,String eindpunt, Timestamp vertrektijd, Timestamp eindtijd){
 		Query q;		
 		if(vertrektijd!=null) {
-			if(eindtijd!=null)q=em.createQuery("SELECT r FROM Route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2 AND ABS(unix_timestamp(r.vertrektijd) - unix_timestamp(vertrektijd))<=3600000 AND ABS(unix_timestamp(r.eindtijd) - unix_timestamp(eindtijd))<=3600000");
-			else q=em.createQuery("SELECT r FROM Route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2 AND ABS(unix_timestamp(r.vertrektijd) - unix_timestamp(vertrektijd))<=3600000");
+			if(eindtijd!=null)q=em.createQuery("SELECT r FROM Route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2 AND (TIMESTAMPDIFF(HOUR,r.vertrektijd,vertrektijd)<=1) AND (TIMESTAMPDIFF(HOUR,r.eindtijd,eindtijd)<=1)");
+			else q=em.createQuery("SELECT r FROM Route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2 AND (TIMESTAMPDIFF(HOUR,r.vertrektijd,vertrektijd)<=1)");
 		}
 		else {
-			if(eindtijd!=null)q=em.createQuery("SELECT r FROM Route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2 AND ABS(unix_timestamp(r.eindtijd) - unix_timestamp(eindtijd))<=3600000");
+			if(eindtijd!=null)q=em.createQuery("SELECT r FROM Route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2 AND (TIMESTAMPDIFF(HOUR,r.eindtijd,eindtijd)<=1)");
 			else q=em.createQuery("SELECT r FROM Route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2");	
 		}
 
