@@ -115,8 +115,8 @@ public class RouteController implements Serializable {
 	}
 	public List<Route> getRoutes() {
 		Timestamp eindetijd=null, vertrektijd;
-//		if(queryEindetijd!=null)eindetijd = new Timestamp(queryEindetijd.getTime());
-//		else eindetijd=null;
+		if(queryEindetijd!=null)eindetijd = new Timestamp(queryEindetijd.getTime());
+		else eindetijd=null;
 		if(queryVertrektijd!=null)vertrektijd=new Timestamp(queryVertrektijd.getTime());
 		else vertrektijd=null;
 		return routeEJB.findRoutes(queryVertrek,queryEinde,vertrektijd,eindetijd);
