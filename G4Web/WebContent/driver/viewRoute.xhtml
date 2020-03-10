@@ -7,15 +7,65 @@
 
 <h:head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-
+	   <style>
+      #map {
+        height: 100%;
+        float: left;
+        width: 70%;
+        height: 100%;
+      }
+     
+    </style>
 	<title>
-		<ui:insert name="title">Submit Report</ui:insert>
+		<ui:insert name="title">View Route</ui:insert>
 	</title>
   
 	<f:metadata>
 		<f:viewParam name="route" value="#{routeController.route.id}" />
-		<f:viewAction action="#{routeController.findTask}" />
-		<button onclick="console.log(#{routeController.findTask})">TEST ID</button>
+		<f:viewAction action="#{routeController.findRoute}" />
 	</f:metadata>
 	
 </h:head> 
+<h:body>
+
+<div class="jumbotron jumbotron-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-12">
+            	
+                <h1 class="h1">
+                    Route to: #{routeController.route.eindpunt} <small></small></h1>
+                    <h:outputText id="test" value="#{routeController.route.eindpunt}" />
+            </div>
+        </div>
+    </div>
+</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="well well-sm">
+
+					<h:form id="PassengerinBoeken">
+						<div class="row">
+
+							<div class="col-md-6"></div>
+								<div>
+								<h:outputText value="Test+ #{routeController.route.eindpunt}"></h:outputText>
+								<div id="map"></div>
+								
+								
+								</div>
+							
+						</div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;callback=initMap">
+    </script>
+</h:body>
+</html>
