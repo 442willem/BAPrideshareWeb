@@ -66,8 +66,8 @@
 	  						</div>
 	  						<div class="form-group">
 		    					<h:outputLabel value="Vroegste Vertrek Tijd: "/>
-		  						<p:datePicker required="true" id="timevertrek" value="#{routeController.route.vertrektijdDate}" showTime="true">
-		  						<f:convertDateTime pattern="MM/dd/yyyy HH:mm" type="" />
+		  						<p:datePicker required="true" id="timevertrek" value="#{routeController.route.vertrektijdDate}" pattern="dd/MM/yyyy HH:mm" showTime="false">
+		  						
 		  						</p:datePicker>
 	  						</div>
 	  						<div>
@@ -78,7 +78,7 @@
 	  						</div>
 	  						<div>
 	  						<h:outputLabel value="Laatste Aankomst Tijd:" />
-	  						<p:datePicker required="true"  id="timeaankomst" value="#{routeController.route.eindtijdDate}" showTime="true"/>
+	  						<p:datePicker required="true"  id="timeaankomst" value="#{routeController.route.eindtijdDate}" pattern="dd/MM/yyyy HH:mm" showTime="false"/>
 	  						</div>
 	  						<div>
 	  						
