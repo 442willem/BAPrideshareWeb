@@ -93,6 +93,7 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 	}
 	@Override
 	public void boekIn(Profiel passagier, int routeId){
+		
 		Route route = findRoute(routeId);
 		Rit rit = new Rit(passagier,route);
 		em.persist(rit);	
