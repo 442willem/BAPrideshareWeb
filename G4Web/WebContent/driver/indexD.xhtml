@@ -15,7 +15,9 @@
 
 <h:body> 
 
-
+<h:form method="post" id="homeform">
+  <h:commandButton value="Home" class="btn btn-primary pull-left" action="#{userController.goToIndexD()}" style="float: left;text-decoration:none; padding:5px;" />
+  </h:form>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 <h:form method="post" id="loginForm">
 <h:commandButton style="text-decoration:none; padding:5px; width:100px; float:right;" value ="Logout" action="#{profielController.logout()}" class="btn btn-primary pull-right" id="activateP" />
