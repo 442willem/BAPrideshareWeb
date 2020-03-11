@@ -54,7 +54,7 @@ public class RouteController implements Serializable {
 	public String requestRit(int routeid) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		facesContext.renderResponse();
-		int profielid = profielEJB.getProfiel().getId();
+		Profiel profielid = profielEJB.getProfiel();
 		routeEJB.boekIn(profielid, routeid);
 		return "indexD.faces?faces-redirect=true&login=1";
 	}
