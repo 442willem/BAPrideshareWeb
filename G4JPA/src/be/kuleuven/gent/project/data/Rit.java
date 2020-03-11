@@ -136,6 +136,11 @@ public class Rit implements Serializable {
 
 	public Rit() {}
 	
+	public Rit(Profiel passagier, Route route) {
+		this.passagier=passagier;
+		this.route=route;
+	}
+	
 	public Rit(int aantalPersonen,int prijs, Timestamp vertrektijd, Timestamp eindtijd, Profiel passagier,Route route) {
 		this.aantalPersonen=aantalPersonen;
 		this.vertrektijd=vertrektijd;
