@@ -51,6 +51,13 @@ public class RouteController implements Serializable {
 		routeEJB.createRoute(route);
 		return "indexD.faces?faces-redirect=true&login=1";
 	}
+	public String requestRit(int routeid) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.renderResponse();
+		int profielid = profielEJB.getProfiel().getId();
+		routeEJB.boekIn(profielid, routeid);
+		return "indexD.faces?faces-redirect=true&login=1";
+	}
 	public void findRoute() {
 		route = routeEJB.findRoute(route.getId());
 	}
