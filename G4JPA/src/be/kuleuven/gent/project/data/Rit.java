@@ -23,11 +23,8 @@ public class Rit implements Serializable {
 	@Column(name="prijs", nullable=false)
 	private int prijs;
 	
-	@Column(name="eindpunt", nullable=false)
-	private String eindpunt;
-	
-	@Column(name="begintpunt", nullable=false)
-	private String begintpunt;
+	@Column(name="beginpunt", nullable=false)
+	private String beginpunt;
 	
 
 	@Column(name="betaald", nullable=false)
@@ -38,9 +35,6 @@ public class Rit implements Serializable {
 	
 	@Column(name="vertrektijd", nullable=false)	
 	private Timestamp vertrektijd;
-	
-	@Column(name="eindtijd", nullable=false)
-	private Timestamp eindtijd;
 	
 	@JoinColumn(name="passagierId", nullable=false)
 	private Profiel passagier;
@@ -56,20 +50,13 @@ public class Rit implements Serializable {
 		this.id = id;
 	}
 	
-	public String getEindpunt() {
-		return eindpunt;
+
+	public String getBeginpunt() {
+		return beginpunt;
 	}
 
-	public void setEindpunt(String eindpunt) {
-		this.eindpunt = eindpunt;
-	}
-
-	public String getBegintpunt() {
-		return begintpunt;
-	}
-
-	public void setBegintpunt(String begintpunt) {
-		this.begintpunt = begintpunt;
+	public void setBeginpunt(String beginpunt) {
+		this.beginpunt = beginpunt;
 	}
 
 	public int getPrijs() {
@@ -107,17 +94,6 @@ public class Rit implements Serializable {
 		this.vertrektijd = vertrektijd;
 	}
 
-	public Timestamp getEindtijd() {
-		return eindtijd;
-	}
-	public String eindtijdToString() {
-		return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(eindtijd);
-	}
-
-	public void setEindtijd(Timestamp eindtijd) {
-		this.eindtijd = eindtijd;
-	}
-
 	public Profiel getPassagier() {
 		return passagier;
 	}
@@ -144,7 +120,6 @@ public class Rit implements Serializable {
 	public Rit(int aantalPersonen,int prijs, Timestamp vertrektijd, Timestamp eindtijd, Profiel passagier,Route route) {
 		this.aantalPersonen=aantalPersonen;
 		this.vertrektijd=vertrektijd;
-		this.eindtijd=eindtijd;
 		this.passagier=passagier;
 		this.route=route;
 		betaald=false;
