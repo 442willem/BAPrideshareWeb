@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import be.kuleuven.gent.project.data.Profiel;
+import be.kuleuven.gent.project.data.Rit;
 import be.kuleuven.gent.project.data.Route;
 
 /**
@@ -90,5 +91,10 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 		Query q = em.createQuery("SELECT COUNT(*) FROM Rit");
 		return q.getFirstResult();
 	}
-
+	@Override
+	public void boekIn(Profiel passagier, int routeId){
+		Route route = findRoute(routeId);
+		Rit rit = new Rit(passagier,route);
+		em.persist(rit);	
+	}
 }
