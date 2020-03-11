@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import be.kuleuven.gent.project.data.Profiel;
 import be.kuleuven.gent.project.data.Route;
 
 @Local
@@ -16,5 +17,5 @@ public interface RouteManagementEJBLocal {
 	public void filterRoutes();
 	public List<Route> findRoutes(String beginpunt, String eindpunt, Timestamp begintijd, Timestamp eindtijd);
 	List<Route> findBestuurderRoute(int bestuurderID);
-	void boekIn(int passagierId, int routeId);
+	void boekIn(Profiel passagier, int routeId);
 }
