@@ -17,39 +17,26 @@
 <script type="text/javascript"
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 	<div id="routes">
-		<h:dataTable id="routetabel" value="#{routeController.findByBestuurder()}" var="route">
-			<h:column>
+		<h:dataTable id ="routentable" value="#{routeController.getRoutes()}" var ="route" >
+	<h:column>
+		<f:facet name="header">
+			<h:outputText value="vertrektijd"/>
+		</f:facet>
+		<h:outputText value="#{route.vertrektijdToString()}"/>
+	</h:column>
+	<h:column>
+		<f:facet name="header">
+			<h:outputText value="aankomsttijd"/>
+		</f:facet>
+		<h:outputText value="#{route.eindtijdToString()}"/>
+	</h:column>
+	<h:column>
 				<f:facet name="header">
-					<h:outputText value="Id" />
+					<h:outputText class="text-center" value="Route bekijken" />
 				</f:facet>
-				<h:link outcome="viewRoute.xhtml?id=#{rit.id}"
-					value="#{route.getId()}" />
+				<a class='btn btn-info btn-xs' href="viewRoute.faces?route=#{route.id}"><span class="glyphicon glyphicon-edit"></span> Meer info</a>
 			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="beginpunt" />
-				</f:facet>
-				<h:outputText value="#{route.beginpunt}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="eindpunt" />
-				</f:facet>
-				<h:outputText value="#{route.eindpunt}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="vertrektijd" />
-				</f:facet>
-				<h:outputText value="#{route.vertrektijdToString()}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="aankomsttijd" />
-				</f:facet>
-				<h:outputText value="#{route.eindtijdToString()}" />
-			</h:column>
-		</h:dataTable>
+</h:dataTable>
 	</div>
 </h:body>
 </html>
