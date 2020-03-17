@@ -38,34 +38,34 @@
 <br />
 	<div id="aanvragen">
 		<h:dataTable id="passagiersTabel" value="#{routeController.findRitten()}"
-			var="route">
+			var="rit">
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="vertrektijd" />
+					<h:outputText value="Ophaalpunt" />
 				</f:facet>
-				<h:outputText value="#{route.vertrektijdToString()}" />
+				<h:outputText value="#{rit.beginpunt}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="aankomsttijd" />
+					<h:outputText value="Aantal Passagiers" />
 				</f:facet>
-				<h:outputText value="#{route.eindtijdToString()}" />
+				<h:outputText value="#{rit.aantalPersonen}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText class="text-center" value="Route bekijken" />
+					<h:outputText class="text-center" value="Profiel" />
 				</f:facet>
 				<a class='btn btn-info btn-xs'
-					href="viewRoute.faces?route=#{route.id}"><span
-					class="glyphicon glyphicon-edit"></span> Meer info</a>
+					href="viewProfiel.faces?profiel=#{rit.passagier.id}"><span
+					class="glyphicon glyphicon-edit"></span>Profiel</a>
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText class="text-center" value="Bekijk Passagiers" />
+					<h:outputText class="text-center" value="Aanvaarden" />
 				</f:facet>
 				<a class='btn btn-info btn-xs'
 					href="viewPassengers.faces?route=#{route.id}"><span
-					class="glyphicon glyphicon-edit"></span>Bekijk Passagiers</a>
+					class="glyphicon glyphicon-edit"></span>Aanvaarden</a>
 			</h:column>
 		</h:dataTable>
 	</div>

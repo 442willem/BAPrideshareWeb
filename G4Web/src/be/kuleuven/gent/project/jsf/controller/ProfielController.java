@@ -48,6 +48,9 @@ public class ProfielController implements Serializable {
 		Profiel p = profielEJB.getProfiel();
 		return p;
 	}
+	public Profiel findProfiel() {
+		return profielEJB.findProfiel(profiel.getId());
+	}
 
 	public void setProfiel(Profiel profiel) {
 		this.profiel = profiel;

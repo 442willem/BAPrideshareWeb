@@ -9,4 +9,6 @@ public interface ProfielManagementEJBLocal {
 	public void createProfiel(Profiel p);
 
 	public Profiel getProfiel();
+
+	public Profiel findProfiel(int id);
 }

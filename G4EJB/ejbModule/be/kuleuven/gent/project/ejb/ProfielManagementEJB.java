@@ -7,6 +7,7 @@ import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import be.kuleuven.gent.project.data.Profiel;
 import be.kuleuven.gent.project.utils.AuthenticationUtils;
@@ -42,5 +43,12 @@ public class ProfielManagementEJB implements ProfielManagementEJBLocal {
 		String login = ctx.getCallerPrincipal().getName();
 		Profiel p = userEJB.findProfiel(login);
 		return p;
+	}
+	@Override
+	public Profiel findProfiel(int id) {
+		Query q = em.createQuery("SELECT p FROM Profiel p where p.id=?1");
+		q.setParameter(1, id);
+		if(q.getResultList().size()>1)return null;
+		return (Profiel) q.getResultList().get(0);
 	}
 }
