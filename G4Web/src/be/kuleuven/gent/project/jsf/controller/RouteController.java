@@ -52,6 +52,7 @@ public class RouteController implements Serializable {
 		return "indexD.faces?faces-redirect=true&login=1";
 	}
 	public String requestRit(String routeid) {
+		System.out.println(routeid);
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		facesContext.renderResponse();
 		int Rid= Integer.parseInt(routeid);
