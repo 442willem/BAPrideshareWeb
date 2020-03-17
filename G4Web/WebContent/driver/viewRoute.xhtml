@@ -67,7 +67,7 @@
 						#{routeController.route.maxPersonen}</h2>
 						<div>
 						<h:form method="post" id="requestform">
-							<h:commandButton value="Verstuur verzoek" class="btn btn-primary" action="console.log('test')" style="margin: 0 auto;text-decoration:none; padding:5px;" />
+							<h:commandButton value="Verstuur verzoek" class="btn btn-primary" action="#{routeController.boekIn('#{routeController.route.id}')}" style="margin: 0 auto;text-decoration:none; padding:5px;" />
 						</h:form>
 						</div>
 				</div>
