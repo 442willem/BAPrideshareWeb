@@ -14,29 +14,40 @@
 	<meta charset="utf-8" />
 </h:head>
 <h:body>
-<script type="text/javascript"
+	<script type="text/javascript"
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 	<div id="routes">
-		<h:dataTable id ="routentable" value="#{routeController.getRoutes()}" var ="route" >
-	<h:column>
-		<f:facet name="header">
-			<h:outputText value="vertrektijd"/>
-		</f:facet>
-		<h:outputText value="#{route.vertrektijdToString()}"/>
-	</h:column>
-	<h:column>
-		<f:facet name="header">
-			<h:outputText value="aankomsttijd"/>
-		</f:facet>
-		<h:outputText value="#{route.eindtijdToString()}"/>
-	</h:column>
-	<h:column>
+		<h:dataTable id="routentable" value="#{routeController.getRoutes()}"
+			var="route">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="vertrektijd" />
+				</f:facet>
+				<h:outputText value="#{route.vertrektijdToString()}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="aankomsttijd" />
+				</f:facet>
+				<h:outputText value="#{route.eindtijdToString()}" />
+			</h:column>
+			<h:column>
 				<f:facet name="header">
 					<h:outputText class="text-center" value="Route bekijken" />
 				</f:facet>
-				<a class='btn btn-info btn-xs' href="viewRoute.faces?route=#{route.id}"><span class="glyphicon glyphicon-edit"></span> Meer info</a>
+				<a class='btn btn-info btn-xs'
+					href="viewRoute.faces?route=#{route.id}"><span
+					class="glyphicon glyphicon-edit"></span> Meer info</a>
 			</h:column>
-</h:dataTable>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText class="text-center" value="Bekijk Passagiers" />
+				</f:facet>
+				<a class='btn btn-info btn-xs'
+					href="viewPassengers.faces?route=#{route.id}"><span
+					class="glyphicon glyphicon-edit"></span>Bekijk Passagiers</a>
+			</h:column>
+		</h:dataTable>
 	</div>
 </h:body>
 </html>

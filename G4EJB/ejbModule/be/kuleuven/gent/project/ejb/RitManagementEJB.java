@@ -63,4 +63,11 @@ public class RitManagementEJB implements RitManagementEJBLocal {
 //		ritten.add(r1);
 //		return ritten;
 	}
+
+	@Override
+	public List<Rit> findRitten(int route) {
+		Query q = em.createQuery("SELECT r FROM Rit r where r.route.id=?1");
+		q.setParameter(1, route);
+		return q.getResultList();
+	}
 }

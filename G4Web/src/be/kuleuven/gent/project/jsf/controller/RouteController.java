@@ -30,6 +30,9 @@ public class RouteController implements Serializable {
 	
 	@EJB
 	private ProfielManagementEJBLocal profielEJB;
+	
+	@EJB
+	private RitManagementEJBLocal ritEJB;
 
 	private Route route;
 	
@@ -62,6 +65,9 @@ public class RouteController implements Serializable {
 	}
 	public void findRoute() {
 		route = routeEJB.findRoute(route.getId());
+	}
+	public List<Rit> findRitten(){
+		return ritEJB.findRitten(route.getId());
 	}
 	public Route getRoute() {
 		return route;
