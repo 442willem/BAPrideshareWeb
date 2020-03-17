@@ -12,4 +12,5 @@ public interface RitManagementEJBLocal {
 	public void wijzigRit();
 	public List<Rit> findAllRitten();
 	int getAantalRitten();
+	public List<Rit> findRitten(int route);
 }
