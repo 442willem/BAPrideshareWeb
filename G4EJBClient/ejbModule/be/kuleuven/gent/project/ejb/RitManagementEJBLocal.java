@@ -13,4 +13,6 @@ public interface RitManagementEJBLocal {
 	public List<Rit> findAllRitten();
 	int getAantalRitten();
 	public List<Rit> findRitten(int route);
+	public void keurRitGoed(int ritId);
+	public void keurRitAf(int ritId);
 }

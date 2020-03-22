@@ -1,44 +1,46 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-  <h:form method="post" id="homeform">
-  <h:commandButton value="Home" class="btn btn-primary pull-left" action="#{userController.goToIndexD()}" style="float: left;text-decoration:none; padding:5px;" />
-  </h:form>
-  <title>
-    <ui:insert name="title">Route view</ui:insert>
-  </title>
-  <meta name="viewport" content="initial-scale=1.0" />
-<meta charset="utf-8" />
-<f:metadata>
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<h:form method="post" id="homeform">
+		<h:commandButton value="Home" class="btn btn-primary pull-left"
+			action="#{userController.goToIndexD()}"
+			style="float: left;text-decoration:none; padding:5px;" />
+	</h:form>
+	<title><ui:insert name="title">Route view</ui:insert></title>
+	<meta name="viewport" content="initial-scale=1.0" />
+	<meta charset="utf-8" />
+	<f:metadata>
 		<f:viewParam name="route" value="#{routeController.route.id}" />
 		<f:viewAction action="#{routeController.findRoute}" />
-</f:metadata>
-</h:head> 
+	</f:metadata>
+</h:head>
 
-<h:body> 
+<h:body>
 
-<div class="jumbotron jumbotron-sm">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-lg-12">
-            	
-                <h1 class="h1">
-                    Route to: #{routeController.route.eindpunt} <small></small></h1>
-                    
-            </div>
-        </div>
-    </div>
-</div>
-<br />
+	<div class="jumbotron jumbotron-sm">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-lg-12">
+
+					<h1 class="h1">
+						Route to: #{routeController.route.eindpunt} <small></small>
+					</h1>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<br />
 	<div id="aanvragen">
-		<h:dataTable id="passagiersTabel" value="#{routeController.findRitten()}"
-			var="rit">
+		<h:dataTable id="passagiersTabel"
+			value="#{routeController.findRitten()}" var="rit">
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Ophaalpunt" />
@@ -63,9 +65,18 @@
 				<f:facet name="header">
 					<h:outputText class="text-center" value="Aanvaarden" />
 				</f:facet>
-				<a class='btn btn-info btn-xs'
-					href="viewPassengers.faces?route=#{route.id}"><span
-					class="glyphicon glyphicon-edit"></span>Aanvaarden</a>
+				<h:panelGroup rendered="#{!rit.goedgekeurd}">
+					<h:form>
+						<h:commandButton value="Aanvaarden"
+							action="#{routeController.keurRitGoed(rit.id)}"></h:commandButton>
+					</h:form>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{rit.goedgekeurd}">
+					<h:form>
+						<h:commandButton value="Afkeuren"
+							action="#{routeController.keurRitAf(rit.id)}"></h:commandButton>
+					</h:form>
+				</h:panelGroup>
 			</h:column>
 		</h:dataTable>
 	</div>

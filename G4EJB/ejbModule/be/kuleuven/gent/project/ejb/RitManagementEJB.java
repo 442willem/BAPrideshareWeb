@@ -70,4 +70,22 @@ public class RitManagementEJB implements RitManagementEJBLocal {
 		q.setParameter(1, route);
 		return q.getResultList();
 	}
+
+	@Override
+	public void keurRitGoed(int ritId) {
+		  Rit r = em.find(Rit.class, ritId);
+		  
+		  System.out.println("HALLO HIER");
+		  r.setGoedgekeurd(true);
+		  em.persist(r);
+	}
+
+	@Override
+	public void keurRitAf(int ritId) {
+		  Rit r = em.getReference(Rit.class, ritId);
+		  
+		  System.out.println(r.getId()+" "+ritId);
+		  r.setGoedgekeurd(false);
+		  em.persist(r);
+	}
 }

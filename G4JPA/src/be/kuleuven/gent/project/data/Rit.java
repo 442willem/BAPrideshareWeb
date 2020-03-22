@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+
+import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 

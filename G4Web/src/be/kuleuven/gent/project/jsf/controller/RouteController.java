@@ -154,4 +154,17 @@ public class RouteController implements Serializable {
 	public String filterRoutes() {
 		return "index.faces?faces-redirect=true";
 	}
+	public String keurRitGoed(int ritId) {
+		ritEJB.keurRitGoed(ritId);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.renderResponse();
+		return "viewPassengers.faces?faces-redirect=true&route="+route.getId();
+	}
+	public String keurRitAf(int ritId) {
+		System.out.println("routecontroller"+ritId);
+		ritEJB.keurRitAf(ritId);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.renderResponse();
+		return "viewPassengers.faces?faces-redirect=true&route="+route.getId();
+	}
 }
