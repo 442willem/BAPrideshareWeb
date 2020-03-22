@@ -25,11 +25,13 @@ public class Rit implements Serializable {
 	
 	@Column(name="beginpunt", nullable=false)
 	private String beginpunt;
-	
 
 	@Column(name="betaald", nullable=false)
 	private boolean betaald;
 	
+	@Column(name="goedgekeurd", nullable=false)
+	private boolean goedgekeurd;
+
 	@Column(name="aantal_personen", nullable=false)
 	private int aantalPersonen;
 	
@@ -73,6 +75,14 @@ public class Rit implements Serializable {
 
 	public void setBetaald(boolean betaald) {
 		this.betaald = betaald;
+	}
+	
+	public boolean isGoedgekeurd() {
+		return goedgekeurd;
+	}
+
+	public void setGoedgekeurd(boolean goedgekeurd) {
+		this.goedgekeurd = goedgekeurd;
 	}
 
 	public int getAantalPersonen() {
