@@ -74,7 +74,7 @@
 					<br />
 					<button onclick="document.getElementById('pleaseGodWork').value">Check
 						me 2</button>
-					<button onclick="DistanceCalc(), markerMap()">Check me</button>
+					<button onclick="DistanceCalc(), initMap();">Check me</button>
 					<div align='center'>
 						<h:form method="post" id="requestform">
 							<h:commandButton value="Verstuur verzoek" class="btn btn-primary"
@@ -103,9 +103,43 @@
         directionsRenderer.setMap(map);
         
 		
-      
+          markerMap();
+          
           calculateAndDisplayRoute(directionsService, directionsRenderer);
           PlaceAutocompleteSearch();
+          
+          
+          
+          function markerMap(){
+      		var geocoder = new google.maps.Geocoder;
+      		geocoder.geocode( { 'address': document.getElementById('pleaseGodWork').value}, function(results, status) {
+      			console.log("test");
+      				if (status == 'OK') {
+      					console.log(results[0].geometry.location);
+      					var latlng = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()};
+      					console.log(latlng);
+      			  		 var marker = new google.maps.Marker({
+      						    map: map,
+      						    position: latlng
+      			    		});
+      			  		 console.log("Hier zou em geset worden");
+      			  		 marker.setMap(map);
+      			  		 console.log("geset?");
+      			  		 
+      			  		bounds  = new google.maps.LatLngBounds();
+      		          loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+      		          bounds.extend(loc);
+      		          map.fitBounds(bounds);
+      		        map.panToBounds(bounds);
+      		          console.log("re-zoom");
+      			  		 
+      			    } else {
+      	       alert('Geocode was not successful for the following reason: ' + status);
+      				}
+      		});
+      	}
+          
+          
       }
 	  function DistanceCalc(){
 		  var originA = "#{routeController.route.beginpunt}";
@@ -232,25 +266,7 @@
 
 	}
 	
-	function markerMap(){
-		var geocoder = new google.maps.Geocoder;
-		geocoder.geocode( { 'address': document.getElementById('pleaseGodWork').value}, function(results, status) {
-			console.log("test");
-				if (status == 'OK') {
-					console.log(results[0].geometry.location);
-					var latlng = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()};
-					console.log(latlng);
-			  		 var marker = new google.maps.Marker({
-						    map: document.getElementById('map').value,
-						    position: latlng
-			    		});
-			  		 marker.setMap(document.getElementById('map').value);
-			  		 
-			    } else {
-	       alert('Geocode was not successful for the following reason: ' + status);
-				}
-		});
-	}
+	
 </script>
 
 </h:body>
