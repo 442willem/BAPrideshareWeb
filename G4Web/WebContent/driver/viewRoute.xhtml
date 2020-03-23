@@ -74,7 +74,7 @@
 					<br />
 					<button onclick="document.getElementById('pleaseGodWork').value">Check
 						me 2</button>
-					<button onclick="DistanceCalc(); markerMap()">Check me</button>
+					<button onclick="DistanceCalc(), markerMap()">Check me</button>
 					<div align='center'>
 						<h:form method="post" id="requestform">
 							<h:commandButton value="Verstuur verzoek" class="btn btn-primary"
@@ -96,11 +96,12 @@
       function initMap() {
         var directionsService = new google.maps.DirectionsService;
         var directionsRenderer = new google.maps.DirectionsRenderer;
-        var map = new google.maps.Map(document.getElementById('map'), {
+        let map = new google.maps.Map(document.getElementById('map'), {
           zoom: 6,
           center: {lat: 51.051410, lng: 3.726115}
         });
         directionsRenderer.setMap(map);
+        
 		
       
           calculateAndDisplayRoute(directionsService, directionsRenderer);
@@ -226,19 +227,25 @@
 			console.log(place);
 
 			document.getElementById('pleaseGodWork').value = place.formatted_address;
-
+			
 		}
 
 	}
 	
 	function markerMap(){
-		 var geocoder = new google.maps.Geocoder;
+		var geocoder = new google.maps.Geocoder;
 		geocoder.geocode( { 'address': document.getElementById('pleaseGodWork').value}, function(results, status) {
+			console.log("test");
 				if (status == 'OK') {
-			   var marker = new google.maps.Marker({
-					    map: map,
-					    position: results[0].geometry.location
-			    	});
+					console.log(results[0].geometry.location);
+					var latlng = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()};
+					console.log(latlng);
+			  		 var marker = new google.maps.Marker({
+						    map: document.getElementById('map').value,
+						    position: latlng
+			    		});
+			  		 marker.setMap(document.getElementById('map').value);
+			  		 
 			    } else {
 	       alert('Geocode was not successful for the following reason: ' + status);
 				}
