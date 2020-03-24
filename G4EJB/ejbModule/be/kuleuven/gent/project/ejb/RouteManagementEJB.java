@@ -1,6 +1,8 @@
 package be.kuleuven.gent.project.ejb;
 
 import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.List;
 
@@ -63,27 +65,62 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
     @Override
     public void filterRoutes() {}
     
-    @Override
+	@Override
     public List<Route> findRoutes(String beginpunt,String eindpunt, Timestamp vertrektijd, Timestamp eindtijd){
 		Query q;	
 		
 		if(vertrektijd!=null) {
-			if(eindtijd!=null)q=em.createQuery("SELECT r FROM Route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2 AND (TIMESTAMPDIFF(HOUR,r.vertrektijd,vertrektijd)<=1) AND (TIMESTAMPDIFF(HOUR,r.eindtijd,eindtijd)<=1)");
-			else q=em.createQuery("SELECT r FROM Route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2 AND (TIMESTAMPDIFF(HOUR,r.vertrektijd,vertrektijd)<=1)");
+			if(eindtijd!=null) {
+				q=em.createQuery("SELECT r FROM Route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2 AND r.eindtijd <=?3 AND r.eindtijd >=?4 AND r.vertrektijd <=?5 and r.vertrektijd >=?6");
+				
+				LocalDateTime eindtijd1=eindtijd.toLocalDateTime();
+				LocalDateTime eindtijd2=eindtijd.toLocalDateTime();
+				eindtijd2.minusHours(1);
+				eindtijd1.plusHours(1);
+				q.setParameter(3, Timestamp.valueOf(eindtijd1));
+				q.setParameter(4, Timestamp.valueOf(eindtijd2) );
+				
+				LocalDateTime vertrektijd1=vertrektijd.toLocalDateTime();
+				LocalDateTime vertrektijd2=vertrektijd.toLocalDateTime();
+				vertrektijd1.plusHours(1);
+				vertrektijd2.minusHours(1);
+				q.setParameter(5, Timestamp.valueOf(vertrektijd1));
+				q.setParameter(6, Timestamp.valueOf(vertrektijd2) );
+			}
+			else {
+				q=em.createQuery("SELECT r FROM Route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2 AND r.vertrektijd <=?3 AND r.vertrektijd >=?4");
+				LocalDateTime vertrektijd1=vertrektijd.toLocalDateTime();
+				LocalDateTime vertrektijd2=vertrektijd.toLocalDateTime();
+				vertrektijd1.plusHours(1);
+				vertrektijd2.minusHours(1);
+				q.setParameter(3, Timestamp.valueOf(vertrektijd1));
+				q.setParameter(4, Timestamp.valueOf(vertrektijd2) );
+			}
 		}
 		else {
-			if(eindtijd!=null)q=em.createQuery("SELECT r FROM Route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2 AND (TIMESTAMPDIFF(HOUR,r.eindtijd,eindtijd)<=1)");
+			if(eindtijd!=null) {
+				q=em.createQuery("SELECT r FROM Route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2 AND r.eindtijd <=?3 AND r.eindtijd >=?4");
+				
+				LocalDateTime eindtijd1=eindtijd.toLocalDateTime();
+				LocalDateTime eindtijd2=eindtijd.toLocalDateTime();
+				eindtijd2.minusHours(1);
+				eindtijd1.plusHours(1);
+				q.setParameter(3, Timestamp.valueOf(eindtijd1));
+				q.setParameter(4, Timestamp.valueOf(eindtijd2) );
+				
+				}
 			else q=em.createQuery("SELECT r FROM Route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2");	
 		}
-
-		if(beginpunt!=null&&!beginpunt.isEmpty()) {
+		
+		if(beginpunt!=null && !beginpunt.isEmpty()) {
 			q.setParameter(1,beginpunt);
 		}else q.setParameter(1, "%");
 		
-		if(eindpunt!=null&&!eindpunt.isEmpty()) {
+		if(eindpunt!=null && !eindpunt.isEmpty()) {
 			q.setParameter(2, eindpunt);
 		}else q.setParameter(2, "%");
 		
+		if(eindtijd==null && vertrektijd==null)q=em.createQuery("SELECT r FROM Route r");
 		return q.getResultList();
     }
 	@Override
