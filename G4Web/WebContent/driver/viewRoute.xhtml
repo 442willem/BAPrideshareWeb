@@ -72,8 +72,6 @@
 						<h:inputHidden id="pleaseGodWork" value="text" />
 					</div>
 					<br />
-					<button onclick="document.getElementById('pleaseGodWork').value">Check
-						me 2</button>
 					<button onclick="DistanceCalc(), initMap();">Check me</button>
 					<div align='center'>
 						<h:form method="post" id="requestform">
@@ -113,18 +111,17 @@
           function markerMap(){
       		var geocoder = new google.maps.Geocoder;
       		geocoder.geocode( { 'address': document.getElementById('pleaseGodWork').value}, function(results, status) {
-      			console.log("test");
+      			
       				if (status == 'OK') {
-      					console.log(results[0].geometry.location);
       					var latlng = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()};
       					console.log(latlng);
       			  		 var marker = new google.maps.Marker({
       						    map: map,
       						    position: latlng
       			    		});
-      			  		 console.log("Hier zou em geset worden");
+      			  		 
       			  		 marker.setMap(map);
-      			  		 console.log("geset?");
+      			  		 
       			  		 
       			  		bounds  = new google.maps.LatLngBounds();
       		          loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
@@ -192,6 +189,19 @@
 				totalDuration = resultAT + resultTD;
 				console.log("Totale tijd in sec voor de route met omweg: "
 						+ totalDuration);
+				var totDinmin = Math.ceil(totalDuration/60);
+				console.log("In minuten: " + totDinmin);
+				var DateTimeBegin = new Date("#{routeController.route.vertrektijd}");
+				console.log("timestamp Begintijd");
+				console.log(DateTimeBegin);
+				var DateTimeEind = new Date("#{routeController.route.eindtijd}");
+				console.log("timestamp aankomsttijd");
+				console.log(DateTimeEind);
+				var newDateobj = new Date(DateTimeBegin.getTime() + totDinmin*60000);
+				console.log("Begintijd + minuten met omweg");
+				console.log(newDateobj);
+				var test = new Boolean("newDateobj.getTime() &lt; DateTimeEind.getTime()");
+				console.log(test);
 			}
 		});
 
