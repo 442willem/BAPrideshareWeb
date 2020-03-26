@@ -2,6 +2,8 @@ package be.kuleuven.gent.project.jsf.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -31,20 +33,39 @@ public class BerichtController implements Serializable {
 	@EJB
 	private UserManagementEJBLocal userEJB;
 	
-	private Profiel zender = new Profiel();
-	private Profiel ontvanger = new Profiel();
+	@EJB
+	private BerichtManagementEJBLocal berichtEJB;
 	
-	public Profiel getZender() {
-		return zender;
+	private Bericht bericht;
+	
+	@PostConstruct
+	public void init() {
+		bericht = new Bericht();
+		bericht.setOntvanger(new Profiel());
+		bericht.setZender(profielEJB.getProfiel());
 	}
-	public void setZender(Profiel zender) {
-		this.zender = zender;
-	}
+	
 	public Profiel getOntvanger() {
-		return ontvanger;
+		return bericht.getOntvanger();
 	}
 	public void setOntvanger(Profiel ontvanger) {
-		this.ontvanger = ontvanger;
+		this.bericht.setOntvanger(ontvanger);
 	}	
+	public Bericht getBericht() {
+		return bericht;
+	}
+	public void setBericht(Bericht bericht) {
+		this.bericht = bericht;
+	}
+	public List<Bericht> getConversation(){
+		return berichtEJB.getConversation(profielEJB.getProfiel().getId(), bericht.getOntvanger().getId());
+	}
+	public String sendBericht() {
+		Date date = new Date();
+		bericht.setTimestamp(new Timestamp(date.getTime()));
+		bericht.setZender(profielEJB.getProfiel());
+		berichtEJB.createBericht(bericht);
+		return "viewConversation.faces?faces-redirect=true&amp;ontvanger="+bericht.getOntvanger().getId();
+	}
 	
 }

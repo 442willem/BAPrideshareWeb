@@ -16,16 +16,46 @@
 	<title><ui:insert name="title">Route view</ui:insert></title>
 	<meta name="viewport" content="initial-scale=1.0" />
 	<meta charset="utf-8" />
-	
+
 
 	<f:metadata>
-		<f:viewParam name="zender" value="#{routeController.route.id}" />
-		<f:viewAction action="#{routeController.findRoute}" />
+		<f:viewParam name="ontvanger"
+			value="#{berichtController.bericht.ontvanger.id}" />
 	</f:metadata>
 </h:head>
 
 <h:body>
-
-
+	<div id="convo">
+		<h:dataTable id="berichtentabel"
+			value="#{berichtController.getConversation()}" var="bericht">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Tijdstip" />
+				</f:facet>
+				<h:outputText value="#{bericht.tijdstipToString()}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Zender" />
+				</f:facet>
+				<h:outputText value="#{bericht.zender.voornaam}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="" />
+				</f:facet>
+				<h:outputText value="#{bericht.content}" />
+			</h:column>
+		</h:dataTable>
+		<h:form>
+			<h:inputText class="form-control" id="nieuwBericht"
+				value="#{berichtController.bericht.content}" required="true">
+			</h:inputText>
+			<h:commandButton
+				style="text-decoration:none; padding:5px; width:115px;"
+				value="submit" action="#{berichtController.sendBericht()}"
+				id="sendBericht" class="btn btn-primary pull-right" />
+		</h:form>
+	</div>
 </h:body>
 </html>

@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 @Entity
 @Table(name="bericht")
@@ -22,8 +23,11 @@ public class Bericht {
 	@Column(name="content", nullable=false)
 	private String content;
 	
-	@JoinColumn(name="chatId", nullable=false)
-	private Chat chat;
+	@JoinColumn(name="zenderId", nullable=false)
+	private Profiel zender;
+
+	@JoinColumn(name="ontvangerId", nullable=false)
+	private Profiel ontvanger;
 	
 	@Column(name="timestamp", nullable=false)
 	private Timestamp timestamp;
@@ -43,13 +47,21 @@ public class Bericht {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-	public Chat getChat() {
-		return chat;
+	
+	public Profiel getZender() {
+		return zender;
 	}
 
-	public void setChat(Chat chat) {
-		this.chat = chat;
+	public void setZender(Profiel zender) {
+		this.zender = zender;
+	}
+
+	public Profiel getOntvanger() {
+		return ontvanger;
+	}
+
+	public void setOntvanger(Profiel ontvanger) {
+		this.ontvanger = ontvanger;
 	}
 
 	public Timestamp getTimestamp() {
@@ -58,6 +70,10 @@ public class Bericht {
 
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
+	}
+	
+	public String tijdstipToString() {
+		return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(timestamp);
 	}
 	
 }
