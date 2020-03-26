@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import be.kuleuven.gent.project.data.Bericht;
+import be.kuleuven.gent.project.data.Profiel;
 import be.kuleuven.gent.project.utils.*;
 
 /**
@@ -48,6 +49,20 @@ public class BerichtManagementEJB implements BerichtManagementEJBLocal {
 			
 		Collections.sort(convo,new ConversationSortByTime());
 		return convo;
+	}
+	@Override
+	public List<Profiel> getConversations(int zenderID) {
+		Query q = em.createQuery("SELECT b FROM Bericht b where b.zender.id=?1 OR b.ontvanger.id=?1");
+		q.setParameter(1, zenderID);
+		
+		List<Bericht> berichten=new ArrayList<Bericht>();
+		berichten.addAll(q.getResultList());
+		List<Profiel> profielen=new ArrayList<Profiel>();
+		
+		for(Bericht b : berichten) {
+			if(!profielen.contains(b.getOntvanger()))profielen.add(b.getOntvanger());
+		}
+		return profielen;
 	}
 
 }

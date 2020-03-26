@@ -22,6 +22,9 @@
 <h:form method="post" id="loginForm">
 <h:commandButton style="text-decoration:none; padding:5px; width:100px; float:right;" value ="Logout" action="#{profielController.logout()}" class="btn btn-primary pull-right" id="activateP" />
 </h:form>
+<h:form method="post" id="myConversations">
+	<h:commandButton style="text-decoration:none; padding:5px; width:120px; float:center;" value ="My Conversations" action="#{userController.goToMyConversations()}" class="btn btn-primary pull-right" id="Berichtnav" />
+</h:form>
 <h:form method="post" id="myRoutes">
 	<h:commandButton style="text-decoration:none; padding:5px; width:120px; float:center;" value ="My Routes" action="#{userController.goToMyRoutes()}" class="btn btn-primary pull-right" id="Routenav2" />
 </h:form>

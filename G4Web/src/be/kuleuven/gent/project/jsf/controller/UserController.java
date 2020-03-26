@@ -48,6 +48,9 @@ public class UserController implements Serializable{
 	public String goToMyRoutes() {
 		return "myRoutes.faces?faces-redirect=true";
 	}
+	public String goToMyConversations() {
+		return "myConversations.faces?faces-redirect=true";
+	}
 	public String goToIndexD() {
 		return "indexD.faces?faces-redirect=true&login=1";
 	}

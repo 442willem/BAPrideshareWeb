@@ -1,20 +1,13 @@
 package be.kuleuven.gent.project.jsf.controller;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.ejb.SessionContext;
-import javax.ejb.Stateless;
-import javax.faces.bean.*;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -59,6 +52,9 @@ public class BerichtController implements Serializable {
 	}
 	public List<Bericht> getConversation(){
 		return berichtEJB.getConversation(profielEJB.getProfiel().getId(), bericht.getOntvanger().getId());
+	}
+	public List<Profiel> getConversations(){
+		return berichtEJB.getConversations(profielEJB.getProfiel().getId());
 	}
 	public String sendBericht() {
 		Date date = new Date();
