@@ -88,4 +88,11 @@ public class RitManagementEJB implements RitManagementEJBLocal {
 		  r.setGoedgekeurd(false);
 		  em.persist(r);
 	}
+
+    @Override
+    public List<Route> findPassagierRit(int passagierID){
+    	Query q=em.createQuery("SELECT r FROM Rit r WHERE r.passagier.id=?1");
+    	q.setParameter(1, passagierID);
+    	return q.getResultList();
+    }
 }

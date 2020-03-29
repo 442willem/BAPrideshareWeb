@@ -9,6 +9,8 @@ import javax.inject.Named;
 
 import be.kuleuven.gent.project.*;
 import be.kuleuven.gent.project.data.Rit;
+import be.kuleuven.gent.project.data.Route;
+import be.kuleuven.gent.project.ejb.ProfielManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.RitManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.UserManagementEJBLocal;
 
@@ -22,6 +24,9 @@ public class RitController implements Serializable {
 	
 	@EJB
 	private UserManagementEJBLocal userEJB;
+	
+	@EJB
+	private ProfielManagementEJBLocal profielEJB;
 	
 	private Rit rit = new Rit();
 	
@@ -39,5 +44,8 @@ public class RitController implements Serializable {
 	}
 	public List<Rit> findAllRitten() {
 		return ritEJB.findAllRitten();
-	}	
+	}
+	public List<Route> findByPassagier(){		
+		return ritEJB.findPassagierRit(profielEJB.getProfiel().getId());
+	}
 }

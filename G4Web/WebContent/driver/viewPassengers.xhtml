@@ -43,6 +43,12 @@
 			value="#{routeController.findRitten()}" var="rit">
 			<h:column>
 				<f:facet name="header">
+					<h:outputText value="naam" />
+				</f:facet>
+				<h:outputText value="#{rit.passagier.voornaam}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
 					<h:outputText value="Ophaalpunt" />
 				</f:facet>
 				<h:outputText value="#{rit.beginpunt}" />

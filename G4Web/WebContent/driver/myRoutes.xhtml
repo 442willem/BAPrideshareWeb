@@ -8,46 +8,107 @@
 <h:head>
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<h:form method="post" id="homeform">
+		<h:commandButton value="Home" class="btn btn-primary pull-left"
+			action="#{userController.goToIndexD()}"
+			style="float: left;text-decoration:none; padding:5px;" />
+	</h:form>
 	<title><ui:insert name="title">Welcome To RideSharing</ui:insert>
 	</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 	<meta charset="utf-8" />
 </h:head>
 <h:body>
+	<div>
+		
+	
 	<script type="text/javascript"
-		src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-	<div id="routes">
-		<h:dataTable id="routentable" value="#{routeController.getRoutes()}"
-			var="route">
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="vertrektijd" />
-				</f:facet>
-				<h:outputText value="#{route.vertrektijdToString()}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="aankomsttijd" />
-				</f:facet>
-				<h:outputText value="#{route.eindtijdToString()}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText class="text-center" value="Route bekijken" />
-				</f:facet>
-				<a class='btn btn-info btn-xs'
-					href="viewRoute.faces?route=#{route.id}"><span
-					class="glyphicon glyphicon-edit"></span> Meer info</a>
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText class="text-center" value="Bekijk Passagiers" />
-				</f:facet>
-				<a class='btn btn-info btn-xs'
-					href="viewPassengers.faces?route=#{route.id}"><span
-					class="glyphicon glyphicon-edit"></span>Bekijk Passagiers</a>
-			</h:column>
-		</h:dataTable>
+			src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+		<div id="routes">
+			<h2>Mijn routes</h2>
+			<h:dataTable id="routentable"
+				value="#{routeController.findByBestuurder()}" var="route">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="vertrektijd" />
+					</f:facet>
+					<h:outputText value="#{route.vertrektijdToString()}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="aankomsttijd" />
+					</f:facet>
+					<h:outputText value="#{route.eindtijdToString()}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText class="text-center" value="Route bekijken" />
+					</f:facet>
+					<a class='btn btn-info btn-xs'
+						href="viewRoute.faces?route=#{route.id}"><span
+						class="glyphicon glyphicon-edit"></span> Meer info</a>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText class="text-center" value="Bekijk Passagiers" />
+					</f:facet>
+					<a class='btn btn-info btn-xs'
+						href="viewPassengers.faces?route=#{route.id}"><span
+						class="glyphicon glyphicon-edit"></span>Bekijk Passagiers</a>
+				</h:column>
+			</h:dataTable>
+		</div>
+
+		<div id="ritten">
+			<h2>Mijn ritten</h2>
+			<h:dataTable id="rittentable"
+				value="#{ritController.findByPassagier()}" var="rit">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="vertrektijd" />
+					</f:facet>
+					<h:outputText value="#{rit.vertrektijdToString()}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="prijs" />
+					</f:facet>
+					<h:outputText value="#{rit.prijs}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText class="text-center" value="Route bekijken" />
+					</f:facet>
+					<a class='btn btn-info btn-xs'
+						href="viewRoute.faces?route=#{rit.route.id}"><span
+						class="glyphicon glyphicon-edit"></span> Meer info</a>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText class="text-center" value="Profiel" />
+					</f:facet>
+					<a class='btn btn-info btn-xs'
+						href="viewProfiel.faces?profiel=#{rit.route.bestuurder.id}"><span
+						class="glyphicon glyphicon-edit"></span>Bekijk bestuurder</a>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText class="text-center" value="Aanvaard" />
+					</f:facet>
+					<h:panelGroup rendered="#{rit.goedgekeurd}">
+						<h:outputText value="&#10003;" />
+					</h:panelGroup>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText class="text-center" value="Betaald" />
+					</f:facet>
+					<h:panelGroup rendered="#{rit.betaald}">
+						<h:outputText value="&#10003;" />
+					</h:panelGroup>
+				</h:column>
+			</h:dataTable>
+		</div>
 	</div>
 </h:body>
 </html>
