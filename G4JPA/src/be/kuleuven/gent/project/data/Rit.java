@@ -8,10 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity
 @Table(name="Rit")
@@ -45,6 +47,10 @@ public class Rit implements Serializable {
 	
 	@JoinColumn(name="routeId", nullable=false)
 	private Route route;
+	
+	@Transient
+	private Date vertrektijdDate;
+	
 	
 	public int getId() {
 		return id;
@@ -105,6 +111,18 @@ public class Rit implements Serializable {
 	public void setVertrektijd(Timestamp vertrektijd) {
 		this.vertrektijd = vertrektijd;
 	}
+	public void setVertrektijd(Date vertrektijd) {
+		this.vertrektijd = new Timestamp(vertrektijd.getTime());
+	}
+	
+	public Date getVertrektijdDate() {
+		return vertrektijdDate;
+	}
+	
+	public void setVertrektijdDate(Date vertrektijdDate) {
+		this.vertrektijdDate = vertrektijdDate;
+		this.vertrektijd= new Timestamp(vertrektijdDate.getTime());
+	}
 
 	public Profiel getPassagier() {
 		return passagier;
@@ -127,6 +145,15 @@ public class Rit implements Serializable {
 	public Rit(Profiel passagier, Route route) {
 		this.passagier=passagier;
 		this.route=route;
+	}
+	public Rit(Timestamp vertrektijd,Profiel passagier, Route route ) {
+		this.passagier=passagier;
+		this.route=route;
+		this.vertrektijd= vertrektijd;
+		this.aantalPersonen = 1;
+		this.prijs = 1;
+		this.goedgekeurd=false;
+		this.betaald = false;
 	}
 	
 	public Rit(int aantalPersonen,int prijs, Timestamp vertrektijd, String beginpunt, Profiel passagier,Route route) {
