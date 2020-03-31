@@ -75,9 +75,9 @@
 					<button onclick="DistanceCalc(), initMap();">Check me</button>
 					<div align='center'>
 						<h:form method="post" id="requestform">
-							<h:commandButton value="Verstuur verzoek" class="btn btn-primary"
+							<h:commandButton  id="Verzoek" value="Verstuur verzoek" class="btn btn-primary"
 								action="#{routeController.requestRit(routeController.route.id)}"
-								style="margin: 0 auto;text-decoration:none; padding:5px;" />
+								style="margin: 0 auto;text-decoration:none; padding:5px; display:none" />
 						</h:form>
 					</div>
 				</div>
@@ -239,6 +239,12 @@
 				console.log(newDateobj);
 				var test = dates.compare(DateTimeEind,newDateobj);
 				console.log(test);
+				if(test == 1){
+					document.getElementById('requestform:Verzoek').style.display= 'inline';
+				} else {
+					document.getElementById('requestform:Verzoek').style.display= 'none';
+				}
+				
 			}
 		});
 
