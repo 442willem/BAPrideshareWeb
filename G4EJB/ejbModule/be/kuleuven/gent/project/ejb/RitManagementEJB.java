@@ -27,6 +27,10 @@ public class RitManagementEJB implements RitManagementEJBLocal {
 	private UserManagementEJBLocal userEJB;
 	@Resource
 	private SessionContext ctx;	
+	
+	@EJB
+	private RouteManagementEJBLocal routeEJB;
+	
     /**
      * Default constructor. 
      */
@@ -95,4 +99,13 @@ public class RitManagementEJB implements RitManagementEJBLocal {
     	q.setParameter(1, passagierID);
     	return q.getResultList();
     }
+    
+    @Override
+	public void boekIn(Rit r, Profiel passagier, int routeId){
+		
+		Route route = routeEJB.findRoute(routeId);
+		r.setPassagier(passagier);
+		r.setRoute(route);
+		em.persist(r);	
+	}
 }

@@ -69,14 +69,16 @@
 					<div align='center'>
 						<h:outputLabel value="Vertrek Adres: " />
 						<input required="required" id="vertrekAdress" type="text" />
-						<h:inputHidden id="pleaseGodWork" value="text" />
+						
 					</div>
 					<br />
 					<button onclick="DistanceCalc(), initMap();">Check me</button>
 					<div align='center'>
 						<h:form method="post" id="requestform">
+						<h:inputHidden id="pleaseGodWork" value="#{ritController.rit.beginpunt}" />
+						<h:inputHidden id ="VertrekTijd" value="#{ritController.rit.vertrektijd}" />
 							<h:commandButton  id="Verzoek" value="Verstuur verzoek" class="btn btn-primary"
-								action="#{routeController.requestRit(routeController.route.id)}"
+								action="#{ritController.requestRit(routeController.route.id)}"
 								style="margin: 0 auto;text-decoration:none; padding:5px; display:none" />
 						</h:form>
 					</div>
@@ -110,7 +112,7 @@
           
           function markerMap(){
       		var geocoder = new google.maps.Geocoder;
-      		geocoder.geocode( { 'address': document.getElementById('pleaseGodWork').value}, function(results, status) {
+      		geocoder.geocode( { 'address': document.getElementById('requestform:pleaseGodWork').value}, function(results, status) {
       			
       				if (status == 'OK') {
       					var latlng = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()};
@@ -178,7 +180,7 @@
 				}
 		  var originA = "#{routeController.route.beginpunt}";
 		  var destA = "#{routeController.route.eindpunt}";
-		  var destT = document.getElementById('pleaseGodWork').value;
+		  var destT = document.getElementById('requestform:pleaseGodWork').value;
 		  var originT = destT;
 		 
 		  var destinationIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&amp;chld=D|FF0000|000000';
@@ -240,7 +242,10 @@
 				var test = dates.compare(DateTimeEind,newDateobj);
 				console.log(test);
 				if(test == 1){
+					var VertrekP = new Date(DateTimeBegin.getTime() + (Math.ceil(resultAT/60))*60000);
+					console.log(VertrekP);
 					document.getElementById('requestform:Verzoek').style.display= 'inline';
+					document.getElementById('requestform:VertrekTijd').value = VertrekP;
 				} else {
 					document.getElementById('requestform:Verzoek').style.display= 'none';
 				}
@@ -306,14 +311,14 @@
 		var place = autocomplete.getPlace();
 		autocomplete.addListener('place_changed', fillInAddress);
 		/*   document.getElementById('viewRoute:pleaseGodWork').value = place.formatted_address; */
-		console.log(document.getElementById('viewRoute:pleaseGodWork').value)
+		console.log(document.getElementById('requestform:pleaseGodWork').value)
 
 		function fillInAddress() {
 			// Get the place details from the autocomplete object.
 			var place = autocomplete.getPlace();
 			console.log(place);
 
-			document.getElementById('pleaseGodWork').value = place.formatted_address;
+			document.getElementById('requestform:pleaseGodWork').value = place.formatted_address;
 			
 		}
 
