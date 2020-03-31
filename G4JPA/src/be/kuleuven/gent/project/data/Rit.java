@@ -129,12 +129,14 @@ public class Rit implements Serializable {
 		this.route=route;
 	}
 	
-	public Rit(int aantalPersonen,int prijs, Timestamp vertrektijd, Timestamp eindtijd, Profiel passagier,Route route) {
+	public Rit(int aantalPersonen,int prijs, Timestamp vertrektijd, String beginpunt, Profiel passagier,Route route) {
 		this.aantalPersonen=aantalPersonen;
 		this.vertrektijd=vertrektijd;
 		this.passagier=passagier;
 		this.route=route;
 		betaald=false;
+		goedgekeurd = false;
+		this.beginpunt = beginpunt;
 		this.prijs=prijs;
 	}
 	
