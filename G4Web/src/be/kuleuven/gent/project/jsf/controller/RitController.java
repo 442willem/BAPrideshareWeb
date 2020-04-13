@@ -59,6 +59,9 @@ public class RitController implements Serializable {
 	public void setRit(Rit rit) {
 		this.rit = rit;
 	}
+	public void findRit() {
+		rit = ritEJB.findRit(rit.getId());
+	}
 	public int getAantalRitten() {
 		return ritEJB.getAantalRitten();
 	}
@@ -67,5 +70,8 @@ public class RitController implements Serializable {
 	}
 	public List<Route> findByPassagier(){		
 		return ritEJB.findPassagierRit(profielEJB.getProfiel().getId());
+	}
+	public void betaalRit() {
+		ritEJB.betaalRit(rit.getId());
 	}
 }

@@ -107,4 +107,16 @@ public class RitManagementEJB implements RitManagementEJBLocal {
 		r.setRoute(route);
 		em.persist(r);
 	}
+    
+	@Override
+	public void betaalRit(int id) {
+		Rit r = em.find(Rit.class, id);
+		r.setBetaald(true);
+		em.persist(r);	
+	}
+
+	@Override
+	public Rit findRit(int id) {
+		return em.find(Rit.class, id);
+	}
 }
