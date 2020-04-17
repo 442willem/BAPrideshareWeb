@@ -79,7 +79,7 @@
 						<h:inputHidden id="pleaseGodWork" value="#{ritController.rit.beginpunt}" />
 						<h:inputHidden id ="VertrekTijd" value="#{ritController.rit.vertrektijd}" />
 							<h:commandButton  id="Verzoek" value="Verstuur verzoek" class="btn btn-primary"
-								action="#{ritController.requestRit}"
+								action="#{ritController.requestRit()}" immediate="true"
 								style="margin: 0 auto;text-decoration:none; padding:5px; display:none"></h:commandButton>
 						</h:form>
 					</div>
@@ -315,7 +315,7 @@
 		var place = autocomplete.getPlace();
 		autocomplete.addListener('place_changed', fillInAddress);
 		/*   document.getElementById('viewRoute:pleaseGodWork').value = place.formatted_address; */
-		console.log(document.getElementById('requestform:pleaseGodWork').value)
+		console.log(document.getElementById('requestform:pleaseGodWork').value);
 
 		function fillInAddress() {
 			// Get the place details from the autocomplete object.
@@ -323,6 +323,7 @@
 			console.log(place);
 
 			document.getElementById('requestform:pleaseGodWork').value = place.formatted_address;
+			console.log(document.getElementById('requestform:pleaseGodWork').value);
 			
 		}
 
