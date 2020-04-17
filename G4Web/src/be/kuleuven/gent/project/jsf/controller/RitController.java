@@ -16,6 +16,7 @@ import be.kuleuven.gent.project.data.Route;
 import be.kuleuven.gent.project.ejb.ProfielManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.RitManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.RouteManagementEJBLocal;
+import be.kuleuven.gent.project.ejb.TussenstopManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.UserManagementEJBLocal;
 
 
@@ -35,7 +36,11 @@ public class RitController implements Serializable {
 	@EJB
 	private ProfielManagementEJBLocal profielEJB;
 	
+	@EJB
+	private TussenstopManagementEJBLocal tussenEJB;
+	
 	private Rit rit;
+	private int routeid;
 	
 	@PostConstruct
 	public void init() {
@@ -43,19 +48,30 @@ public class RitController implements Serializable {
 	}
 	
 	
-	public String requestRit(String routeid) {
+	public String requestRit() {
 		System.out.println(routeid);
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		facesContext.renderResponse();
-		int Rid= Integer.parseInt(routeid);
+
 		Profiel profielid = profielEJB.getProfiel();
-		ritEJB.boekIn(rit, profielid, Rid);
+		ritEJB.boekIn(rit, profielid, routeid);
 		return "indexD.faces?faces-redirect=true&login=1";
 	}
 	
 	public Rit getRit() {
 		return rit;
 	}
+	
+	public int getRouteid() {
+		return routeid;
+	}
+
+
+	public void setRouteid(int routeid) {
+		this.routeid = routeid;
+	}
+
+
 	public void setRit(Rit rit) {
 		this.rit = rit;
 	}
