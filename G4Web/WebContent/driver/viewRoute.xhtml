@@ -72,14 +72,14 @@
 						
 					</div>
 					<br />
-					<button onclick="DistanceCalc(), initMap(), id();">Check me</button>
+					<button onclick="DistanceCalc(), initMap();">Check me</button>
 					<div align='center'>
 						<h:form method="post" id="requestform">
 						<h:inputHidden id="idroute" value="#{ritController.routeid}" />
 						<h:inputHidden id="pleaseGodWork" value="#{ritController.rit.beginpunt}" />
 						<h:inputHidden id ="VertrekTijd" value="#{ritController.rit.vertrektijd}" />
 							<h:commandButton  id="Verzoek" value="Verstuur verzoek" class="btn btn-primary"
-								action="#{ritController.requestRit()}"
+								action="#{ritController.requestRit}"
 								style="margin: 0 auto;text-decoration:none; padding:5px; display:none"></h:commandButton>
 						</h:form>
 					</div>
@@ -94,10 +94,6 @@
 
 	<script>
 	
-	  function id(){
-		  document.getElementById('idroute').value= #{routeController.route.id};
-		  console.log(document.getElementById('idroute').value);
-	  }
 
       function initMap() {
         var directionsService = new google.maps.DirectionsService;
@@ -147,6 +143,8 @@
           
       }
 	  function DistanceCalc(){
+		  document.getElementById('requestform:idroute').value= #{routeController.route.id};
+		  console.log(document.getElementById('requestform:idroute').value);
 		  var dates = {
 				    convert:function(d) {
 				        // Converts the date in d to a date-object. The input can be:
