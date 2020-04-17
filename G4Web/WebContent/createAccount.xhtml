@@ -68,6 +68,12 @@
 										</h:inputText>
 										<h:message for="voornaam"></h:message>
 									</div>
+									<div class="form-group">
+										<h:outputLabel value="PayPal adres for payment " />
+										<h:inputText class="form-control" id="email"
+											value="#{profielController.profiel.paypalemail}" required="true">
+										</h:inputText>
+									</div>
 									<dir class="form-group">
 										<h:selectOneMenu value="#{profielController.profiel.group}">
 											<f:selectItem itemValue="Driver" itemLabel="Driver" />

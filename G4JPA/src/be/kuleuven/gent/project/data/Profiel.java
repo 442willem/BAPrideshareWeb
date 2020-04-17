@@ -39,6 +39,9 @@ public class Profiel implements Serializable {
 	@Column(name="password", nullable=false)
 	private String password;
 	
+	@Column(name="paypalemail", nullable=false)
+	private String paypalemail;
+
 	@Column(table="profiel_Group", name="idGroup", nullable =false)
 	private String group;
 	
@@ -104,6 +107,14 @@ public class Profiel implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getPaypalemail() {
+		return paypalemail;
+	}
+
+	public void setPaypalemail(String paypalemail) {
+		this.paypalemail = paypalemail;
 	}
 
 	public Profiel() {}
