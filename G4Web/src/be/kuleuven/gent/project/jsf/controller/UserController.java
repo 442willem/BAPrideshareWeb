@@ -52,6 +52,7 @@ public class UserController implements Serializable{
 		return "myConversations.faces?faces-redirect=true";
 	}
 	public String goToIndexD() {
+		System.out.println("joooow");
 		return "indexD.faces?faces-redirect=true&login=1";
 	}
 	

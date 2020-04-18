@@ -1,121 +1,183 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 
-  <title>
-    <ui:insert name="title">Welcome To RideSharing</ui:insert>
-  </title>
-</h:head> 
+	<title><ui:insert name="title">Welcome To RideSharing</ui:insert>
+	</title>
+	<style type="text/css">
+.routeTable {
+	border-collapse: collapse;
+}
 
-<h:body> 
+.routeTableHeader {
+	background: none repeat scroll 0 0 ;
+	padding: 2px;
+}
 
-<h:form method="post" id="homeform">
-  <h:commandButton value="Home" class="btn btn-primary pull-left" action="#{userController.goToIndexD()}" style="float: left;text-decoration:none; padding:5px;" />
-  </h:form>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-<h:form method="post" id="loginForm">
-<h:commandButton style="text-decoration:none; padding:5px; width:100px; float:right;" value ="Logout" action="#{profielController.logout()}" class="btn btn-primary pull-right" id="activateP" />
-</h:form>
-<h:form method="post" id="myConversations">
-	<h:commandButton style="text-decoration:none; padding:5px; width:120px; float:center;" value ="My Conversations" action="#{userController.goToMyConversations()}" class="btn btn-primary pull-right" id="Berichtnav" />
-</h:form>
-<h:form method="post" id="myRoutes">
-	<h:commandButton style="text-decoration:none; padding:5px; width:120px; float:center;" value ="My Routes" action="#{userController.goToMyRoutes()}" class="btn btn-primary pull-right" id="Routenav2" />
-</h:form>
-<script type="text/javascript">
-	jQuery(function() {topBar.show()});</script>          
-<p:notificationBar id="notbar" position="top" widgetVar="topBar" styleClass="top" rendered="#{param.login == 1}">
-    <h:outputText value="Welcome, you are now logged in! #{profielController.getHuidigProfiel().login}" rendered="#{param.login == 1}" style="color:#FFCC00;font-size:15px;" />
-</p:notificationBar>
+.routeTableColumn {
+	background: none repeat scroll 0 0;
+	padding: 2px;
+}
+</style>
+</h:head>
+
+<h:body>
+
+	<h:form method="post" id="homeform">
+		<h:commandButton value="Home" class="btn btn-primary pull-left"
+			action="#{userController.goToIndexD()}"
+			style="float: left;text-decoration:none; padding:5px;" />
+	</h:form>
+	<script type="text/javascript"
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+	<h:form method="post" id="loginForm">
+		<h:commandButton
+			style="text-decoration:none; padding:5px; width:100px; float:right;"
+			value="Logout" action="#{profielController.logout()}"
+			class="btn btn-primary pull-right" id="activateP" />
+	</h:form>
+	<h:form method="post" id="myConversations">
+		<h:commandButton
+			style="text-decoration:none; padding:5px; width:120px; float:center;"
+			value="My Conversations"
+			action="#{userController.goToMyConversations()}"
+			class="btn btn-primary pull-right" id="Berichtnav" />
+	</h:form>
+	<h:form method="post" id="myRoutes">
+		<h:commandButton
+			style="text-decoration:none; padding:5px; width:120px; float:center;"
+			value="My Routes" action="#{userController.goToMyRoutes()}"
+			class="btn btn-primary pull-right" id="Routenav2" />
+	</h:form>
+	<script type="text/javascript">
+		jQuery(function() {
+			topBar.show()
+		});
+	</script>
+	<p:notificationBar id="notbar" position="top" widgetVar="topBar"
+		styleClass="top" rendered="#{param.login == 1}">
+		<h:outputText
+			value="Welcome, you are now logged in! #{profielController.getHuidigProfiel().login}"
+			rendered="#{param.login == 1}" style="color:#FFCC00;font-size:15px;" />
+	</p:notificationBar>
 
 
 
-<div class="jumbotron jumbotron-sm">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-lg-12">
-            	
-                <h1 class="h1">
-                    Welcome to the new and improved Ridesharing platform, #{profielController.getHuidigProfiel().login}! <small></small></h1>
-                    
-            </div>
-        </div>
-    </div>
-</div>
-      
+	<div class="jumbotron jumbotron-sm">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-lg-12">
 
+					<h1 class="h1">
+						Welcome to the new and improved Ridesharing platform,
+						#{profielController.getHuidigProfiel().login}! <small></small>
+					</h1>
 
-            
-<h2 class="h2">Hier komt dus die tabel met de gegevens in de db</h2>
-<div class="filter">
-    <div class="rij">
-        <div class="col-md-8">
-            <div class="well well-sm">
-				<h:form method="post" id="createAccount">
-					<div class="row">
-						<div class="col-md-6">
-	              			 <div class="form-group">
-	              				<div class="form-group">
-		    					<h:outputLabel value="vertrekplaats"/>
-		  						<h:inputText class="form-control" id="vertrekpkaats" value="#{routeController.queryVertrek}">
-		  						</h:inputText>
-	  						</div></div>
-	  	           			<div class="form-group">
-	              				<div class="form-group">
-		    					<h:outputLabel value="aankomstplaats"/>
-		  						<h:inputText class="form-control" id="aankomstplaats" value="#{routeController.queryEinde}">
-		  						</h:inputText>
-	  						</div></div>
-	  						<div class="form-group">
-	              				<div class="form-group">
-		    					<h:outputLabel value="vertrektijd"/>
-		  						<h:inputText class="form-control" id="vertrektijd" value="#{routeController.queryVertrektijd}">
-		  						</h:inputText>
-	  						</div></div>
-	  						<div class="form-group">
-	              				<div class="form-group">
-		    					<h:outputLabel value="aankomsttijd"/>
-		  						<h:inputText class="form-control" id="aankomsttijd" value="#{routeController.queryEindetijd}">
-		  						</h:inputText>
-	  						</div></div>    						
-	  						<h:commandButton style="text-decoration:none; padding:5px; width:115px;" value = "ok"  action = "#{routeController.filterRoutes()}" id = "FilterProfiel" class="btn btn-primary pull-right"/>
-	  					</div>
-					</div>
-				</h:form>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<h:dataTable id ="routentable" value="#{routeController.getRoutes()}" var ="route" >
-	<h:column>
-		<f:facet name="header">
-			<h:outputText value="vertrektijd"/>
-		</f:facet>
-		<h:outputText value="#{route.vertrektijdToString()}"/>
-	</h:column>
-	<h:column>
-		<f:facet name="header">
-			<h:outputText value="aankomsttijd"/>
-		</f:facet>
-		<h:outputText value="#{route.eindtijdToString()}"/>
-	</h:column>
-	<h:column>
-				<f:facet name="header">
-					<h:outputText class="text-center" value="Route bekijken" />
-				</f:facet>
-				<a class='btn btn-info btn-xs' href="viewRoute.faces?route=#{route.id}"><span class="glyphicon glyphicon-edit"></span> Meer info</a>
-			</h:column>
-</h:dataTable>
-<h:form method="post" id="createRoute">
-	<h:commandButton style="text-decoration:none; padding:5px; width:120px; float:center;" value ="Create new route" action="#{userController.goToCreateRoute()}" class="btn btn-primary pull-right" id="RouteNav" />
-</h:form>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="well well-sm">
+					<h:form method="post" id="filterRoutes">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<p:outputLabel value="From:" />
+									<p:inputText class="form-control" id="queryvertrekplaats"
+										value="#{routeController.queryVertrek}">
+									</p:inputText>
+								</div>
+								<div class="form-group">
+									<p:outputLabel value="To:" />
+									<p:inputText class="form-control" id="queryaankomstplaats"
+										value="#{routeController.queryEinde}">
+									</p:inputText>
+								</div>
+								<div class="form-group">
+									<h:outputLabel value="Leaving Time (dd/mm/yyyy hh:mm): " />
+									<h:inputText id="vertrektijd" class="form-control"
+										value="#{routeController.queryVertrektijd}">
+										<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+									</h:inputText>
+								</div>
+								<div class="form-group">
+									<h:outputLabel value="Arrival Time (dd/mm/yyyy hh:mm): " />
+									<h:inputText id="aankomsttijd" class="form-control"
+										value="#{routeController.queryEindetijd}">
+										<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+									</h:inputText>
+								</div>
+								<div class="form-group">
+									<p:commandButton
+										style="text-decoration:none; padding:5px;"
+										value="Search Routes" id="filterRoute"
+										action="userController.goToIndex()"
+										class="btn btn-primary pull-right">
+									</p:commandButton>
+								</div>
+							</div>
+						</div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</div>
 
-</h:body> 
+	<div id="herlaad">
+		<h:dataTable id="routentable" value="#{routeController.getRoutes()}"
+			var="route" styleClass="routeTable" headerClass="routeTableHeader"
+			columnClasses="routeTableColumn">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value=" " />
+				</f:facet>
+				<h:link outcome="viewRoute.xhtml?route=#{route.id}"
+					value="#{route.getId()}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="From " />
+				</f:facet>
+				<h:outputText value="#{route.beginpunt} " />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="To " />
+				</f:facet>
+				<h:outputText value="#{route.eindpunt} " />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Leaves At " />
+				</f:facet>
+				<h:outputText value="#{route.vertrektijdToString()} " />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Arrives At " />
+				</f:facet>
+				<h:outputText value="#{route.eindtijdToString()} " />
+			</h:column>
+		</h:dataTable>
+		</div>
+		
+	<h:form method="post" id="createRoute">
+		<h:commandButton
+			style="text-decoration:none; padding:5px; width:120px; float:center;"
+			value="Create new route" action="#{userController.goToCreateRoute()}"
+			class="btn btn-primary pull-right" id="RouteNav" />
+	</h:form>
+
+</h:body>
 
 </html>

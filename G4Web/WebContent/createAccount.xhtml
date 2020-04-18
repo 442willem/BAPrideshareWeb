@@ -74,12 +74,6 @@
 											value="#{profielController.profiel.paypalemail}" required="true">
 										</h:inputText>
 									</div>
-									<dir class="form-group">
-										<h:selectOneMenu value="#{profielController.profiel.group}">
-											<f:selectItem itemValue="Driver" itemLabel="Driver" />
-											<f:selectItem itemValue="Passenger" itemLabel="Passenger" />
-										</h:selectOneMenu>
-									</dir> 
 									<h:commandButton
 										style="text-decoration:none; padding:5px; width:115px;"
 										value="submit" action="#{profielController.createProfiel()}"

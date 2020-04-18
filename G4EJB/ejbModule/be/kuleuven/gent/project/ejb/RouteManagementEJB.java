@@ -112,15 +112,13 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 		}
 		
 		if(beginpunt!=null && !beginpunt.isEmpty()) {
-			q.setParameter(1,beginpunt);
+			q.setParameter(1,"%"+beginpunt+"%");
 		}else q.setParameter(1, "%");
 		
 		if(eindpunt!=null && !eindpunt.isEmpty()) {
-			q.setParameter(2, eindpunt);
+			q.setParameter(2, "%"+eindpunt+"%");
 		}else q.setParameter(2, "%");
-		
-		if(eindtijd==null && vertrektijd==null)q=em.createQuery("SELECT r FROM Route r");
-		return q.getResultList();
+				return q.getResultList();
     }
 	@Override
 	public int getAantalRoutes() {

@@ -12,6 +12,21 @@
 	</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 	<meta charset="utf-8" />
+	<style type="text/css">
+.routeTable {
+	border-collapse: collapse;
+}
+
+.routeTableHeader {
+	background: none repeat scroll 0 0 ;
+	padding: 2px;
+}
+
+.routeTableColumn {
+	background: none repeat scroll 0 0;
+	padding: 2px;
+}
+</style>
 </h:head>
 <h:body>
 	<script type="text/javascript"
@@ -45,7 +60,6 @@
 			</div>
 		</div>
 	</div>
-	<h2 class="h2">Hier komt dus die tabel met de gegevens in de db</h2>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8">
@@ -54,35 +68,36 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<p:outputLabel value="vertrekplaats" />
+									<p:outputLabel value="From:" />
 									<p:inputText class="form-control" id="queryvertrekplaats"
 										value="#{routeController.queryVertrek}">
 									</p:inputText>
 								</div>
 								<div class="form-group">
-									<p:outputLabel value="aankomstplaats" />
+									<p:outputLabel value="To:" />
 									<p:inputText class="form-control" id="queryaankomstplaats"
 										value="#{routeController.queryEinde}">
 									</p:inputText>
 								</div>
 								<div class="form-group">
-									<h:outputLabel value="Vertrektijd (dd-mm-yyyy hh:mm): " />
+									<h:outputLabel value="Leaving Time (dd/mm/yyyy hh:mm): " />
 									<h:inputText id="vertrektijd" class="form-control"
 										value="#{routeController.queryVertrektijd}">
-										<f:convertDateTime pattern="dd-MM-yyyy HH:mm" />
+										<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
 									</h:inputText>
 								</div>
 								<div class="form-group">
-									<h:outputLabel value="Aankomsttijd (dd-mm-yyyy hh:mm): " />
+									<h:outputLabel value="Arrival Time (dd/mm/yyyy hh:mm): " />
 									<h:inputText id="aankomsttijd" class="form-control"
 										value="#{routeController.queryEindetijd}">
-										<f:convertDateTime pattern="dd-MM-yyyy HH:mm" />
+										<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
 									</h:inputText>
-								</div> 
+								</div>
 								<div class="form-group">
 									<p:commandButton
-										style="text-decoration:none; padding:5px; width:115px;"
-										value="zoeken" id="filterRoute" action="userController.goToIndex()"
+										style="text-decoration:none; padding:5px;"
+										value="Search Routes" id="filterRoute"
+										action="userController.goToIndex()"
 										class="btn btn-primary pull-right">
 									</p:commandButton>
 								</div>
@@ -95,40 +110,39 @@
 	</div>
 
 	<div id="herlaad">
-		<h:outputLabel id="vertrek"
-			value="vertrek: #{routeController.queryVertrek} aankomst: #{routeController.queryEinde} vertrektijd: #{routeController.queryVertrektijd} aankomsttijd: #{routeController.queryEindetijd}" />
 		<h:dataTable id="routentable" value="#{routeController.getRoutes()}"
-			var="route">
+			var="route" styleClass="routeTable" headerClass="routeTableHeader"
+			columnClasses="routeTableColumn">
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Id" />
+					<h:outputText value=" " />
 				</f:facet>
-				<h:link outcome="viewRoute.xhtml?id=#{rit.id}"
+				<h:link outcome="viewRoute.xhtml?id=#{route.id}"
 					value="#{route.getId()}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="beginpunt" />
+					<h:outputText value="From " />
 				</f:facet>
-				<h:outputText value="#{route.beginpunt}" />
+				<h:outputText value="#{route.beginpunt} " />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="eindpunt" />
+					<h:outputText value="To " />
 				</f:facet>
-				<h:outputText value="#{route.eindpunt}" />
+				<h:outputText value="#{route.eindpunt} " />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="vertrektijd" />
+					<h:outputText value="Leaves At " />
 				</f:facet>
-				<h:outputText value="#{route.vertrektijdToString()}" />
+				<h:outputText value="#{route.vertrektijdToString()} " />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="aankomsttijd" />
+					<h:outputText value="Arrives At " />
 				</f:facet>
-				<h:outputText value="#{route.eindtijdToString()}" />
+				<h:outputText value="#{route.eindtijdToString()} " />
 			</h:column>
 		</h:dataTable>
 	</div>

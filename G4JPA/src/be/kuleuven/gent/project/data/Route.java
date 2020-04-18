@@ -66,7 +66,7 @@ public class Route {
 		this.eindtijd = new Timestamp(eindtijd.getTime());
 	}
 	public String eindtijdToString() {
-		return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(eindtijd);
+		return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(eindtijd);
 	}
 
 	public Timestamp getVertrektijd() {
@@ -80,7 +80,7 @@ public class Route {
 		this.vertrektijd = new Timestamp(vertrektijd.getTime());
 	}
 	public String vertrektijdToString() {	
-		return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(vertrektijd);
+		return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(vertrektijd);
 	}
 
 	public Profiel getBestuurder() {
