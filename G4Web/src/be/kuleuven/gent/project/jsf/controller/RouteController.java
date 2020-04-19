@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,6 +41,9 @@ public class RouteController implements Serializable {
 	private String queryEinde;
 	private Date queryVertrektijd;
 	private Date queryEindetijd;
+	
+	private List<Route> alleRoutes;
+	private int indexRoutes;
 	
 	@PostConstruct
 	public void init(){
@@ -137,14 +141,42 @@ public class RouteController implements Serializable {
 	public int getAantalRoutes() {
 		return routeEJB.getAantalRoutes();
 	}
+	
+	//alle routes worden opgeslaan en de initiele index wordt geplaatst op 0
 	public List<Route> getRoutes() {
 		Timestamp eindetijd=null, vertrektijd;
 		if(queryEindetijd!=null)eindetijd = new Timestamp(queryEindetijd.getTime());
 		else eindetijd=null;
 		if(queryVertrektijd!=null)vertrektijd=new Timestamp(queryVertrektijd.getTime());
 		else vertrektijd=null;
-		return routeEJB.findRoutes(queryVertrek,queryEinde,vertrektijd,eindetijd);
+		alleRoutes = routeEJB.findRoutes(queryVertrek,queryEinde,vertrektijd,eindetijd);
+		indexRoutes=0;
+		
+		//methode om de 5 volgende routes terug te krijgen
+		return volgendeRoutes();
 	}
+	
+	//methode om 5 routes te tonen als er op de knop BACK word gedrukt
+	public List<Route> volgendeRoutes(){
+		List<Route> routes= new ArrayList<Route>();
+		for(int i=0;i<5;i++) {
+			routes.add(alleRoutes.get(indexRoutes));
+			indexRoutes++;
+		}
+		return routes;
+	}
+
+	// methode om 5 routes te tonen als er op de knop BACK wordt gedrukt
+	public List<Route> vorigeRoutes(){
+		List<Route> routes= new ArrayList<Route>();
+		indexRoutes-=5;
+		for(int i=0;i<5;i++) {
+			routes.add(alleRoutes.get(indexRoutes));
+			indexRoutes++;
+		}
+		return routes;
+	}
+	
 	public List<Route> findAllRoutes() {
 		return routeEJB.findAllRoutes();
 	}
