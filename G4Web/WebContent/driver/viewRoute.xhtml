@@ -69,18 +69,28 @@
 					<div align='center'>
 						<h:outputLabel value="Vertrek Adres: " />
 						<input required="required" id="vertrekAdress" type="text" />
-						
+
 					</div>
 					<br />
 					<button onclick="DistanceCalc(), initMap();">Check me</button>
 					<div align='center'>
 						<h:form method="post" id="requestform">
-						<h:inputHidden id="idroute" value="#{ritController.routeid}" />
-						<h:inputHidden id="pleaseGodWork" value="#{ritController.rit.beginpunt}" />
-						<h:inputHidden id ="VertrekTijd" value="#{ritController.rit.vertrektijd}" />
-							<h:commandButton  id="Verzoek" value="Verstuur verzoek" class="btn btn-primary"
-								action="#{ritController.requestRit()}" immediate="true"
-								style="margin: 0 auto;text-decoration:none; padding:5px; display:none"></h:commandButton>
+							<div class="form-group">
+								<h:inputText id="idroute" value="#{ritController.routeid}" />
+							</div>
+							<div class="form-group">
+								<h:inputText id="VertrekTijd" value="#{ritController.rit.vertrektijd}" />
+							</div>
+							<div class="form-group">
+								<h:inputText id="pleaseGodWork"	value="#{ritController.rit.beginpunt}" />
+							</div>
+							<div class="form-group">
+								<h:commandButton id="Verzoek" value="Verstuur verzoek"
+									class="btn btn-primary" action="#{ritController.requestRit()}"
+									immediate="true"
+									style="margin: 0 auto;text-decoration:none; padding:5px; display:none" >
+									</h:commandButton>
+							</div>
 						</h:form>
 					</div>
 				</div>

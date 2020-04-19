@@ -1,6 +1,7 @@
 package be.kuleuven.gent.project.jsf.controller;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -23,7 +24,7 @@ import be.kuleuven.gent.project.ejb.UserManagementEJBLocal;
 @Named
 @ViewScoped
 public class RitController implements Serializable {
-	private static final long serialVersionUID = -3737221385235612830L;
+	private static final long serialVersionUID = -3737221385235612803L;
 	@EJB
 	private RitManagementEJBLocal ritEJB;
 	
@@ -36,8 +37,6 @@ public class RitController implements Serializable {
 	@EJB
 	private ProfielManagementEJBLocal profielEJB;
 	
-	@EJB
-	private TussenstopManagementEJBLocal tussenEJB;
 	
 	private Rit rit;
 	private int routeid;
@@ -45,6 +44,8 @@ public class RitController implements Serializable {
 	@PostConstruct
 	public void init() {
 		rit = new Rit();
+		rit.setBeginpunt("iets");
+		rit.setVertrektijdDate(new Date("Tue Mar 24 2020 14:12:00 GMT+0100 (Midden-Europese standaardtijd"));
 	}
 	
 	
@@ -70,7 +71,43 @@ public class RitController implements Serializable {
 	public void setRouteid(int routeid) {
 		this.routeid = routeid;
 	}
+	public RouteManagementEJBLocal getRouteEJB() {
+		return routeEJB;
+	}
+	
+	public RitManagementEJBLocal getRitEJB() {
+		return ritEJB;
+	}
 
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	public void setRitEJB(RitManagementEJBLocal ritEJB) {
+		this.ritEJB = ritEJB;
+	}
+
+
+	public void setRouteEJB(RouteManagementEJBLocal routeEJB) {
+		this.routeEJB = routeEJB;
+	}
+
+	public UserManagementEJBLocal getUserEJB() {
+		return userEJB;
+	}
+
+	public void setUserEJB(UserManagementEJBLocal userEJB) {
+		this.userEJB = userEJB;
+	}
+	public ProfielManagementEJBLocal getProfielEJB() {
+		return profielEJB;
+	}
+
+	public void setProfielEJB(ProfielManagementEJBLocal profielEJB) {
+		this.profielEJB = profielEJB;
+	}
 
 	public void setRit(Rit rit) {
 		this.rit = rit;
