@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-@Table(name="Rit")
+@Table(name="rit")
 public class Rit implements Serializable {
 	
 	@Id
