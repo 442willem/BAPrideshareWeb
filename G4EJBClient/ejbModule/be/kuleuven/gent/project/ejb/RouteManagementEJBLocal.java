@@ -12,7 +12,7 @@ import be.kuleuven.gent.project.data.Route;
 public interface RouteManagementEJBLocal {
 	public void createRoute(Route r);
 	public List<Route> findAllRoutes();
-	public int getAantalRoutes();
+	public long getAantalRoutes();
 	public Route findRoute(int id);
 	public void filterRoutes();
 	public List<Route> findRoutes(String beginpunt, String eindpunt, Timestamp begintijd, Timestamp eindtijd);

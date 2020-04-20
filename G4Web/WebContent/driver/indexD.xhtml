@@ -26,6 +26,9 @@
 	padding: 2px;
 }
 </style>
+<f:metadata>
+		<f:viewParam name="index" value="#{routeController.indexRoutes}" />
+	</f:metadata>
 </h:head>
 
 <h:body>
@@ -121,7 +124,7 @@
 									<p:commandButton
 										style="text-decoration:none; padding:5px;"
 										value="Search Routes" id="filterRoute"
-										action="userController.goToIndex()"
+										action="userController.goToIndexD()"
 										class="btn btn-primary pull-right">
 									</p:commandButton>
 								</div>
@@ -141,7 +144,7 @@
 				<f:facet name="header">
 					<h:outputText value=" " />
 				</f:facet>
-				<h:link outcome="viewRoute.xhtml?route=#{route.id}"
+				<h:link outcome="viewRoute.xhtml?id=#{route.id}"
 					value="#{route.getId()}" />
 			</h:column>
 			<h:column>
@@ -169,8 +172,19 @@
 				<h:outputText value="#{route.eindtijdToString()} " />
 			</h:column>
 		</h:dataTable>
-		</div>
-		
+		<h:form>
+			<p:commandButton style="text-decoration:none; padding:5px;"
+				value="Next" id="volgendeRoutes"
+				action="#{routeController.volgendeRoutesD()}"
+				class="btn btn-primary pull-right">
+			</p:commandButton>
+			<p:commandButton style="text-decoration:none; padding:5px;"
+				value="Back" id="vorigeRoutes"
+				action="#{routeController.vorigeRoutesD()}"
+				class="btn btn-primary pull-right">
+			</p:commandButton>
+		</h:form>
+	</div>
 	<h:form method="post" id="createRoute">
 		<h:commandButton
 			style="text-decoration:none; padding:5px; width:120px; float:center;"

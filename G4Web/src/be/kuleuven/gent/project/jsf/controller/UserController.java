@@ -22,7 +22,7 @@ public class UserController implements Serializable{
 	private UserManagementEJBLocal userEJB;
 	
 	public String activateDriver(){
-		return "driver/indexD.faces?faces-redirect=true&login=1";
+		return "driver/indexD.faces?faces-redirect=true&login=1&index=0";
 	}
 	
 	public String activatePassenger(){
@@ -31,7 +31,7 @@ public class UserController implements Serializable{
 	}
 	
 	public String goToLogin() {
-		return "driver/indexD.faces?faces-redirect=true&login=1";
+		return "driver/indexD.faces?faces-redirect=true&login=1&index=0";
 	}
 	public String goToCreateAccount() {
 		return "createAccount.faces?faces-redirect=true";
@@ -40,7 +40,7 @@ public class UserController implements Serializable{
 		return "test.faces?faces-redirect=true";
 	}
 	public String goToIndex() {
-		return "index.faces?faces-redirect=true";
+		return "index.faces?faces-redirect=true&index=0";
 	}
 	public String goToCreateRoute() {
 		return "createRoute.faces?faces-redirect=true";
@@ -53,7 +53,7 @@ public class UserController implements Serializable{
 	}
 	public String goToIndexD() {
 		System.out.println("joooow");
-		return "indexD.faces?faces-redirect=true&login=1";
+		return "indexD.faces?faces-redirect=true&login=1&index=0";
 	}
 	
 

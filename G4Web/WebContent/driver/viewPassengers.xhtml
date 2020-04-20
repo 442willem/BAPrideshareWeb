@@ -43,43 +43,43 @@
 			value="#{routeController.findRitten()}" var="rit">
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="naam" />
+					<h:outputText value="Name " />
 				</f:facet>
 				<h:outputText value="#{rit.passagier.voornaam}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Ophaalpunt" />
+					<h:outputText value="Pickup At " />
 				</f:facet>
 				<h:outputText value="#{rit.beginpunt}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Aantal Passagiers" />
+					<h:outputText value="Number of places" />
 				</f:facet>
 				<h:outputText value="#{rit.aantalPersonen}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText class="text-center" value="Profiel" />
+					<h:outputText class="text-center" value=" " />
 				</f:facet>
 				<a class='btn btn-info btn-xs'
 					href="viewProfiel.faces?profiel=#{rit.passagier.id}"><span
-					class="glyphicon glyphicon-edit"></span>Profiel</a>
+					class="glyphicon glyphicon-edit"></span>See Profile</a>
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText class="text-center" value="Aanvaarden" />
+					<h:outputText class="text-center" value=" " />
 				</f:facet>
 				<h:panelGroup rendered="#{!rit.goedgekeurd}">
 					<h:form>
-						<h:commandButton value="Aanvaarden"
+						<h:commandButton value="Accept"
 							action="#{routeController.keurRitGoed(rit.id)}"></h:commandButton>
 					</h:form>
 				</h:panelGroup>
 				<h:panelGroup rendered="#{rit.goedgekeurd}">
 					<h:form>
-						<h:commandButton value="Afkeuren"
+						<h:commandButton value="Deny"
 							action="#{routeController.keurRitAf(rit.id)}"></h:commandButton>
 					</h:form>
 				</h:panelGroup>
@@ -90,7 +90,7 @@
 				</f:facet>
 				<a class='btn btn-info btn-xs'
 					href="viewConversation.faces?ontvanger=#{rit.passagier.id}"><span
-					class="glyphicon glyphicon-edit"></span>Bericht sturen</a>
+					class="glyphicon glyphicon-edit"></span>Send Message</a>
 			</h:column>
 		</h:dataTable>
 	</div>

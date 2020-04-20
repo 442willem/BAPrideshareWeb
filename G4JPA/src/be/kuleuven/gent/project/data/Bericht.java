@@ -73,7 +73,7 @@ public class Bericht {
 	}
 	
 	public String tijdstipToString() {
-		return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(timestamp);
+		return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(timestamp);
 	}
 	
 }

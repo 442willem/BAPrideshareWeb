@@ -25,26 +25,25 @@ public class RouteController implements Serializable {
 	private static final long serialVersionUID = -3737221385235612830L;
 	@EJB
 	private RouteManagementEJBLocal routeEJB;
-	
+
 	@EJB
 	private UserManagementEJBLocal userEJB;
-	
+
 	@EJB
 	private ProfielManagementEJBLocal profielEJB;
-	
+
 	@EJB
 	private RitManagementEJBLocal ritEJB;
 
 	private Route route;
-	
+
 	private String queryVertrek;
 	private String queryEinde;
 	private Date queryVertrektijd;
 	private Date queryEindetijd;
-	
-	private List<Route> alleRoutes;
+
 	private int indexRoutes;
-	
+
 	@PostConstruct
 	public void init(){
 		route = new Route();
@@ -52,11 +51,12 @@ public class RouteController implements Serializable {
 		queryEinde=null;
 		queryVertrektijd=null;
 		queryEindetijd=null;
+		System.out.println("Postconstruct");
 	}
-	
+
 	public String createRoute() {
 		routeEJB.createRoute(route);
-		return "indexD.faces?faces-redirect=true&login=1";
+		return "indexD.faces?faces-redirect=true&login=1&index=0";
 	}
 	public String requestRit(String routeid) {
 		System.out.println(routeid);
@@ -65,7 +65,7 @@ public class RouteController implements Serializable {
 		int Rid= Integer.parseInt(routeid);
 		Profiel profielid = profielEJB.getProfiel();
 		routeEJB.boekIn(profielid, Rid);
-		return "indexD.faces?faces-redirect=true&login=1";
+		return "indexD.faces?faces-redirect=true&login=1&index=0";
 	}
 	public void findRoute() {
 		route = routeEJB.findRoute(route.getId());
@@ -80,6 +80,14 @@ public class RouteController implements Serializable {
 		this.route = route;
 	}
 	
+	public int getIndexRoutes() {
+		return indexRoutes;
+	}
+
+	public void setIndexRoutes(int indexRoutes) {
+		this.indexRoutes = indexRoutes;
+	}
+
 	public RouteManagementEJBLocal getRouteEJB() {
 		return routeEJB;
 	}
@@ -138,45 +146,62 @@ public class RouteController implements Serializable {
 		return serialVersionUID;
 	}
 
-	public int getAantalRoutes() {
+	public long getAantalRoutes() {
 		return routeEJB.getAantalRoutes();
 	}
-	
+
 	//alle routes worden opgeslaan en de initiele index wordt geplaatst op 0
 	public List<Route> getRoutes() {
+		List<Route> routes=new ArrayList<Route>();
 		Timestamp eindetijd=null, vertrektijd;
 		if(queryEindetijd!=null)eindetijd = new Timestamp(queryEindetijd.getTime());
 		else eindetijd=null;
 		if(queryVertrektijd!=null)vertrektijd=new Timestamp(queryVertrektijd.getTime());
 		else vertrektijd=null;
-		alleRoutes = routeEJB.findRoutes(queryVertrek,queryEinde,vertrektijd,eindetijd);
-		indexRoutes=0;
+		List <Route> alleRoutes = routeEJB.findRoutes(queryVertrek,queryEinde,vertrektijd,eindetijd);
 		
-		//methode om de 5 volgende routes terug te krijgen
-		return volgendeRoutes();
-	}
-	
-	//methode om 5 routes te tonen als er op de knop BACK word gedrukt
-	public List<Route> volgendeRoutes(){
-		List<Route> routes= new ArrayList<Route>();
+		System.out.println("index:"+indexRoutes);
 		for(int i=0;i<5;i++) {
-			routes.add(alleRoutes.get(indexRoutes));
-			indexRoutes++;
+			if(indexRoutes+i<alleRoutes.size()) {
+				routes.add(alleRoutes.get(indexRoutes+i));
+			}
 		}
+		//methode om de 5 volgende routes terug te krijgen
 		return routes;
 	}
 
-	// methode om 5 routes te tonen als er op de knop BACK wordt gedrukt
-	public List<Route> vorigeRoutes(){
-		List<Route> routes= new ArrayList<Route>();
-		indexRoutes-=5;
-		for(int i=0;i<5;i++) {
-			routes.add(alleRoutes.get(indexRoutes));
-			indexRoutes++;
-		}
-		return routes;
+	//methode om 5 routes te tonen als er op de knop NEXT word gedrukt
+	public String volgendeRoutes(){
+		indexRoutes+=5;
+		System.out.println("count:"+routeEJB.getAantalRoutes()+"index:"+indexRoutes);
+		if(indexRoutes>routeEJB.getAantalRoutes())indexRoutes-=5;
+		System.out.println("volgende: "+indexRoutes);
+		return "index.faces?faces-redirect=true&index="+indexRoutes;
 	}
-	
+
+	// methode om 5 routes te tonen als er op de knop BACK wordt gedrukt
+	public String vorigeRoutes(){
+		indexRoutes-=5;
+		if(indexRoutes<0)indexRoutes=0;
+		System.out.println("vorige: "+indexRoutes);
+		return "index.faces?faces-redirect=true&index="+indexRoutes;
+	}
+	//methode om 5 routes te tonen als er op de knop NEXT word gedrukt
+	public String volgendeRoutesD(){
+		indexRoutes+=5;
+		if(indexRoutes>routeEJB.getAantalRoutes())indexRoutes-=5;
+		System.out.println("volgende: "+indexRoutes);
+		return "indexD.faces?faces-redirect=true&login=1&index="+indexRoutes;
+	}
+
+	// methode om 5 routes te tonen als er op de knop BACK wordt gedrukt
+	public String vorigeRoutesD(){
+		indexRoutes-=5;
+		if(indexRoutes<0)indexRoutes=0;
+		System.out.println("vorige: "+indexRoutes);
+		return "indexD.faces?faces-redirect=true&login=1&index="+indexRoutes;
+	}
+
 	public List<Route> findAllRoutes() {
 		return routeEJB.findAllRoutes();
 	}
@@ -184,7 +209,7 @@ public class RouteController implements Serializable {
 		return routeEJB.findBestuurderRoute(profielEJB.getProfiel().getId());
 	}
 	public String filterRoutes() {
-		return "index.faces?faces-redirect=true";
+		return "index.faces?faces-redirect=true&index="+indexRoutes;
 	}
 	public String keurRitGoed(int ritId) {
 		ritEJB.keurRitGoed(ritId);

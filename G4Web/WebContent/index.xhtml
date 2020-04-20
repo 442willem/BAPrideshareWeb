@@ -18,7 +18,7 @@
 }
 
 .routeTableHeader {
-	background: none repeat scroll 0 0 ;
+	background: none repeat scroll 0 0;
 	padding: 2px;
 }
 
@@ -27,6 +27,9 @@
 	padding: 2px;
 }
 </style>
+	<f:metadata>
+		<f:viewParam name="index" value="#{routeController.indexRoutes}" />
+	</f:metadata>
 </h:head>
 <h:body>
 	<script type="text/javascript"
@@ -94,8 +97,7 @@
 									</h:inputText>
 								</div>
 								<div class="form-group">
-									<p:commandButton
-										style="text-decoration:none; padding:5px;"
+									<p:commandButton style="text-decoration:none; padding:5px;"
 										value="Search Routes" id="filterRoute"
 										action="userController.goToIndex()"
 										class="btn btn-primary pull-right">
@@ -145,6 +147,18 @@
 				<h:outputText value="#{route.eindtijdToString()} " />
 			</h:column>
 		</h:dataTable>
+		<h:form>
+			<p:commandButton style="text-decoration:none; padding:5px;"
+				value="Next" id="volgendeRoutes"
+				action="#{routeController.volgendeRoutes()}"
+				class="btn btn-primary pull-right">
+			</p:commandButton>
+			<p:commandButton style="text-decoration:none; padding:5px;"
+				value="Back" id="vorigeRoutes"
+				action="#{routeController.vorigeRoutes()}"
+				class="btn btn-primary pull-right">
+			</p:commandButton>
+		</h:form>
 	</div>
 </h:body>
 </html>

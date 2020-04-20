@@ -121,9 +121,9 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 				return q.getResultList();
     }
 	@Override
-	public int getAantalRoutes() {
-		Query q = em.createQuery("SELECT COUNT(*) FROM Rit");
-		return q.getFirstResult();
+	public long getAantalRoutes() {
+		Query q = em.createQuery("SELECT COUNT(r.beginpunt) FROM Route r");
+		return  (long) q.getSingleResult();
 	}
 	@Override
 	public void boekIn(Profiel passagier, int routeId){

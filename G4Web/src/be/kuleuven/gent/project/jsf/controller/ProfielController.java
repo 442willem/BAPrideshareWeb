@@ -38,7 +38,7 @@ public class ProfielController implements Serializable {
 		facesContext.renderResponse();
 		profiel.setGroup("Driver");
 		profielEJB.createProfiel(profiel);
-		return "index.faces?faces-redirect=true";
+		return "index.faces?faces-redirect=true&index=0";	
 	}
 	
 	public Profiel getProfiel() {

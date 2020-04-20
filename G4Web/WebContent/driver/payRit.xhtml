@@ -32,7 +32,7 @@
 				<div class="col-sm-12 col-lg-12">
 
 					<h1 class="h1">
-						Rit naar: #{ritController.rit.route.eindpunt} <small></small>
+						Drive to: #{ritController.rit.route.eindpunt} <small></small>
 					</h1>
 				</div>
 			</div>
@@ -45,7 +45,7 @@
 		onclick="#{ritController.betaalRit()}" style="display: none;" />
 	<h:commandButton id="hidden-button2"
 		onclick="#{userController.goToMyRoutes()}" style="display: none;" />
-	<p>Prijs voor deze rit: $#{ritController.rit.prijs}</p>
+	<p>Price for this drive: $#{ritController.rit.prijs}</p>
 
 	<div id="paypal-button-container"></div>
 

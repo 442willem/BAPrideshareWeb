@@ -25,75 +25,75 @@
 	<script type="text/javascript"
 			src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 		<div id="routes">
-			<h2>Mijn routes</h2>
+			<h2>Upcoming Drives</h2>
 			<h:dataTable id="routentable"
 				value="#{routeController.findByBestuurder()}" var="route">
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="vertrektijd" />
+						<h:outputText value="Departure " />
 					</f:facet>
 					<h:outputText value="#{route.vertrektijdToString()}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="aankomsttijd" />
+						<h:outputText value="Arrival " />
 					</f:facet>
 					<h:outputText value="#{route.eindtijdToString()}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText class="text-center" value="Route bekijken" />
+						<h:outputText class="text-center" value=" " />
 					</f:facet>
 					<a class='btn btn-info btn-xs'
 						href="viewRoute.faces?route=#{route.id}"><span
-						class="glyphicon glyphicon-edit"></span> Meer info</a>
+						class="glyphicon glyphicon-edit"></span>View Route</a>
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText class="text-center" value="Bekijk Passagiers" />
+						<h:outputText class="text-center" value=" " />
 					</f:facet>
 					<a class='btn btn-info btn-xs'
 						href="viewPassengers.faces?route=#{route.id}"><span
-						class="glyphicon glyphicon-edit"></span>Bekijk Passagiers</a>
+						class="glyphicon glyphicon-edit"></span>Passengers</a>
 				</h:column>
 			</h:dataTable>
 		</div>
 
 		<div id="ritten">
-			<h2>Mijn ritten</h2>
+			<h2>Upcoming Bookings</h2>
 			<h:dataTable id="rittentable"
 				value="#{ritController.findByPassagier()}" var="rit">
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="vertrektijd" />
+						<h:outputText value="Departure " />
 					</f:facet>
 					<h:outputText value="#{rit.vertrektijdToString()}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="prijs" />
+						<h:outputText value="Price" />
 					</f:facet>
-					<h:outputText value="#{rit.prijs}" />
+					<h:outputText value="$#{rit.prijs}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText class="text-center" value="Route bekijken" />
+						<h:outputText class="text-center" value=" " />
 					</f:facet>
 					<a class='btn btn-info btn-xs'
 						href="viewRoute.faces?route=#{rit.route.id}"><span
-						class="glyphicon glyphicon-edit"></span> Meer info</a>
+						class="glyphicon glyphicon-edit"></span>View Route</a>
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText class="text-center" value="Profiel" />
+						<h:outputText class="text-center" value=" " />
 					</f:facet>
 					<a class='btn btn-info btn-xs'
 						href="viewProfiel.faces?profiel=#{rit.route.bestuurder.id}"><span
-						class="glyphicon glyphicon-edit"></span>Bekijk bestuurder</a>
+						class="glyphicon glyphicon-edit"></span>My Driver</a>
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText class="text-center" value="Aanvaard" />
+						<h:outputText class="text-center" value="Accepted " />
 					</f:facet>
 					<h:panelGroup rendered="#{rit.goedgekeurd}">
 						<h:outputText value="&#10003;" />
@@ -101,7 +101,7 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText class="text-center" value="Betaald" />
+						<h:outputText class="text-center" value="Payed " />
 					</f:facet>
 					<h:panelGroup rendered="#{rit.betaald}">
 						<h:outputText value="&#10003;" />
@@ -109,7 +109,7 @@
 					<h:panelGroup rendered="#{!rit.betaald}">
 						<a class='btn btn-info btn-xs'
 						href="payRit.faces?rit=#{rit.id}"><span
-						class="glyphicon glyphicon-edit"></span>Nu Betalen</a>
+						class="glyphicon glyphicon-edit"></span>Pay now</a>
 					</h:panelGroup>					
 				</h:column>
 			</h:dataTable>

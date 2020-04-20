@@ -30,13 +30,13 @@
 			value="#{berichtController.getConversation()}" var="bericht">
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Tijdstip" />
+					<h:outputText value="Time: " />
 				</f:facet>
 				<h:outputText value="#{bericht.tijdstipToString()}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Zender" />
+					<h:outputText value="From: " />
 				</f:facet>
 				<h:outputText value="#{bericht.zender.voornaam}" />
 			</h:column>
@@ -53,7 +53,7 @@
 			</h:inputText>
 			<h:commandButton
 				style="text-decoration:none; padding:5px; width:115px;"
-				value="submit" action="#{berichtController.sendBericht()}"
+				value="Send" action="#{berichtController.sendBericht()}"
 				id="sendBericht" class="btn btn-primary pull-right" />
 		</h:form>
 	</div>
