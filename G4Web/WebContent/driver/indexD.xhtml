@@ -17,7 +17,7 @@
 }
 
 .routeTableHeader {
-	background: none repeat scroll 0 0 ;
+	background: none repeat scroll 0 0;
 	padding: 2px;
 }
 
@@ -26,7 +26,7 @@
 	padding: 2px;
 }
 </style>
-<f:metadata>
+	<f:metadata>
 		<f:viewParam name="index" value="#{routeController.indexRoutes}" />
 	</f:metadata>
 </h:head>
@@ -121,8 +121,7 @@
 									</h:inputText>
 								</div>
 								<div class="form-group">
-									<p:commandButton
-										style="text-decoration:none; padding:5px;"
+									<p:commandButton style="text-decoration:none; padding:5px;"
 										value="Search Routes" id="filterRoute"
 										action="userController.goToIndexD()"
 										class="btn btn-primary pull-right">
@@ -140,13 +139,6 @@
 		<h:dataTable id="routentable" value="#{routeController.getRoutes()}"
 			var="route" styleClass="routeTable" headerClass="routeTableHeader"
 			columnClasses="routeTableColumn">
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value=" " />
-				</f:facet>
-				<h:link outcome="viewRoute.xhtml?id=#{route.id}"
-					value="#{route.getId()}" />
-			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="From " />
@@ -170,6 +162,14 @@
 					<h:outputText value="Arrives At " />
 				</f:facet>
 				<h:outputText value="#{route.eindtijdToString()} " />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText class="text-center" value=" " />
+				</f:facet>
+				<a class='btn btn-info btn-xs'
+					href="viewRoute.faces?route=#{route.id}"><span
+					class="glyphicon glyphicon-edit"></span>View Route</a>
 			</h:column>
 		</h:dataTable>
 		<h:form>

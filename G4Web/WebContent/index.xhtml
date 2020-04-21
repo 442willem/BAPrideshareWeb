@@ -117,13 +117,6 @@
 			columnClasses="routeTableColumn">
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value=" " />
-				</f:facet>
-				<h:link outcome="viewRoute.xhtml?id=#{route.id}"
-					value="#{route.getId()}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
 					<h:outputText value="From " />
 				</f:facet>
 				<h:outputText value="#{route.beginpunt} " />
