@@ -3,6 +3,7 @@ package be.kuleuven.gent.project.ejb;
 import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -71,7 +72,7 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 		
 		if(vertrektijd!=null) {
 			if(eindtijd!=null) {
-				q=em.createQuery("SELECT r FROM Route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2 AND r.eindtijd <=?3 AND r.eindtijd >=?4 AND r.vertrektijd <=?5 and r.vertrektijd >=?6");
+				q=em.createQuery("SELECT r FROM route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2 AND r.eindtijd <=?3 AND r.eindtijd >=?4 AND r.vertrektijd <=?5 and r.vertrektijd >=?6");
 				
 				LocalDateTime eindtijd1=eindtijd.toLocalDateTime().plusHours(2);
 				LocalDateTime eindtijd2=eindtijd.toLocalDateTime().minusHours(2);
@@ -131,5 +132,43 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 		Route route = findRoute(routeId);
 		Rit rit = new Rit(passagier,route);
 		em.persist(rit);	
+	}
+	
+	//geeft het beginpunt en eindpunt van de gegeven rit terug
+	@Override
+	public String[] zoekTijdelijkeTussenstops(int routeID,int ritID){
+		Query q;
+		String[] tussenstops= new String[2];
+		q= em.createQuery("SELECT r FROM rit r WHERE r.routeID = ?1 AND r.ritID= ?2 ");
+		q.setParameter(1, routeID);
+		q.setParameter(2, ritID);
+		Rit tijdelijkeRit = (Rit) q.getSingleResult();
+		
+		tussenstops[0]=tijdelijkeRit.getBeginpunt();
+		tussenstops[1]=tijdelijkeRit.getEindpunt();
+		
+		return tussenstops;	
+	}
+	
+	// geeft alle geaccepteerde tussenstoppen terug
+	@Override
+	public String[] zoekGeaccepteerdeTussenstops(int routeID){
+		Query q;
+		String[] tussenstops;
+		int index=0;
+		
+		q= em.createQuery("SELECT r FROM rit r WHERE r.routeID = ?1 AND r.goedgekeurd=1");
+		q.setParameter(1, routeID);
+		List<Rit> tijdelijkeRitten = q.getResultList();
+		tussenstops = new String[tijdelijkeRitten.size()*2];
+		
+		for (Rit r: tijdelijkeRitten) {
+			tussenstops[index]=r.getBeginpunt();
+			index++;
+			tussenstops[index]=r.getEindpunt();
+			index++;
+		}
+		
+		return tussenstops;	
 	}
 }

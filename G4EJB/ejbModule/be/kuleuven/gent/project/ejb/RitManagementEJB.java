@@ -119,4 +119,5 @@ public class RitManagementEJB implements RitManagementEJBLocal {
 	public Rit findRit(int id) {
 		return em.find(Rit.class, id);
 	}
+	
 }

@@ -42,6 +42,9 @@ public class Rit implements Serializable {
 	@Column(name="vertrektijd", nullable=false)	
 	private Timestamp vertrektijd;
 	
+	@Column(name="eindpunt", nullable=false)	
+	private String eindpunt;
+
 	@JoinColumn(name="passagierId", nullable=false)
 	private Profiel passagier;
 	
@@ -122,6 +125,15 @@ public class Rit implements Serializable {
 	public void setVertrektijdDate(Date vertrektijdDate) {
 		this.vertrektijdDate = vertrektijdDate;
 		this.vertrektijd= new Timestamp(vertrektijdDate.getTime());
+	}
+	
+
+	public String getEindpunt() {
+		return eindpunt;
+	}
+
+	public void setEindpunt(String eindtijd) {
+		this.eindpunt = eindtijd;
 	}
 
 	public Profiel getPassagier() {
