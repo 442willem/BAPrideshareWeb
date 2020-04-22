@@ -6,28 +6,22 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import be.kuleuven.gent.project.*;
 import be.kuleuven.gent.project.data.Profiel;
 import be.kuleuven.gent.project.data.Rit;
 import be.kuleuven.gent.project.data.Route;
 import be.kuleuven.gent.project.ejb.ProfielManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.RitManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.RouteManagementEJBLocal;
-import be.kuleuven.gent.project.ejb.TussenstopManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.UserManagementEJBLocal;
 
-
 @Named
-@RequestScoped
-public class RitController implements Serializable {
-
+@ViewScoped
+public class ViewRouteController implements Serializable {
 	/**
 	 * 
 	 */
@@ -47,26 +41,27 @@ public class RitController implements Serializable {
 	
 	
 	private Rit rit;
-	private int routeid;
+	private Route route;
+	
 	
 	@PostConstruct
 	public void init() {
 		rit = new Rit();
-		rit.setBeginpunt("iets");
-		rit.setVertrektijdDate(new Date("Tue Mar 24 2020 14:12:00 GMT+0100 (Midden-Europese standaardtijd"));
+		route = new Route();
 	}
 	
 	
-	public String requestRit(int routeid, String Bp, String Ep) {
+	public String requestRit(int routeid) {
 		System.out.println(routeid);
 		System.out.println("HIER");
-		System.out.println(Bp);
+		System.out.println(routeid + rit.getBeginpunt() + rit.getEindpunt());
+//		System.out.println(Bp);
 		System.out.println("MISS");
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		facesContext.renderResponse();
 		
-		rit.setBeginpunt(Bp);
-		rit.setEindpunt(Ep);
+//		rit.setBeginpunt(Bp);
+//		rit.setEindpunt(Ep);
 
 		Profiel profielid = profielEJB.getProfiel();
 		ritEJB.boekIn(rit, profielid, routeid);
@@ -77,14 +72,6 @@ public class RitController implements Serializable {
 		return rit;
 	}
 	
-	public int getRouteid() {
-		return routeid;
-	}
-
-
-	public void setRouteid(int routeid) {
-		this.routeid = routeid;
-	}
 	public RouteManagementEJBLocal getRouteEJB() {
 		return routeEJB;
 	}
@@ -126,19 +113,23 @@ public class RitController implements Serializable {
 	public void setRit(Rit rit) {
 		this.rit = rit;
 	}
-	public void findRit() {
-		rit = ritEJB.findRit(rit.getId());
+	public void findRoute() {
+		route = routeEJB.findRoute(route.getId());
 	}
-	public int getAantalRitten() {
-		return ritEJB.getAantalRitten();
+
+
+	public Route getRoute() {
+		return route;
 	}
-	public List<Rit> findAllRitten() {
-		return ritEJB.findAllRitten();
+
+
+	public void setRoute(Route route) {
+		this.route = route;
 	}
-	public List<Route> findByPassagier(){		
-		return ritEJB.findPassagierRit(profielEJB.getProfiel().getId());
+	public String goToIndexD() {
+		System.out.println("joooow");
+		return "indexD.faces?faces-redirect=true&login=1&index=0";
 	}
-	public void betaalRit() {
-		ritEJB.betaalRit(rit.getId());
-	}
+	
+
 }

@@ -104,6 +104,7 @@ public class RitManagementEJB implements RitManagementEJBLocal {
 	public void boekIn(Rit r, Profiel passagier, int routeId){
 		Route route = routeEJB.findRoute(routeId);
 		r.setPassagier(passagier);
+		r.setAantalPersonen(1);
 		r.setRoute(route);
 		em.persist(r);
 	}

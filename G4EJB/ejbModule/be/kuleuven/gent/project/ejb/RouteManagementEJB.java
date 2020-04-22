@@ -126,13 +126,13 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 		Query q = em.createQuery("SELECT COUNT(r.beginpunt) FROM Route r");
 		return  (long) q.getSingleResult();
 	}
-	@Override
-	public void boekIn(Profiel passagier, int routeId){
-		
-		Route route = findRoute(routeId);
-		Rit rit = new Rit(passagier,route);
-		em.persist(rit);	
-	}
+//	@Override
+//	public void boekIn(Profiel passagier, int routeId){
+//		
+//		Route route = findRoute(routeId);
+//		Rit rit = new Rit(passagier,route);
+//		em.persist(rit);	
+//	}
 	
 	//geeft het beginpunt en eindpunt van de gegeven rit terug
 	@Override

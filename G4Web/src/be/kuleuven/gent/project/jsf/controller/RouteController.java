@@ -36,6 +36,7 @@ public class RouteController implements Serializable {
 	private RitManagementEJBLocal ritEJB;
 
 	private Route route;
+	private Rit rit = new Rit();
 
 	private String queryVertrek;
 	private String queryEinde;
@@ -43,6 +44,7 @@ public class RouteController implements Serializable {
 	private Date queryEindetijd;
 
 	private int indexRoutes;
+
 
 	@PostConstruct
 	public void init(){
@@ -58,14 +60,38 @@ public class RouteController implements Serializable {
 		routeEJB.createRoute(route);
 		return "indexD.faces?faces-redirect=true&login=1&index=0";
 	}
-	public String requestRit(String routeid) {
+	
+	public RitManagementEJBLocal getRitEJB() {
+		return ritEJB;
+	}
+
+	public void setRitEJB(RitManagementEJBLocal ritEJB) {
+		this.ritEJB = ritEJB;
+	}
+
+
+	public Rit getRit() {
+		return rit;
+	}
+
+	public void setRit(Rit rit) {
+		this.rit = rit;
+	}
+
+	public String requestRit(int routeid) {
 		System.out.println(routeid);
+		System.out.println("HIER");
+//		System.out.println(Bp);
+		System.out.println("MISS");
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		facesContext.renderResponse();
-		int Rid= Integer.parseInt(routeid);
+		
+//		rit.setBeginpunt(Bp);
+//		rit.setEindpunt(Ep);
+
 		Profiel profielid = profielEJB.getProfiel();
-		routeEJB.boekIn(profielid, Rid);
-		return "indexD.faces?faces-redirect=true&login=1&index=0";
+		ritEJB.boekIn(rit, profielid, routeid);
+		return "indexD.faces?faces-redirect=true&login=1";
 	}
 	public void findRoute() {
 		route = routeEJB.findRoute(route.getId());

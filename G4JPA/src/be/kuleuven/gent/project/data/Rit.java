@@ -17,8 +17,13 @@ import java.util.Date;
 
 @Entity
 @Table(name="rit")
-public class Rit implements Serializable {
+public class Rit implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -795494013091388989L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idrit", nullable=false,length=16)
@@ -65,10 +70,12 @@ public class Rit implements Serializable {
 	
 
 	public String getBeginpunt() {
+		System.out.println("BP get");
 		return beginpunt;
 	}
 
 	public void setBeginpunt(String beginpunt) {
+		System.out.println("BP set");
 		this.beginpunt = beginpunt;
 	}
 
@@ -152,7 +159,9 @@ public class Rit implements Serializable {
 		this.route = route;
 	}
 
-	public Rit() {}
+	public Rit() {
+		System.out.println("Default constructor");
+	}
 	
 	public Rit(Profiel passagier, Route route) {
 		this.passagier=passagier;

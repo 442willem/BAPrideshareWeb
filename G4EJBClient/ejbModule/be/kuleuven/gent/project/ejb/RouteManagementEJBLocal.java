@@ -18,7 +18,7 @@ public interface RouteManagementEJBLocal {
 	public void filterRoutes();
 	public List<Route> findRoutes(String beginpunt, String eindpunt, Timestamp begintijd, Timestamp eindtijd);
 	List<Route> findBestuurderRoute(int bestuurderID);
-	public void boekIn(Profiel passagier, int routeId);
+//	public void boekIn(Profiel passagier, int routeId);
 	public String[] zoekGeaccepteerdeTussenstops(int routeID);
 	public String[] zoekTijdelijkeTussenstops(int routeID,int ritID);
 }
