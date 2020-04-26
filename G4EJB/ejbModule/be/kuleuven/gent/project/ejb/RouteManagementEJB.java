@@ -140,7 +140,7 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 	public String[] zoekTijdelijkeTussenstops(int routeID,int ritID){
 		Query q;
 		String[] tussenstops= new String[2];
-		q= em.createQuery("SELECT r FROM tir r WHERE r.routeID = ?1 AND r.ritID= ?2 ");
+		q= em.createQuery("SELECT r FROM Tussenstop r WHERE r.route = ?1 AND r.id= ?2 ");
 		q.setParameter(1, routeID);
 		q.setParameter(2, ritID);
 		Tussenstop tijdelijkeRit = (Tussenstop) q.getSingleResult();

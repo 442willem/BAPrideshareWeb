@@ -17,6 +17,7 @@ import be.kuleuven.gent.project.*;
 import be.kuleuven.gent.project.data.Profiel;
 import be.kuleuven.gent.project.data.Rit;
 import be.kuleuven.gent.project.data.Route;
+import be.kuleuven.gent.project.data.Tussenstop;
 import be.kuleuven.gent.project.ejb.ProfielManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.RitManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.RouteManagementEJBLocal;
@@ -46,35 +47,18 @@ public class RitController implements Serializable {
 	private ProfielManagementEJBLocal profielEJB;
 	
 	
-	private Rit rit;
+	private Tussenstop rit;
 	private int routeid;
 	
 	@PostConstruct
 	public void init() {
-		rit = new Rit();
-		rit.setBeginpunt("iets");
-		rit.setVertrektijdDate(new Date("Tue Mar 24 2020 14:12:00 GMT+0100 (Midden-Europese standaardtijd"));
+		rit = new Tussenstop();
 	}
 	
 	
-	public String requestRit(int routeid, String Bp, String Ep) {
-		System.out.println(routeid);
-		System.out.println("HIER");
-		System.out.println(Bp);
-		System.out.println("MISS");
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		facesContext.renderResponse();
-		
-		rit.setBeginpunt(Bp);
-		rit.setEindpunt(Ep);
 
-		Profiel profielid = profielEJB.getProfiel();
-		rit.setPassagier(profielid);
-		ritEJB.boekIn(rit,  routeid);
-		return "indexD.faces?faces-redirect=true&login=1";
-	}
 	
-	public Rit getRit() {
+	public Tussenstop getRit() {
 		return rit;
 	}
 	
@@ -124,7 +108,7 @@ public class RitController implements Serializable {
 		this.profielEJB = profielEJB;
 	}
 
-	public void setRit(Rit rit) {
+	public void setRit(Tussenstop rit) {
 		this.rit = rit;
 	}
 	public void findRit() {

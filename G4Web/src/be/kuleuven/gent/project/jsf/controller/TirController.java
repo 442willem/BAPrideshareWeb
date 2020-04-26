@@ -57,7 +57,9 @@ public class TirController implements Serializable {
 	
 	
 	
-	
+	public String[] zoekGeaccepteerdeTussenstops(int routeID){
+		return routeEJB.zoekGeaccepteerdeTussenstops(route.getId());
+	}
 	
 	public void findRoute() {
 		route = routeEJB.findRoute(route.getId());

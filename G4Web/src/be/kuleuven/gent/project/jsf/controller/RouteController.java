@@ -78,22 +78,7 @@ public class RouteController implements Serializable {
 		this.rit = rit;
 	}
 
-	public String requestRit(int routeid) {
-		System.out.println(routeid);
-		System.out.println("HIER");
-//		System.out.println(Bp);
-		System.out.println("MISS");
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		facesContext.renderResponse();
-		
-//		rit.setBeginpunt(Bp);
-//		rit.setEindpunt(Ep);
 
-		Profiel profielid = profielEJB.getProfiel();
-		rit.setPassagier(profielid);
-		ritEJB.boekIn(rit, routeid);
-		return "indexD.faces?faces-redirect=true&login=1";
-	}
 	public void findRoute() {
 		route = routeEJB.findRoute(route.getId());
 	}

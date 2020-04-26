@@ -52,23 +52,7 @@ public class ViewRouteController implements Serializable {
 	}
 	
 	
-	public String requestRit(int routeid) {
-		System.out.println(routeid);
-		System.out.println("HIER");
-		System.out.println(routeid + rit.getBeginpunt() + rit.getEindpunt());
-//		System.out.println(Bp);
-		System.out.println("MISS");
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		facesContext.renderResponse();
-		
-//		rit.setBeginpunt(Bp);
-//		rit.setEindpunt(Ep);
 
-		Profiel profielid = profielEJB.getProfiel();
-		rit.setPassagier(profielid);
-		ritEJB.boekIn(rit, routeid);
-		return "indexD.faces?faces-redirect=true&login=1";
-	}
 	
 	public String test(int routeid, String input) {
 		System.out.println("test");
