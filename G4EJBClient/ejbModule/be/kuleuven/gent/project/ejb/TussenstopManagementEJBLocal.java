@@ -6,5 +6,5 @@ import be.kuleuven.gent.project.data.Tussenstop;
 
 @Local
 public interface TussenstopManagementEJBLocal {
-	public void createTussenstop(Tussenstop t);
+	public void createTir(Tussenstop t);
 }

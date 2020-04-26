@@ -69,7 +69,8 @@ public class RitController implements Serializable {
 		rit.setEindpunt(Ep);
 
 		Profiel profielid = profielEJB.getProfiel();
-		ritEJB.boekIn(rit, profielid, routeid);
+		rit.setPassagier(profielid);
+		ritEJB.boekIn(rit,  routeid);
 		return "indexD.faces?faces-redirect=true&login=1";
 	}
 	

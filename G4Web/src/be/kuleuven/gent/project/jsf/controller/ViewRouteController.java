@@ -6,7 +6,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -64,8 +65,15 @@ public class ViewRouteController implements Serializable {
 //		rit.setEindpunt(Ep);
 
 		Profiel profielid = profielEJB.getProfiel();
-		ritEJB.boekIn(rit, profielid, routeid);
+		rit.setPassagier(profielid);
+		ritEJB.boekIn(rit, routeid);
 		return "indexD.faces?faces-redirect=true&login=1";
+	}
+	
+	public String test(int routeid, String input) {
+		System.out.println("test");
+		System.out.println("Rit: " + routeid +" rit beginpunt:" + input);
+		return "index.faces?faces-redirect=true&login=1";
 	}
 	
 	public Rit getRit() {

@@ -10,8 +10,7 @@
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 	
 	<title><ui:insert name="title">Route view</ui:insert></title>
-	<meta name="viewport" content="initial-scale=1.0" />
-	<meta charset="utf-8" />
+	
 	<style>
 .mapinv {
 	display: none;
@@ -38,7 +37,7 @@
 <h:body>
 <h:form method="post" id="homeform">
 		<h:commandButton value="Home" class="btn btn-primary pull-left"
-			action="#{ViewRouteController.goToIndexD()}"
+			action="#{viewRouteController.goToIndexD()}"
 			style="float: left;text-decoration:none; padding:5px;" />
 </h:form>
 
@@ -91,8 +90,11 @@
 								<h:inputText id="pleaseGodWorkTOO" value="#{viewRouteController.rit.eindpunt}" />
 							</div>
 							<div class="form-group">
+							<h:inputText value="#{input}"></h:inputText>
+							</div>
+							<div class="form-group">
 								<h:commandButton id="Verzoek" value="Verstuur verzoek"
-									class="btn btn-primary" action="#{viewRouteController.requestRit(viewRouteController.route.id)}"
+									class="btn btn-primary" action="#{viewRouteController.test(viewRouteController.route.id, input.value)}"
 									immediate="true"
 									 >
 									 
