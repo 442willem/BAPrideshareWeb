@@ -49,7 +49,7 @@ public class TirController implements Serializable {
 	public String test(int Routeid, String test) {
 		System.out.println(test);
 		System.out.println("KIEKEBOE");
-		tir.setRouteID(routeEJB.findRoute(Routeid));
+		tir.setRoute(routeEJB.findRoute(Routeid));
 		tir.setVertrektijd(new Date(test));
 		tirejb.createTir(tir);
 		return "indexD.faces?faces-redirect=true&login=1";

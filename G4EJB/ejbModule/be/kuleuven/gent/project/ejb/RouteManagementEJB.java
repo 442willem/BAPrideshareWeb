@@ -16,6 +16,7 @@ import javax.persistence.Query;
 import be.kuleuven.gent.project.data.Profiel;
 import be.kuleuven.gent.project.data.Rit;
 import be.kuleuven.gent.project.data.Route;
+import be.kuleuven.gent.project.data.Tussenstop;
 
 /**
  * Session Bean implementation class RouteManagementEJB
@@ -139,10 +140,10 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 	public String[] zoekTijdelijkeTussenstops(int routeID,int ritID){
 		Query q;
 		String[] tussenstops= new String[2];
-		q= em.createQuery("SELECT r FROM rit r WHERE r.routeID = ?1 AND r.ritID= ?2 ");
+		q= em.createQuery("SELECT r FROM tir r WHERE r.routeID = ?1 AND r.ritID= ?2 ");
 		q.setParameter(1, routeID);
 		q.setParameter(2, ritID);
-		Rit tijdelijkeRit = (Rit) q.getSingleResult();
+		Tussenstop tijdelijkeRit = (Tussenstop) q.getSingleResult();
 		
 		tussenstops[0]=tijdelijkeRit.getBeginpunt();
 		tussenstops[1]=tijdelijkeRit.getEindpunt();
@@ -157,12 +158,12 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 		String[] tussenstops;
 		int index=0;
 		
-		q= em.createQuery("SELECT r FROM rit r WHERE r.routeID = ?1 AND r.goedgekeurd=1");
+		q= em.createQuery("SELECT r FROM tir r WHERE r.routeID = ?1 AND r.goedgekeurd=1");
 		q.setParameter(1, routeID);
-		List<Rit> tijdelijkeRitten = q.getResultList();
+		List<Tussenstop> tijdelijkeRitten = q.getResultList();
 		tussenstops = new String[tijdelijkeRitten.size()*2];
 		
-		for (Rit r: tijdelijkeRitten) {
+		for (Tussenstop r: tijdelijkeRitten) {
 			tussenstops[index]=r.getBeginpunt();
 			index++;
 			tussenstops[index]=r.getEindpunt();

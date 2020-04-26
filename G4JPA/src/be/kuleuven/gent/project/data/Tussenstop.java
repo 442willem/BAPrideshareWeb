@@ -35,7 +35,7 @@ public class Tussenstop {
 	private Timestamp vertrektijd;
 	
 	@Column(name="aantal_personen", nullable=false)
-	private int aantalP;
+	private int aantalPersonen;
 	
 	@Column(name="betaald", nullable = false)
 	private boolean betaald;
@@ -44,7 +44,7 @@ public class Tussenstop {
 	private boolean goedgekeurd;
 	
 	@JoinColumn(name="routeID", nullable =false)
-	private Route routeID;
+	private Route route;
 	
 	@JoinColumn(name="passagierID", nullable=false)
 	private Profiel passagier;
@@ -80,12 +80,12 @@ public class Tussenstop {
 		this.eindpunt = eindpunt;
 	}
 
-	public Route getRouteID() {
-		return routeID;
+	public Route getRoute() {
+		return route;
 	}
 
-	public void setRouteID(Route routeID) {
-		this.routeID = routeID;
+	public void setRoute(Route route) {
+		this.route = route;
 	}
 	
 
@@ -136,12 +136,12 @@ public class Tussenstop {
 	
 
 
-	public int getAantalP() {
-		return aantalP;
+	public int getAantalPersonen() {
+		return aantalPersonen;
 	}
 
-	public void setAantalP(int aantalP) {
-		this.aantalP = aantalP;
+	public void setAantalPersonen(int aantalPersonen) {
+		this.aantalPersonen = aantalPersonen;
 	}
 	
 

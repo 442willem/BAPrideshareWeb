@@ -7,6 +7,7 @@ import javax.ejb.Local;
 import be.kuleuven.gent.project.data.Profiel;
 import be.kuleuven.gent.project.data.Rit;
 import be.kuleuven.gent.project.data.Route;
+import be.kuleuven.gent.project.data.Tussenstop;
 
 @Local
 public interface RitManagementEJBLocal {
@@ -18,7 +19,6 @@ public interface RitManagementEJBLocal {
 	public void keurRitGoed(int ritId);
 	public void keurRitAf(int ritId);
 	public List<Route> findPassagierRit(int passagierID);
-	public void boekIn(Rit r, int routeId);
-	public Rit findRit(int id);
+	public Tussenstop findRit(int id);
 	public void betaalRit(int id);
 }
