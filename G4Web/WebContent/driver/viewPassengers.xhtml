@@ -64,6 +64,14 @@
 					<h:outputText class="text-center" value=" " />
 				</f:facet>
 				<a class='btn btn-info btn-xs'
+					href="viewRit.faces?rit=#{rit.id}"><span
+					class="glyphicon glyphicon-edit"></span>See Route</a>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText class="text-center" value=" " />
+				</f:facet>
+				<a class='btn btn-info btn-xs'
 					href="viewProfiel.faces?profiel=#{rit.passagier.id}"><span
 					class="glyphicon glyphicon-edit"></span>See Profile</a>
 			</h:column>

@@ -46,7 +46,9 @@ public class Route {
 	private Date eindtijdDate;
 	@Transient
 	private Date vertrektijdDate;
-	
+	@Transient 
+	private String tussenstops;
+
 	public int getId() {
 		return id;
 	}
@@ -140,5 +142,13 @@ public class Route {
 	public void setVertrektijdDate(Date vertrektijdDate) {
 		this.vertrektijdDate = vertrektijdDate;
 		this.vertrektijd= new Timestamp(vertrektijdDate.getTime());
+	}
+	
+	public String getTussenstops() {
+		return tussenstops;
+	}
+
+	public void setTussenstops(String tussenstops) {
+		this.tussenstops = tussenstops;
 	}
 }

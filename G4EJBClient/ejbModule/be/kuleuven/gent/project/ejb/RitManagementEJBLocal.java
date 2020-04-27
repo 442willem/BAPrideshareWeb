@@ -21,4 +21,5 @@ public interface RitManagementEJBLocal {
 	public List<Route> findPassagierRit(int passagierID);
 	public Tussenstop findRit(int id);
 	public void betaalRit(int id);
+	
 }

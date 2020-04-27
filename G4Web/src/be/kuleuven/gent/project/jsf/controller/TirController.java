@@ -45,6 +45,10 @@ public class TirController implements Serializable {
 	
 	}
 	
+	public void findRit() {
+		tir = tirejb.findRit(tir.getId());
+		route = routeEJB.findRoute(tir.getRoute().getId());
+	}
 	
 	public String test(int Routeid, String test) {
 		System.out.println(test);
@@ -121,11 +125,18 @@ public class TirController implements Serializable {
 		return route;
 	}
 
-
 	public void setRoute(Route route) {
 		this.route = route;
 	}
-	
-	
-	
+	public void setTussenstops() {
+		String[] array=routeEJB.zoekGeaccepteerdeTussenstops(route.getId());
+		System.out.println("Aantal tussenstops:"+array.length);
+		if(array.length>0) {
+		StringBuilder sb = new StringBuilder("");
+		for(int a=0; a<array.length;a++)sb.append(array[a]+"|");
+		sb.deleteCharAt(sb.length()-1);
+		route.setTussenstops(sb.toString());
+		}else route.setTussenstops("");
+		System.out.println("Tussenstops geset:" + route.getTussenstops());
+	}	
 }

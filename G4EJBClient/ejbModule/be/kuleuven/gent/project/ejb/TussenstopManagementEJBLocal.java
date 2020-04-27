@@ -7,4 +7,6 @@ import be.kuleuven.gent.project.data.Tussenstop;
 @Local
 public interface TussenstopManagementEJBLocal {
 	public void createTir(Tussenstop t);
+
+	public Tussenstop findRit(int id);
 }

@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<h:form method="post" id="homeform">
+	<h:commandButton value="Home" class="btn btn-primary pull-left"
+		action="#{userController.goToIndexD()}"
+		style="float: left;text-decoration:none; padding:5px;" />
+</h:form>
+<title><ui:insert name="title">Rit view</ui:insert></title>
+<meta name="viewport" content="initial-scale=1.0" />
+<meta charset="utf-8" />
+<f:metadata>
+	<f:viewParam name="rit" value="#{tirController.tir.id}" />
+	<f:viewAction action="#{tirController.findRit}" />
+	<f:viewAction action="#{tirController.setTussenstops()}" />
+</f:metadata>
+</head>
+<body>
+	<script
+		src="https://www.paypal.com/sdk/js?client-id=AZeJi_oALA_e2d8PoyjJ8-1Imn4NXJPU_mkwKTSccLUf4DMo37kr2XQ3U9bfXLCLrsSTWpfYm6qtRDFm">
+		// Required. Replace SB_CLIENT_ID with your sandbox client ID.
+	</script>
+	<div class="jumbotron jumbotron-sm">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-lg-12">
+
+					<h1 class="h1">
+						Drive to: #{tirController.tir.route.eindpunt} <small></small>
+					</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<h:inputHidden id="hidden-beginpunt"
+		value="#{tirController.tir.beginpunt}"></h:inputHidden>
+	<h:inputHidden id="hidden-eindpunt"
+		value="#{tirController.tir.eindpunt}"></h:inputHidden>
+	<h:inputHidden id="hidden-start"
+		value="#{tirController.tir.route.beginpunt}"></h:inputHidden>
+	<h:inputHidden id="hidden-eind"
+		value="#{tirController.tir.route.eindpunt}"></h:inputHidden>
+	<h:inputHidden id="hidden-tussenstops"
+		value="#{tirController.route.tussenstops}"></h:inputHidden>
+	<div style="margin: 0 auto; width: 600px; height: 600px;" id="map"></div>
+
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;libraries=places,geometry&amp;callback=PlaceAutocompleteSearch&amp;fields=formatted_address&amp;callback=initMap"
+		async="" defer=""></script>
+	<script>
+		function initMap() {
+			var directionsService = new google.maps.DirectionsService;
+			var directionsRenderer = new google.maps.DirectionsRenderer;
+			let map = new google.maps.Map(document.getElementById('map'), {
+				zoom : 6,
+				center : {
+					lat : 51.051410,
+					lng : 3.726115
+				}
+			});
+			directionsRenderer.setMap(map);
+
+			calculateAndDisplayRoute(directionsService, directionsRenderer);
+
+			function calculateAndDisplayRoute(directionsService,
+					directionsRenderer) {
+				var beginpunt = document.getElementById('hidden-beginpunt').value;
+				var eindpunt = document.getElementById('hidden-eindpunt').value;
+				console.log("Extra tussenstop:" + beginpunt);
+				console.log("Extra tussenstop:" + eindpunt);
+				var waypts = [];
+				waypts.push({
+					location : beginpunt,
+					stopover : true
+				});
+				waypts.push({
+					location : eindpunt,
+					stopover : true
+				});
+				var next = true;
+				var ritten = document.getElementById('hidden-tussenstops').value.split("|");
+				console.log(ritten);
+				if(ritten.length>1){
+				console.log(ritten.length);
+				ritten.forEach(function (item, index, array) {
+					  console.log(item, index);
+						waypts.push({
+							location : item,
+							stopover : true
+						});
+					});
+				}
+				directionsService.route({
+					origin : document.getElementById('hidden-start').value,
+					destination : document.getElementById('hidden-eind').value,
+					waypoints : waypts,
+					optimizeWaypoints : true,
+					travelMode : 'DRIVING'
+				}, function(response, status) {
+					if (status === 'OK') {
+						directionsRenderer.setDirections(response);
+						var route = response.routes[0];
+						console.log(route);
+						console.log(response);
+
+					} else {
+						window.alert('Directions request failed due to '
+								+ status);
+					}
+				});
+			}
+
+		}
+	</script>
+</body>
+</html>

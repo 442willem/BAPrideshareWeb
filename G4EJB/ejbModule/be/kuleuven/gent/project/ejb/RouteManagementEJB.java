@@ -157,10 +157,11 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 		Query q;
 		String[] tussenstops;
 		int index=0;
-		
-		q= em.createQuery("SELECT r FROM tir r WHERE r.routeID = ?1 AND r.goedgekeurd=1");
+		System.out.println(routeID);
+		q= em.createQuery("SELECT r FROM Tussenstop r WHERE r.route.id = ?1 AND r.goedgekeurd=TRUE");
 		q.setParameter(1, routeID);
 		List<Tussenstop> tijdelijkeRitten = q.getResultList();
+		System.out.println(tijdelijkeRitten.size());
 		tussenstops = new String[tijdelijkeRitten.size()*2];
 		
 		for (Tussenstop r: tijdelijkeRitten) {
@@ -169,7 +170,7 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 			tussenstops[index]=r.getEindpunt();
 			index++;
 		}
-		
+		System.out.println("aantal tussenstops:"+ tussenstops.length);
 		return tussenstops;	
 	}
 }

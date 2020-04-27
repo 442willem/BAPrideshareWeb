@@ -42,5 +42,9 @@ public class TussenstopManagementEJB implements TussenstopManagementEJBLocal {
 		t.setPassagier(p);
     	em.persist(t);
     }
+	@Override
+	public Tussenstop findRit(int id) {
+		return em.find(Tussenstop.class, id);
+	}
 
 }
