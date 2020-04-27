@@ -46,5 +46,13 @@ public class TussenstopManagementEJB implements TussenstopManagementEJBLocal {
 	public Tussenstop findRit(int id) {
 		return em.find(Tussenstop.class, id);
 	}
+	@Override
+	public void keurRitGoed(int ritId) {
+		  Tussenstop r = em.find(Tussenstop.class, ritId);
+		  
+		  System.out.println("HALLO HIER");
+		  r.setGoedgekeurd(true);
+		  em.persist(r);
+	}
 
 }

@@ -9,4 +9,6 @@ public interface TussenstopManagementEJBLocal {
 	public void createTir(Tussenstop t);
 
 	public Tussenstop findRit(int id);
+
+	public void keurRitGoed(int ritId);
 }

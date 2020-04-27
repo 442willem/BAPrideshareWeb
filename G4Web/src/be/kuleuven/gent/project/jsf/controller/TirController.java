@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import be.kuleuven.gent.project.data.Route;
@@ -139,4 +140,10 @@ public class TirController implements Serializable {
 		}else route.setTussenstops("");
 		System.out.println("Tussenstops geset:" + route.getTussenstops());
 	}	
+	public String keurRitGoed(int ritId) {
+		tirejb.keurRitGoed(ritId);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.renderResponse();
+		return "viewPassengers.faces?faces-redirect=true&route="+route.getId();
+	}
 }

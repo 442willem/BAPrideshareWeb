@@ -53,7 +53,10 @@
 	<h:inputHidden id="hidden-tussenstops"
 		value="#{tirController.route.tussenstops}"></h:inputHidden>
 	<div style="margin: 0 auto; width: 600px; height: 600px;" id="map"></div>
-
+	<h:form>
+		<h:commandButton value="Accept"
+			action="#{tirController.keurRitGoed(tirController.tir.id)}"></h:commandButton>
+	</h:form>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;libraries=places,geometry&amp;callback=PlaceAutocompleteSearch&amp;fields=formatted_address&amp;callback=initMap"
 		async="" defer=""></script>
@@ -87,7 +90,6 @@
 					location : eindpunt,
 					stopover : true
 				});
-				var next = true;
 				var ritten = document.getElementById('hidden-tussenstops').value.split("|");
 				console.log(ritten);
 				if(ritten.length>1){

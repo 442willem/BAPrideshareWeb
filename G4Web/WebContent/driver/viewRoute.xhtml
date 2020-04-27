@@ -5,330 +5,104 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<link rel="stylesheet"
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-	
-	<title><ui:insert name="title">Route view</ui:insert></title>
-	
-	<style>
-.mapinv {
-	display: none;
-}
-/* Always set the map height explicitly to define the size of the div
- * element that contains the map. */
-#map {
-	height: 100%;
-	width: 100%;
-}
-
-.mapinv {
-	display: none;
-}
-</style>
-	<meta name="viewport" content="initial-scale=1.0" />
-	<meta charset="utf-8" />
-	<f:metadata>
-		<f:viewParam name="route" value="#{viewRouteController.route.id}" />
-		<f:viewAction action="#{viewRouteController.findRoute}" />
-	</f:metadata>
-</h:head>
-
-<h:body>
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 <h:form method="post" id="homeform">
-		<h:commandButton value="Home" class="btn btn-primary pull-left"
-			action="#{viewRouteController.goToIndexD()}"
-			style="float: left;text-decoration:none; padding:5px;" />
+	<h:commandButton value="Home" class="btn btn-primary pull-left"
+		action="#{userController.goToIndexD()}"
+		style="float: left;text-decoration:none; padding:5px;" />
+	<h:commandButton value="Back" class="btn btn-primary pull-left"
+		action="#{userController.goToMyRoutes()}"
+		style="float: left;text-decoration:none; padding:5px;" />
 </h:form>
-
+<title><ui:insert name="title">Rit view</ui:insert></title>
+<meta name="viewport" content="initial-scale=1.0" />
+<meta charset="utf-8" />
+<f:metadata>
+	<f:viewParam name="route" value="#{routeController.route.id}" />
+	<f:viewAction action="#{routeController.findRoute()}" />
+	<f:viewAction action="#{routeController.setTussenstops()}" />
+</f:metadata>
+</head>
+<body>
+	<script
+		src="https://www.paypal.com/sdk/js?client-id=AZeJi_oALA_e2d8PoyjJ8-1Imn4NXJPU_mkwKTSccLUf4DMo37kr2XQ3U9bfXLCLrsSTWpfYm6qtRDFm">
+		// Required. Replace SB_CLIENT_ID with your sandbox client ID.
+	</script>
 	<div class="jumbotron jumbotron-sm">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 col-lg-12">
 
 					<h1 class="h1">
-						Route to: #{viewRouteController.route.eindpunt} <small></small>
+						Drive to: #{routeController.route.eindpunt} <small></small>
 					</h1>
-
 				</div>
 			</div>
 		</div>
 	</div>
-	<br />
-
-
-	<div align='center' class="container">
-		<div class="row">
-			<div class="col-md-8">
-				<div class="well well-sm">
-					<div style="margin: 0 auto; width: 600px; height: 600px;" id="map"></div>
-					<h2>Laatste aankomsttijd: #{viewRouteController.route.eindtijd}</h2>
-					<h2>Aantal vrije zitplaatsen:
-						#{viewRouteController.route.maxPersonen}</h2>
-					<br />
-					<div align='center'>
-						<h:outputLabel value="Vertrek Adres: " />
-						<input required="required" id="vertrekAdress" type="text" />
-						<h:outputLabel value="Uw bestemming: " />
-						<input required="required" id="eindAdress" type="text" />
-
-					</div>
-					<br />
-					<button onclick="initMap();">Check me</button>
-					<div align='center'>
-						<h:form method="post" id="requestform">
-							<div class="form-group">
-								<h:inputText id="idroute" value="#{viewRouteController.rit.route}" />
-							</div>
-							<div class="form-group">
-								<h:inputText id="VertrekTijd" value="#{viewRouteController.rit.vertrektijd}" />
-							</div>
-							<div class="form-group">
-								<h:inputText id="pleaseGodWork"	value="#{viewRouteController.rit.beginpunt}" />
-							</div>
-							<div class="form-group">
-								<h:inputText id="pleaseGodWorkTOO" value="#{viewRouteController.rit.eindpunt}" />
-							</div>
-							<div class="form-group">
-							<h:inputText value="#{input}"></h:inputText>
-							</div>
-							<div class="form-group">
-								<h:commandButton id="Verzoek" value="Verstuur verzoek"
-									class="btn btn-primary" action="#{viewRouteController.test(viewRouteController.route.id, input.value)}"
-									immediate="true"
-									 >
-									 
-									</h:commandButton>
-							</div>
-						</h:form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<h:inputHidden id="hidden-start"
+		value="#{routeController.route.beginpunt}"></h:inputHidden>
+	<h:inputHidden id="hidden-eind"
+		value="#{routeController.route.eindpunt}"></h:inputHidden>
+	<h:inputHidden id="hidden-tussenstops"
+		value="#{routeController.route.tussenstops}"></h:inputHidden>
+	<div style="margin: 0 auto; width: 600px; height: 600px;" id="map"></div>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;libraries=places,geometry&amp;callback=PlaceAutocompleteSearch&amp;fields=formatted_address&amp;callback=initMap"
 		async="" defer=""></script>
-
-
-	<script >
-	document.getElementById('requestform:idroute').value = #{viewRouteController.route.id};
-	var dates = {
-		    convert:function(d) {
-		        // Converts the date in d to a date-object. The input can be:
-		        //   a date object: returned without modification
-		        //  an array      : Interpreted as [year,month,day]. NOTE: month is 0-11.
-		        //   a number     : Interpreted as number of milliseconds
-		        //                  since 1 Jan 1970 (a timestamp) 
-		        //   a string     : Any format supported by the javascript engine, like
-		        //                  "YYYY/MM/DD", "MM/DD/YYYY", "Jan 31 2009" etc.
-		        //  an object     : Interpreted as an object with year, month and date
-		        //                  attributes.  **NOTE** month is 0-11.
-		        return (
-		            d.constructor === Date ? d :
-		            d.constructor === Array ? new Date(d[0],d[1],d[2]) :
-		            d.constructor === Number ? new Date(d) :
-		            d.constructor === String ? new Date(d) :
-		            typeof d === "object" ? new Date(d.year,d.month,d.date) :
-		            NaN
-		        );
-		    },
-		    compare:function(a,b) {
-		        // Compare two dates (could be of any type supported by the convert
-		        // function above) and returns:
-		        //  -1 : if a &lt; b
-		        //   0 : if a = b
-		        //   1 : if a &gt; b
-		        // NaN : if a or b is an illegal date
-		        // NOTE: The code inside isFinite does an assignment (=).
-		        return (
-		            isFinite(a=this.convert(a).valueOf()) &amp;&amp;
-		            isFinite(b=this.convert(b).valueOf()) ?
-		            (a&gt;b)-(a&lt;b) :
-		            NaN
-		        );
-		    },
-		    
-		}
-
-      function initMap() {
-        var directionsService = new google.maps.DirectionsService;
-        var directionsRenderer = new google.maps.DirectionsRenderer;
-        let map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 6,
-          center: {lat: 51.051410, lng: 3.726115}
-        });
-        directionsRenderer.setMap(map);
-        
-		
-          markerMap();
-          
-          calculateAndDisplayRoute(directionsService, directionsRenderer);
-          PlaceAutocompleteSearch();
-          
-          
-          
-          function markerMap(){
-      		var geocoder = new google.maps.Geocoder;
-      		geocoder.geocode( { 'address': document.getElementById('requestform:pleaseGodWork').value}, function(results, status) {
-      			
-      				if (status == 'OK') {
-      					var latlng = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()};
-      					console.log(latlng);
-      			  		 var marker = new google.maps.Marker({
-      						    map: map,
-      						    position: latlng
-      			    		});
-      			  		 
-      			  		 marker.setMap(map);
-      			  		 
-      			  		 
-      			  		bounds  = new google.maps.LatLngBounds();
-      		          loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-      		          bounds.extend(loc);
-      		          map.fitBounds(bounds);
-      		        map.panToBounds(bounds);
-      		          console.log("re-zoom");
-      			  		 
-      			    } else {
-      	       alert('Geef je Tussenstop weer');
-      				}
-      		});
-      	}
-          
-          
-      }
-	  
-	  
-	  
-	 
-	function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-		var beginpunt = document.getElementById('requestform:pleaseGodWork').value;
-		var eindpunt =document.getElementById('requestform:pleaseGodWorkTOO').value;
-		var waypts = [];
-		if(document.getElementById('requestform:pleaseGodWork').value !== ""){
-			console.log("KIEKEBOE");
-			TOTDuration=0;
-			waypts.push({
-				location: beginpunt,
-				stopover: true
+	<script>
+		function initMap() {
+			var directionsService = new google.maps.DirectionsService;
+			var directionsRenderer = new google.maps.DirectionsRenderer;
+			let map = new google.maps.Map(document.getElementById('map'), {
+				zoom : 6,
+				center : {
+					lat : 51.051410,
+					lng : 3.726115
+				}
 			});
-		}
-		if(document.getElementById('requestform:pleaseGodWorkTOO').value !== ""){
-			console.log("KIEKEBOE");
-			waypts.push({
-				location: eindpunt,
-				stopover: true
-			});
-		}
-		/* var checkboxArray = document.getElementById('waypoints');
-		for (var i = 0; i &lt; checkboxArray.length; i++) {
-		  if (checkboxArray.options[i].selected) {
-		    waypts.push({
-		      location: checkboxArray[i].value,
-		      stopover: true
-		    });
-		  }
-		} */
+			directionsRenderer.setMap(map);
 
-		directionsService.route({
-			origin : "#{viewRouteController.route.beginpunt}",
-			destination : "#{viewRouteController.route.eindpunt}",
-			waypoints : waypts,
-			optimizeWaypoints : true,
-			travelMode : 'DRIVING'
-		}, function(response, status) {
-			if (status === 'OK') {
-				directionsRenderer.setDirections(response);
-				var route = response.routes[0];
-				console.log(route);
-				console.log(response);
-				 			
-				// For each route, summarize total time.
-				var wiebenik= route.legs.forEach(testFunction); 
-				console.log(wiebenik);
-			} else {
-				window.alert('Directions request failed due to ' + status);
+			calculateAndDisplayRoute(directionsService, directionsRenderer);
+
+			function calculateAndDisplayRoute(directionsService,
+					directionsRenderer) {
+				var waypts = [];
+				var ritten = document.getElementById('hidden-tussenstops').value.split("|");
+				console.log(ritten);
+				if(ritten.length>1){
+				console.log(ritten.length);
+				ritten.forEach(function (item, index, array) {
+					  console.log(item, index);
+						waypts.push({
+							location : item,
+							stopover : true
+						});
+					});
+				}
+				directionsService.route({
+					origin : document.getElementById('hidden-start').value,
+					destination : document.getElementById('hidden-eind').value,
+					waypoints : waypts,
+					optimizeWaypoints : true,
+					travelMode : 'DRIVING'
+				}, function(response, status) {
+					if (status === 'OK') {
+						directionsRenderer.setDirections(response);
+						var route = response.routes[0];
+						console.log(route);
+						console.log(response);
+
+					} else {
+						window.alert('Directions request failed due to '
+								+ status);
+					}
+				});
 			}
-		});
-	}
-	var TOTDuration=0;
-	function testFunction(item, index){
-		console.log(item.duration.value);
-		TOTDuration = TOTDuration + item.duration.value;
-		console.log(TOTDuration);
-		
-		var totDinmin = Math.ceil(TOTDuration/60);
-		console.log("In minuten: " + totDinmin);
-		var DateTimeBegin = new Date("#{viewRouteController.route.vertrektijd}");
-		console.log("timestamp Begintijd");
-		console.log(DateTimeBegin);
-		var DateTimeEind = new Date("#{viewRouteController.route.eindtijd}");
-		console.log("timestamp aankomsttijd");
-		console.log(DateTimeEind);
-		var newDateobj = new Date(DateTimeBegin.getTime() + totDinmin*60000);
-		console.log("Begintijd + minuten met omweg");
-		console.log(newDateobj);
-		var test = dates.compare(DateTimeEind,newDateobj);
-		console.log(test);
-		if(test == 1){
-			var VertrekP = new Date(DateTimeBegin.getTime() + (Math.ceil(TOTDuration/60))*60000);
-			console.log(VertrekP);
-			document.getElementById('requestform:Verzoek').style.display= 'inline';
-			document.getElementById('requestform:VertrekTijd').value = VertrekP;
-		} else {
-			document.getElementById('requestform:Verzoek').style.display= 'none';
+
 		}
-		
-		
-	}
-	
-	
-	function PlaceAutocompleteSearch() {
-
-		var options = {
-			types : [ 'address' ]
-		};
-		var componentForm = {
-			street_number : 'short_name',
-			route : 'long_name',
-			locality : 'long_name',
-			administrative_area_level_1 : 'short_name',
-			country : 'long_name',
-			postal_code : 'short_name'
-		};
-		var input = document.getElementById('vertrekAdress');
-		var inputE = document.getElementById('eindAdress');
-		var autocomplete = new google.maps.places.Autocomplete(input, options);
-		var autocompleteE = new google.maps.places.Autocomplete(inputE, options);
-		var place = autocomplete.getPlace();
-		var placeE = autocompleteE.getPlace();
-		autocomplete.addListener('place_changed', fillInAddress);
-		autocompleteE.addListener('place_changed', fillInAddressE);
-		/*   document.getElementById('viewRoute:pleaseGodWork').value = place.formatted_address; */
-		console.log(document.getElementById('requestform:pleaseGodWork').value);
-		console.log(document.getElementById('requestform:pleaseGodWorkTOO').value);
-
-		function fillInAddress() {
-			// Get the place details from the autocomplete object.
-			var place = autocomplete.getPlace();
-			console.log(place);
-
-			document.getElementById('requestform:pleaseGodWork').value = place.formatted_address;
-			console.log(document.getElementById('requestform:pleaseGodWork').value);
-			
-		}
-		function fillInAddressE(){
-			var placeE= autocompleteE.getPlace();
-			console.log(placeE);
-			
-			document.getElementById('requestform:pleaseGodWorkTOO').value = placeE.formatted_address;
-		}
-
-	}
-	
-	
-</script>
-
-</h:body>
+	</script>
+</body>
 </html>
