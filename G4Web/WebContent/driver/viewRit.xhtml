@@ -12,6 +12,9 @@
 	<h:commandButton value="Home" class="btn btn-primary pull-left"
 		action="#{userController.goToIndexD()}"
 		style="float: left;text-decoration:none; padding:5px;" />
+	<h:commandButton value="Back" class="btn btn-primary pull-left"
+		action="#{userController.goToViewPassengers(tirController.tir.route.id)}"
+		style="float: left;text-decoration:none; padding:5px;" />
 </h:form>
 <title><ui:insert name="title">Rit view</ui:insert></title>
 <meta name="viewport" content="initial-scale=1.0" />
