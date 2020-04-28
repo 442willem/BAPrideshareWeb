@@ -236,6 +236,16 @@
       				var route = response.routes[0];
       				console.log(route);
       				console.log(response);
+      				var ind= 0;
+      				route.legs.forEach(function (item, index, array) {
+  					  console.log(item.end_address, index);
+						if(document.getElementById('createRoute:pleaseGodWork').value !== "" ){
+							if(document.getElementById('createRoute:pleaseGodWork').value==item.end_address){
+								console.log(index);
+								ind = index;
+							}
+						}
+					});
       				 			
       				// For each route, summarize total time.
       				var wiebenik= route.legs.forEach(testFunction); 
@@ -246,7 +256,21 @@
       		});
       	}
       	var TOTDuration=0;
+      	var theVertrTijd=0;
       	function testFunction(item, index){
+      		var ind = 0;
+      		
+      		if(document.getElementById('createRoute:pleaseGodWork').value !== "" ){
+				if(document.getElementById('createRoute:pleaseGodWork').value==item.end_address){
+					console.log("Vertrekpunt van de nieuwe rit= " +index);
+					ind = index;
+				}
+			}
+      		if(index == ind){
+      			var DateTimeBegin = new Date("#{tirController.route.vertrektijd}");
+      			theVertrTijd = new Date(DateTimeBegin.getTime() + (Math.ceil(item.duration.value/60))*60000);
+      			console.log(theVertrTijd);
+      		}
       		console.log(item.duration.value);
       		TOTDuration = TOTDuration + item.duration.value;
       		console.log(TOTDuration);
@@ -265,7 +289,7 @@
       		var test = dates.compare(DateTimeEind,newDateobj);
       		console.log(test);
       		if(test == 1){
-      			var VertrekP = new Date(DateTimeBegin.getTime() + (Math.ceil(TOTDuration/60))*60000);
+      			var VertrekP = new Date(theVertrTijd.getTime() );
       			document.getElementById('createRoute:vertrekT').innerHTML = VertrekP;
       			VertrekP.setHours(VertrekP.getHours()+2) 
       			var dateStr =
