@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import be.kuleuven.gent.project.data.Route;
@@ -17,7 +18,7 @@ import be.kuleuven.gent.project.ejb.TussenstopManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.UserManagementEJBLocal;
 
 @Named
-@SessionScoped
+@ViewScoped
 public class TirController implements Serializable {
 	@EJB
 	private TussenstopManagementEJBLocal tirejb;
