@@ -34,9 +34,12 @@ public class RouteController implements Serializable {
 
 	@EJB
 	private RitManagementEJBLocal ritEJB;
+	
+	@EJB
+	private NotificatieManagementLocal notificatieEJB;
 
 	private Route route;
-	private Rit rit = new Rit();
+	private Tussenstop rit = new Tussenstop();
 
 	private String queryVertrek;
 	private String queryEinde;
@@ -70,11 +73,11 @@ public class RouteController implements Serializable {
 	}
 
 
-	public Rit getRit() {
+	public Tussenstop getRit() {
 		return rit;
 	}
 
-	public void setRit(Rit rit) {
+	public void setRit(Tussenstop rit) {
 		this.rit = rit;
 	}
 
@@ -225,6 +228,10 @@ public class RouteController implements Serializable {
 	}
 	public String keurRitGoed(int ritId) {
 		ritEJB.keurRitGoed(ritId);
+		Notificatie n = new Notificatie("ritAccepted");
+		n.setProfiel(profielEJB.getProfiel());
+		n.setRit(ritEJB.findRit(ritId));
+		notificatieEJB.createNotificatie(n);
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		facesContext.renderResponse();
 		return "viewPassengers.faces?faces-redirect=true&route="+route.getId();

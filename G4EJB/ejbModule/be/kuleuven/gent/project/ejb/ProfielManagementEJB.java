@@ -1,5 +1,7 @@
 package be.kuleuven.gent.project.ejb;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -9,7 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import be.kuleuven.gent.project.data.Profiel;
+import be.kuleuven.gent.project.data.*;
 import be.kuleuven.gent.project.utils.AuthenticationUtils;
 
 /**
@@ -50,5 +52,32 @@ public class ProfielManagementEJB implements ProfielManagementEJBLocal {
 		q.setParameter(1, id);
 		if(q.getResultList().size()>1)return null;
 		return (Profiel) q.getResultList().get(0);
+	}
+	@Override
+	public void updateScores(int id) {
+		System.out.println(id);
+		Query q = em.createQuery("SELECT r FROM Review r where r.ontvanger.id=?1");
+		q.setParameter(1, id);
+		List<Review> reviews=q.getResultList();
+		System.out.println(reviews.size());
+		int dScore=0;
+		int dReviews=0;
+		int pScore=0;
+		int pReviews=0;
+		
+		for(Review r:reviews) {
+			if(r.getModus()==0) {
+				dScore+=r.getScore();
+				dReviews++;
+			}
+			if(r.getModus()==1) {
+				pScore+=r.getScore();
+				pReviews++;
+			}
+		}
+		Profiel p = em.find(Profiel.class, id);
+		if(dReviews>0)p.setDriverscore((int)(dScore/dReviews));else p.setDriverscore(5);
+		if(pReviews>0)p.setPassagierscore((int)(pScore/pReviews));else p.setPassagierscore(5);
+		em.persist(p);
 	}
 }

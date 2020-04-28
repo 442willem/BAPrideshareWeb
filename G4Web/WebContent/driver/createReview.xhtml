@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+
+	<title><ui:insert name="title">Create a new Review</ui:insert></title>
+
+	<meta name="viewport" content="initial-scale=1.0" />
+	<meta charset="utf-8" />
+	<f:metadata>
+		<f:viewParam name="profiel"
+			value="#{reviewController.review.ontvanger.id}" />
+		<f:viewParam name="modus" value="#{reviewController.review.modus}" />
+	</f:metadata>
+</h:head>
+
+<h:body>
+	<h:form method="post" id="homeform">
+		<h:commandButton value="Home" class="btn btn-primary pull-left"
+			action="#{userController.goToIndexD()}"
+			style="float: left;text-decoration:none; padding:5px;" />
+	</h:form>
+	<h:panelGroup rendered="#{reviewController.review.modus==0}">
+	<h2>Leave a review for your driver</h2>
+	</h:panelGroup>
+	<h:panelGroup rendered="#{reviewController.review.modus==1}">
+	<h2>Leave a review for your passenger</h2>
+	</h:panelGroup>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="well well-sm">
+					<h:form method="post" id="createReview">
+						<div class="row">
+							<div class="col-md-6">
+								<div>
+									<dir class="form-group">
+										<h:outputLabel value="Score" />
+										<h:selectOneMenu value="#{reviewController.review.score}">
+											<f:selectItem itemValue="1" itemLabel="1" />
+											<f:selectItem itemValue="2" itemLabel="2" />
+											<f:selectItem itemValue="3" itemLabel="3" />
+											<f:selectItem itemValue="4" itemLabel="4" />
+											<f:selectItem itemValue="5" itemLabel="5" />
+										</h:selectOneMenu>
+									</dir>
+									<div class="form-group">
+										<h:outputLabel value="Tell us why: " />
+										<h:inputTextarea class="form-control" id="achternaam"
+											value="#{reviewController.review.descriptie}" required="true">
+										</h:inputTextarea>
+									</div>
+									<br />
+									<h:commandButton
+										style="text-decoration:none; padding:3px; width:115px;"
+										value="submit" action="#{reviewController.createReview()}"
+										id="SendReview" class="btn btn-primary pull-right" />
+								</div>
+							</div>
+						</div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</div>
+</h:body>
+
+</html>

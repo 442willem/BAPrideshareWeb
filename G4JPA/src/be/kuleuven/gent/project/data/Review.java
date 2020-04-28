@@ -24,12 +24,12 @@ public class Review {
 	private int score;
 	
 	@Column(name="modus", nullable=false)
-	private int modus;
+	private int modus; //0=driver, 1=passagier
 	
 	@JoinColumn(name="ontvangerId", nullable=false)
 	private Profiel ontvanger;
 	
-	@JoinColumn(name="afzenderId", nullable=false)
+	@JoinColumn(name="verzenderId", nullable=false)
 	private Profiel afzender;
 	
 	public int getId() {

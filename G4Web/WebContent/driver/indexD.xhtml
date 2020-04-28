@@ -59,6 +59,12 @@
 			value="My Routes" action="#{userController.goToMyRoutes()}"
 			class="btn btn-primary pull-right" id="Routenav2" />
 	</h:form>
+		<h:form method="post" id="myNotifications">
+		<h:commandButton
+			style="text-decoration:none; padding:5px; width:120px; float:center;"
+			value="My Notifications" action="#{userController.goToMyNotifications()}"
+			class="btn btn-primary pull-right" id="Routenav3" />
+	</h:form>
 	<script type="text/javascript">
 		jQuery(function() {
 			topBar.show()

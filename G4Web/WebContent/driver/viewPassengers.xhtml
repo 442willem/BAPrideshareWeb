@@ -105,6 +105,16 @@
 					href="viewConversation.faces?ontvanger=#{rit.passagier.id}"><span
 					class="glyphicon glyphicon-edit"></span>Send Message</a>
 			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText class="text-center" value=" " />
+				</f:facet>
+				<h:panelGroup rendered="#{rit.goedgekeurd}">
+					<a class='btn btn-info btn-xs'
+						href="createReview.faces?faces-redirect=true&amp;profiel=#{rit.passagier.id}&amp;modus=1"><span
+						class="glyphicon glyphicon-edit"></span>Review Passenger</a>
+				</h:panelGroup>
+			</h:column>
 		</h:dataTable>
 	</div>
 </h:body>

@@ -14,10 +14,12 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import be.kuleuven.gent.project.*;
+import be.kuleuven.gent.project.data.Notificatie;
 import be.kuleuven.gent.project.data.Profiel;
 import be.kuleuven.gent.project.data.Rit;
 import be.kuleuven.gent.project.data.Route;
 import be.kuleuven.gent.project.data.Tussenstop;
+import be.kuleuven.gent.project.ejb.NotificatieManagementLocal;
 import be.kuleuven.gent.project.ejb.ProfielManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.RitManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.RouteManagementEJBLocal;
@@ -45,6 +47,9 @@ public class RitController implements Serializable {
 	
 	@EJB
 	private ProfielManagementEJBLocal profielEJB;
+	
+	@EJB
+	private NotificatieManagementLocal notificatieEJB;
 	
 	
 	private Tussenstop rit;
@@ -125,5 +130,9 @@ public class RitController implements Serializable {
 	}
 	public void betaalRit() {
 		ritEJB.betaalRit(rit.getId());
+		Notificatie n = new Notificatie("betaling");
+		n.setProfiel(profielEJB.getProfiel());
+		n.setRit(rit);
+		notificatieEJB.createNotificatie(n);
 	}
 }

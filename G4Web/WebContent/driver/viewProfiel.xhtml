@@ -29,8 +29,7 @@
 			<div class="row">
 				<div class="col-sm-12 col-lg-12">
 
-					<h1 class="h1">
-						#{profielController.findProfiel().voornaam}
+					<h1 class="h1">#{profielController.findProfiel().voornaam}
 						#{profielController.findProfiel().achternaam}</h1>
 
 				</div>
@@ -38,14 +37,44 @@
 		</div>
 	</div>
 	<br />
-	<h2 class="h2">Driver score:
-		#{profielController.findProfiel().driverscore}/5</h2>
-	<h2 class="h2">Passenger score:
-		#{profielController.findProfiel().passagierscore}/5</h2>
-
 	<a class='btn btn-info btn-xs'
 		href="viewConversation.faces?ontvanger=#{profielController.findProfiel().id}"><span
 		class="glyphicon glyphicon-edit"></span>Send Message</a>
+	<h2 class="h2">Driver score:
+		#{profielController.findProfiel().driverscore}/5</h2>
+	<h:dataTable id="reviewTabelDriver"
+		value="#{reviewController.findReviewsProfielDriver()}" var="review">
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Score " />
+			</f:facet>
+			<h:outputText value="#{review.score}/5" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Description " />
+			</f:facet>
+			<h:outputText value="#{review.descriptie}" />
+		</h:column>
+	</h:dataTable>
+
+	<h2 class="h2">Passenger score:
+		#{profielController.findProfiel().passagierscore}/5</h2>
+	<h:dataTable id="reviewTabelPassenger"
+		value="#{reviewController.findReviewsProfielPassenger()}" var="review">
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Score " />
+			</f:facet>
+			<h:outputText value="#{review.score}/5" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Description " />
+			</f:facet>
+			<h:outputText value="#{review.descriptie}" />
+		</h:column>
+	</h:dataTable>
 
 </h:body>
 </html>

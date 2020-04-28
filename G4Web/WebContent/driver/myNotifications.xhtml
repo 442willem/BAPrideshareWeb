@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<h:form method="post" id="homeform">
+		<h:commandButton value="Home" class="btn btn-primary pull-left"
+			action="#{userController.goToIndexD()}"
+			style="float: left;text-decoration:none; padding:5px;" />
+	</h:form>
+	<title><ui:insert name="title">Welcome To RideSharing</ui:insert>
+	</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+	<meta charset="utf-8" />
+</h:head>
+<h:body>
+	<div>
+		<div id="notificaties">
+			<h2>My Notifications</h2>
+			<h:dataTable id="notificatieTabel"
+				value="#{notificatieController.findNotificaties()}"
+				var="notificatie">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Received At " />
+					</f:facet>
+					<h:outputText value="#{notificatie.tijdstipToString()}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value=" " />
+					</f:facet>
+					<h:outputText value="#{notificatie.getMessage()}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText class="text-center" value=" " />
+					</f:facet>
+					<h:panelGroup rendered="#{notificatie.heeftRoute()}">
+					<a class='btn btn-info btn-xs'
+						href="viewRoute.faces?route=#{notificatie.route.id}"><span
+						class="glyphicon glyphicon-edit"></span>View Route</a>
+					</h:panelGroup>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText class="text-center" value=" " />
+					</f:facet>
+					<h:panelGroup rendered="#{notificatie.heeftRit()}">
+					<a class='btn btn-info btn-xs'
+						href="viewRit.faces?rit=#{notificatie.rit.id}"><span
+						class="glyphicon glyphicon-edit"></span>View Ride</a>
+					</h:panelGroup>
+				</h:column>
+			</h:dataTable>
+		</div>
+	</div>
+</h:body>
+</html>

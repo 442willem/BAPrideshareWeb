@@ -11,4 +11,6 @@ public interface ProfielManagementEJBLocal {
 	public Profiel getProfiel();
 
 	public Profiel findProfiel(int id);
+
+	public void updateScores(int id);
 }

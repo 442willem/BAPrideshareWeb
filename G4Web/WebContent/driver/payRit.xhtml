@@ -39,12 +39,11 @@
 		</div>
 	</div>
 	<br />
+	<h:inputHidden id="hidden-id" value="#{ritController.rit.route.bestuurder.id}"></h:inputHidden>
 	<h:inputHidden id="hidden-price" value="#{ritController.rit.prijs}"></h:inputHidden>
 	<h:inputHidden id="hidden-email" value="#{ritController.rit.route.bestuurder.paypalemail}"></h:inputHidden>
 	<h:commandButton id="hidden-button"
 		onclick="#{ritController.betaalRit()}" style="display: none;" />
-	<h:commandButton id="hidden-button2"
-		onclick="#{userController.goToMyRoutes()}" style="display: none;" />
 	<p>Price for this drive: $#{ritController.rit.prijs}</p>
 
 	<div id="paypal-button-container"></div>
@@ -52,7 +51,7 @@
 	<script>
 	var prijs = document.getElementById('hidden-price').value;
 	var email = document.getElementById('hidden-email').value;
-	
+	var id = document.getElementById('hidden-id').value;
 		paypal.Buttons(
 				{
 					createOrder : function(data, actions) {
@@ -74,7 +73,10 @@
 								function(details) {
 									// This function shows a transaction success message to your buyer.
 									document.getElementById("hidden-button").click();
-									window.location.href = "myRoutes.faces?faces-redirect=true";
+									console.log(id);
+									var string = 'createReview.faces?faces-redirect=true&amp;profiel='+id+'&amp;modus=0';
+									console.log(string);
+									window.location.href = string;
 								});
 					}
 				}).render('#paypal-button-container');
