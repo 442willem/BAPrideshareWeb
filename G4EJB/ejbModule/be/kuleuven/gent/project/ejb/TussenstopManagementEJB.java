@@ -34,7 +34,6 @@ public class TussenstopManagementEJB implements TussenstopManagementEJBLocal {
     @Override
     public void createTir(Tussenstop t) {
     	//iets van calculate prijs op basis van extra tijd voor de omweg
-    	t.setPrijs(20);
     	t.setBetaald(false);
     	t.setGoedgekeurd(false);
     	String login = ctx.getCallerPrincipal().getName();
