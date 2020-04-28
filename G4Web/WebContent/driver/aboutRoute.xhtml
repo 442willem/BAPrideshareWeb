@@ -105,6 +105,11 @@
 	  							<h:outputLabel id ="vertrekT" value="Na ingeven van de geprefereerde vertrek en eindpunten, druk op de Check me knop" />
 	  							<h:inputHidden id="VertrekTijd" value="#{input}"  />
 	  						</div>
+	  						<div class ="form-group">
+	  							<h:outputLabel value="Prijs in Euro: "></h:outputLabel>
+	  							<h:outputLabel id = "prijs" value = "Na ingeven van de geprefereerde vertrek en eindpunten, druk op de Check me knop" />
+	  							<h:inputHidden id="Prijs" value="#{tirController.tir.prijs}" />
+	  						</div>
 	  						
 	  						
 	  						<div class = "form-group">
@@ -182,7 +187,8 @@
           calculateAndDisplayRoute(directionsService, directionsRenderer);
           PlaceAutocompleteSearch();
           
-          
+          var indexV=0;
+          var indexA=0;
           function calculateAndDisplayRoute(directionsService, directionsRenderer) {
       		var beginpunt = document.getElementById('createRoute:pleaseGodWork').value;
       		var eindpunt =document.getElementById('createRoute:pleaseGodWorkTOO').value;
@@ -236,13 +242,19 @@
       				var route = response.routes[0];
       				console.log(route);
       				console.log(response);
-      				var ind= 0;
+      				
       				route.legs.forEach(function (item, index, array) {
   					  console.log(item.end_address, index);
 						if(document.getElementById('createRoute:pleaseGodWork').value !== "" ){
 							if(document.getElementById('createRoute:pleaseGodWork').value==item.end_address){
 								console.log(index);
-								ind = index;
+								indexV = index;
+							}
+						}
+						if(document.getElementById('createRoute:pleaseGodWorkTOO').value !== "" ){
+							if(document.getElementById('createRoute:pleaseGodWorkTOO').value==item.end_address){
+								console.log(index);
+								indexA = index;
 							}
 						}
 					});
@@ -257,20 +269,46 @@
       	}
       	var TOTDuration=0;
       	var theVertrTijd=0;
+      	var tijdOmweg = 0;
+      	var tijdVoorPrijs=0;
       	function testFunction(item, index){
+      		console.log(indexV);
+      		console.log(indexA);
       		var ind = 0;
       		
+      		
+      		
       		if(document.getElementById('createRoute:pleaseGodWork').value !== "" ){
-				if(document.getElementById('createRoute:pleaseGodWork').value==item.end_address){
+				if(index &lt;= indexV){
 					console.log("Vertrekpunt van de nieuwe rit= " +index);
+					console.log("HIER: " + item.duration.value);
 					ind = index;
+					tijdOmweg =(typeof tijdOmweg==='undefined') ? item.duration.value : tijdOmweg+item.duration.value;
 				}
 			}
       		if(index == ind){
+      			console.log(tijdOmweg);
       			var DateTimeBegin = new Date("#{tirController.route.vertrektijd}");
-      			theVertrTijd = new Date(DateTimeBegin.getTime() + (Math.ceil(item.duration.value/60))*60000);
+      			theVertrTijd = new Date(DateTimeBegin.getTime() + (Math.ceil(tijdOmweg/60))*60000);
       			console.log(theVertrTijd);
       		}
+      		
+      		if(document.getElementById('createRoute:pleaseGodWorkTOO').value !== "" ){
+				if(index &lt;= indexA){
+					console.log("Eindpunt van de nieuwe rit= " +index);
+					tijdVoorPrijs =(typeof tijdVoorPrijs==='undefined') ? item.duration.value : tijdVoorPrijs+item.duration.value;
+					
+				}
+			}
+      		if(index == indexA){
+      			console.log(tijdVoorPrijs);
+      			calculatePrice(tijdVoorPrijs);
+      		}
+      		console.log(tijdOmweg);
+      		
+      		
+      		
+      		
       		console.log(item.duration.value);
       		TOTDuration = TOTDuration + item.duration.value;
       		console.log(TOTDuration);
@@ -361,6 +399,16 @@
 		  	}
 		
 
+	}
+	
+	function calculatePrice(tijd){
+		//iets in functie van de omweg die de driver moet maken
+		//mss tijd tussen rit begin --> eindpunt
+		console.log(Math.floor(tijd/200));
+		document.getElementById('createRoute:prijs').innerHTML= Math.floor(tijd/200);
+		document.getElementById('createRoute:Prijs').value= Math.floor(tijd/200);
+		
+		
 	}
 	
 	}
