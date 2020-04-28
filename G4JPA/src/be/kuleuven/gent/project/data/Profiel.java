@@ -13,7 +13,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @Table(name="profiel")
-@SecondaryTable(name = "profiel_Group", pkJoinColumns=@PrimaryKeyJoinColumn(name="idProfiel", referencedColumnName="login"))
+@SecondaryTable(name = "profiel_Group", pkJoinColumns=@PrimaryKeyJoinColumn(name="login", referencedColumnName="login"))
 public class Profiel implements Serializable {
 	//alle parameters die in de DB staan , nog iets ...
 	@Id

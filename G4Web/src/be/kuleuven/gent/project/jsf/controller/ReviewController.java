@@ -57,7 +57,7 @@ public class ReviewController implements Serializable {
 	public String createReview() {
 		review.setAfzender(profielEJB.getProfiel());
 		reviewEJB.createReview(review);
-	profielEJB.updateScores(review.getOntvanger().getId());
+//		profielEJB.updateScores(review.getOntvanger().getId());
 		Notificatie n = new Notificatie("review");
 		n.setProfiel(review.getOntvanger());
 		notificatieEJB.createNotificatie(n);
