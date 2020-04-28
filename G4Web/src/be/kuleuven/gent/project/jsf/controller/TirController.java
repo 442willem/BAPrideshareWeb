@@ -130,6 +130,7 @@ public class TirController implements Serializable {
 		this.route = route;
 	}
 	public void setTussenstops() {
+		System.out.println("routeid = " + route.getId());
 		String[] array=routeEJB.zoekGeaccepteerdeTussenstops(route.getId());
 		System.out.println("Aantal tussenstops:"+array.length);
 		if(array.length>0) {

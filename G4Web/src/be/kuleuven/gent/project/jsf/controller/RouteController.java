@@ -237,6 +237,7 @@ public class RouteController implements Serializable {
 		return "viewPassengers.faces?faces-redirect=true&route="+route.getId();
 	}
 	public void setTussenstops() {
+		System.out.println("routeId= "+route.getId());
 		String[] array=routeEJB.zoekGeaccepteerdeTussenstops(route.getId());
 		System.out.println("Aantal tussenstops:"+array.length);
 		if(array.length>0) {
