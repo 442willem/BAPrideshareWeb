@@ -13,7 +13,7 @@
 		action="#{userController.goToIndexD()}"
 		style="float: left;text-decoration:none; padding:5px;" />
 	<h:commandButton value="Back" class="btn btn-primary pull-left"
-		action="#{userController.goToViewPassengers(tirController.tir.route.id)}"
+		action="#{userController.goToMyRoutes()}"
 		style="float: left;text-decoration:none; padding:5px;" />
 </h:form>
 <title><ui:insert name="title">Rit view</ui:insert></title>
@@ -54,9 +54,11 @@
 		value="#{tirController.route.tussenstops}"></h:inputHidden>
 	<div style="margin: 0 auto; width: 600px; height: 600px;" id="map"></div>
 	<h:form>
-		<h:commandButton value="Accept" class="btn btn-primary pull-left"
-			action="#{tirController.keurRitGoed(tirController.tir.id)}"
+	<h:panelGroup rendered="#{!tirController.tir.goedgekeurd}">
+		<h:commandButton value="Cancel request" class="btn btn-primary pull-left"
+			action="#{tirController.deleteRitRequest(tirController.tir.id)}"
 			style="float: left;text-decoration:none; padding:5px;"></h:commandButton>
+			</h:panelGroup>
 	</h:form>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;libraries=places,geometry&amp;callback=PlaceAutocompleteSearch&amp;fields=formatted_address&amp;callback=initMap"

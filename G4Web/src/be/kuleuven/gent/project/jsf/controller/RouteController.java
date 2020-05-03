@@ -235,6 +235,7 @@ public class RouteController implements Serializable {
 		n.setProfiel(profielEJB.getProfiel());
 		n.setRit(ritEJB.findRit(ritId));
 		notificatieEJB.createNotificatie(n);
+		routeEJB.notifyAllRitten(ritId);
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		facesContext.renderResponse();
 		return "viewPassengers.faces?faces-redirect=true&route="+route.getId();

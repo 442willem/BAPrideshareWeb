@@ -68,6 +68,20 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 		n.setProfiel(r.getBestuurder());
 		em.persist(n);
 	}
+	@Override
+	public void notifyAllRitten(int ritId) {
+		Query q=em.createQuery("SELECT r FROM Tussenstop r WHERE r.route.id=?1 AND r.id<>?2");
+		q.setParameter(1, em.find(Tussenstop.class, ritId).getRoute().getId());
+		q.setParameter(2, ritId);
+		List<Tussenstop> ritten = q.getResultList();
+
+		for (Tussenstop rit: ritten) {
+			Notificatie n = new Notificatie("ritChange");
+			n.setProfiel(rit.getPassagier());
+			n.setRit(rit);
+			em.persist(n);
+		}
+	}
 	
 	@Override
 	public Route findRoute(int id) {

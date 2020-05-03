@@ -11,4 +11,6 @@ public interface TussenstopManagementEJBLocal {
 	public Tussenstop findRit(int id);
 
 	public void keurRitGoed(int ritId);
+
+	public void deleteRit(int id);
 }

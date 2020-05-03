@@ -132,7 +132,7 @@ public class Notificatie {
 			message="A ride you have booked has been accepted";
 			break;
 		case "ritChange":
-			message="A ride you have booked has been changed";
+			message="A ride you have requested has been changed";
 			break;
 		default:
 			message=null;

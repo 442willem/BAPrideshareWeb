@@ -22,4 +22,5 @@ public interface RouteManagementEJBLocal {
 //	public void boekIn(Profiel passagier, int routeId);
 	public String[] zoekGeaccepteerdeTussenstops(int routeID);
 	public String[] zoekTijdelijkeTussenstops(int routeID,int ritID);
+	public void notifyAllRitten(int ritId);
 }

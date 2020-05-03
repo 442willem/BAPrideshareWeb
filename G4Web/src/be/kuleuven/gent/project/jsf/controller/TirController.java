@@ -148,4 +148,10 @@ public class TirController implements Serializable {
 		facesContext.renderResponse();
 		return "viewPassengers.faces?faces-redirect=true&route="+route.getId();
 	}
+	public String deleteRitRequest(int id) {
+		tirejb.deleteRit(id);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.renderResponse();
+		return "myRoutes.faces?faces-redirect=true";
+	}
 }
