@@ -41,8 +41,7 @@ public class ProfielController implements Serializable {
 		return "index.faces?faces-redirect=true&index=0";	
 	}
 	
-	public Profiel getProfiel() {
-		
+	public Profiel getProfiel() {	
 		return profiel;
 	}
 	public Profiel getHuidigProfiel() {
@@ -65,6 +64,12 @@ public class ProfielController implements Serializable {
 			e.printStackTrace();
 		}
 	  }
+	public String getDriverscore() {
+		return profielEJB.getDriverscore(profiel.getId());
+	}
+	public String getPassagierscore() {
+		return profielEJB.getPassagierscore(profiel.getId());
+	}
 	
 	
 	

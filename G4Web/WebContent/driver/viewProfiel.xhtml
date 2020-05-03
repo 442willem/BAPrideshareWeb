@@ -16,6 +16,20 @@
 	<title><ui:insert name="title">Profiel view</ui:insert></title>
 	<meta name="viewport" content="initial-scale=1.0" />
 	<meta charset="utf-8" />
+
+	<style type="text/css">
+.row {
+	display: flex;
+}
+
+.columnLeft {
+	flex: 10%;
+}
+
+.column {
+	flex: 45%;
+}
+</style>
 	<f:metadata>
 		<f:viewParam name="profiel" value="#{profielController.profiel.id}" />
 		<f:viewAction action="#{profielController.findProfiel}" />
@@ -40,41 +54,50 @@
 	<a class='btn btn-info btn-xs'
 		href="viewConversation.faces?ontvanger=#{profielController.findProfiel().id}"><span
 		class="glyphicon glyphicon-edit"></span>Send Message</a>
-	<h2 class="h2">Driver score:
-		#{profielController.findProfiel().driverscore}/5</h2>
-	<h:dataTable id="reviewTabelDriver"
-		value="#{reviewController.findReviewsProfielDriver()}" var="review">
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Score " />
-			</f:facet>
-			<h:outputText value="#{review.score}/5" />
-		</h:column>
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Description " />
-			</f:facet>
-			<h:outputText value="#{review.descriptie}" />
-		</h:column>
-	</h:dataTable>
 
-	<h2 class="h2">Passenger score:
-		#{profielController.findProfiel().passagierscore}/5</h2>
-	<h:dataTable id="reviewTabelPassenger"
-		value="#{reviewController.findReviewsProfielPassenger()}" var="review">
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Score " />
-			</f:facet>
-			<h:outputText value="#{review.score}/5" />
-		</h:column>
-		<h:column>
-			<f:facet name="header">
-				<h:outputText value="Description " />
-			</f:facet>
-			<h:outputText value="#{review.descriptie}" />
-		</h:column>
-	</h:dataTable>
+	<div class="row">
+		<div class="columnLeft"></div>
+		<div class="column">
+			<h2 class="h2">Driver score:
+				#{profielController.getDriverscore()}/5</h2>
+			<h:dataTable id="reviewTabelDriver"
+				value="#{reviewController.findReviewsProfielDriver()}" var="review">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Score " />
+					</f:facet>
+					<h:outputText value="#{review.score}/5" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Description " />
+					</f:facet>
+					<h:outputText value="#{review.descriptie}" />
+				</h:column>
+			</h:dataTable>
+		</div>
+		<div class="column">
+
+			<h2 class="h2">Passenger score:
+				#{profielController.getPassagierscore()}/5</h2>
+			<h:dataTable id="reviewTabelPassenger"
+				value="#{reviewController.findReviewsProfielPassenger()}"
+				var="review">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Score " />
+					</f:facet>
+					<h:outputText value="#{review.score}/5" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Description " />
+					</f:facet>
+					<h:outputText value="#{review.descriptie}" />
+				</h:column>
+			</h:dataTable>
+		</div>
+	</div>
 
 </h:body>
 </html>

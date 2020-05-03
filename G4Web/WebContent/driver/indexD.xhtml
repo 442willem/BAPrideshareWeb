@@ -59,11 +59,19 @@
 			value="My Routes" action="#{userController.goToMyRoutes()}"
 			class="btn btn-primary pull-right" id="Routenav2" />
 	</h:form>
-		<h:form method="post" id="myNotifications">
+	<h:form method="post" id="myNotifications">
 		<h:commandButton
 			style="text-decoration:none; padding:5px; width:120px; float:center;"
-			value="My Notifications" action="#{userController.goToMyNotifications()}"
-			class="btn btn-primary pull-right" id="Routenav3" />
+			value="My Notifications"
+			action="#{userController.goToMyNotifications()}"
+			class="btn btn-primary pull-right" id="NotifNav" />
+	</h:form>
+	<h:form method="post" id="myProfile">
+		<h:commandButton
+			style="text-decoration:none; padding:5px; width:120px; float:center;"
+			value="My Profile"
+			action="#{userController.goToMyProfile(profielController.getHuidigProfiel().getId())}"
+			class="btn btn-primary pull-right" id="ProfileNav" />
 	</h:form>
 	<script type="text/javascript">
 		jQuery(function() {

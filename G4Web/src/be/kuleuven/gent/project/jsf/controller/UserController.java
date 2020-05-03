@@ -61,6 +61,9 @@ public class UserController implements Serializable{
 		System.out.println("joooow");
 		return "indexD.faces?faces-redirect=true&login=1&index=0";
 	}
+	public String goToMyProfile(int id) {
+		return "viewProfiel.faces?faces-redirect=true&profiel="+id;
+	}
 	
 
 }

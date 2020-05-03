@@ -54,30 +54,39 @@ public class ProfielManagementEJB implements ProfielManagementEJBLocal {
 		return (Profiel) q.getResultList().get(0);
 	}
 	@Override
-	public void updateScores(int id) {
+	public String getDriverscore(int id) {
 		System.out.println(id);
-		Query q = em.createQuery("SELECT r FROM Review r where r.ontvanger.id=?1");
+		Query q = em.createQuery("SELECT r FROM Review r where r.ontvanger.id=?1 AND r.modus=0");
 		q.setParameter(1, id);
 		List<Review> reviews=q.getResultList();
 		System.out.println(reviews.size());
-		int dScore=0;
-		int dReviews=0;
-		int pScore=0;
-		int pReviews=0;
+		double dScore=0;
+		double dReviews=0;
 		
 		for(Review r:reviews) {
-			if(r.getModus()==0) {
+			
 				dScore+=r.getScore();
 				dReviews++;
-			}
-			if(r.getModus()==1) {
+			
+		}
+		if(dReviews>0) return String.format ("%.1f", (dScore/dReviews));
+		else return "5";
+	}
+	@Override
+	public String getPassagierscore(int id) {
+		System.out.println(id);
+		Query q = em.createQuery("SELECT r FROM Review r where r.ontvanger.id=?1 AND r.modus=1");
+		q.setParameter(1, id);
+		List<Review> reviews=q.getResultList();
+		System.out.println(reviews.size());
+		double pScore=0;
+		double pReviews=0;
+		
+		for(Review r:reviews) {
 				pScore+=r.getScore();
 				pReviews++;
-			}
 		}
-		Profiel p = em.find(Profiel.class, id);
-		if(dReviews>0)p.setDriverscore((int)(dScore/dReviews));else p.setDriverscore(5);
-		if(pReviews>0)p.setPassagierscore((int)(pScore/pReviews));else p.setPassagierscore(5);
-		em.persist(p);
+		if(pReviews>0) return String.format ("%.1f", (pScore/pReviews));
+		else return "5";
 	}
 }
