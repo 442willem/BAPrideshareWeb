@@ -54,7 +54,7 @@
 		value="#{tirController.route.tussenstops}"></h:inputHidden>
 	<div style="margin: 0 auto; width: 600px; height: 600px;" id="map"></div>
 	<h:outputLabel id="vertrek" value="De verwachte vertrektijd voor als deze rit geaccepteerd wordt is:"/><br/>
-	<h:outputLabel id="vertrekT" value="" /><h:outputLabel id="waarschuwing" value =" "/><br/>
+	<h:outputLabel id="waarschuwing" value =" " style="color:red ;font-weight:bold"/><br/> <h:outputLabel id="vertrekT" value="" /><br/>
 	<h:outputLabel value="Prijs in Euro: "/><br/>
 	<h:outputLabel id="prijs"	value="" /><br/>
 	<h:form>
@@ -240,8 +240,8 @@
 	      		var test = dates.compare(DateTimeEind,newDateobj);
 	      		console.log(test);
 	      		if(test == 1){
-	      			var VertrekP = new Date(theVertrTijd.getTime() );
-	      			VertrekP.setHours(VertrekP.getHours()+2) 
+	      			var VertrekP = new Date(DateTimeBegin.getTime() );
+	      			VertrekP.setHours(VertrekP.getHours()) 
 	      			var dateStr =
 	      			  ("00" + (VertrekP.getMonth() + 1)).slice(-2) + "/" +
 	      			  ("00" + VertrekP.getDate()).slice(-2) + "/" +
@@ -250,21 +250,13 @@
 	      			  ("00" + VertrekP.getMinutes()).slice(-2) + ":" +
 	      			  ("00" + VertrekP.getSeconds()).slice(-2);
 	      			console.log(dateStr);
-	      			document.getElementById('vertrekT').value = dateStr;
+	      			document.getElementById('vertrekT').innerHTML = dateStr;
 	      		} else {
 	      			if(document.getElementById('hidden-beginpunt').value !== ""){
-	      				var VertrekP = new Date(theVertrTijd.getTime() );
-		      			VertrekP.setHours(VertrekP.getHours()+2) 
-		      			var dateStr =
-		      			  ("00" + (VertrekP.getMonth() + 1)).slice(-2) + "/" +
-		      			  ("00" + VertrekP.getDate()).slice(-2) + "/" +
-		      			VertrekP.getFullYear() + " " +
-		      			  ("00" + VertrekP.getHours()).slice(-2) + ":" +
-		      			  ("00" + VertrekP.getMinutes()).slice(-2) + ":" +
-		      			  ("00" + VertrekP.getSeconds()).slice(-2);
-		      			console.log(dateStr);
-		      			document.getElementById('vertrekT').value = dateStr;
-		      			document.getElementById('waarschuwing').value = "Opgelet, voor deze rit moet vertrokken worden voor de gewenste vertrektijd!";
+	      				console.log(newDateobj - DateTimeEind);
+	      				var verschilVroeger = (newDateobj - DateTimeEind)/(1000*60)
+		      			document.getElementById('vertrekT').innerHTML = verschilVroeger +" minuten" + "\t";
+		      			document.getElementById('waarschuwing').innerHTML = "	Opgelet, voor deze rit moet vertrokken worden voor de gewenste vertrektijd!";
 	      			}
 	      			/* console.log("ONMOGELIJK") */
 	      		}
