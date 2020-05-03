@@ -1,6 +1,8 @@
 package be.kuleuven.gent.project.ejb;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,6 +11,7 @@ import javax.persistence.*;
 
 import com.sun.jmx.snmp.Timestamp;
 
+import be.kuleuven.gent.project.data.Notificatie;
 import be.kuleuven.gent.project.data.Profiel;
 import be.kuleuven.gent.project.data.Rit;
 import be.kuleuven.gent.project.data.Route;
@@ -28,6 +31,8 @@ public class RitManagementEJB implements RitManagementEJBLocal {
 	private UserManagementEJBLocal userEJB;
 	@Resource
 	private SessionContext ctx;	
+	@Resource
+	TimerService timerService;
 	
 	@EJB
 	private RouteManagementEJBLocal routeEJB;
@@ -82,7 +87,23 @@ public class RitManagementEJB implements RitManagementEJBLocal {
 		  
 		  System.out.println("HALLO HIER");
 		  r.setGoedgekeurd(true);
+		// setting timer for 24 hours before start to send notification
+			long t = r.getRoute().getVertrektijd().getTime();
+			Calendar cal = Calendar.getInstance();
+			cal.setTimeInMillis(t-86400000);
+			Date date = cal.getTime();
+			Timer timer = timerService.createSingleActionTimer(date, new TimerConfig(r,true));
+			System.out.println("TimerBean: timeout initiated for:" + date.toString());		
 		  em.persist(r);
+	}
+	@Timeout
+	public void timeout(Timer timer) {
+		System.out.println("TimerBean: timeout occurred");
+		Tussenstop r=(Tussenstop) timer.getInfo();
+		Notificatie n = new Notificatie("ritHerinnering");
+		System.out.println("ritid:"+r.getId()+"passagierId"+r.getPassagier().getId());
+		n.setProfiel(r.getPassagier());
+		em.persist(n);
 	}
 
 	@Override

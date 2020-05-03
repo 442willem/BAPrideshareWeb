@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name="route")
-public class Route {
+public class Route implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idRoute", nullable=false,length=16)

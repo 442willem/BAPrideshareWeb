@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import javax.ejb.Local;
+import javax.ejb.Timer;
 
 import be.kuleuven.gent.project.data.Profiel;
 import be.kuleuven.gent.project.data.Rit;

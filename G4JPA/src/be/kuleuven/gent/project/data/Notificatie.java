@@ -104,6 +104,15 @@ public class Notificatie {
 		if(rit!=null)return true;
 		else return false;
 	}
+	public boolean isRouteHerrinering() {
+		if(type.equals("routeHerinnering"))return true;
+		else return false;
+	}
+	public boolean isRitHerrinering() {
+		if(type.equals("ritHerinnering"))return true;
+		else return false;
+	}
+	
 	public String getMessage() {
 		String message;
 		switch(type) {

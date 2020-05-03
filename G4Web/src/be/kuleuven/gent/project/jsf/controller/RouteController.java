@@ -5,11 +5,13 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.*;
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
+import javax.annotation.Resource;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -37,7 +39,7 @@ public class RouteController implements Serializable {
 	
 	@EJB
 	private NotificatieManagementLocal notificatieEJB;
-
+	
 	private Route route;
 	private Tussenstop rit = new Tussenstop();
 
@@ -61,9 +63,10 @@ public class RouteController implements Serializable {
 
 	public String createRoute() {
 		routeEJB.createRoute(route);
+
 		return "indexD.faces?faces-redirect=true&login=1&index=0";
 	}
-	
+
 	public RitManagementEJBLocal getRitEJB() {
 		return ritEJB;
 	}
