@@ -255,7 +255,17 @@
 	      			if(document.getElementById('hidden-beginpunt').value !== ""){
 	      				console.log(newDateobj - DateTimeEind);
 	      				var verschilVroeger = (newDateobj - DateTimeEind)/(1000*60)
-		      			document.getElementById('vertrekT').innerHTML = verschilVroeger +" minuten" + "\t";
+	      				var VertrekP = new Date(DateTimeBegin.getTime() - verschilVroeger)
+	      				var dateStr =
+	  	      			  ("00" + (VertrekP.getMonth() + 1)).slice(-2) + "/" +
+	  	      			  ("00" + VertrekP.getDate()).slice(-2) + "/" +
+	  	      			VertrekP.getFullYear() + " " +
+	  	      			  ("00" + VertrekP.getHours()).slice(-2) + ":" +
+	  	      			  ("00" + VertrekP.getMinutes()).slice(-2) + ":" +
+	  	      			  ("00" + VertrekP.getSeconds()).slice(-2);
+	  	      			console.log(dateStr);
+	  	      			document.getElementById('vertrekT').innerHTML = dateStr;
+		      			document.getElementById('vertrekT').innerHTML = dateStr;
 		      			document.getElementById('waarschuwing').innerHTML = "	Opgelet, voor deze rit moet vertrokken worden voor de gewenste vertrektijd!";
 	      			}
 	      			/* console.log("ONMOGELIJK") */
