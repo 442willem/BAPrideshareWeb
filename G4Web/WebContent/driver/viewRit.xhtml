@@ -254,15 +254,17 @@
 	      		} else {
 	      			if(document.getElementById('hidden-beginpunt').value !== ""){
 	      				console.log(newDateobj - DateTimeEind);
-	      				var verschilVroeger = (newDateobj - DateTimeEind)/(1000*60)
-	      				var VertrekP = new Date(DateTimeBegin.getTime() - verschilVroeger)
+	      				var verschilVroeger = (newDateobj - DateTimeEind)/(1000*60);
+	     				console.log(verschilVroeger);
+	      				var VertrekP = new Date(DateTimeBegin.getTime() - (newDateobj - DateTimeEind));
+	      				console.log(VertrekP);
 	      				var dateStr =
 	  	      			  ("00" + (VertrekP.getMonth() + 1)).slice(-2) + "/" +
 	  	      			  ("00" + VertrekP.getDate()).slice(-2) + "/" +
 	  	      			VertrekP.getFullYear() + " " +
 	  	      			  ("00" + VertrekP.getHours()).slice(-2) + ":" +
 	  	      			  ("00" + VertrekP.getMinutes()).slice(-2) + ":" +
-	  	      			  ("00" + VertrekP.getSeconds()).slice(-2);
+	  	      			  ("00");
 	  	      			console.log(dateStr);
 	  	      			document.getElementById('vertrekT').innerHTML = dateStr;
 		      			document.getElementById('vertrekT').innerHTML = dateStr;
