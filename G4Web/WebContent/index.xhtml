@@ -10,6 +10,7 @@
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 	<title><ui:insert name="title">Welcome To RideSharing</ui:insert>
 	</title>
+	<h:outputStylesheet name="css/table-style.css"  />
 	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 	<meta charset="utf-8" />
 	<style type="text/css">
@@ -113,8 +114,9 @@
 
 	<div id="herlaad">
 		<h:dataTable id="routentable" value="#{routeController.getRoutes()}"
-			var="route" styleClass="routeTable" headerClass="routeTableHeader"
-			columnClasses="routeTableColumn">
+			var="route" styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row">
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="From " />

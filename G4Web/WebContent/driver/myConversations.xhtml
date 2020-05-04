@@ -8,23 +8,38 @@
 <h:head>
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-		<h:form method="post" id="homeform">
-		<h:commandButton value="Home" class="btn btn-primary pull-left"
-			action="#{userController.goToIndexD()}"
-			style="float: left;text-decoration:none; padding:5px;" />
-	</h:form>
-	<title><ui:insert name="title">Welcome To RideSharing</ui:insert>
+		
+	<title><ui:insert name="title">My Conversations</ui:insert>
 	</title>
+	<h:outputStylesheet name="css/table-style.css"  />
 	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 	<meta charset="utf-8" />
 </h:head>
 <h:body>
+<h:form method="post" id="homeform">
+		<h:commandButton value="Home" class="btn btn-primary pull-left"
+			action="#{userController.goToIndexD()}"
+			style="float: left;text-decoration:none; padding:5px;" />
+</h:form>
 	<script type="text/javascript"
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-	
-	<div id="conversations">
+<div class="jumbotron jumbotron-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-12">
+            	
+                <h1 class="h1">
+                    My Conversations <small></small></h1>
+                    
+            </div>
+        </div>
+    </div>
+</div>	
+	<div id="conversations" class="well well-sm">
 		<h:dataTable id="conversationTable" value="#{berichtController.getConversations()}"
-			var="profiel">
+			var="profiel" styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row">
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Name " />
