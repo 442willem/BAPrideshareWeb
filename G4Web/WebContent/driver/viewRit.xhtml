@@ -36,32 +36,47 @@
 				<div class="col-sm-12 col-lg-12">
 
 					<h1 class="h1">
-						Drive to: #{tirController.tir.route.eindpunt} <small></small>
+						Drive to: #{tirController.tir.route.eindpunt}, with #{tirController.tir.passagier.voornaam}! <small></small>
 					</h1>
 				</div>
 			</div>
 		</div>
 	</div>
-	<h:inputHidden id="hidden-beginpunt"
-		value="#{tirController.tir.beginpunt}"></h:inputHidden>
-	<h:inputHidden id="hidden-eindpunt"
-		value="#{tirController.tir.eindpunt}"></h:inputHidden>
-	<h:inputHidden id="hidden-start"
-		value="#{tirController.tir.route.beginpunt}"></h:inputHidden>
-	<h:inputHidden id="hidden-eind"
-		value="#{tirController.tir.route.eindpunt}"></h:inputHidden>
-	<h:inputHidden id="hidden-tussenstops"
-		value="#{tirController.route.tussenstops}"></h:inputHidden>
-	<div style="margin: 0 auto; width: 600px; height: 600px;" id="map"></div>
-	<h:outputLabel id="vertrek" value="De verwachte vertrektijd voor als deze rit geaccepteerd wordt is:"/><br/>
-	<h:outputLabel id="waarschuwing" value =" " style="color:red ;font-weight:bold"/><br/> <h:outputLabel id="vertrekT" value="" /><br/>
-	<h:outputLabel value="Prijs in Euro: "/><br/>
-	<h:outputLabel id="prijs"	value="" /><br/>
-	<h:form>
-		<h:commandButton value="Accept" class="btn btn-primary pull-left"
-			action="#{tirController.keurRitGoed(tirController.tir.id)}"
-			style="float: left;text-decoration:none; padding:5px;"></h:commandButton>
-	</h:form>
+	<div class="container">
+    	<div class="row">
+      	  <div class="col-md-8">
+      	  <div class="well well-sm">
+      	 	 <div class="row">
+					<div class="col-md-6">
+			<h:inputHidden id="hidden-beginpunt"
+				value="#{tirController.tir.beginpunt}"></h:inputHidden>
+			<h:inputHidden id="hidden-eindpunt"
+				value="#{tirController.tir.eindpunt}"></h:inputHidden>
+			<h:inputHidden id="hidden-start"
+				value="#{tirController.tir.route.beginpunt}"></h:inputHidden>
+			<h:inputHidden id="hidden-eind"
+				value="#{tirController.tir.route.eindpunt}"></h:inputHidden>
+			<h:inputHidden id="hidden-tussenstops"
+				value="#{tirController.route.tussenstops}"></h:inputHidden>
+			<div style="margin: 0 auto; width: 600px; height: 600px;" id="map"></div>
+			<h:outputLabel id="vertrek" value="De verwachte vertrektijd voor als deze rit geaccepteerd wordt is:"/><br/>
+			<h:outputLabel id="waarschuwing" value =" " style="color:red ;font-weight:bold"/><br/> <h:outputLabel id="vertrekT" value="" /><br/>
+			<h:outputLabel value="Prijs in Euro: "/> 
+			<h:outputLabel id="prijs"	value="" /><br/>
+			<h:form>
+				<div align="right">
+				<h:commandButton value="Accept" class="btn btn-primary"
+					action="#{tirController.keurRitGoed(tirController.tir.id)}"
+					style="text-decoration:none; padding:5px;"></h:commandButton>
+				</div>
+			</h:form>
+			</div>
+			</div>
+			</div>
+			</div>
+		</div>
+	</div>
+			
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;libraries=places,geometry&amp;callback=PlaceAutocompleteSearch&amp;fields=formatted_address&amp;callback=initMap"
 		async="" defer=""></script>
