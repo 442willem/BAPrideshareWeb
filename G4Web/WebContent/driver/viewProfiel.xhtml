@@ -36,8 +36,8 @@
 	</f:metadata>
 </h:head>
 
-<h:body>
 
+<body onload="check()"> 
 	<div class="jumbotron jumbotron-sm">
 		<div class="container">
 			<div class="row">
@@ -51,7 +51,7 @@
 		</div>
 	</div>
 	<br />
-	<a class='btn btn-info btn-xs'
+	<a class='btn btn-info btn-xs' id='knop'
 		href="viewConversation.faces?ontvanger=#{profielController.findProfiel().id}"><span
 		class="glyphicon glyphicon-edit"></span>Send Message</a>
 
@@ -98,6 +98,15 @@
 			</h:dataTable>
 		</div>
 	</div>
+<script>
+	function check(){
+		if(#{profielController.getHuidigProfiel().id}==#{profielController.findProfiel().id}){
+			console.log("zelfde persoon");
+			document.getElementById('knop').style.display='none';
+		}
+	}
 
-</h:body>
+</script>
+</body>
+
 </html>
