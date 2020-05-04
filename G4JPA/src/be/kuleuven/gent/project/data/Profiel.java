@@ -9,9 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
+@XmlRootElement
 @Table(name="profiel")
 @SecondaryTable(name = "profiel_Group", pkJoinColumns=@PrimaryKeyJoinColumn(name="login", referencedColumnName="login"))
 public class Profiel implements Serializable {
@@ -119,6 +121,15 @@ public class Profiel implements Serializable {
 	}
 
 	public Profiel() {}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Profiel [id=" + id + ", driverscore=" + driverscore + ", passagierscore=" + passagierscore
+				+ ", voornaam=" + voornaam + ", achternaam=" + achternaam + ", login=" + login + ", password="
+				+ password + ", paypalemail=" + paypalemail + ", group=" + group + "]";
+	}
 	
 	public Profiel(String group,String login, String password,String achternaam, String voornaam) {
 		this.achternaam=achternaam;

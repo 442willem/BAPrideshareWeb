@@ -25,7 +25,7 @@ import be.kuleuven.gent.project.ejb.RitManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.UserManagementEJBLocal;
 
 @javax.enterprise.context.RequestScoped
-@Path("task_service")
+@Path("rit_service")
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
 public class RitRestService {
