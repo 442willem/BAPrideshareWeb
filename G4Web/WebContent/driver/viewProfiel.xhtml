@@ -13,6 +13,7 @@
 			action="#{userController.goToIndexD()}"
 			style="float: left;text-decoration:none; padding:5px;" />
 	</h:form>
+	<h:outputStylesheet name="css/table-style.css"  />
 	<title><ui:insert name="title">Profiel view</ui:insert></title>
 	<meta name="viewport" content="initial-scale=1.0" />
 	<meta charset="utf-8" />
@@ -61,7 +62,9 @@
 			<h2 class="h2">Driver score:
 				#{profielController.getDriverscore()}/5</h2>
 			<h:dataTable id="reviewTabelDriver"
-				value="#{reviewController.findReviewsProfielDriver()}" var="review">
+				value="#{reviewController.findReviewsProfielDriver()}" var="review" styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row">
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Score " />
@@ -82,7 +85,9 @@
 				#{profielController.getPassagierscore()}/5</h2>
 			<h:dataTable id="reviewTabelPassenger"
 				value="#{reviewController.findReviewsProfielPassenger()}"
-				var="review">
+				var="review" styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row">
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Score " />

@@ -46,8 +46,7 @@
     	<div class="row">
       	  <div class="col-md-8">
       	  <div class="well well-sm">
-      	 	 <div class="row">
-					<div class="col-md-6">
+      	 	 
 			<h:inputHidden id="hidden-beginpunt"
 				value="#{tirController.tir.beginpunt}"></h:inputHidden>
 			<h:inputHidden id="hidden-eindpunt"
@@ -59,6 +58,7 @@
 			<h:inputHidden id="hidden-tussenstops"
 				value="#{tirController.route.tussenstops}"></h:inputHidden>
 			<div style="margin: 0 auto; width: 600px; height: 600px;" id="map"></div>
+			<h:outputLabel id="tussenstopB" value="De extra tussenstops zijn: #{tirController.tir.beginpunt} &amp; #{tirController.tir.eindpunt}" style="color:blue"></h:outputLabel>
 			<h:outputLabel id="vertrek" value="De verwachte vertrektijd voor als deze rit geaccepteerd wordt is:"/><br/>
 			<h:outputLabel id="waarschuwing" value =" " style="color:red ;font-weight:bold"/><br/> <h:outputLabel id="vertrekT" value="" /><br/>
 			<h:outputLabel value="Prijs in Euro: "/> 
@@ -70,8 +70,7 @@
 					style="text-decoration:none; padding:5px;"></h:commandButton>
 				</div>
 			</h:form>
-			</div>
-			</div>
+			
 			</div>
 			</div>
 		</div>
