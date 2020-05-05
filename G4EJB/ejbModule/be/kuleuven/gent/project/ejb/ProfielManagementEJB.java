@@ -40,6 +40,15 @@ public class ProfielManagementEJB implements ProfielManagementEJBLocal {
 		}
 		em.persist(p);
     }
+    
+    @Override
+    public Profiel findProfiel(String username) {
+    	Query q = em.createQuery("SELECT p FROM Profiel p where p.login=?1");
+		q.setParameter(1, username);
+		if(q.getResultList().size()>1)return null;
+		return (Profiel) q.getResultList().get(0);
+    }
+    
 	@Override
 	public Profiel getProfiel() {
 		String login = ctx.getCallerPrincipal().getName();

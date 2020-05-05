@@ -23,4 +23,6 @@ public interface RouteManagementEJBLocal {
 	public String[] zoekGeaccepteerdeTussenstops(int routeID);
 	public String[] zoekTijdelijkeTussenstops(int routeID,int ritID);
 	public void notifyAllRitten(int ritId);
+	public void createRoute(Route r, int i);
+	public Timestamp toTimestamp(String date);
 }

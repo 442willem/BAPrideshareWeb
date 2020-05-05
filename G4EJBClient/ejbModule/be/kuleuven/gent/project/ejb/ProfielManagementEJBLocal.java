@@ -14,4 +14,8 @@ public interface ProfielManagementEJBLocal {
 
 	public String getDriverscore(int id);
 	public String getPassagierscore(int id);
+
+	public Profiel findProfiel(String username);
+	
+	
 }

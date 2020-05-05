@@ -1,6 +1,7 @@
 package be.kuleuven.gent.project.ejb;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -58,6 +59,35 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 		Timer timer = timerService.createSingleActionTimer(date, new TimerConfig(r,true));
 		System.out.println("TimerBean: timeout initiated for:" + date.toString());		
 		em.persist(r);
+	}
+	
+	@Override
+	public void createRoute (Route r, int i) {
+		// setting timer for 24 hours before start to send notification
+				long t = r.getVertrektijd().getTime();
+				Calendar cal = Calendar.getInstance();
+				cal.setTimeInMillis(t-86400000);
+				Date date = cal.getTime();
+				Timer timer = timerService.createSingleActionTimer(date, new TimerConfig(r,true));
+				System.out.println("TimerBean: timeout initiated for:" + date.toString());		
+				em.persist(r);
+		
+	}
+	
+	@Override
+	public Timestamp toTimestamp(String date) {
+		Timestamp timestamp;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            Date parsedDateVertrek = dateFormat.parse(date);
+            timestamp = new java.sql.Timestamp(parsedDateVertrek.getTime());
+        } catch(Exception e) {
+           System.out.println(e.toString());
+            timestamp=null;
+        }
+
+        return  timestamp;
+		
 	}
 	@Timeout
 	public void timeout(Timer timer) {

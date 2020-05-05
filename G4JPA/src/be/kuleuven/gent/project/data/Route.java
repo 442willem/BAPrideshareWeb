@@ -48,6 +48,11 @@ public class Route implements Serializable {
 	private Date vertrektijdDate;
 	@Transient 
 	private String tussenstops;
+	@Transient
+	private String eindtijdString;
+	@Transient
+	private String vertrektijdString;
+	
 
 	public int getId() {
 		return id;
@@ -125,6 +130,30 @@ public class Route implements Serializable {
 		this.vertrektijd=vertrektijd;
 		this.bestuurder=bestuurder;
 	}
+	
+	public Timestamp toTimestamp(String date) {
+		Timestamp timestamp;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            Date parsedDateVertrek = dateFormat.parse(date);
+            timestamp = new java.sql.Timestamp(parsedDateVertrek.getTime());
+        } catch(Exception e) {
+           System.out.println(e.toString());
+            timestamp=null;
+        }
+
+        return  timestamp;
+	}
+	
+	public Route(Route r ) {
+		this.eindtijdString=r.eindtijdString;
+		this.vertrektijdString=r.vertrektijdString;
+		this.beginpunt=r.beginpunt;
+		this.eindpunt=r.eindpunt;
+		this.maxPersonen=r.maxPersonen;
+		this.eindtijd=toTimestamp(r.eindtijdString);
+		this.vertrektijd=toTimestamp(r.vertrektijdString);
+	}
 
 	public Date getEindtijdDate() {
 		return eindtijdDate;
@@ -150,5 +179,11 @@ public class Route implements Serializable {
 
 	public void setTussenstops(String tussenstops) {
 		this.tussenstops = tussenstops;
+	}
+	
+	@Override
+	public String toString() {
+		return "Route [ beginpunt= "+beginpunt+", eindpunt= "+eindpunt+", maxPersonen= "+
+				maxPersonen+", eindtijd= "+eindtijd.toString()+", begintijd= "+vertrektijdToString()+"///"+bestuurder.toString();
 	}
 }
