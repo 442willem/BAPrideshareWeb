@@ -91,7 +91,6 @@ public class RouteRestService {
     	
     		route.setBestuurder(profiel);	
     		
-    		System.out.println("route: "+route.toString());
     		
     		routeRepo.createRoute(route,0);
     		
@@ -117,7 +116,7 @@ public class RouteRestService {
     		
 			System.out.println("grootte: "+routelist.size());
     		
-    		return Response.ok().build();
+    		return Response.ok().entity(routelist).build();
     		
     		
     	}catch (Exception e) {

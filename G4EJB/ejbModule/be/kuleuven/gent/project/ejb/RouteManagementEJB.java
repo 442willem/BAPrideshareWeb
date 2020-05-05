@@ -140,7 +140,7 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 
 		if(vertrektijd!=null) {
 			if(eindtijd!=null) {
-				q=em.createQuery("SELECT r FROM route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2 AND r.eindtijd <=?3 AND r.eindtijd >=?4 AND r.vertrektijd <=?5 and r.vertrektijd >=?6");
+				q=em.createQuery("SELECT r FROM Route r WHERE r.beginpunt LIKE ?1 AND r.eindpunt LIKE ?2 AND r.eindtijd <=?3 AND r.eindtijd >=?4 AND r.vertrektijd <=?5 and r.vertrektijd >=?6");
 
 				LocalDateTime eindtijd1=eindtijd.toLocalDateTime().plusHours(2);
 				LocalDateTime eindtijd2=eindtijd.toLocalDateTime().minusHours(2);
@@ -148,8 +148,8 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 				q.setParameter(3, Timestamp.valueOf(eindtijd1));
 				q.setParameter(4, Timestamp.valueOf(eindtijd2) );
 
-				LocalDateTime vertrektijd1=vertrektijd.toLocalDateTime().plusHours(2);
-				LocalDateTime vertrektijd2=vertrektijd.toLocalDateTime().minusHours(2);
+				LocalDateTime vertrektijd1=vertrektijd.toLocalDateTime().plusDays(2);
+				LocalDateTime vertrektijd2=vertrektijd.toLocalDateTime().minusDays(2);
 
 				q.setParameter(5, Timestamp.valueOf(vertrektijd1));
 				q.setParameter(6, Timestamp.valueOf(vertrektijd2) );
