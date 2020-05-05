@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-@ApplicationPath("rest_example")
+@ApplicationPath("restApp")
 public class ApplicationConfig extends Application {
 
 	private final Set<Class<?>> classes;
@@ -21,6 +21,7 @@ public class ApplicationConfig extends Application {
 		c.add(RitRestService.class);
 		c.add(AuthenticationService.class);
 		c.add(JWTTokenNeededFilter.class);
+		c.add(RouteRestService.class);
 
 		classes = Collections.unmodifiableSet(c);
 	}
