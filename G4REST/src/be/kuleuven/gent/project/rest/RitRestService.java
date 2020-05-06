@@ -58,7 +58,6 @@ public class RitRestService {
 			
 			List<Route> routelist = ritRepo.findPassagierRit(profiel.getId());
     		
-			System.out.println("grootte: "+routelist.size());
     		
     		return Response.ok().entity(routelist).build();
     		
