@@ -147,13 +147,12 @@ public class RouteRestService {
 	}
 	
 	@GET
-	@Path("Tussenstops/{username}")
-	public Response getTussenstops(@PathParam("username") String username) {
+	@Path("tussenstops/{routeid}")
+	public Response getTussenstops(@PathParam("routeid") int routeid) {
 		try {
 			
-			Profiel profiel = profielRepo.findProfiel(username);
 			
-			String[] routelist = routeRepo.zoekGeaccepteerdeTussenstops(profiel.getId());
+			String[] routelist = routeRepo.zoekGeaccepteerdeTussenstops(routeid);
     		
 			System.out.println("grootte: ");
     		

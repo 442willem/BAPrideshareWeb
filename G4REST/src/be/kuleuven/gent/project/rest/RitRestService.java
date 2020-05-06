@@ -27,7 +27,7 @@ import be.kuleuven.gent.project.ejb.RitManagementEJBLocal;
 //mss route EJB & Rit EJB nodig
 import be.kuleuven.gent.project.ejb.UserManagementEJBLocal;
 
-@javax.enterprise.context.RequestScoped
+
 @Path("rit_service")
 @Stateless
 @JWTTokenNeeded
