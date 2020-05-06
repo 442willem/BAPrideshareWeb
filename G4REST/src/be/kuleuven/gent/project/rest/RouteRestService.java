@@ -106,7 +106,7 @@ public class RouteRestService {
 	@GET
 	@Path("searchRoutes")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createRoute(@QueryParam("beginpunt") String beginpunt,@QueryParam("eindpunt") String eindpunt,@QueryParam("begintijd") String begintijd,@QueryParam("eindtijd") String eindtijd) {
+	public Response searchRoute(@QueryParam("beginpunt") String beginpunt,@QueryParam("eindpunt") String eindpunt,@QueryParam("begintijd") String begintijd,@QueryParam("eindtijd") String eindtijd) {
 		try {
 			
 			Timestamp beginTimestamp=routeRepo.toTimestamp(begintijd);
@@ -124,6 +124,48 @@ public class RouteRestService {
 		}
 		
 	}
+	
+	@GET
+	@Path("myRoute/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response myRoute(@PathParam("username") String username) {
+		try {
+			
+			Profiel profiel = profielRepo.findProfiel(username);
+			
+			List<Route> routelist = routeRepo.findBestuurderRoute(profiel.getId());
+    		
+			System.out.println("grootte: "+routelist.size());
+    		
+    		return Response.ok().entity(routelist).build();
+    		
+    		
+    	}catch (Exception e) {
+			return Response.serverError().build();
+		}
+		
+	}
+	
+	@GET
+	@Path("Tussenstops/{username}")
+	public Response getTussenstops(@PathParam("username") String username) {
+		try {
+			
+			Profiel profiel = profielRepo.findProfiel(username);
+			
+			String[] routelist = routeRepo.zoekGeaccepteerdeTussenstops(profiel.getId());
+    		
+			System.out.println("grootte: ");
+    		
+    		return Response.ok().entity(routelist).build();
+    		
+    		
+    	}catch (Exception e) {
+			return Response.serverError().build();
+		}
+		
+	}
+	
 	
 	
 	
