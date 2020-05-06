@@ -26,12 +26,24 @@
 			action="#{userController.goToIndexD()}"
 			style="float: left;text-decoration:none; padding:5px;" />
 	</h:form>
-	<h:panelGroup rendered="#{reviewController.review.modus==0}">
-	<h2>Leave a review for your driver</h2>
-	</h:panelGroup>
-	<h:panelGroup rendered="#{reviewController.review.modus==1}">
-	<h2>Leave a review for your passenger</h2>
-	</h:panelGroup>
+	<div class="jumbotron jumbotron-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-12">
+            	
+                	<h:panelGroup rendered="#{reviewController.review.modus==0}">
+					<h1 class="h1">Leave a review for your driver</h1>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{reviewController.review.modus==1}">
+					<h1 class="h1">Leave a review for your passenger</h1>
+					</h:panelGroup>
+            </div>
+        </div>
+    </div>
+</div>
+
+	
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8">
