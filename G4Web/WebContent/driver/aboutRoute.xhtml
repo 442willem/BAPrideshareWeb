@@ -107,7 +107,7 @@
 									<h:inputHidden id="VertrekTijd" value="#{input}" />
 								</div>
 								<div class="form-group">
-									<h:outputLabel value="Cost in Euros: "></h:outputLabel>
+									<h:outputLabel value="Cost: €"></h:outputLabel>
 									<h:outputLabel id="prijs"
 										value="After filling in the form, press the Check Me button to calculate your ride" />
 									<h:inputHidden id="Prijs" value="#{tirController.tir.prijs}" />
@@ -115,7 +115,7 @@
 								<div class="form-group">
 									<h:commandButton
 										style="display:none;text-decoration:none; padding:3px; width:115px;"
-										value="Verzend verzoek"
+										value="Book this ride"
 										action="#{tirController.test(tirController.route.id,input)}"
 										id="MakeRoute" class="btn btn-primary " />
 								</div>

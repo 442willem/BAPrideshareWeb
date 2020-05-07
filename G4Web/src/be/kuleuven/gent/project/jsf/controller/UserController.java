@@ -64,6 +64,4 @@ public class UserController implements Serializable{
 	public String goToMyProfile(int id) {
 		return "viewProfiel.faces?faces-redirect=true&profiel="+id;
 	}
-	
-
 }

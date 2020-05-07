@@ -53,6 +53,11 @@ public class TussenstopManagementEJB implements TussenstopManagementEJBLocal {
 		Profiel p = userEJB.findProfiel(login);
 		t.setPassagier(p);
 		em.persist(t);
+		Notificatie n = new Notificatie("ritRequest");
+		n.setProfiel(t.getPassagier());
+		n.setRit(t);
+		n.setGelezen(false);
+		em.persist(n);
 	}
 	@Override
 	public Tussenstop findRit(int id) {
@@ -80,6 +85,7 @@ public class TussenstopManagementEJB implements TussenstopManagementEJBLocal {
 		Notificatie n = new Notificatie("ritHerinnering");
 		System.out.println("ritid:"+r.getId()+"passagierId"+r.getPassagier().getId());
 		n.setProfiel(r.getPassagier());
+		n.setGelezen(false);
 		em.persist(n);
 	}
 	@Override

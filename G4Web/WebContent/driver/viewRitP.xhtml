@@ -41,30 +41,34 @@
 				</div>
 			</div>
 		</div>
-		<h:form>
-			<h:panelGroup rendered="#{!tirController.tir.goedgekeurd}">
-				<h:commandButton value="Cancel request"
-					class="btn btn-primary pull-left"
-					action="#{tirController.deleteRitRequest(tirController.tir.id)}"
-					style="float: left;text-decoration:none; padding:5px;"></h:commandButton>
-			</h:panelGroup>
-		</h:form>
 	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8">
 				<div class="well well-sm">
-					<h:inputHidden id="hidden-beginpunt"
-						value="#{tirController.tir.beginpunt}"></h:inputHidden>
-					<h:inputHidden id="hidden-eindpunt"
-						value="#{tirController.tir.eindpunt}"></h:inputHidden>
-					<h:inputHidden id="hidden-start"
-						value="#{tirController.tir.route.beginpunt}"></h:inputHidden>
-					<h:inputHidden id="hidden-eind"
-						value="#{tirController.tir.route.eindpunt}"></h:inputHidden>
-					<h:inputHidden id="hidden-tussenstops"
-						value="#{tirController.route.tussenstops}"></h:inputHidden>
-					<div style="margin: 0 auto; width: 600px; height: 600px;" id="map"></div>
+					<div class="row">
+						<h:inputHidden id="hidden-beginpunt"
+							value="#{tirController.tir.beginpunt}"></h:inputHidden>
+						<h:inputHidden id="hidden-eindpunt"
+							value="#{tirController.tir.eindpunt}"></h:inputHidden>
+						<h:inputHidden id="hidden-start"
+							value="#{tirController.tir.route.beginpunt}"></h:inputHidden>
+						<h:inputHidden id="hidden-eind"
+							value="#{tirController.tir.route.eindpunt}"></h:inputHidden>
+						<h:inputHidden id="hidden-tussenstops"
+							value="#{tirController.route.tussenstops}"></h:inputHidden>
+						<div style="margin: 0 auto; width: 600px; height: 600px;" id="map"></div>
+					</div>
+					<div class="row" style="margin: 10px;">
+						<h:form>
+							<h:panelGroup rendered="#{!tirController.tir.goedgekeurd}">
+								<h:commandButton value="Cancel request"
+									class="btn btn-primary pull-left"
+									action="#{tirController.deleteRitRequest(tirController.tir.id)}"
+									style="float: left;text-decoration:none; padding:5px;"></h:commandButton>
+							</h:panelGroup>
+						</h:form>
+					</div>
 				</div>
 			</div>
 		</div>

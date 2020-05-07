@@ -35,26 +35,35 @@
 			</div>
 		</div>
 	</div>
-	<div id="conversations" class="well well-sm">
-		<h:dataTable id="conversationTable"
-			value="#{berichtController.getConversations()}" var="profiel"
-			styleClass="order-table" headerClass="order-table-header"
-			rowClasses="order-table-odd-row,order-table-even-row">
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Name " />
-				</f:facet>
-				<h:outputText value="#{profiel.getVoornaam()}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText class="text-center" value="" />
-				</f:facet>
-				<a class='btn btn-info btn-xs'
-					href="viewConversation.faces?ontvanger=#{profiel.id}"><span
-					class="glyphicon glyphicon-edit"></span>Send message</a>
-			</h:column>
-		</h:dataTable>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8" style="width: 50%;">
+				<div id="conversaties" class="well well-sm" style="width: 99%;">
+
+						<h:dataTable id="conversationTable"
+							value="#{berichtController.getConversations()}" var="profiel"
+							styleClass="order-table" headerClass="order-table-header"
+							rowClasses="order-table-odd-row,order-table-even-row">
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Name " />
+								</f:facet>
+								<h:outputText value="#{profiel.getVoornaam()}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText class="text-center" value="" />
+								</f:facet>
+								<a class='btn btn-info btn-xs'
+									href="viewConversation.faces?ontvanger=#{profiel.id}"><span
+									class="glyphicon glyphicon-edit"></span>Send message</a>
+							</h:column>
+						</h:dataTable>
+			
+				</div>
+			</div>
+		</div>
 	</div>
 </h:body>
 </html>

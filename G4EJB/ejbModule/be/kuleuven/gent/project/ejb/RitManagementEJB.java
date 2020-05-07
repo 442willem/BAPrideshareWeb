@@ -103,6 +103,7 @@ public class RitManagementEJB implements RitManagementEJBLocal {
 		Notificatie n = new Notificatie("ritHerinnering");
 		System.out.println("ritid:"+r.getId()+"passagierId"+r.getPassagier().getId());
 		n.setProfiel(r.getPassagier());
+		n.setGelezen(false);
 		em.persist(n);
 	}
 

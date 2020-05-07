@@ -24,11 +24,15 @@
 	display: flex;
 }
 
-.columnLeft {
-	flex: 85%;
+.columnRight {
+	flex: 5%;
 }
 
 .column {
+	flex: 80%;
+}
+
+.columnRight {
 	flex: 15%;
 }
 </style>
@@ -55,16 +59,15 @@
 				</div>
 			</div>
 		</div>
-		<a class='btn btn-primary pull-left'
-			href="viewProfiel.faces?profiel=#{berichtController.bericht.ontvanger.id}">See
-			profile</a>
+
 
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-8">
-				<div class="well well-sm">
-					<div style="height: 300px; overflow: auto;">
+			<div class="col-md-8" style="width: 100%;">
+				<div class="well well-sm" style="width: 99%;">
+					<div class="row"
+						style="margin: 10px; width: 99%; height: 300px; overflow: auto;">
 						<h:dataTable id="berichtentabel"
 							value="#{berichtController.getConversation()}" var="bericht"
 							styleClass="order-table" headerClass="order-table-header"
@@ -97,14 +100,20 @@
 						</h:dataTable>
 					</div>
 					<h:form>
-						<div class="row">
+						<div class="row" style="margin: 10px;">
+
 							<div class="columnLeft">
+								<a class='btn btn-primary pull-left'
+									href="viewProfiel.faces?profiel=#{berichtController.bericht.ontvanger.id}">See
+									profile</a>
+							</div>
+							<div class="column">
 								<h:inputText class="form-control" id="nieuwBericht"
 									value="#{berichtController.bericht.content}" required="true"
 									maxlength="500">
 								</h:inputText>
 							</div>
-							<div class="column">
+							<div class="columnRight">
 								<h:commandButton
 									style="text-decoration:none; padding:5px; width:115px;"
 									value="Send" action="#{berichtController.sendBericht()}"

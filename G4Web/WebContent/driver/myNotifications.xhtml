@@ -8,75 +8,126 @@
 <h:head>
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-	
-	<title><ui:insert name="title">My Notifications</ui:insert>
-	</title>
+
+	<title><ui:insert name="title">My Notifications</ui:insert></title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 	<meta charset="utf-8" />
+	<h:outputStylesheet name="css/table-style.css" />
+
 </h:head>
 <h:body>
-<h:form method="post" id="homeform">
+	<h:form method="post" id="homeform">
 		<h:commandButton value="Home" class="btn btn-primary pull-left"
 			action="#{userController.goToIndexD()}"
 			style="float: left;text-decoration:none; padding:5px;" />
-</h:form>
-<div class="jumbotron jumbotron-sm">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-lg-12">
-            	
-                <h1 class="h1">
-                  My Notifications <small></small></h1>
-                    
-            </div>
-        </div>
-    </div>
-</div>
+	</h:form>
+	<div class="jumbotron jumbotron-sm">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-lg-12">
 
-	<div>
-		<div id="notificaties" class="well well-sm">
-			<h2>My Notifications</h2>
-			<h:dataTable id="notificatieTabel"
-				value="#{notificatieController.findNotificaties()}"
-				var="notificatie">
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Received At " />
-					</f:facet>
-					<h:outputText value="#{notificatie.tijdstipToString()}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value=" " />
-					</f:facet>
-					<h:outputText value="#{notificatie.getMessage()}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText class="text-center" value=" " />
-					</f:facet>
-					<h:panelGroup rendered="#{notificatie.heeftRoute()}">
-					<a class='btn btn-info btn-xs'
-						href="viewRoute.faces?route=#{notificatie.route.id}"><span
-						class="glyphicon glyphicon-edit"></span>View Route</a>
-					</h:panelGroup>
-					<h:panelGroup rendered="#{notificatie.isRouteHerrinering()}">
-					<a class='btn btn-info btn-xs'
-						href="myRoutes.faces"><span
-						class="glyphicon glyphicon-edit"></span>See My Routes</a>
-					</h:panelGroup>
-					<h:panelGroup rendered="#{notificatie.heeftRit()}">
-					<a class='btn btn-info btn-xs'
-						href="viewRitP.faces?rit=#{notificatie.rit.id}"><span
-						class="glyphicon glyphicon-edit"></span>View Ride</a>
-					</h:panelGroup>
-					<h:panelGroup rendered="#{notificatie.isRitHerrinering()}">
-					<a class='btn btn-info btn-xs'
-						href="myRoutes.faces"><span
-						class="glyphicon glyphicon-edit"></span>See My Routes</a>
-					</h:panelGroup>
-				</h:column>
-			</h:dataTable>
+					<h1 class="h1">
+						My Notifications <small></small>
+					</h1>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8" style="width: 100%;">
+				<div id="notificaties" class="well well-sm" style="width: 99%;">
+					<div style="height: 400px; overflow: auto;">
+						<h:dataTable id="notificatieTabel"
+							value="#{notificatieController.findNotificaties()}"
+							var="notificatie" styleClass="order-table"
+							headerClass="order-table-header"
+							rowClasses="order-table-odd-row,order-table-even-row">
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Received At " />
+								</f:facet>
+								<h:outputText value="#{notificatie.tijdstipToString()}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value=" " />
+								</f:facet>
+								<h:outputText value="#{notificatie.getMessage()}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText class="text-center" value=" " />
+								</f:facet>
+								<h:panelGroup rendered="#{notificatie.heeftRoute()}">
+									<a class='btn btn-info btn-xs'
+										href="viewRoute.faces?route=#{notificatie.route.id}"><span
+										class="glyphicon glyphicon-edit"></span>View Route</a>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{notificatie.isRouteHerrinering()}">
+									<a class='btn btn-info btn-xs' href="myRoutes.faces"><span
+										class="glyphicon glyphicon-edit"></span>My Routes</a>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{notificatie.isRitChange()}">
+									<a class='btn btn-info btn-xs'
+										href="viewRitP.faces?rit=#{notificatie.rit.id}"><span
+										class="glyphicon glyphicon-edit"></span>View Ride</a>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{notificatie.isRitAccepted()}">
+									<a class='btn btn-info btn-xs'
+										href="viewRitP.faces?rit=#{notificatie.rit.id}"><span
+										class="glyphicon glyphicon-edit"></span>View Ride</a>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{notificatie.isRitRequest()}">
+									<a class='btn btn-info btn-xs'
+										href="viewRit.faces?rit=#{notificatie.rit.id}"><span
+										class="glyphicon glyphicon-edit"></span>View Ride</a>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{notificatie.isRitHerrinering()}">
+									<a class='btn btn-info btn-xs' href="myRoutes.faces"><span
+										class="glyphicon glyphicon-edit"></span>My Routes</a>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{notificatie.isBericht()}">
+									<a class='btn btn-info btn-xs' href="myConversations.faces"><span
+										class="glyphicon glyphicon-edit"></span>My Conversations</a>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{notificatie.isReview()}">
+									<a class='btn btn-info btn-xs' href="viewProfiel.faces?faces-redirect=true&amp;profiel=#{notificatie.getProfiel().getId()}"><span
+										class="glyphicon glyphicon-edit"></span>My Profile</a>
+								</h:panelGroup>
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Read" />
+								</f:facet>
+								<h:panelGroup rendered="#{notificatie.getGelezen()}">
+									<h:outputText value="&#10003;" />
+								</h:panelGroup>
+								<h:panelGroup rendered="#{!notificatie.getGelezen()}">
+									<h:form method="post" id="read">
+										<h:commandButton value="Mark as read" class="btn btn-primary"
+											action="#{notificatieController.setGelezen(notificatie.id)}"
+											style="float: center;text-decoration:none; padding:5px;" />
+									</h:form>
+								</h:panelGroup>
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="" />
+								</f:facet>
+								<h:form method="post" id="delete">
+									<h:commandButton value="&#10006;"
+										class="btn btn-primary pull-left"
+										action="#{notificatieController.delete(notificatie.id)}"
+										style="float: left;text-decoration:none; padding:5px;" />
+								</h:form>
+							</h:column>
+						</h:dataTable>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </h:body>
