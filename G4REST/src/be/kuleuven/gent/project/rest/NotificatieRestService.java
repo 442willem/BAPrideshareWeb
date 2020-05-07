@@ -55,10 +55,10 @@ public class NotificatieRestService {
 	@GET
 	@Path("alleNotificaties/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAllNotifications(@QueryParam("username") String id) {
+	public Response getAllNotifications(@PathParam("username") String id) {
 		try {
-		Profiel Pro = profielRepo.findProfiel(id);
-		List<Notificatie> alleNotificaties = notificatieRepo.findNotificaties(Pro.getId());
+		Profiel pro = profielRepo.findProfiel(id);
+		List<Notificatie> alleNotificaties = notificatieRepo.findNotificaties(pro.getId());
         return Response.ok().entity(alleNotificaties).build();
         
 		}catch (Exception e) {
