@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import be.kuleuven.gent.project.data.Bericht;
+import be.kuleuven.gent.project.data.Notificatie;
 import be.kuleuven.gent.project.data.Profiel;
 import be.kuleuven.gent.project.utils.*;
 
@@ -30,6 +31,10 @@ public class BerichtManagementEJB implements BerichtManagementEJBLocal {
     }
     @Override
     public void createBericht(Bericht b) {
+    	Notificatie n = new Notificatie("bericht");
+		n.setProfiel(b.getOntvanger());
+		n.setGelezen(false);
+		em.persist(n);
     	em.persist(b);
     }
     
@@ -60,7 +65,7 @@ public class BerichtManagementEJB implements BerichtManagementEJBLocal {
 		List<Profiel> profielen=new ArrayList<Profiel>();
 		
 		for(Bericht b : berichten) {
-			if(!profielen.contains(b.getOntvanger()))profielen.add(b.getOntvanger());
+			if(!profielen.contains(b.getOntvanger())&&b.getOntvanger().getId()!=zenderID)profielen.add(b.getOntvanger());
 		}
 		return profielen;
 	}

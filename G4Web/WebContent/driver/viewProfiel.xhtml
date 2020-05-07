@@ -62,7 +62,7 @@
 			<h2 class="h2">Driver score:
 				#{profielController.getDriverscore()}/5</h2>
 			<h:dataTable id="reviewTabelDriver"
-				value="#{reviewController.findReviewsProfielDriver()}" var="review" styleClass="order-table"
+				value="#{reviewController.findReviewsProfielDriver(profielController.findProfiel().id)}" var="review" styleClass="order-table"
     			headerClass="order-table-header"
     			rowClasses="order-table-odd-row,order-table-even-row">
 				<h:column>
@@ -84,7 +84,7 @@
 			<h2 class="h2">Passenger score:
 				#{profielController.getPassagierscore()}/5</h2>
 			<h:dataTable id="reviewTabelPassenger"
-				value="#{reviewController.findReviewsProfielPassenger()}"
+				value="#{reviewController.findReviewsProfielPassenger(profielController.findProfiel().id)}"
 				var="review" styleClass="order-table"
     			headerClass="order-table-header"
     			rowClasses="order-table-odd-row,order-table-even-row">

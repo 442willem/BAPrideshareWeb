@@ -36,6 +36,9 @@ public class Notificatie {
 
 	@Column(name="tijdstip", nullable=false)
 	private Timestamp tijdstip;
+	
+	@Column(name="gelezen", nullable=false)
+	private Boolean gelezen;
 
 	@Transient
 	private Date tijdstipDate;
@@ -96,6 +99,14 @@ public class Notificatie {
 	public String tijdstipToString() {
 		return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(tijdstip);
 	}
+	public Boolean getGelezen() {
+		return gelezen;
+	}
+
+	public void setGelezen(Boolean gelezen) {
+		this.gelezen = gelezen;
+	}
+	
 	public boolean heeftRoute() {
 		if(route!=null)return true;
 		else return false;
@@ -110,6 +121,26 @@ public class Notificatie {
 	}
 	public boolean isRitHerrinering() {
 		if(type.equals("ritHerinnering"))return true;
+		else return false;
+	}
+	public boolean isBericht() {
+		if(type.equals("bericht"))return true;
+		else return false;
+	}
+	public boolean isReview() {
+		if(type.equals("review"))return true;
+		else return false;
+	}
+	public boolean isRitRequest() {
+		if(type.equals("ritRequest"))return true;
+		else return false;
+	}
+	public boolean isRitChange() {
+		if(type.equals("ritChange"))return true;
+		else return false;
+	}
+	public boolean isRitAccepted() {
+		if(type.equals("ritAccepted"))return true;
 		else return false;
 	}
 	
@@ -133,6 +164,12 @@ public class Notificatie {
 			break;
 		case "ritChange":
 			message="A ride you have requested has been changed";
+			break;
+		case "ritRequest":
+			message="Someone has requested to join your ride";
+			break;
+		case "bericht":
+			message="You have a new message";
 			break;
 		default:
 			message=null;

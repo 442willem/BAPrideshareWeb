@@ -96,6 +96,7 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 		Notificatie n = new Notificatie("routeHerinnering");
 		System.out.println("routeid:"+r.getId()+"bestuurderid"+r.getBestuurder().getId());
 		n.setProfiel(r.getBestuurder());
+		n.setGelezen(false);
 		em.persist(n);
 	}
 	@Override
@@ -109,6 +110,7 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
 			Notificatie n = new Notificatie("ritChange");
 			n.setProfiel(rit.getPassagier());
 			n.setRit(rit);
+			n.setGelezen(false);
 			em.persist(n);
 		}
 	}

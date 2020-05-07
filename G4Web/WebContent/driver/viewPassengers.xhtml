@@ -19,6 +19,7 @@
 	<title><ui:insert name="title">Route view</ui:insert></title>
 	<meta name="viewport" content="initial-scale=1.0" />
 	<meta charset="utf-8" />
+	<h:outputStylesheet name="css/table-style.css" />
 	<f:metadata>
 		<f:viewParam name="route" value="#{routeController.route.id}" />
 		<f:viewAction action="#{routeController.findRoute}" />
@@ -32,90 +33,95 @@
 			<div class="row">
 				<div class="col-sm-12 col-lg-12">
 
-					<h1 class="h1">
-						Route to: #{routeController.route.eindpunt} <small></small>
-					</h1>
-
+					<h1 class="h1">Passengers for the drive to
+						#{routeController.route.eindpunt}</h1>
 				</div>
 			</div>
 		</div>
 	</div>
-	<br />
-	<div id="aanvragen">
-		<h:dataTable id="passagiersTabel"
-			value="#{routeController.findRitten()}" var="rit">
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Name " />
-				</f:facet>
-				<h:outputText value="#{rit.passagier.voornaam}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Pickup At " />
-				</f:facet>
-				<h:outputText value="#{rit.beginpunt}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Number of places" />
-				</f:facet>
-				<h:outputText value="#{rit.aantalPersonen}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText class="text-center" value=" " />
-				</f:facet>
-				<a class='btn btn-info btn-xs'
-					href="viewProfiel.faces?profiel=#{rit.passagier.id}"><span
-					class="glyphicon glyphicon-edit"></span>See Profile</a>
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText class="text-center" value=" " />
-				</f:facet>
-				<h:panelGroup rendered="#{!rit.goedgekeurd}">
-					<h:form>
-						<h:commandButton value="Accept"
-							action="#{routeController.keurRitGoed(rit.id)}"></h:commandButton>
-					</h:form>
-				</h:panelGroup>
-				<h:panelGroup rendered="#{rit.goedgekeurd}">
-					<h:form>
-						<h:commandButton value="Deny"
-							action="#{routeController.keurRitAf(rit.id)}"></h:commandButton>
-					</h:form>
-				</h:panelGroup>
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText class="text-center" value=" " />
-				</f:facet>
-				<h:panelGroup rendered="#{!rit.goedgekeurd}">
-					<a class='btn btn-info btn-xs'
-						href="viewRit.faces?rit=#{rit.id}"><span
-						class="glyphicon glyphicon-edit"></span>See Route</a>
-				</h:panelGroup>
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText class="text-center" value="" />
-				</f:facet>
-				<a class='btn btn-info btn-xs'
-					href="viewConversation.faces?ontvanger=#{rit.passagier.id}"><span
-					class="glyphicon glyphicon-edit"></span>Send Message</a>
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText class="text-center" value=" " />
-				</f:facet>
-				<h:panelGroup rendered="#{rit.goedgekeurd}">
-					<a class='btn btn-info btn-xs'
-						href="createReview.faces?faces-redirect=true&amp;profiel=#{rit.passagier.id}&amp;modus=1"><span
-						class="glyphicon glyphicon-edit"></span>Review Passenger</a>
-				</h:panelGroup>
-			</h:column>
-		</h:dataTable>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8" style="width: 100%;">
+				<div id="ritten" class="well well-sm" style="width: 99%;">
+					<div class="row"  style="margin: 10px;" id="aanvragen">
+						<h:dataTable id="passagiersTabel"
+							value="#{routeController.findRitten()}" var="rit"
+							styleClass="order-table" headerClass="order-table-header"
+							rowClasses="order-table-odd-row,order-table-even-row">
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Name " />
+								</f:facet>
+								<h:outputText value="#{rit.passagier.voornaam}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Pickup At " />
+								</f:facet>
+								<h:outputText value="#{rit.beginpunt}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Number of places" />
+								</f:facet>
+								<h:outputText value="#{rit.aantalPersonen}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText class="text-center" value=" " />
+								</f:facet>
+								<h:panelGroup rendered="#{!rit.goedgekeurd}">
+									<h:form>
+										<h:commandButton value="Accept"
+											action="#{routeController.keurRitGoed(rit.id)}"></h:commandButton>
+									</h:form>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{rit.goedgekeurd}">
+									<h:form>
+										<h:commandButton value="Deny"
+											action="#{routeController.keurRitAf(rit.id)}"></h:commandButton>
+									</h:form>
+								</h:panelGroup>
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText class="text-center" value=" " />
+								</f:facet>
+								<h:panelGroup rendered="#{!rit.goedgekeurd}">
+									<a class='btn btn-info btn-xs'
+										href="viewRit.faces?rit=#{rit.id}"><span
+										class="glyphicon glyphicon-edit"></span>See Route</a>
+								</h:panelGroup>
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText class="text-center" value=" " />
+								</f:facet>
+								<a class='btn btn-info btn-xs'
+									href="viewProfiel.faces?profiel=#{rit.passagier.id}"><span
+									class="glyphicon glyphicon-edit"></span>See Profile</a>
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText class="text-center" value=" " />
+								</f:facet>
+								<h:panelGroup rendered="#{rit.goedgekeurd}">
+									<a class='btn btn-info btn-xs'
+										href="createReview.faces?faces-redirect=true&amp;profiel=#{rit.passagier.id}&amp;modus=1"><span
+										class="glyphicon glyphicon-edit"></span>Review Passenger</a>
+								</h:panelGroup>
+							</h:column>
+						</h:dataTable>
+					</div>
+					<div class="row" id="knop" style="margin: 10px;">
+					<a class='btn btn-primary pull-left'
+						href="viewRoute.faces?route=#{routeController.route.id}">View
+						Route</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </h:body>
 </html>

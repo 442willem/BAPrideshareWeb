@@ -54,10 +54,10 @@ public class RouteController implements Serializable {
 	@PostConstruct
 	public void init(){
 		route = new Route();
-		queryVertrek=null;
-		queryEinde=null;
-		queryVertrektijd=null;
-		queryEindetijd=null;
+//		queryVertrek=null;
+//		queryEinde=null;
+//		queryVertrektijd=null;
+//		queryEindetijd=null;
 		System.out.println("Postconstruct");
 	}
 
@@ -83,7 +83,6 @@ public class RouteController implements Serializable {
 	public void setRit(Tussenstop rit) {
 		this.rit = rit;
 	}
-
 
 	public void findRoute() {
 		route = routeEJB.findRoute(route.getId());
@@ -179,42 +178,42 @@ public class RouteController implements Serializable {
 		List <Route> alleRoutes = routeEJB.findRoutes(queryVertrek,queryEinde,vertrektijd,eindetijd);
 		
 		System.out.println("index:"+indexRoutes);
-		for(int i=0;i<5;i++) {
+		for(int i=0;i<10;i++) {
 			if(indexRoutes+i<alleRoutes.size()) {
 				routes.add(alleRoutes.get(indexRoutes+i));
 			}
 		}
-		//methode om de 5 volgende routes terug te krijgen
+		//methode om de 10 volgende routes terug te krijgen
 		return routes;
 	}
 
 	//methode om 5 routes te tonen als er op de knop NEXT word gedrukt
 	public String volgendeRoutes(){
-		indexRoutes+=5;
+		indexRoutes+=10;
 		System.out.println("count:"+routeEJB.getAantalRoutes()+"index:"+indexRoutes);
-		if(indexRoutes>routeEJB.getAantalRoutes())indexRoutes-=5;
+		if(indexRoutes>routeEJB.getAantalRoutes())indexRoutes-=10;
 		System.out.println("volgende: "+indexRoutes);
 		return "index.faces?faces-redirect=true&index="+indexRoutes;
 	}
 
 	// methode om 5 routes te tonen als er op de knop BACK wordt gedrukt
 	public String vorigeRoutes(){
-		indexRoutes-=5;
+		indexRoutes-=10;
 		if(indexRoutes<0)indexRoutes=0;
 		System.out.println("vorige: "+indexRoutes);
 		return "index.faces?faces-redirect=true&index="+indexRoutes;
 	}
 	//methode om 5 routes te tonen als er op de knop NEXT word gedrukt
 	public String volgendeRoutesD(){
-		indexRoutes+=5;
-		if(indexRoutes>routeEJB.getAantalRoutes())indexRoutes-=5;
+		indexRoutes+=10;
+		if(indexRoutes>routeEJB.getAantalRoutes())indexRoutes-=10;
 		System.out.println("volgende: "+indexRoutes);
 		return "indexD.faces?faces-redirect=true&login=1&index="+indexRoutes;
 	}
 
 	// methode om 5 routes te tonen als er op de knop BACK wordt gedrukt
 	public String vorigeRoutesD(){
-		indexRoutes-=5;
+		indexRoutes-=10;
 		if(indexRoutes<0)indexRoutes=0;
 		System.out.println("vorige: "+indexRoutes);
 		return "indexD.faces?faces-redirect=true&login=1&index="+indexRoutes;

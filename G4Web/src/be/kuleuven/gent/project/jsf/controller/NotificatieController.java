@@ -81,8 +81,20 @@ public class NotificatieController implements Serializable {
 			notificatie.setRit(ritEJB.findRit(ritId));
 			notificatieEJB.createNotificatie(notificatie);
 			break;
+		case "bericht":
+			notificatieEJB.createNotificatie(notificatie);
+			break;
 		default:
 			notificatieEJB.createNotificatie(notificatie);
 		}
+	}
+	public void delete(int id) {
+		notificatieEJB.delete(id);
+	}
+	public long getAantalNotificaties(int id) {
+		return notificatieEJB.getAantalNotificaties(id);
+	}
+	public void setGelezen(int id) {
+		notificatieEJB.setGelezen(id);
 	}
 }

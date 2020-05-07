@@ -10,22 +10,26 @@
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 	<title><ui:insert name="title">Welcome To RideSharing</ui:insert>
 	</title>
-	<h:outputStylesheet name="css/table-style.css"  />
+	<h:outputStylesheet name="css/table-style.css" />
 	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 	<meta charset="utf-8" />
 	<style type="text/css">
-.routeTable {
-	border-collapse: collapse;
+.row1 {
+	display: flex;
 }
 
-.routeTableHeader {
-	background: none repeat scroll 0 0;
-	padding: 2px;
+.column {
+	flex: 18%;
+	display: flex;
+	justify-content: flex-end;
+	flex-direction: column;
 }
 
-.routeTableColumn {
-	background: none repeat scroll 0 0;
-	padding: 2px;
+.form-group {
+	margin: 2px;
+	display: flex;
+	justify-content: flex-end;
+	flex-direction: column;
 }
 </style>
 	<f:metadata>
@@ -66,37 +70,45 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-8">
-				<div class="well well-sm">
+			<div class="col-md-8" style="width: 100%;">
+				<div class="well well-sm" style="width: 99%;">
 					<h:form method="post" id="filterRoutes">
-						<div class="row">
-							<div class="col-md-6">
+						<div class="row1">
+							<div class="column">
 								<div class="form-group">
 									<p:outputLabel value="From:" />
 									<p:inputText class="form-control" id="queryvertrekplaats"
 										value="#{routeController.queryVertrek}">
 									</p:inputText>
 								</div>
+							</div>
+							<div class="column">
 								<div class="form-group">
 									<p:outputLabel value="To:" />
 									<p:inputText class="form-control" id="queryaankomstplaats"
 										value="#{routeController.queryEinde}">
 									</p:inputText>
 								</div>
+							</div>
+							<div class="column">
 								<div class="form-group">
-									<h:outputLabel value="Leaving Time (dd/mm/yyyy hh:mm): " />
+									<h:outputLabel value="Departure time: " />
 									<h:inputText id="vertrektijd" class="form-control"
 										value="#{routeController.queryVertrektijd}">
 										<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
 									</h:inputText>
 								</div>
+							</div>
+							<div class="column">
 								<div class="form-group">
-									<h:outputLabel value="Arrival Time (dd/mm/yyyy hh:mm): " />
+									<h:outputLabel value="Arrival time: " />
 									<h:inputText id="aankomsttijd" class="form-control"
 										value="#{routeController.queryEindetijd}">
 										<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
 									</h:inputText>
 								</div>
+							</div>
+							<div class="column">
 								<div class="form-group">
 									<p:commandButton style="text-decoration:none; padding:5px;"
 										value="Search Routes" id="filterRoute"
@@ -111,49 +123,58 @@
 			</div>
 		</div>
 	</div>
-
-	<div id="herlaad">
-		<h:dataTable id="routentable" value="#{routeController.getRoutes()}"
-			var="route" styleClass="order-table"
-    			headerClass="order-table-header"
-    			rowClasses="order-table-odd-row,order-table-even-row">
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="From " />
-				</f:facet>
-				<h:outputText value="#{route.beginpunt} " />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="To " />
-				</f:facet>
-				<h:outputText value="#{route.eindpunt} " />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Leaves At " />
-				</f:facet>
-				<h:outputText value="#{route.vertrektijdToString()} " />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Arrives At " />
-				</f:facet>
-				<h:outputText value="#{route.eindtijdToString()} " />
-			</h:column>
-		</h:dataTable>
-		<h:form>
-			<p:commandButton style="text-decoration:none; padding:5px;"
-				value="Next" id="volgendeRoutes"
-				action="#{routeController.volgendeRoutes()}"
-				class="btn btn-primary pull-right">
-			</p:commandButton>
-			<p:commandButton style="text-decoration:none; padding:5px;"
-				value="Back" id="vorigeRoutes"
-				action="#{routeController.vorigeRoutes()}"
-				class="btn btn-primary pull-right">
-			</p:commandButton>
-		</h:form>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8" style="width: 100%;">
+				<div class="well well-sm" style="width: 99%;">
+					<div class="row" id="herlaad" style="margin: 2px;">
+						<h:dataTable id="routentable"
+							value="#{routeController.getRoutes()}" var="route"
+							styleClass="order-table" headerClass="order-table-header"
+							rowClasses="order-table-odd-row,order-table-even-row">
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="From " />
+								</f:facet>
+								<h:outputText value="#{route.beginpunt} " />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="To " />
+								</f:facet>
+								<h:outputText value="#{route.eindpunt} " />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Leaves At " />
+								</f:facet>
+								<h:outputText value="#{route.vertrektijdToString()} " />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Arrives At " />
+								</f:facet>
+								<h:outputText value="#{route.eindtijdToString()} " />
+							</h:column>
+						</h:dataTable>
+					</div>
+					<div class="row" id="knoppen" style="margin: 2px;">
+						<h:form>
+							<p:commandButton style="text-decoration:none; padding:5px;"
+								value="Back" id="vorigeRoutes"
+								action="#{routeController.vorigeRoutes()}"
+								class="btn btn-primary pull-left">
+							</p:commandButton>
+							<p:commandButton style="text-decoration:none; padding:5px;"
+								value="Next" id="volgendeRoutes"
+								action="#{routeController.volgendeRoutes()}"
+								class="btn btn-primary pull-left">
+							</p:commandButton>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </h:body>
 </html>

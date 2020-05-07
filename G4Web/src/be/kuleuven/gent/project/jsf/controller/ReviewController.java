@@ -62,11 +62,11 @@ public class ReviewController implements Serializable {
 		notificatieEJB.createNotificatie(n);
 		return "myRoutes.faces?faces-redirect=true";
 	}
-	public List<Review> findReviewsProfielDriver(){
-		return reviewEJB.findReviewsDriver(profielEJB.getProfiel().getId());
+	public List<Review> findReviewsProfielDriver(int id){
+		return reviewEJB.findReviewsDriver(id);
 	}
-	public List<Review> findReviewsProfielPassenger(){
-		return reviewEJB.findReviewsPassenger(profielEJB.getProfiel().getId());
+	public List<Review> findReviewsProfielPassenger(int id){
+		return reviewEJB.findReviewsPassenger(id);
 	}
 	
 }
