@@ -1,137 +1,140 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 
-  <title>
-    <ui:insert name="title">Book in on a Route</ui:insert>
-  </title>
- <style>
- .mapinv{
- display: none;
- }
- #map {
-        height: 100%;
-      }
- /* Always set the map height explicitly to define the size of the div
+	<title><ui:insert name="title">Book in on a Route</ui:insert></title>
+	<style>
+.mapinv {
+	display: none;
+}
+
+#map {
+	height: 100%;
+}
+/* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
 #map {
-  height: 100%;
+	height: 100%;
 }
 
-.mapinv{
-  display: none;
+.mapinv {
+	display: none;
 }
-
-
- </style>
-<meta name="viewport" content="initial-scale=1.0" />
-<meta charset="utf-8" />
-<f:metadata>
+</style>
+	<meta name="viewport" content="initial-scale=1.0" />
+	<meta charset="utf-8" />
+	<f:metadata>
 		<f:viewParam name="route" value="#{tirController.route.id}" />
 		<f:viewAction action="#{tirController.findRoute}" />
 		<f:viewAction action="#{tirController.setTussenstops()}" />
 	</f:metadata>
 
-</h:head> 
+</h:head>
 
-<h:body> 
-<h:form method="post" id="homeform">
-  <h:commandButton value="Home" class="btn btn-primary pull-left" action="#{userController.goToIndexD()}" style="float: left;text-decoration:none; padding:5px;" />
- </h:form>
+<h:body>
+	<h:form method="post" id="homeform">
+		<h:commandButton value="Home" class="btn btn-primary pull-left"
+			action="#{userController.goToIndexD()}"
+			style="float: left;text-decoration:none; padding:5px;" />
+	</h:form>
 
-<div class="jumbotron jumbotron-sm">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-lg-12">
-            	
-                <h1 class="h1">
-                    Route to: #{tirController.route.eindpunt}! <small></small></h1>
-                    
-            </div>
-        </div>
-    </div>
-</div>
+	<div class="jumbotron jumbotron-sm">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-lg-12">
 
+					<h1 class="h1">
+						Route to: #{tirController.route.eindpunt}! <small></small>
+					</h1>
 
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-8">
-        <div style="margin: 0 auto; width: 600px; height: 600px;" id="map"></div>
-         
-            <div class="well well-sm">
-               <h2>Laatste aankomsttijd: #{tirController.route.eindtijd}</h2>
-					<h2>Aantal vrije zitplaatsen:
-						#{tirController.route.maxPersonen}</h2>
-					<br />
-				<h:form method="post" id="createRoute">
-					<div class="row">
-						<div class="col-md-6">
-	              			
-	              			<div class="form-group">
-		    					<h:outputLabel value="Vertrek Adres: "/>
-		  						<input required="required" id="vertrekAdress" type="text" />
-		  						
-		  						<h:inputHidden id="pleaseGodWork" value="#{tirController.tir.beginpunt}"/>
-	  						</div>
-	  						<div class = "form-group">
-	  						<h:outputLabel value="Aankomst adress: "/>
-		  						<input required="required" id="aankomstAdress" type ="text">
-		  						</input>
-		  						<h:inputHidden id="pleaseGodWorkTOO" value="#{tirController.tir.eindpunt}" />
-	  						</div>
-	  						<dir class = "form-group">
-	  						<h:outputLabel value="Aantal Personen: "/>
-	  						<h:selectOneMenu value="#{tirController.tir.aantalPersonen}">
-   								 <f:selectItem itemValue="1" itemLabel="1" />
-   								 <f:selectItem itemValue="2" itemLabel="2" />
-   								 <f:selectItem itemValue="3" itemLabel="3" />
-							</h:selectOneMenu>
-	  						</dir>
-	  						<div class = "form-group">
-	  							<h:inputHidden id="idroute" value = "#{tirController.route.id}"></h:inputHidden>
-	  						
-	  						</div>
-	  						<div class = "form-group">
-	  						<h:outputLabel value = "Voorgestelde vertrektijd: "></h:outputLabel>
-	  						<br />
-	  							<h:outputLabel id ="vertrekT" value="Na ingeven van de geprefereerde vertrek en eindpunten, druk op de Check me knop" />
-	  							<h:inputHidden id="VertrekTijd" value="#{input}"  />
-	  						</div>
-	  						<div class ="form-group">
-	  							<h:outputLabel value="Prijs in Euro: "></h:outputLabel>
-	  							<h:outputLabel id = "prijs" value = "Na ingeven van de geprefereerde vertrek en eindpunten, druk op de Check me knop" />
-	  							<h:inputHidden id="Prijs" value="#{tirController.tir.prijs}" />
-	  						</div>
-	  						
-	  						
-	  						<div class = "form-group">
-	  						
-								<h:commandButton style="display:none;text-decoration:none; padding:3px; width:115px;"  value = "Verzend verzoek"  action = "#{tirController.test(tirController.route.id,input)}" id = "MakeRoute" class="btn btn-primary "/>
-	  						</div>
-	  					</div>
-					</div>
-				</h:form>
-				<button align="center" onclick="initMap();">Check me</button>
-				<h:inputHidden id="hidden-tussenstops"
-			value="#{tirController.route.tussenstops}"></h:inputHidden>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div style="margin: 0 auto; width: 600px; height: 600px;" id="map"></div>
+
+				<div class="well well-sm">
+					<h2>Arrives at: #{tirController.route.eindtijdToString()}</h2><br/>
+					<h:form method="post" id="createRoute">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<h:outputLabel value="Pick me up at: " />
+									<input required="required" id="vertrekAdress" type="text" />
+
+									<h:inputHidden id="pleaseGodWork"
+										value="#{tirController.tir.beginpunt}" />
+								</div>
+								<div class="form-group">
+									<h:outputLabel value="Drop me off at: " />
+									<input required="required" id="aankomstAdress" type="text">
+									</input>
+									<h:inputHidden id="pleaseGodWorkTOO"
+										value="#{tirController.tir.eindpunt}" />
+								</div>
+								<dir class="form-group">
+									<h:outputLabel value="Seats: " />
+									<h:selectOneMenu id="passagiers"
+										value="#{tirController.tir.aantalPersonen}">
+										<f:selectItem itemValue="1" itemLabel="1" />
+										<f:selectItem itemValue="2" itemLabel="2" />
+										<f:selectItem itemValue="3" itemLabel="3" />
+									</h:selectOneMenu>
+								</dir>
+								<div class="form-group">
+									<h:inputHidden id="idroute" value="#{tirController.route.id}"></h:inputHidden>
+
+								</div>
+								<div class="form-group"> 
+									<h:outputLabel value="Estimated Pickup Time: "></h:outputLabel>
+									<br />
+									<h:outputLabel id="vertrekT"
+										value="After filling in the form, press the Check Me button to calculate your ride" />
+									<h:inputHidden id="VertrekTijd" value="#{input}" />
+								</div>
+								<div class="form-group">
+									<h:outputLabel value="Cost in Euros: "></h:outputLabel>
+									<h:outputLabel id="prijs"
+										value="After filling in the form, press the Check Me button to calculate your ride" />
+									<h:inputHidden id="Prijs" value="#{tirController.tir.prijs}" />
+								</div>
+								<div class="form-group">
+									<h:commandButton
+										style="display:none;text-decoration:none; padding:3px; width:115px;"
+										value="Verzend verzoek"
+										action="#{tirController.test(tirController.route.id,input)}"
+										id="MakeRoute" class="btn btn-primary " />
+								</div>
+							</div>
+						</div>
+					</h:form>
+					<button class="btn btn-primary" style="text-decoration:none; padding:3px; width:115px;" align="center" onclick="initMap();">Check me</button>
+					<h:inputHidden id="hidden-tussenstops"
+						value="#{tirController.route.tussenstops}"></h:inputHidden>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;libraries=places,geometry&amp;callback=PlaceAutocompleteSearch&amp;fields=formatted_address&amp;callback=initMap"
 		async="" defer=""></script>
-		<script >
+	<script>
 		document.getElementById('createRoute:idroute').value = #{tirController.route.id};
 		
 		
@@ -267,7 +270,7 @@
       				}
       				console.log(wiebenik);
       			} else {
-      				window.alert('Directions request failed due to ' + status);
+      				Alert();
       			}
       		});
       	}
@@ -332,7 +335,7 @@
       		console.log(test);
       		if(test == 1){
       			var VertrekP = new Date(theVertrTijd.getTime() );
-      			document.getElementById('createRoute:vertrekT').innerHTML = VertrekP;
+      		//	document.getElementById('createRoute:vertrekT').innerHTML = VertrekP;
       			VertrekP.setHours(VertrekP.getHours()+2) 
       			var dateStr =
       			  ("00" + (VertrekP.getMonth() + 1)).slice(-2) + "/" +
@@ -344,7 +347,18 @@
       			console.log(dateStr);
       			
       			document.getElementById('createRoute:MakeRoute').style.display= 'inline';
+      			
       			document.getElementById('createRoute:VertrekTijd').value = dateStr;
+      			
+      			VertrekP.setHours(VertrekP.getHours()-2) 
+      			dateStr =
+      			  ("00" + (VertrekP.getMonth() + 1)).slice(-2) + "/" +
+      			  ("00" + VertrekP.getDate()).slice(-2) + "/" +
+      			VertrekP.getFullYear() + " " +
+      			  ("00" + VertrekP.getHours()).slice(-2) + ":" +
+      			  ("00" + VertrekP.getMinutes()).slice(-2);
+      			console.log(dateStr);
+      			document.getElementById('createRoute:vertrekT').innerHTML = dateStr;
       		} else {
       			if(document.getElementById('createRoute:pleaseGodWork').value !== ""){
       				bool = true;
@@ -358,7 +372,7 @@
           
 	function Alert(){
 		
-		window.alert('De Route zal niet op tijd aankomen met deze vertrek en eindpunten');
+		window.alert('The driver can\'t arrive on time with these pickup or dropoff points.\nPlease choose a different pickup or dropoff point.');
 		document.getElementById('createRoute:MakeRoute').style.display= 'none';
 
 	}
@@ -415,8 +429,14 @@
 		//iets in functie van de omweg die de driver moet maken
 		//mss tijd tussen rit begin --> eindpunt
 		console.log(Math.floor(tijd/200));
-		document.getElementById('createRoute:prijs').innerHTML= Math.floor(tijd/200);
-		document.getElementById('createRoute:Prijs').value= Math.floor(tijd/200);
+		var aantalPassagiers = document.getElementById('createRoute:passagiers').value;
+		if(aantalPassagiers==1){
+			document.getElementById('createRoute:prijs').innerHTML= Math.floor(tijd/200);
+			document.getElementById('createRoute:Prijs').value= Math.floor(tijd/200);
+		}else{
+			document.getElementById('createRoute:prijs').innerHTML= Math.floor((tijd/200)*(1+((aantalPassagiers-1)/2)));
+			document.getElementById('createRoute:Prijs').value= Math.floor((tijd/200)*(1+((aantalPassagiers-1)/2)));
+		}
 		
 		
 	}

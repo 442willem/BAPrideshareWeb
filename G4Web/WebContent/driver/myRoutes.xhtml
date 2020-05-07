@@ -9,11 +9,10 @@
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 
-	<title><ui:insert name="title">My Routes</ui:insert>
-	</title>
+	<title><ui:insert name="title">My Routes</ui:insert></title>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 	<meta charset="utf-8" />
-	<h:outputStylesheet name="css/table-style.css"  />
+	<h:outputStylesheet name="css/table-style.css" />
 </h:head>
 <h:body>
 	<h:form method="post" id="homeform">
@@ -28,7 +27,7 @@
 				<div class="col-sm-12 col-lg-12">
 
 					<h1 class="h1">
-						My Routes Dashbord <small></small>
+						My Routes Dashboard <small></small>
 					</h1>
 
 				</div>
@@ -38,16 +37,28 @@
 
 
 	<div>
-		
-	
-	<script type="text/javascript"
+
+
+		<script type="text/javascript"
 			src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 		<div id="routes" class="well well-sm">
 			<h2>Upcoming Drives</h2>
 			<h:dataTable id="routentable"
-				value="#{routeController.findByBestuurder()}" var="route" styleClass="order-table"
-    			headerClass="order-table-header"
-    			rowClasses="order-table-odd-row,order-table-even-row">
+				value="#{routeController.findByBestuurder()}" var="route"
+				styleClass="order-table" headerClass="order-table-header"
+				rowClasses="order-table-odd-row,order-table-even-row">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="From " />
+					</f:facet>
+					<h:outputText value="#{route.beginpunt}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="To " />
+					</f:facet>
+					<h:outputText value="#{route.eindpunt}" />
+				</h:column>
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Departure " />
@@ -82,9 +93,21 @@
 		<div id="ritten" class="well well-sm">
 			<h2>Upcoming Bookings</h2>
 			<h:dataTable id="rittentable"
-				value="#{ritController.findByPassagier()}" var="rit" styleClass="order-table"
-    			headerClass="order-table-header"
-    			rowClasses="order-table-odd-row,order-table-even-row">
+				value="#{ritController.findByPassagier()}" var="rit"
+				styleClass="order-table" headerClass="order-table-header"
+				rowClasses="order-table-odd-row,order-table-even-row">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="From " />
+					</f:facet>
+					<h:outputText value="#{rit.beginpunt}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="To " />
+					</f:facet>
+					<h:outputText value="#{rit.eindpunt}" />
+				</h:column>
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Departure " />
@@ -101,8 +124,7 @@
 					<f:facet name="header">
 						<h:outputText class="text-center" value=" " />
 					</f:facet>
-					<a class='btn btn-info btn-xs'
-						href="viewRitP.faces?rit=#{rit.id}"><span
+					<a class='btn btn-info btn-xs' href="viewRitP.faces?rit=#{rit.id}"><span
 						class="glyphicon glyphicon-edit"></span>View Ride</a>
 				</h:column>
 				<h:column>
@@ -129,10 +151,9 @@
 						<h:outputText value="&#10003;" />
 					</h:panelGroup>
 					<h:panelGroup rendered="#{!rit.betaald}">
-						<a class='btn btn-info btn-xs'
-						href="payRit.faces?rit=#{rit.id}"><span
-						class="glyphicon glyphicon-edit"></span>Pay now</a>
-					</h:panelGroup>					
+						<a class='btn btn-info btn-xs' href="payRit.faces?rit=#{rit.id}"><span
+							class="glyphicon glyphicon-edit"></span>Pay now</a>
+					</h:panelGroup>
 				</h:column>
 			</h:dataTable>
 		</div>
