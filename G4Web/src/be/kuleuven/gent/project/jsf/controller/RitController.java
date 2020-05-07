@@ -125,7 +125,7 @@ public class RitController implements Serializable {
 	public List<Rit> findAllRitten() {
 		return ritEJB.findAllRitten();
 	}
-	public List<Route> findByPassagier(){		
+	public List<Tussenstop> findByPassagier(){		
 		return ritEJB.findPassagierRit(profielEJB.getProfiel().getId());
 	}
 	public void betaalRit() {

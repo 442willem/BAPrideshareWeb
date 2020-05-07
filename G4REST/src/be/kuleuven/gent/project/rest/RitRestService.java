@@ -2,6 +2,7 @@ package be.kuleuven.gent.project.rest;
 
 import java.net.URI;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -22,8 +23,10 @@ import javax.ws.rs.core.MediaType;
 import be.kuleuven.gent.project.data.Profiel;
 import be.kuleuven.gent.project.data.Rit;
 import be.kuleuven.gent.project.data.Route;
+import be.kuleuven.gent.project.data.Tussenstop;
 import be.kuleuven.gent.project.ejb.ProfielManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.RitManagementEJBLocal;
+import be.kuleuven.gent.project.ejb.RouteManagementEJBLocal;
 //mss route EJB & Rit EJB nodig
 import be.kuleuven.gent.project.ejb.UserManagementEJBLocal;
 
@@ -35,6 +38,9 @@ public class RitRestService {
 
 	@EJB
 	private RitManagementEJBLocal ritRepo;
+	
+	@EJB
+	private RouteManagementEJBLocal routeRepo;
 	
 	@EJB
 	private UserManagementEJBLocal userRepo;
@@ -56,7 +62,8 @@ public class RitRestService {
 			
 			Profiel profiel = profielRepo.findProfiel(username);
 			
-			List<Route> routelist = ritRepo.findPassagierRit(profiel.getId());
+			
+			List<Tussenstop> routelist = ritRepo.findPassagierRit(profiel.getId());
     		
     		
     		return Response.ok().entity(routelist).build();

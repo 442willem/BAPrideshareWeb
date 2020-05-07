@@ -18,7 +18,7 @@ public interface RitManagementEJBLocal {
 	public List<Rit> findRitten(int route);
 	public void keurRitGoed(int ritId);
 	public void keurRitAf(int ritId);
-	public List<Route> findPassagierRit(int passagierID);
+	public List<Tussenstop> findPassagierRit(int passagierID);
 	public Tussenstop findRit(int id);
 	public void betaalRit(int id);
 	
