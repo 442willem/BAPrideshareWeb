@@ -50,18 +50,25 @@
 			</h:panelGroup>
 		</h:form>
 	</div>
-	<h:inputHidden id="hidden-beginpunt"
-		value="#{tirController.tir.beginpunt}"></h:inputHidden>
-	<h:inputHidden id="hidden-eindpunt"
-		value="#{tirController.tir.eindpunt}"></h:inputHidden>
-	<h:inputHidden id="hidden-start"
-		value="#{tirController.tir.route.beginpunt}"></h:inputHidden>
-	<h:inputHidden id="hidden-eind"
-		value="#{tirController.tir.route.eindpunt}"></h:inputHidden>
-	<h:inputHidden id="hidden-tussenstops"
-		value="#{tirController.route.tussenstops}"></h:inputHidden>
-	<div style="margin: 0 auto; width: 600px; height: 600px;" id="map"></div>
-
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="well well-sm">
+					<h:inputHidden id="hidden-beginpunt"
+						value="#{tirController.tir.beginpunt}"></h:inputHidden>
+					<h:inputHidden id="hidden-eindpunt"
+						value="#{tirController.tir.eindpunt}"></h:inputHidden>
+					<h:inputHidden id="hidden-start"
+						value="#{tirController.tir.route.beginpunt}"></h:inputHidden>
+					<h:inputHidden id="hidden-eind"
+						value="#{tirController.tir.route.eindpunt}"></h:inputHidden>
+					<h:inputHidden id="hidden-tussenstops"
+						value="#{tirController.route.tussenstops}"></h:inputHidden>
+					<div style="margin: 0 auto; width: 600px; height: 600px;" id="map"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;libraries=places,geometry&amp;callback=PlaceAutocompleteSearch&amp;fields=formatted_address&amp;callback=initMap"
 		async="" defer=""></script>

@@ -49,6 +49,11 @@ public class BerichtController implements Serializable {
 		System.out.println(bericht.getOntvanger().getVoornaam());
 		return profielEJB.findProfiel(bericht.getOntvanger().getId()).getVoornaam();
 	}
+	public String getNaamZender() {
+		System.out.println(bericht.getZender().getId());
+		System.out.println(bericht.getZender().getVoornaam());
+		return profielEJB.findProfiel(bericht.getZender().getId()).getVoornaam();
+	}
 	public Bericht getBericht() {
 		return bericht;
 	}

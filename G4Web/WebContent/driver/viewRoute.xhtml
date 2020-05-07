@@ -42,13 +42,21 @@
 			</div>
 		</div>
 	</div>
-	<h:inputHidden id="hidden-start"
-		value="#{routeController.route.beginpunt}"></h:inputHidden>
-	<h:inputHidden id="hidden-eind"
-		value="#{routeController.route.eindpunt}"></h:inputHidden>
-	<h:inputHidden id="hidden-tussenstops"
-		value="#{routeController.route.tussenstops}"></h:inputHidden>
-	<div style="margin: 0 auto; width: 600px; height: 600px;" id="map"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="well well-sm">
+					<h:inputHidden id="hidden-start"
+						value="#{routeController.route.beginpunt}"></h:inputHidden>
+					<h:inputHidden id="hidden-eind"
+						value="#{routeController.route.eindpunt}"></h:inputHidden>
+					<h:inputHidden id="hidden-tussenstops"
+						value="#{routeController.route.tussenstops}"></h:inputHidden>
+					<div style="margin: 0 auto; width: 600px; height: 600px;" id="map"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUI3IbCN38MjQJgCJptMXN4NluM7EdHns&amp;libraries=places,geometry&amp;callback=PlaceAutocompleteSearch&amp;fields=formatted_address&amp;callback=initMap"
 		async="" defer=""></script>
@@ -70,12 +78,13 @@
 			function calculateAndDisplayRoute(directionsService,
 					directionsRenderer) {
 				var waypts = [];
-				var ritten = document.getElementById('hidden-tussenstops').value.split("|");
+				var ritten = document.getElementById('hidden-tussenstops').value
+						.split("|");
 				console.log(ritten);
-				if(ritten.length>1){
-				console.log(ritten.length);
-				ritten.forEach(function (item, index, array) {
-					  console.log(item, index);
+				if (ritten.length > 1) {
+					console.log(ritten.length);
+					ritten.forEach(function(item, index, array) {
+						console.log(item, index);
 						waypts.push({
 							location : item,
 							stopover : true

@@ -8,8 +8,8 @@
 <h:head>
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-	
-	<h:outputStylesheet name="css/table-style.css"  />
+
+	<h:outputStylesheet name="css/table-style.css" />
 	<title><ui:insert name="title">Talk!</ui:insert></title>
 	<meta name="viewport" content="initial-scale=1.0" />
 	<meta charset="utf-8" />
@@ -19,15 +19,31 @@
 		<f:viewParam name="ontvanger"
 			value="#{berichtController.bericht.ontvanger.id}" />
 	</f:metadata>
+	<style type="text/css">
+.row {
+	display: flex;
+}
+
+.columnLeft {
+	flex: 85%;
+}
+
+.column {
+	flex: 15%;
+}
+</style>
 </h:head>
 
 <h:body>
-<h:form method="post" id="homeform">
+	<h:form method="post" id="homeform">
 		<h:commandButton value="Home" class="btn btn-primary pull-left"
 			action="#{userController.goToIndexD()}"
 			style="float: left;text-decoration:none; padding:5px;" />
-</h:form>
-<div class="jumbotron jumbotron-sm">
+		<h:commandButton value="Back" class="btn btn-primary pull-left"
+			action="#{userController.goToMyConversations()}"
+			style="float: left;text-decoration:none; padding:5px;" />
+	</h:form>
+	<div class="jumbotron jumbotron-sm">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12 col-lg-12">
@@ -39,40 +55,66 @@
 				</div>
 			</div>
 		</div>
+		<a class='btn btn-primary pull-left'
+			href="viewProfiel.faces?profiel=#{berichtController.bericht.ontvanger.id}">See
+			profile</a>
+
 	</div>
-	<div id="convo" class="well well-sm">
-		<h:dataTable id="berichtentabel"
-			value="#{berichtController.getConversation()}" var="bericht" styleClass="order-table"
-    			headerClass="order-table-header"
-    			rowClasses="order-table-odd-row,order-table-even-row">
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Time: " />
-				</f:facet>
-				<h:outputText value="#{bericht.tijdstipToString()}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="From: " />
-				</f:facet>
-				<h:outputText value="#{bericht.zender.voornaam}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="" />
-				</f:facet>
-				<h:outputText value="#{bericht.content}" />
-			</h:column>
-		</h:dataTable>
-		<h:form>
-			<h:inputText class="form-control" id="nieuwBericht"
-				value="#{berichtController.bericht.content}" required="true">
-			</h:inputText>
-			<h:commandButton
-				style="text-decoration:none; padding:5px; width:115px;"
-				value="Send" action="#{berichtController.sendBericht()}"
-				id="sendBericht" class="btn btn-primary pull-right" />
-		</h:form>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="well well-sm">
+					<div style="height: 300px; overflow: auto;">
+						<h:dataTable id="berichtentabel"
+							value="#{berichtController.getConversation()}" var="bericht"
+							styleClass="order-table" headerClass="order-table-header"
+							rowClasses="order-table-odd-row,order-table-even-row">
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value=" " />
+								</f:facet>
+								<h:outputText value="#{bericht.tijdstipToString()}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="#{berichtController.getNaamOntvanger()}" />
+								</f:facet>
+								<h:panelGroup
+									rendered="#{bericht.zender.voornaam==berichtController.getNaamOntvanger()}">
+									<h:outputText value="#{bericht.content}" />
+								</h:panelGroup>
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="#{berichtController.getNaamZender()}" />
+								</f:facet>
+								<h:panelGroup
+									rendered="#{bericht.zender.voornaam!=berichtController.getNaamOntvanger()}">
+									<h:outputText value="#{bericht.content}" />
+								</h:panelGroup>
+							</h:column>
+
+						</h:dataTable>
+					</div>
+					<h:form>
+						<div class="row">
+							<div class="columnLeft">
+								<h:inputText class="form-control" id="nieuwBericht"
+									value="#{berichtController.bericht.content}" required="true"
+									maxlength="500">
+								</h:inputText>
+							</div>
+							<div class="column">
+								<h:commandButton
+									style="text-decoration:none; padding:5px; width:115px;"
+									value="Send" action="#{berichtController.sendBericht()}"
+									id="sendBericht" class="btn btn-primary pull-right" />
+							</div>
+						</div>
+					</h:form>
+				</div>
+			</div>
+		</div>
 	</div>
 </h:body>
 </html>
