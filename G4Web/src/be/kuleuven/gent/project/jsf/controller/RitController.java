@@ -129,10 +129,12 @@ public class RitController implements Serializable {
 		return ritEJB.findPassagierRit(profielEJB.getProfiel().getId());
 	}
 	public void betaalRit() {
-		ritEJB.betaalRit(rit.getId());
-		Notificatie n = new Notificatie("betaling");
-		n.setProfiel(profielEJB.getProfiel());
-		n.setRit(rit);
-		notificatieEJB.createNotificatie(n);
+		if(rit.getId()!=-1) {
+			ritEJB.betaalRit(rit.getId());
+			Notificatie n = new Notificatie("betaling");
+			n.setProfiel(profielEJB.getProfiel());
+			n.setRit(rit);
+			notificatieEJB.createNotificatie(n);
+		}
 	}
 }

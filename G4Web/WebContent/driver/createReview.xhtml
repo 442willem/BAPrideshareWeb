@@ -14,9 +14,10 @@
 	<meta name="viewport" content="initial-scale=1.0" />
 	<meta charset="utf-8" />
 	<f:metadata>
-		<f:viewParam name="profiel"
-			value="#{reviewController.review.ontvanger.id}" />
+		<f:viewParam name="profiel"	value="#{reviewController.review.ontvanger.id}" />
 		<f:viewParam name="modus" value="#{reviewController.review.modus}" />
+		<f:viewParam name="rit" value="#{ritController.rit.id}" />
+		<f:viewAction action="#{ritController.betaalRit()}" />
 	</f:metadata>
 </h:head>
 
