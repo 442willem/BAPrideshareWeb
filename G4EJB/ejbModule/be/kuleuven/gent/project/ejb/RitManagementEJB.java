@@ -117,7 +117,7 @@ public class RitManagementEJB implements RitManagementEJBLocal {
 	}
 
     @Override
-    public List<Route> findPassagierRit(int passagierID){
+    public List<Tussenstop> findPassagierRit(int passagierID){
     	Query q=em.createQuery("SELECT r FROM Tussenstop r WHERE r.passagier.id=?1");
     	q.setParameter(1, passagierID);
     	return q.getResultList();

@@ -65,7 +65,7 @@ public class BerichtManagementEJB implements BerichtManagementEJBLocal {
 		List<Profiel> profielen=new ArrayList<Profiel>();
 		
 		for(Bericht b : berichten) {
-			if(!profielen.contains(b.getOntvanger())&&b.getOntvanger().getId()!=zenderID)profielen.add(b.getOntvanger());
+			if(!profielen.contains(b.getOntvanger())&&b.getOntvanger()!=b.getZender())profielen.add(b.getOntvanger());
 		}
 		return profielen;
 	}
