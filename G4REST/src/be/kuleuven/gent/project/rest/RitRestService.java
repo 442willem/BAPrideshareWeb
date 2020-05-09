@@ -77,7 +77,7 @@ public class RitRestService {
 		
 	}
 	
-<<<<<<< HEAD
+
 	@GET
 	@Path("getPassagiers/{route}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -92,7 +92,7 @@ public class RitRestService {
 			return Response.serverError().build();
 		}
 	}
-=======
+
 	@POST
 	@Path("deleteRit/{Rid}")
 	public Response deleteRit(@PathParam("Rid")String ritid) {
@@ -105,5 +105,4 @@ public class RitRestService {
 		}
 	}
 	
->>>>>>> branch 'master' of https://github.com/DairodR/RideshareG4.git
 }
