@@ -72,4 +72,19 @@ public class RitRestService {
 		}
 		
 	}
+	
+	@GET
+	@Path("getPassagiers/{route}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getPassagier(@PathParam("route") int route) {
+		try {
+			
+			List<Rit> passagierList=ritRepo.findRitten(route);
+			
+			return Response.ok().entity(passagierList).build();
+			
+		}catch (Exception e) {
+			return Response.serverError().build();
+		}
+	}
 }
