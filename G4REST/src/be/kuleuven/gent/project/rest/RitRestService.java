@@ -27,6 +27,7 @@ import be.kuleuven.gent.project.data.Tussenstop;
 import be.kuleuven.gent.project.ejb.ProfielManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.RitManagementEJBLocal;
 import be.kuleuven.gent.project.ejb.RouteManagementEJBLocal;
+import be.kuleuven.gent.project.ejb.TussenstopManagementEJBLocal;
 //mss route EJB & Rit EJB nodig
 import be.kuleuven.gent.project.ejb.UserManagementEJBLocal;
 
@@ -47,6 +48,9 @@ public class RitRestService {
 	
 	@EJB
 	private ProfielManagementEJBLocal profielRepo;
+	
+	@EJB
+	private TussenstopManagementEJBLocal tussenRepo;
 	
 	@Context
 	private UriInfo uriInfo;
@@ -74,4 +78,17 @@ public class RitRestService {
 		}
 		
 	}
+	
+	@POST
+	@Path("deleteRit/{Rid}")
+	public Response deleteRit(@PathParam("Rid")String ritid) {
+		try {
+			int ritId = Integer.parseInt(ritid);
+			tussenRepo.deleteRit(ritId);
+			return Response.ok().build();
+		}catch (Exception e) {
+			return Response.serverError().build();
+		}
+	}
+	
 }
