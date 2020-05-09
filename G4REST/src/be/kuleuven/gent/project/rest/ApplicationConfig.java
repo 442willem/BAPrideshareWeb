@@ -23,6 +23,7 @@ public class ApplicationConfig extends Application {
 		c.add(JWTTokenNeededFilter.class);
 		c.add(RouteRestService.class);
 		c.add(NotificatieRestService.class);
+		c.add(BerichtRestService.class);
 
 		classes = Collections.unmodifiableSet(c);
 	}

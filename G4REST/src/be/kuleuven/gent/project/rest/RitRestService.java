@@ -43,8 +43,6 @@ public class RitRestService {
 	@EJB
 	private RouteManagementEJBLocal routeRepo;
 	
-	@EJB
-	private UserManagementEJBLocal userRepo;
 	
 	@EJB
 	private ProfielManagementEJBLocal profielRepo;
