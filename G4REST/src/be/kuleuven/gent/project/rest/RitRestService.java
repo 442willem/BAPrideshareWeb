@@ -105,4 +105,28 @@ public class RitRestService {
 		}
 	}
 	
+	@POST
+	@Path("keurRitGoed/{Rid}")
+	public Response keurRitGoed(@PathParam("Rid")String ritid) {
+		try {
+			int ritId = Integer.parseInt(ritid);
+			tussenRepo.keurRitGoed(ritId);
+			return Response.ok().build();
+		}catch (Exception e) {
+			return Response.serverError().build();
+		}
+	}
+	@POST
+	@Path("keurRitAf/{Rid}")
+	public Response keurRitAf(@PathParam("Rid")String ritid) {
+		try {
+			int ritId = Integer.parseInt(ritid);
+			ritRepo.keurRitAf(ritId);
+			return Response.ok().build();
+		}catch (Exception e) {
+			return Response.serverError().build();
+		}
+	}
+	
+	
 }
