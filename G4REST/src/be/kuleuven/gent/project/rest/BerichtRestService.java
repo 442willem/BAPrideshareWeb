@@ -78,11 +78,11 @@ public class BerichtRestService {
 
 			List<Bericht> messageList=berichtRepo.getConversation(profiel.getId(), other);
 						
-			List<Bericht> omgekeerdeList=new ArrayList<Bericht>(messageList.size());
+			List<Bericht> omgekeerdeList=new ArrayList<Bericht>();
 			
 		
-			for(int i=0;i<messageList.size();i++) {
-				omgekeerdeList.set(messageList.size()-i, messageList.get(i));
+			for(int i=messageList.size()-1;i>0;i--) {
+				omgekeerdeList.add(messageList.get(i));
 			}
 
 			return Response.ok().entity(omgekeerdeList).build();
