@@ -107,11 +107,18 @@ public class RouteRestService {
 	@Path("searchRoutes")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response searchRoute(@QueryParam("beginpunt") String beginpunt,@QueryParam("eindpunt") String eindpunt,@QueryParam("begintijd") String begintijd,@QueryParam("eindtijd") String eindtijd) {
+		System.out.println("begin: "+beginpunt+"eind:"+eindpunt+"begint:"+begintijd+"eindt:"+eindtijd);
 		try {
+			Timestamp beginTimestamp;
+			Timestamp eindTimestamp;
+			if(begintijd==null||begintijd.equals("") )beginTimestamp=null;
+			else beginTimestamp=routeRepo.toTimestamp(begintijd);
+			if(eindtijd==null||eindtijd.equals(""))eindTimestamp=null;
+			else eindTimestamp=routeRepo.toTimestamp(eindtijd);
 			
-			Timestamp beginTimestamp=routeRepo.toTimestamp(begintijd);
-			Timestamp eindTimestamp=routeRepo.toTimestamp(eindtijd);
-		
+//			System.out.println("begin: "+beginTimestamp.toString());
+//			System.out.println("eind: "+eindTimestamp.toString());
+			
 			List<Route> routelist = routeRepo.findRoutes(beginpunt, eindpunt, beginTimestamp, eindTimestamp);
     		
 			System.out.println("grootte: "+routelist.size());
@@ -120,6 +127,7 @@ public class RouteRestService {
     		
     		
     	}catch (Exception e) {
+    		System.out.println("error: "+e.toString());
 			return Response.serverError().build();
 		}
 		

@@ -82,7 +82,7 @@ public class RouteManagementEJB implements RouteManagementEJBLocal {
             Date parsedDateVertrek = dateFormat.parse(date);
             timestamp = new java.sql.Timestamp(parsedDateVertrek.getTime());
         } catch(Exception e) {
-           System.out.println(e.toString());
+           System.out.println("toTimestamperror"+e.toString());
             timestamp=null;
         }
 
