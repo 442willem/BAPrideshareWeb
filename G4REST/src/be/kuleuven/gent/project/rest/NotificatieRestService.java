@@ -1,7 +1,12 @@
 package be.kuleuven.gent.project.rest;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.security.Principal;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -18,8 +23,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
+
+import com.google.gson.Gson;
+
 import javax.ws.rs.core.MediaType;
 
+import be.kuleuven.gent.project.data.Bericht;
 import be.kuleuven.gent.project.data.Notificatie;
 import be.kuleuven.gent.project.data.Profiel;
 import be.kuleuven.gent.project.data.Rit;
@@ -63,6 +72,23 @@ public class NotificatieRestService {
         
 		}catch (Exception e) {
 			e.printStackTrace();
+			return Response.serverError().build();
+		}
+		
+	}
+	
+	@POST
+	@Path("setGelezen/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response createRoute(@PathParam("id") int idNotif) {
+		try {
+			
+			notificatieRepo.setGelezen(idNotif);
+    		
+    		return Response.ok().build();
+    		
+    		
+    	}catch (Exception e) {
 			return Response.serverError().build();
 		}
 		
