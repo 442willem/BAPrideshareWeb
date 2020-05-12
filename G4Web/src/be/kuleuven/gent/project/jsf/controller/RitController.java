@@ -122,12 +122,15 @@ public class RitController implements Serializable {
 	public int getAantalRitten() {
 		return ritEJB.getAantalRitten();
 	}
+	
 	public List<Rit> findAllRitten() {
 		return ritEJB.findAllRitten();
 	}
+	//vind de tussenstoppen van een bepaalde passagier
 	public List<Tussenstop> findByPassagier(){		
 		return ritEJB.findPassagierRit(profielEJB.getProfiel().getId());
 	}
+	//methode om de rit te betalen, achterliggend paypal integratie
 	public void betaalRit() {
 		if(rit.getId()!=-1) {
 			ritEJB.betaalRit(rit.getId());

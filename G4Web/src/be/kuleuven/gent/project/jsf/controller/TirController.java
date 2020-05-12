@@ -51,7 +51,8 @@ public class TirController implements Serializable {
 		tir = tirejb.findRit(tir.getId());
 		route = routeEJB.findRoute(tir.getRoute().getId());
 	}
-	
+	//functie die raar genoeg wel werkt ondanks dat hij dezelfde is als in de ritcontroller
+	//gemaakt voor het in te boeken op een route van een bepaalde gebruiker
 	public String test(int Routeid, String test) {
 		System.out.println(test);
 		System.out.println("KIEKEBOE");
@@ -130,6 +131,8 @@ public class TirController implements Serializable {
 	public void setRoute(Route route) {
 		this.route = route;
 	}
+	//zoeken van alle geaccepteerde tussenstops op een gekozen route
+	//dit om ze te kunnen weergeven op de Google Map
 	public void setTussenstops() {
 		System.out.println("routeid = " + route.getId());
 		String[] array=routeEJB.zoekGeaccepteerdeTussenstops(route.getId());
@@ -148,6 +151,7 @@ public class TirController implements Serializable {
 		facesContext.renderResponse();
 		return "viewPassengers.faces?faces-redirect=true&route="+route.getId();
 	}
+	//zolang de driver niet de rit heeft geaccepteerd kan de passagier zijn rit request intrekken
 	public String deleteRitRequest(int id) {
 		tirejb.deleteRit(id);
 		FacesContext facesContext = FacesContext.getCurrentInstance();

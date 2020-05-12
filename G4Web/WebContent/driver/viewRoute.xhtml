@@ -78,6 +78,7 @@
 			function calculateAndDisplayRoute(directionsService,
 					directionsRenderer) {
 				var waypts = [];
+				//van de huidige route alle geaccepteerde tussenstops opvragen en pushen naar de google maps waypoints
 				var ritten = document.getElementById('hidden-tussenstops').value
 						.split("|");
 				console.log(ritten);

@@ -200,6 +200,7 @@
 			var ritten = document.getElementById('hidden-tussenstops').value.split("|");
 			console.log(ritten);
 			if(ritten.length>1){
+				//waypoints toevoegen als die er al zijn op deze route
 				console.log(ritten.length);
 				ritten.forEach(function (item, index, array) {
 					  console.log(item, index);
@@ -246,7 +247,7 @@
       				var route = response.routes[0];
       				console.log(route);
       				console.log(response);
-      				
+      				//voor elke route leg de duration value optellen om de totale tijd te berekenen
       				route.legs.forEach(function (item, index, array) {
   					  console.log(item.end_address, index);
 						if(document.getElementById('createRoute:pleaseGodWork').value !== "" ){
@@ -284,7 +285,8 @@
       		var ind = 0;
       		
       		
-      		
+      		//noodzakelijk voor het berekenen van de prijs
+      		//tijd van tussenpunt rit tot aankomst tussenpunt rit 
       		if(document.getElementById('createRoute:pleaseGodWork').value !== "" ){
 				if(index &lt;= indexV){
 					console.log("Vertrekpunt van de nieuwe rit= " +index);
@@ -319,7 +321,8 @@
       		console.log(item.duration.value);
       		TOTDuration = TOTDuration + item.duration.value;
       		console.log(TOTDuration);
-      		
+      		//checken of dat de gegeven rit mogelijk is in de route 
+      		//brekende eindtijd tov gegeven eindtijd van de bestuurder
       		var totDinmin = Math.ceil(TOTDuration/60);
       		console.log("In minuten: " + totDinmin);
       		var DateTimeBegin = new Date("#{tirController.route.vertrektijd}");
@@ -376,6 +379,7 @@
 		document.getElementById('createRoute:MakeRoute').style.display= 'none';
 
 	}
+	//autocomplete van adressen voor de 2 input velden
 	function PlaceAutocompleteSearch() {
 
 		var options = {

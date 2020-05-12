@@ -60,7 +60,7 @@ public class RouteController implements Serializable {
 //		queryEindetijd=null;
 		System.out.println("Postconstruct");
 	}
-
+	//route creëren
 	public String createRoute() {
 		routeEJB.createRoute(route);
 
@@ -87,6 +87,7 @@ public class RouteController implements Serializable {
 	public void findRoute() {
 		route = routeEJB.findRoute(route.getId());
 	}
+	//voor een bepaalde route al zijn ritten zoeken en teruggeven
 	public List<Rit> findRitten(){
 		return ritEJB.findRitten(route.getId());
 	}

@@ -141,6 +141,7 @@
 				console.log("Extra tussenstop:" + beginpunt);
 				console.log("Extra tussenstop:" + eindpunt);
 				var waypts = [];
+				//de waypointen pushen, van de huidige rit en van alle geaccepteerde tussenstops
 				waypts.push({
 					location : beginpunt,
 					stopover : true
@@ -175,6 +176,7 @@
 						console.log(route);
 						console.log(response);
 	      				route.legs.forEach(function (item, index, array) {
+	      					//per route-leg de totale duration berekenen
 	    					  console.log(item.end_address, index);
 	  						if(document.getElementById('hidden-beginpunt').value !== "" ){
 	  							if(document.getElementById('hidden-beginpunt').value==item.end_address){
@@ -205,7 +207,7 @@
 	      		console.log(indexV);
 	      		console.log(indexA);
 	      		var ind = 0;
-	      			
+	      			//hier dan ook de totale omweg duration berekenen
 	      		if(document.getElementById('hidden-beginpunt').value !== "" ){
 					if(index &lt;= indexV){
 						console.log("Vertrekpunt van de nieuwe rit= " +index);
@@ -255,6 +257,7 @@
 	      		var test = dates.compare(DateTimeEind,newDateobj);
 	      		console.log(test);
 	      		if(test == 1){
+	      			//deze date vegelijken met de originele aankomst date om te checken of de route wel mogelijk is
 	      			var VertrekP = new Date(DateTimeBegin.getTime() );
 	      			VertrekP.setHours(VertrekP.getHours()) 
 	      			var dateStr =
